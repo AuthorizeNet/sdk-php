@@ -1,0 +1,4620 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>AuthorizeNet</name>
+    </assembly>
+    <members>
+        <member name="T:AuthorizeNet.HttpXmlUtility">
+            <summary>
+            This class posts the XML Form to Authorize.NET
+            </summary>
+        </member>
+        <member name="M:AuthorizeNet.HttpXmlUtility.#ctor(AuthorizeNet.ServiceMode,System.String,System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:AuthorizeNet.HttpXmlUtility"/> class.
+            </summary>
+            <param name="mode">The mode.</param>
+            <param name="apiLogin">The API login.</param>
+            <param name="transactionKey">The transaction key.</param>
+        </member>
+        <member name="M:AuthorizeNet.HttpXmlUtility.AuthenticateRequest(AuthorizeNet.APICore.ANetApiRequest)">
+            <summary>
+            Adds authentication information to the request.
+            </summary>
+            <param name="request">The request.</param>
+        </member>
+        <member name="M:AuthorizeNet.HttpXmlUtility.Send(AuthorizeNet.APICore.ANetApiRequest)">
+            <summary>
+            Sends the specified API request.
+            </summary>
+            <param name="apiRequest">The API request.</param>
+            <returns></returns>
+        </member>
+        <member name="T:AuthorizeNet.ApiFields">
+            <summary>
+            These are field names and explanations only
+            </summary>
+        </member>
+        <member name="F:AuthorizeNet.ApiFields.ApiLogin">
+            <summary>
+            The merchant's unique API Login ID
+            </summary>
+        </member>
+        <member name="F:AuthorizeNet.ApiFields.TransactionKey">
+            <summary>
+            The merchant's unique Transaction Key
+            </summary>	
+        </member>
+        <member name="F:AuthorizeNet.ApiFields.AllowPartialAuth">
+            <summary>
+            True, False
+            </summary>
+        </member>
+        <member name="F:AuthorizeNet.ApiFields.DelimitData">
+            <summary>
+            Whether to return the data in delimited fashion
+            </summary>
+        </member>
+        <member name="F:AuthorizeNet.ApiFields.DelimitCharacter">
+            <summary>
+            If the return from AuthorizeNet is delimited - this is the character to use. Default is pipe
+            </summary>
+        </member>
+        <member name="F:AuthorizeNet.ApiFields.RelayResponse">
+            <summary>
+            The relay response - leave this set as TRUE
+            </summary>
+        </member>
+        <member name="F:AuthorizeNet.ApiFields.ApiVersion">
+            <summary>
+            Required - The merchant's transaction version
+            </summary>
+        </member>
+        <member name="F:AuthorizeNet.ApiFields.TransactionType">
+            <summary>
+            The type of transaction:
+            AUTH_CAPTURE (default), AUTH_ONLY, CAPTURE_ONLY, CREDIT, PRIOR_AUTH_CAPTURE, VOID
+            </summary>
+        </member>
+        <member name="F:AuthorizeNet.ApiFields.Method">
+            <summary>
+            CC or ECHECK
+            </summary>
+        </member>
+        <member name="F:AuthorizeNet.ApiFields.RecurringBilling">
+            <summary>
+            The recurring billing status
+            </summary>
+        </member>
+        <member name="F:AuthorizeNet.ApiFields.Amount">
+            <summary>
+            The amount of the transaction
+            </summary>
+        </member>
+        <member name="F:AuthorizeNet.ApiFields.CreditCardNumber">
+            <summary>
+            The credit card number - between 13 and 16 digits without spaces. When x_type=CREDIT, only the last four digits are required
+            </summary>
+        </member>
+        <member name="F:AuthorizeNet.ApiFields.CreditCardExpiration">
+            <summary>
+            The expiration date - MMYY, MM/YY, MM-YY, MMYYYY, MM/YYYY, MM-YYYY
+            </summary>
+        </member>
+        <member name="F:AuthorizeNet.ApiFields.CreditCardCode">
+            <summary>
+            The three- or four-digit number on the back of a credit card (on the front for American Express).
+            </summary>
+        </member>
+        <member name="F:AuthorizeNet.ApiFields.TransactionID">
+            <summary>
+            The payment gateway assigned transaction ID of an original transaction - Required only for CREDIT, PRIOR_ AUTH_ CAPTURE, and VOID transactions
+            </summary>
+        </member>
+        <member name="F:AuthorizeNet.ApiFields.SplitTenderId">
+            <summary>
+            The payment gateway-assitned ID assigned when the original transaction includes  two or more partial payments. This is the identifier that is used to group transactions that are part of a split tender order.
+            </summary>
+        </member>
+        <member name="F:AuthorizeNet.ApiFields.AuthorizationCode">
+            <summary>
+            The authorization code of an original transaction not authorized on the payment gateway
+            </summary>
+        </member>
+        <member name="F:AuthorizeNet.ApiFields.IsTestRequest">
+            <summary>
+            The request to process test transactions
+            </summary>
+        </member>
+        <member name="F:AuthorizeNet.ApiFields.DuplicateWindowTime">
+            <summary>
+            The window of time after the submission of a transaction that a duplicate transaction can not be submitted
+            </summary>
+        </member>
+        <member name="F:AuthorizeNet.ApiFields.InvoiceNumber">
+            <summary>
+            The merchant assigned invoice number for the transaction
+            </summary>
+        </member>
+        <member name="F:AuthorizeNet.ApiFields.Description">
+            <summary>
+            The transaction description
+            </summary>
+        </member>
+        <member name="F:AuthorizeNet.ApiFields.CustomerID">
+            <summary>
+            The ID of the Customer as relates to your application
+            </summary>
+        </member>
+        <member name="T:AuthorizeNet.CardPresentCredit">
+            <summary>
+            A Credit transaction
+            </summary>
+        </member>
+        <member name="T:AuthorizeNet.GatewayRequest">
+            <summary>
+            An abstract base class, from which all Request classes must inherit
+            </summary>
+        </member>
+        <member name="M:AuthorizeNet.GatewayRequest.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:AuthorizeNet.GatewayRequest"/> class.
+            </summary>
+        </member>
+        <member name="M:AuthorizeNet.GatewayRequest.ToPostString">
+            <summary>
+            Outputs the queue as a delimited, URL-safe string for sending to Authorize.net as a form POST
+            </summary>
+        </member>
+        <member name="M:AuthorizeNet.GatewayRequest.Queue(System.String,System.String)">
+            <summary>
+            Queues the specified key into the request.
+            </summary>
+            <param name="key">The key.</param>
+            <param name="value">The value.</param>
+        </member>
+        <member name="M:AuthorizeNet.GatewayRequest.Get(System.String)">
+            <summary>
+            Gets the specified key from the request.
+            </summary>
+            <param name="key">The key.</param>
+        </member>
+        <member name="M:AuthorizeNet.GatewayRequest.LoadCoreValues">
+            <summary>
+            Loads the core values tp the API request, including auth and basic settings.
+            </summary>
+        </member>
+        <member name="M:AuthorizeNet.GatewayRequest.AddCustomer(System.String,System.String,System.String,System.String,System.String,System.String)">
+            <summary>
+            Adds a Customer record to the current request
+            </summary>
+        </member>
+        <member name="M:AuthorizeNet.GatewayRequest.AddFraudCheck(System.String)">
+            <summary>
+            This method adds the required values for Fraud Detection Suite. Your merchant must sign up for this service with Authorize.Net
+            </summary>
+            <param name="customerIP">The Customer's IP address</param>
+            <returns></returns>
+        </member>
+        <member name="M:AuthorizeNet.GatewayRequest.AddFraudCheck">
+            <summary>
+            This method will pull the user's IP address for use with FDS. Only valid for Web-based transactions.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:AuthorizeNet.GatewayRequest.AddFreight(System.Decimal,System.String,System.String)">
+            <summary>
+            Adds a detailed tax value to the request
+            </summary>
+        </member>
+        <member name="M:AuthorizeNet.GatewayRequest.AddFreight(System.Decimal)">
+            <summary>
+            Adds a tax value to the request
+            </summary>
+        </member>
+        <member name="M:AuthorizeNet.GatewayRequest.AddDuty(System.Decimal,System.String,System.String)">
+            <summary>
+            Adds a detailed tax value to the request
+            </summary>
+        </member>
+        <member name="M:AuthorizeNet.GatewayRequest.AddDuty(System.Decimal)">
+            <summary>
+            Adds a tax value to the request
+            </summary>
+        </member>
+        <member name="M:AuthorizeNet.GatewayRequest.AddTax(System.Decimal,System.String,System.String)">
+            <summary>
+            Adds a detailed tax value to the request
+            </summary>
+        </member>
+        <member name="M:AuthorizeNet.GatewayRequest.AddTax(System.Decimal)">
+            <summary>
+            Adds a tax value to the request
+            </summary>
+        </member>
+        <member name="M:AuthorizeNet.GatewayRequest.AddCardCode(System.String)">
+            <summary>
+            The 3-digit Credit Card Code (CCV) on the back of the card
+            </summary>
+        </member>
+        <member name="M:AuthorizeNet.GatewayRequest.AddShipping(System.String,System.String,System.String,System.String,System.String,System.String)">
+            <summary>
+            Adds a Shipping Record to the current request
+            </summary>
+        </member>
+        <member name="M:AuthorizeNet.GatewayRequest.AddMerchantValue(System.String,System.String)">
+            <summary>
+            This is where you can add custom values to the request, which will be returned to you
+            in the response
+            </summary>
+        </member>
+        <member name="M:AuthorizeNet.GatewayRequest.AddLineItem(System.String,System.String,System.String,System.Int32,System.Decimal,System.Boolean)">
+            <summary>
+            Adds a line item to the current order
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:AuthorizeNet.GatewayRequest.AddInvoice(System.String)">
+            <summary>
+            Adds an InvoiceNumber to the request
+            </summary>
+        </member>
+        <member name="P:AuthorizeNet.GatewayRequest.BankABACode">
+            <summary>
+            Gets or sets the bank ABA code.
+            </summary>
+            <value>The bank ABA code.</value>
+        </member>
+        <member name="P:AuthorizeNet.GatewayRequest.BankAccountNumber">
+            <summary>
+            Gets or sets the bank account number.
+            </summary>
+            <value>The bank account number.</value>
+        </member>
+        <member name="P:AuthorizeNet.GatewayRequest.BankAccountType">
+            <summary>
+            Gets or sets the type of the bank account.
+            </summary>
+            <value>The type of the bank account.</value>
+        </member>
+        <member name="P:AuthorizeNet.GatewayRequest.BankName">
+            <summary>
+            Gets or sets the name of the bank.
+            </summary>
+            <value>The name of the bank.</value>
+        </member>
+        <member name="P:AuthorizeNet.GatewayRequest.BankAccountName">
+            <summary>
+            Gets or sets the name of the bank account.
+            </summary>
+            <value>The name of the bank account.</value>
+        </member>
+        <member name="P:AuthorizeNet.GatewayRequest.EcheckType">
+            <summary>
+            Gets or sets the type of the echeck.
+            </summary>
+            <value>The type of the echeck.</value>
+        </member>
+        <member name="P:AuthorizeNet.GatewayRequest.BankCheckNumber">
+            <summary>
+            Gets or sets the bank check number.
+            </summary>
+            <value>The bank check number.</value>
+        </member>
+        <member name="P:AuthorizeNet.GatewayRequest.Address">
+            <summary>
+            Gets or sets the address.
+            </summary>
+            <value>The address.</value>
+        </member>
+        <member name="P:AuthorizeNet.GatewayRequest.AllowPartialAuth">
+            <summary>
+            Gets or sets the allow partial auth.
+            </summary>
+            <value>The allow partial auth.</value>
+        </member>
+        <member name="P:AuthorizeNet.GatewayRequest.Amount">
+            <summary>
+            Gets or sets the amount.
+            </summary>
+            <value>The amount.</value>
+        </member>
+        <member name="P:AuthorizeNet.GatewayRequest.AuthCode">
+            <summary>
+            Gets or sets the auth code.
+            </summary>
+            <value>The auth code.</value>
+        </member>
+        <member name="P:AuthorizeNet.GatewayRequest.AuthenticationIndicator">
+            <summary>
+            Gets or sets the authentication indicator.
+            </summary>
+            <value>The authentication indicator.</value>
+        </member>
+        <member name="P:AuthorizeNet.GatewayRequest.CardCode">
+            <summary>
+            Gets or sets the credit card code.
+            </summary>
+            <value>The card code.</value>
+        </member>
+        <member name="P:AuthorizeNet.GatewayRequest.CardNum">
+            <summary>
+            Gets or sets the credit card number.
+            </summary>
+            <value>The card num.</value>
+        </member>
+        <member name="P:AuthorizeNet.GatewayRequest.CardholderAuthenticationValue">
+            <summary>
+            Gets or sets the cardholder authentication value.
+            </summary>
+            <value>The cardholder authentication value.</value>
+        </member>
+        <member name="P:AuthorizeNet.GatewayRequest.City">
+            <summary>
+            Gets or sets the city.
+            </summary>
+            <value>The city.</value>
+        </member>
+        <member name="P:AuthorizeNet.GatewayRequest.Company">
+            <summary>
+            Gets or sets the company.
+            </summary>
+            <value>The company.</value>
+        </member>
+        <member name="P:AuthorizeNet.GatewayRequest.Country">
+            <summary>
+            Gets or sets the country.
+            </summary>
+            <value>The country.</value>
+        </member>
+        <member name="P:AuthorizeNet.GatewayRequest.CustId">
+            <summary>
+            Gets or sets the cust id.
+            </summary>
+            <value>The cust id.</value>
+        </member>
+        <member name="P:AuthorizeNet.GatewayRequest.CustomerIp">
+            <summary>
+            Gets or sets the customer ip.
+            </summary>
+            <value>The customer ip.</value>
+        </member>
+        <member name="P:AuthorizeNet.GatewayRequest.DelimChar">
+            <summary>
+            Gets or sets the delim char.
+            </summary>
+            <value>The delim char.</value>
+        </member>
+        <member name="P:AuthorizeNet.GatewayRequest.DelimData">
+            <summary>
+            Gets or sets the delim data.
+            </summary>
+            <value>The delim data.</value>
+        </member>
+        <member name="P:AuthorizeNet.GatewayRequest.Description">
+            <summary>
+            Gets or sets the description.
+            </summary>
+            <value>The description.</value>
+        </member>
+        <member name="P:AuthorizeNet.GatewayRequest.DuplicateWindow">
+            <summary>
+            Gets or sets the duplicate window - the am.
+            </summary>
+            <value>The duplicate window.</value>
+        </member>
+        <member name="P:AuthorizeNet.GatewayRequest.Duty">
+            <summary>
+            Gets or sets the duty.
+            </summary>
+            <value>The duty.</value>
+        </member>
+        <member name="P:AuthorizeNet.GatewayRequest.Email">
+            <summary>
+            Gets or sets the email.
+            </summary>
+            <value>The email.</value>
+        </member>
+        <member name="P:AuthorizeNet.GatewayRequest.EmailCustomer">
+            <summary>
+            Gets or sets the email customer.
+            </summary>
+            <value>The email customer.</value>
+        </member>
+        <member name="P:AuthorizeNet.GatewayRequest.EncapChar">
+            <summary>
+            Gets or sets the encap char.
+            </summary>
+            <value>The encap char.</value>
+        </member>
+        <member name="P:AuthorizeNet.GatewayRequest.ExpDate">
+            <summary>
+            Gets or sets the exp date.
+            </summary>
+            <value>The exp date.</value>
+        </member>
+        <member name="P:AuthorizeNet.GatewayRequest.Fax">
+            <summary>
+            Gets or sets the fax.
+            </summary>
+            <value>The fax.</value>
+        </member>
+        <member name="P:AuthorizeNet.GatewayRequest.FirstName">
+            <summary>
+            Gets or sets the first name.
+            </summary>
+            <value>The first name.</value>
+        </member>
+        <member name="P:AuthorizeNet.GatewayRequest.FooterEmailReceipt">
+            <summary>
+            Gets or sets the footer email receipt.
+            </summary>
+            <value>The footer email receipt.</value>
+        </member>
+        <member name="P:AuthorizeNet.GatewayRequest.Freight">
+            <summary>
+            Gets or sets the freight.
+            </summary>
+            <value>The freight.</value>
+        </member>
+        <member name="P:AuthorizeNet.GatewayRequest.HeaderEmailReceipt">
+            <summary>
+            Gets or sets the header email receipt.
+            </summary>
+            <value>The header email receipt.</value>
+        </member>
+        <member name="P:AuthorizeNet.GatewayRequest.InvoiceNum">
+            <summary>
+            Gets or sets the invoice num.
+            </summary>
+            <value>The invoice num.</value>
+        </member>
+        <member name="P:AuthorizeNet.GatewayRequest.LastName">
+            <summary>
+            Gets or sets the last name.
+            </summary>
+            <value>The last name.</value>
+        </member>
+        <member name="P:AuthorizeNet.GatewayRequest.LineItem">
+            <summary>
+            Gets or sets the line item.
+            </summary>
+            <value>The line item.</value>
+        </member>
+        <member name="P:AuthorizeNet.GatewayRequest.Login">
+            <summary>
+            Gets or sets the login.
+            </summary>
+            <value>The login.</value>
+        </member>
+        <member name="P:AuthorizeNet.GatewayRequest.Method">
+            <summary>
+            Gets or sets the method.
+            </summary>
+            <value>The method.</value>
+        </member>
+        <member name="P:AuthorizeNet.GatewayRequest.Phone">
+            <summary>
+            Gets or sets the phone.
+            </summary>
+            <value>The phone.</value>
+        </member>
+        <member name="P:AuthorizeNet.GatewayRequest.PoNum">
+            <summary>
+            Gets or sets the po number.
+            </summary>
+            <value>The po num.</value>
+        </member>
+        <member name="P:AuthorizeNet.GatewayRequest.RecurringBilling">
+            <summary>
+            Gets or sets the recurring billing.
+            </summary>
+            <value>The recurring billing.</value>
+        </member>
+        <member name="P:AuthorizeNet.GatewayRequest.RelayResponse">
+            <summary>
+            Gets or sets the relay response.
+            </summary>
+            <value>The relay response.</value>
+        </member>
+        <member name="P:AuthorizeNet.GatewayRequest.ShipToAddress">
+            <summary>
+            Gets or sets the ship to address.
+            </summary>
+            <value>The ship to address.</value>
+        </member>
+        <member name="P:AuthorizeNet.GatewayRequest.ShipToCompany">
+            <summary>
+            Gets or sets the ship to company.
+            </summary>
+            <value>The ship to company.</value>
+        </member>
+        <member name="P:AuthorizeNet.GatewayRequest.ShipToCountry">
+            <summary>
+            Gets or sets the ship to country.
+            </summary>
+            <value>The ship to country.</value>
+        </member>
+        <member name="P:AuthorizeNet.GatewayRequest.ShipToCity">
+            <summary>
+            Gets or sets the ship to city.
+            </summary>
+            <value>The ship to city.</value>
+        </member>
+        <member name="P:AuthorizeNet.GatewayRequest.ShipToFirstName">
+            <summary>
+            Gets or sets the first name of the ship to.
+            </summary>
+            <value>The first name of the ship to.</value>
+        </member>
+        <member name="P:AuthorizeNet.GatewayRequest.ShipToLastName">
+            <summary>
+            Gets or sets the last name of the ship to.
+            </summary>
+            <value>The last name of the ship to.</value>
+        </member>
+        <member name="P:AuthorizeNet.GatewayRequest.ShipToState">
+            <summary>
+            Gets or sets the state of the ship to.
+            </summary>
+            <value>The state of the ship to.</value>
+        </member>
+        <member name="P:AuthorizeNet.GatewayRequest.ShipToZip">
+            <summary>
+            Gets or sets the ship to zip.
+            </summary>
+            <value>The ship to zip.</value>
+        </member>
+        <member name="P:AuthorizeNet.GatewayRequest.SplitTenderId">
+            <summary>
+            Gets or sets the split tender id.
+            </summary>
+            <value>The split tender id.</value>
+        </member>
+        <member name="P:AuthorizeNet.GatewayRequest.State">
+            <summary>
+            Gets or sets the state.
+            </summary>
+            <value>The state.</value>
+        </member>
+        <member name="P:AuthorizeNet.GatewayRequest.Tax">
+            <summary>
+            Gets or sets the tax.
+            </summary>
+            <value>The tax.</value>
+        </member>
+        <member name="P:AuthorizeNet.GatewayRequest.TaxExempt">
+            <summary>
+            Gets or sets the tax exempt.
+            </summary>
+            <value>The tax exempt.</value>
+        </member>
+        <member name="P:AuthorizeNet.GatewayRequest.TestRequest">
+            <summary>
+            Gets or sets the test request.
+            </summary>
+            <value>The test request.</value>
+        </member>
+        <member name="P:AuthorizeNet.GatewayRequest.TranKey">
+            <summary>
+            Gets or sets the tran key.
+            </summary>
+            <value>The tran key.</value>
+        </member>
+        <member name="P:AuthorizeNet.GatewayRequest.TransId">
+            <summary>
+            Gets or sets the trans id.
+            </summary>
+            <value>The trans id.</value>
+        </member>
+        <member name="P:AuthorizeNet.GatewayRequest.Type">
+            <summary>
+            Gets or sets the type.
+            </summary>
+            <value>The type.</value>
+        </member>
+        <member name="P:AuthorizeNet.GatewayRequest.Version">
+            <summary>
+            Gets or sets the version.
+            </summary>
+            <value>The version.</value>
+        </member>
+        <member name="P:AuthorizeNet.GatewayRequest.Zip">
+            <summary>
+            Gets or sets the zip.
+            </summary>
+            <value>The zip.</value>
+        </member>
+        <member name="M:AuthorizeNet.CardPresentCredit.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:AuthorizeNet.CardPresentCredit"/> class.
+            </summary>
+            <param name="transactionID">The transaction ID.</param>
+        </member>
+        <member name="M:AuthorizeNet.EcheckRequest.#ctor(System.Decimal,System.String,System.String,AuthorizeNet.BankAccountType,System.String,System.String,System.String)">
+            <summary>
+            Creates an ECheck transaction (defaulted to WEB) request for use with the AIM gateway
+            </summary>
+            <param name="amount"></param>
+            <param name="bankABACode">The valid routing number of the customer’s bank</param>
+            <param name="bankAccountNumber">The customer’s valid bank account number</param>
+            <param name="acctType">CHECKING, BUSINESSCHECKING, SAVINGS</param>
+            <param name="bankName">The name of the bank that holds the customer’s account</param>
+            <param name="acctName">The name associated with the bank account</param>
+            <param name="bankCheckNumber">The check number on the customer’s paper check</param>
+        </member>
+        <member name="M:AuthorizeNet.EcheckRequest.#ctor(AuthorizeNet.EcheckType,System.Decimal,System.String,System.String,AuthorizeNet.BankAccountType,System.String,System.String,System.String)">
+            <summary>
+            Creates an ECheck transaction request for use with the AIM gateway
+            </summary>
+            <param name="type">The Echeck Transaction type: ARC, BOC, CCD, PPD, TEL, WEB</param>
+            <param name="amount"></param>
+            <param name="bankABACode">The valid routing number of the customer’s bank</param>
+            <param name="bankAccountNumber">The customer’s valid bank account number</param>
+            <param name="acctType">CHECKING, BUSINESSCHECKING, SAVINGS</param>
+            <param name="bankName">The name of the bank that holds the customer’s account</param>
+            <param name="acctName">The name associated with the bank account</param>
+            <param name="bankCheckNumber">The check number on the customer’s paper check</param>
+        </member>
+        <member name="M:AuthorizeNet.EcheckRequest.AsRecurring">
+            <summary>
+            Sets the eCheck request as a recurring payment
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:AuthorizeNet.SubscriptionGateway.#ctor(System.String,System.String,AuthorizeNet.ServiceMode)">
+            <summary>
+            Initializes a new instance of the <see cref="T:AuthorizeNet.SubscriptionGateway"/> class.
+            </summary>
+            <param name="apiLogin">The API login.</param>
+            <param name="transactionKey">The transaction key.</param>
+            <param name="mode">The mode.</param>
+        </member>
+        <member name="M:AuthorizeNet.SubscriptionGateway.#ctor(System.String,System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:AuthorizeNet.SubscriptionGateway"/> class.
+            </summary>
+            <param name="apiLogin">The API login.</param>
+            <param name="transactionKey">The transaction key.</param>
+        </member>
+        <member name="M:AuthorizeNet.SubscriptionGateway.CreateSubscription(AuthorizeNet.ISubscriptionRequest)">
+            <summary>
+            Creates a new subscription
+            </summary>
+            <param name="subscription">The subscription to create - requires that you add a credit card and billing first and last.</param>
+        </member>
+        <member name="M:AuthorizeNet.SubscriptionGateway.UpdateSubscription(AuthorizeNet.ISubscriptionRequest)">
+            <summary>
+            Updates the subscription.
+            </summary>
+            <param name="subscription">The subscription to update. Can't change billing intervals however.</param>
+            <returns></returns>
+        </member>
+        <member name="M:AuthorizeNet.SubscriptionGateway.CancelSubscription(System.String)">
+            <summary>
+            Cancels the subscription.
+            </summary>
+            <param name="subscriptionID">The subscription ID.</param>
+            <returns></returns>
+        </member>
+        <member name="M:AuthorizeNet.SubscriptionGateway.GetSubscriptionStatus(System.String)">
+            <summary>
+            Gets the subscription status.
+            </summary>
+            <param name="subscriptionID">The subscription ID.</param>
+            <returns></returns>
+        </member>
+        <member name="M:AuthorizeNet.Gateway.DecideResponse(System.String[])">
+            <summary>
+            Decides the response.
+            </summary>
+            <param name="rawResponse">The raw response.</param>
+            <returns></returns>
+        </member>
+        <member name="M:AuthorizeNet.CustomerGateway.#ctor(System.String,System.String,AuthorizeNet.ServiceMode)">
+            <summary>
+            Initializes a new instance of the <see cref="T:AuthorizeNet.CustomerGateway"/> class.
+            </summary>
+            <param name="apiLogin">The API login.</param>
+            <param name="transactionKey">The transaction key.</param>
+            <param name="mode">Test or Live.</param>
+        </member>
+        <member name="M:AuthorizeNet.CustomerGateway.#ctor(System.String,System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:AuthorizeNet.CustomerGateway"/> class.
+            </summary>
+            <param name="apiLogin">The API login.</param>
+            <param name="transactionKey">The transaction key.</param>
+        </member>
+        <member name="M:AuthorizeNet.CustomerGateway.GetCustomer(System.String)">
+            <summary>
+            Retrieve an existing customer profile along with all the associated customer payment profiles and customer shipping addresses. 
+            </summary>
+            <param name="profileID">The profile ID</param>
+            <returns></returns>
+        </member>
+        <member name="M:AuthorizeNet.CustomerGateway.AddCreditCard(System.String,System.String,System.Int32,System.Int32,System.String)">
+            <summary>
+            Adds a credit card profile to the user and returns the profile ID
+            </summary>
+            <param name="profileID">The profile ID.</param>
+            <param name="cardNumber">The card number.</param>
+            <param name="expirationMonth">The expiration month.</param>
+            <param name="expirationYear">The expiration year.</param>
+            <param name="cardCode">The card code.</param>
+            <returns></returns>
+        </member>
+        <member name="M:AuthorizeNet.CustomerGateway.AddCreditCard(System.String,System.String,System.Int32,System.Int32,System.String,AuthorizeNet.Address)">
+            <summary>
+            Adds a credit card profile to the user and returns the profile ID
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:AuthorizeNet.CustomerGateway.AddShippingAddress(System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String)">
+            <summary>
+            Adds a Shipping Address to the customer profile
+            </summary>
+        </member>
+        <member name="M:AuthorizeNet.CustomerGateway.AddShippingAddress(System.String,AuthorizeNet.Address)">
+            <summary>
+            Adds a Shipping Address to the customer profile
+            </summary>
+        </member>
+        <member name="M:AuthorizeNet.CustomerGateway.AuthorizeAndCapture(System.String,System.String,System.Decimal)">
+            <summary>
+            Authorizes and Captures a transaction using the supplied profile information.
+            </summary>
+            <param name="profileID">The profile ID.</param>
+            <param name="paymentProfileID">The payment profile ID.</param>
+            <param name="amount">The amount.</param>
+            <returns></returns>
+        </member>
+        <member name="M:AuthorizeNet.CustomerGateway.AuthorizeAndCapture(System.String,System.String,System.Decimal,System.Decimal,System.Decimal)">
+            <summary>
+            Authorizes and Captures a transaction using the supplied profile information with Tax and Shipping specified. If you want
+            to add more detail here, use the 3rd option - which is to add an Order object
+            </summary>
+            <param name="profileID">The profile ID.</param>
+            <param name="paymentProfileID">The payment profile ID.</param>
+            <param name="amount">The amount.</param>
+            <param name="tax">The tax.</param>
+            <param name="shipping">The shipping.</param>
+            <returns></returns>
+        </member>
+        <member name="M:AuthorizeNet.CustomerGateway.AuthorizeAndCapture(AuthorizeNet.Order)">
+            <summary>
+            Authorizes and Captures a transaction using the supplied profile information, abstracted through an Order object. Using the Order
+            you can add line items, specify shipping and tax, etc.
+            </summary>
+            <param name="order">The order.</param>
+            <returns></returns>
+        </member>
+        <member name="M:AuthorizeNet.CustomerGateway.Authorize(System.String,System.String,System.Decimal)">
+            <summary>
+            Authorizes a transaction using the supplied profile information.
+            </summary>
+            <param name="profileID">The profile ID.</param>
+            <param name="paymentProfileID">The payment profile ID.</param>
+            <param name="amount">The amount.</param>
+            <returns></returns>
+        </member>
+        <member name="M:AuthorizeNet.CustomerGateway.Authorize(System.String,System.String,System.Decimal,System.Decimal,System.Decimal)">
+            <summary>
+            Authorizes a transaction using the supplied profile information with Tax and Shipping specified. If you want
+            to add more detail here, use the 3rd option - which is to add an Order object
+            </summary>
+            <param name="profileID">The profile ID.</param>
+            <param name="paymentProfileID">The payment profile ID.</param>
+            <param name="amount">The amount.</param>
+            <param name="tax">The tax.</param>
+            <param name="shipping">The shipping.</param>
+            <returns></returns>
+        </member>
+        <member name="M:AuthorizeNet.CustomerGateway.Authorize(AuthorizeNet.Order)">
+            <summary>
+            Authorizes a transaction using the supplied profile information, abstracted through an Order object. Using the Order
+            you can add line items, specify shipping and tax, etc.
+            </summary>
+            <param name="order">The order.</param>
+            <returns>A string representing the approval code</returns>
+        </member>
+        <member name="M:AuthorizeNet.CustomerGateway.Capture(System.String,System.String,System.String,System.Decimal,System.String)">
+            <summary>
+            Captures the specified transaction.
+            </summary>
+            <param name="profileID">The profile ID.</param>
+            <param name="paymentProfileId">The payment profile id.</param>
+            <param name="cardCode">The 3 digit card code.</param>
+            <param name="amount">The amount.</param>
+            <param name="approvalCode">The approval code.</param>
+            <returns></returns>
+        </member>
+        <member name="M:AuthorizeNet.CustomerGateway.Refund(System.String,System.String,System.String,System.String,System.Decimal)">
+            <summary>
+            Refunds a transaction for the specified amount
+            </summary>
+            <param name="profileID">The profile ID.</param>
+            <param name="paymentProfileId">The payment profile id.</param>
+            <param name="transactionId">The transaction id.</param>
+            <param name="approvalCode">The approval code.</param>
+            <param name="amount">The amount.</param>
+            <returns></returns>
+        </member>
+        <member name="M:AuthorizeNet.CustomerGateway.Void(System.String,System.String,System.String,System.String)">
+            <summary>
+            Voids a previously authorized transaction
+            </summary>
+            <param name="profileID">The profile ID.</param>
+            <param name="paymentProfileId">The payment profile id.</param>
+            <param name="transactionId">The transaction id.</param>
+            <param name="approvalCode">The approval code.</param>
+            <returns></returns>
+        </member>
+        <member name="M:AuthorizeNet.CustomerGateway.DeleteCustomer(System.String)">
+            <summary>
+            Deletes a customer from the AuthNET servers.
+            </summary>
+            <param name="profileID">The profile ID.</param>
+            <returns></returns>
+        </member>
+        <member name="M:AuthorizeNet.CustomerGateway.DeletePaymentProfile(System.String,System.String)">
+            <summary>
+            Deletes a payment profile for a customer from the AuthNET servers.
+            </summary>
+            <param name="profileID">The profile ID.</param>
+            <param name="paymentProfileID">The payment profile ID.</param>
+            <returns></returns>
+        </member>
+        <member name="M:AuthorizeNet.CustomerGateway.DeleteShippingAddress(System.String,System.String)">
+            <summary>
+            Deletes a shipping address for a given user from the AuthNET servers.
+            </summary>
+            <param name="profileID">The profile ID.</param>
+            <param name="shippingAddressID">The shipping address ID.</param>
+            <returns></returns>
+        </member>
+        <member name="M:AuthorizeNet.CustomerGateway.GetCustomerIDs">
+            <summary>
+            Returns all Customer IDs stored at Authorize.NET
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:AuthorizeNet.CustomerGateway.GetShippingAddress(System.String,System.String)">
+            <summary>
+            Gets a shipping address for a customer.
+            </summary>
+            <param name="profileID">The profile ID.</param>
+            <param name="shippingAddressID">The shipping address ID.</param>
+            <returns></returns>
+        </member>
+        <member name="M:AuthorizeNet.CustomerGateway.UpdateCustomer(AuthorizeNet.Customer)">
+            <summary>
+            Updates a customer's record.
+            </summary>
+            <param name="customer">The customer.</param>
+            <returns></returns>
+        </member>
+        <member name="M:AuthorizeNet.CustomerGateway.UpdatePaymentProfile(System.String,AuthorizeNet.PaymentProfile)">
+            <summary>
+            Updates a payment profile for a user.
+            </summary>
+            <param name="profileID">The profile ID.</param>
+            <param name="profile">The profile.</param>
+            <returns></returns>
+        </member>
+        <member name="M:AuthorizeNet.CustomerGateway.UpdateShippingAddress(System.String,AuthorizeNet.Address)">
+            <summary>
+            Updates a shipping address for a user.
+            </summary>
+            <param name="profileID">The profile ID.</param>
+            <param name="address">The address.</param>
+            <returns></returns>
+        </member>
+        <member name="M:AuthorizeNet.CustomerGateway.ValidateProfile(System.String,System.String,System.String,AuthorizeNet.ValidationMode)">
+            <summary>
+            This function validates the information on a profile - making sure what you have stored at AuthNET is valid. You can
+            do this in two ways: in TestMode it will just run a validation to be sure all required fields are present and valid. If 
+            you specify "live" - a live authorization request will be performed.
+            </summary>
+            <param name="profileID">The profile ID.</param>
+            <param name="paymentProfileID">The payment profile ID.</param>
+            <param name="shippingAddressID">The shipping address ID.</param>
+            <param name="mode">The mode.</param>
+            <returns></returns>
+        </member>
+        <member name="T:AuthorizeNet.Address">
+            <summary>
+            This is an Address abstraction used for Billing and Shipping
+            </summary>
+        </member>
+        <member name="M:AuthorizeNet.Address.#ctor(AuthorizeNet.APICore.nameAndAddressType)">
+            <summary>
+            Initializes a new instance of the <see cref="T:AuthorizeNet.Address"/> class, resolving the given API Type
+            </summary>
+            <param name="fromType">From type.</param>
+        </member>
+        <member name="M:AuthorizeNet.Address.#ctor(AuthorizeNet.APICore.customerAddressType)">
+            <summary>
+            Initializes a new instance of the <see cref="T:AuthorizeNet.Address"/> class, resolving the given API Type
+            </summary>
+            <param name="fromType">From type.</param>
+        </member>
+        <member name="M:AuthorizeNet.Address.#ctor(AuthorizeNet.APICore.customerAddressExType)">
+            <summary>
+            Initializes a new instance of the <see cref="T:AuthorizeNet.Address"/> class, resolving the given API Type
+            </summary>
+            <param name="fromType">From type.</param>
+        </member>
+        <member name="M:AuthorizeNet.Address.ToAPIType">
+            <summary>
+            Creates an API type for use with outbound requests to the Gateway. Mostly for internal use.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:AuthorizeNet.Address.ToAPIExType">
+            <summary>
+            Creates an API type for use with outbound requests to the Gateway. Mostly for internal use.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:AuthorizeNet.Address.ToAPINameAddressType">
+            <summary>
+            Creates an API type for use with outbound requests to the Gateway. Mostly for internal use.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:AuthorizeNet.CardPresentVoid">
+            <summary>
+            A Cardpresent Void transaction
+            </summary>
+        </member>
+        <member name="M:AuthorizeNet.CardPresentVoid.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:AuthorizeNet.CardPresentVoid"/> class.
+            </summary>
+            <param name="transactionID">The transaction ID.</param>
+        </member>
+        <member name="T:AuthorizeNet.CreditRequest">
+            <summary>
+            Credits, or refunds, the amount back to the user
+            </summary>
+        </member>
+        <member name="M:AuthorizeNet.CreditRequest.#ctor(System.String,System.Decimal,System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:AuthorizeNet.CreditRequest"/> class.
+            </summary>
+            <param name="transactionId">The transaction id.</param>
+            <param name="amount">The amount.</param>
+            <param name="cardNumber">The card number.</param>
+        </member>
+        <member name="T:AuthorizeNet.PaymentProfile">
+            <summary>
+            An abstraction for the AuthNET API, allowing you store credit card information with Authorize.net
+            </summary>
+        </member>
+        <member name="M:AuthorizeNet.PaymentProfile.ToAPI">
+            <summary>
+            Creates an API object, ready to send to AuthNET servers.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:AuthorizeNet.PaymentProfile.#ctor(AuthorizeNet.APICore.customerPaymentProfileMaskedType)">
+            <summary>
+            Initializes a new instance of the <see cref="T:AuthorizeNet.PaymentProfile"/> class, using the passed-in API type to create the profile.
+            </summary>
+            <param name="apiType">Type of the API.</param>
+        </member>
+        <member name="T:AuthorizeNet.CaptureRequest">
+            <summary>
+            A request representing a Capture - the final transfer of funds that happens after an auth.
+            </summary>
+        </member>
+        <member name="M:AuthorizeNet.CaptureRequest.#ctor(System.Decimal,System.String,System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:AuthorizeNet.CaptureRequest"/> class.
+            </summary>
+            <param name="amount">The amount.</param>
+            <param name="transactionId">The transaction id.</param>
+            <param name="authCode">The auth code.</param>
+        </member>
+        <member name="T:AuthorizeNet.CardPresentPriorAuthCapture">
+            <summary>
+            Captures a prior authorization
+            </summary>
+        </member>
+        <member name="M:AuthorizeNet.CardPresentPriorAuthCapture.#ctor(System.String,System.Decimal)">
+            <summary>
+            Initializes a new instance of the <see cref="T:AuthorizeNet.CardPresentPriorAuthCapture"/> class.
+            </summary>
+            <param name="transactionID">The transaction ID.</param>
+            <param name="amount">The amount.</param>
+        </member>
+        <member name="T:AuthorizeNet.CardPresentCaptureOnly">
+            <summary>
+            Capture only function
+            </summary>
+        </member>
+        <member name="M:AuthorizeNet.CardPresentCaptureOnly.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:AuthorizeNet.CardPresentCaptureOnly"/> class.
+            </summary>
+            <param name="authCode">The auth code.</param>
+        </member>
+        <member name="T:AuthorizeNet.SubscriptionRequest">
+            <summary>
+            This is the abstracted SubscriptionRequest class - it provides a simplified way of dealing with the underlying
+            ARB API. This class uses a Fluent Interface to build out the request - creating only what you need.
+            </summary>
+        </member>
+        <member name="M:AuthorizeNet.SubscriptionRequest.CreateMonthly(System.String,System.String,System.Decimal,System.Int16)">
+            <summary>
+            Creates a monthly subscription request.
+            </summary>
+            <param name="email">The email.</param>
+            <param name="subscriptionName">Name of the subscription.</param>
+            <param name="amount">The amount.</param>
+            <param name="numberOfBillings">The number of billings. So if you wanted to create a monthly subscription that lasts for a year - this would be 12</param>
+            <returns></returns>
+        </member>
+        <member name="M:AuthorizeNet.SubscriptionRequest.CreateAnnual(System.String,System.String,System.Decimal,System.Int16)">
+            <summary>
+            Creates an annual subscription.
+            </summary>
+            <param name="email">The email.</param>
+            <param name="subscriptionName">Name of the subscription.</param>
+            <param name="amount">The amount.</param>
+            <param name="numberOfBillings">The number of billings. So if you wanted to create a yearly subscription that lasts for a year - this would be 1</param>
+            <returns></returns>
+        </member>
+        <member name="M:AuthorizeNet.SubscriptionRequest.CreateWeekly(System.String,System.String,System.Decimal)">
+            <summary>
+            Creates a weekly subscription that bills every 7 days.
+            </summary>
+            <param name="email">The email.</param>
+            <param name="subscriptionName">Name of the subscription.</param>
+            <param name="amount">The amount.</param>
+            <returns></returns>
+        </member>
+        <member name="M:AuthorizeNet.SubscriptionRequest.CreateWeekly(System.String,System.String,System.Decimal,System.Int16)">
+            <summary>
+            Creates a weekly subscription that bills every 7 days. 
+            </summary>
+            <param name="email">The email.</param>
+            <param name="subscriptionName">Name of the subscription.</param>
+            <param name="amount">The amount.</param>
+            <param name="numberOfBillings">The number of billings. If you want this subscription to last for a month, this should be set to 4</param>
+            <returns></returns>
+        </member>
+        <member name="M:AuthorizeNet.SubscriptionRequest.UsingCreditCard(System.String,System.String,System.String,System.Int32,System.Int32)">
+            <summary>
+            Adds a credit card payment to the subscription. This is required.
+            </summary>
+            <param name="firstName">The first name.</param>
+            <param name="lastName">The last name.</param>
+            <param name="cardNumber">The card number.</param>
+            <param name="cardExpirationYear">The card expiration year.</param>
+            <param name="cardExpirationMonth">The card expiration month.</param>
+            <returns></returns>
+        </member>
+        <member name="M:AuthorizeNet.SubscriptionRequest.WithBillingAddress(AuthorizeNet.Address)">
+            <summary>
+            Adds a full billing address - which is required for a credit card.
+            </summary>
+            <param name="add">The add.</param>
+            <returns></returns>
+        </member>
+        <member name="M:AuthorizeNet.SubscriptionRequest.WithShippingAddress(AuthorizeNet.Address)">
+            <summary>
+            Adds a shipping address to the request.
+            </summary>
+            <param name="add">The address to ship to</param>
+            <returns></returns>
+        </member>
+        <member name="M:AuthorizeNet.SubscriptionRequest.SetTrialPeriod(System.Int16,System.Decimal)">
+            <summary>
+            Sets a trial period for the subscription. This is part of the overall subscription plan.
+            </summary>
+            <param name="trialBillingCycles">The trial billing cycles.</param>
+            <param name="trialAmount">The trial amount.</param>
+            <returns></returns>
+        </member>
+        <member name="M:AuthorizeNet.SubscriptionRequest.ToAPI">
+            <summary>
+            This is mostly for internal processing needs - it takes the SubscriptionRequest and turns it into something the Gateway can serialize.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:AuthorizeNet.SubscriptionRequest.ToUpdateableAPI">
+            <summary>
+            The Update function won't accept a change to some values - specifically the billing interval. This creates a request
+            that the API can understand for updates only
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:AuthorizeNet.VoidRequest">
+            <summary>
+            A request representing a Void of a previously authorized transaction
+            </summary>
+        </member>
+        <member name="M:AuthorizeNet.VoidRequest.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:AuthorizeNet.VoidRequest"/> class.
+            </summary>
+            <param name="transactionId">The transaction id.</param>
+        </member>
+        <member name="M:AuthorizeNet.CardPresentAuthorizationRequest.#ctor(System.Decimal,System.String,System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:AuthorizeNet.CardPresentAuthorizationRequest"/> class using track data from a card reader.
+            </summary>
+            <param name="amount">The amount.</param>
+            <param name="track1">The track1 data.</param>
+            <param name="track2">The track2 data.</param>
+        </member>
+        <member name="M:AuthorizeNet.CardPresentAuthorizationRequest.#ctor(System.Decimal,System.String,System.String,System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:AuthorizeNet.CardPresentAuthorizationRequest"/> class.
+            </summary>
+            <param name="amount">The amount.</param>
+            <param name="cardNumber">The card number.</param>
+            <param name="expirationMonth">The expiration month.</param>
+            <param name="expirationYear">The expiration year.</param>
+        </member>
+        <member name="M:AuthorizeNet.CardPresentAuthorizeAndCaptureRequest.#ctor(System.Decimal,System.String,System.String,System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:AuthorizeNet.CardPresentAuthorizeAndCaptureRequest"/> class.
+            </summary>
+            <param name="amount">The amount.</param>
+            <param name="cardNumber">The card number.</param>
+            <param name="expirationMonth">The expiration month.</param>
+            <param name="expirationYear">The expiration year.</param>
+        </member>
+        <member name="T:AuthorizeNet.Order">
+            <summary>
+            This is an abstraction for the AuthNET API so you can specify detailed order information.
+            </summary>
+        </member>
+        <member name="M:AuthorizeNet.Order.#ctor(System.String,System.String,System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:AuthorizeNet.Order"/> class.
+            </summary>
+            <param name="profileID">The profile ID.</param>
+            <param name="paymentProfileId">The payment profile id.</param>
+            <param name="shippingAddressID">The shipping address ID.</param>
+        </member>
+        <member name="T:ArbApiSample.ANetApiResponse">
+            <remarks/>
+        </member>
+        <member name="F:ArbApiSample.ANetApiResponse.refId">
+            <remarks/>
+        </member>
+        <member name="F:ArbApiSample.ANetApiResponse.messages">
+            <remarks/>
+        </member>
+        <member name="T:ArbApiSample.messagesType">
+            <remarks/>
+        </member>
+        <member name="F:ArbApiSample.messagesType.resultCode">
+            <remarks/>
+        </member>
+        <member name="F:ArbApiSample.messagesType.message">
+            <remarks/>
+        </member>
+        <member name="T:ArbApiSample.messageTypeEnum">
+            <remarks/>
+        </member>
+        <member name="F:ArbApiSample.messageTypeEnum.Ok">
+            <remarks/>
+        </member>
+        <member name="F:ArbApiSample.messageTypeEnum.Error">
+            <remarks/>
+        </member>
+        <member name="T:ArbApiSample.messagesTypeMessage">
+            <remarks/>
+        </member>
+        <member name="F:ArbApiSample.messagesTypeMessage.code">
+            <remarks/>
+        </member>
+        <member name="F:ArbApiSample.messagesTypeMessage.text">
+            <remarks/>
+        </member>
+        <member name="T:ArbApiSample.profileTransVoidType">
+            <remarks/>
+        </member>
+        <member name="F:ArbApiSample.profileTransVoidType.customerProfileId">
+            <remarks/>
+        </member>
+        <member name="F:ArbApiSample.profileTransVoidType.customerPaymentProfileId">
+            <remarks/>
+        </member>
+        <member name="F:ArbApiSample.profileTransVoidType.customerShippingAddressId">
+            <remarks/>
+        </member>
+        <member name="F:ArbApiSample.profileTransVoidType.transId">
+            <remarks/>
+        </member>
+        <member name="T:ArbApiSample.lineItemType">
+            <remarks/>
+        </member>
+        <member name="F:ArbApiSample.lineItemType.itemId">
+            <remarks/>
+        </member>
+        <member name="F:ArbApiSample.lineItemType.name">
+            <remarks/>
+        </member>
+        <member name="F:ArbApiSample.lineItemType.description">
+            <remarks/>
+        </member>
+        <member name="F:ArbApiSample.lineItemType.quantity">
+            <remarks/>
+        </member>
+        <member name="F:ArbApiSample.lineItemType.unitPrice">
+            <remarks/>
+        </member>
+        <member name="F:ArbApiSample.lineItemType.taxable">
+            <remarks/>
+        </member>
+        <member name="F:ArbApiSample.lineItemType.taxableSpecified">
+            <remarks/>
+        </member>
+        <member name="T:ArbApiSample.extendedAmountType">
+            <remarks/>
+        </member>
+        <member name="F:ArbApiSample.extendedAmountType.amount">
+            <remarks/>
+        </member>
+        <member name="F:ArbApiSample.extendedAmountType.name">
+            <remarks/>
+        </member>
+        <member name="F:ArbApiSample.extendedAmountType.description">
+            <remarks/>
+        </member>
+        <member name="T:ArbApiSample.profileTransAmountType">
+            <remarks/>
+        </member>
+        <member name="F:ArbApiSample.profileTransAmountType.amount">
+            <remarks/>
+        </member>
+        <member name="F:ArbApiSample.profileTransAmountType.tax">
+            <remarks/>
+        </member>
+        <member name="F:ArbApiSample.profileTransAmountType.shipping">
+            <remarks/>
+        </member>
+        <member name="F:ArbApiSample.profileTransAmountType.duty">
+            <remarks/>
+        </member>
+        <member name="F:ArbApiSample.profileTransAmountType.lineItems">
+            <remarks/>
+        </member>
+        <member name="T:ArbApiSample.profileTransRefundType">
+            <remarks/>
+        </member>
+        <member name="F:ArbApiSample.profileTransRefundType.customerProfileId">
+            <remarks/>
+        </member>
+        <member name="F:ArbApiSample.profileTransRefundType.customerPaymentProfileId">
+            <remarks/>
+        </member>
+        <member name="F:ArbApiSample.profileTransRefundType.customerShippingAddressId">
+            <remarks/>
+        </member>
+        <member name="F:ArbApiSample.profileTransRefundType.creditCardNumberMasked">
+            <remarks/>
+        </member>
+        <member name="F:ArbApiSample.profileTransRefundType.bankRoutingNumberMasked">
+            <remarks/>
+        </member>
+        <member name="F:ArbApiSample.profileTransRefundType.bankAccountNumberMasked">
+            <remarks/>
+        </member>
+        <member name="F:ArbApiSample.profileTransRefundType.order">
+            <remarks/>
+        </member>
+        <member name="F:ArbApiSample.profileTransRefundType.transId">
+            <remarks/>
+        </member>
+        <member name="T:ArbApiSample.orderExType">
+            <remarks/>
+        </member>
+        <member name="T:ArbApiSample.orderType">
+            <remarks/>
+        </member>
+        <member name="F:ArbApiSample.orderType.invoiceNumber">
+            <remarks/>
+        </member>
+        <member name="F:ArbApiSample.orderType.description">
+            <remarks/>
+        </member>
+        <member name="F:ArbApiSample.orderExType.purchaseOrderNumber">
+            <remarks/>
+        </member>
+        <member name="T:ArbApiSample.profileTransPriorAuthCaptureType">
+            <remarks/>
+        </member>
+        <member name="F:ArbApiSample.profileTransPriorAuthCaptureType.customerProfileId">
+            <remarks/>
+        </member>
+        <member name="F:ArbApiSample.profileTransPriorAuthCaptureType.customerPaymentProfileId">
+            <remarks/>
+        </member>
+        <member name="F:ArbApiSample.profileTransPriorAuthCaptureType.customerShippingAddressId">
+            <remarks/>
+        </member>
+        <member name="F:ArbApiSample.profileTransPriorAuthCaptureType.transId">
+            <remarks/>
+        </member>
+        <member name="T:ArbApiSample.profileTransOrderType">
+            <remarks/>
+        </member>
+        <member name="F:ArbApiSample.profileTransOrderType.customerProfileId">
+            <remarks/>
+        </member>
+        <member name="F:ArbApiSample.profileTransOrderType.customerPaymentProfileId">
+            <remarks/>
+        </member>
+        <member name="F:ArbApiSample.profileTransOrderType.customerShippingAddressId">
+            <remarks/>
+        </member>
+        <member name="F:ArbApiSample.profileTransOrderType.order">
+            <remarks/>
+        </member>
+        <member name="F:ArbApiSample.profileTransOrderType.taxExempt">
+            <remarks/>
+        </member>
+        <member name="F:ArbApiSample.profileTransOrderType.taxExemptSpecified">
+            <remarks/>
+        </member>
+        <member name="F:ArbApiSample.profileTransOrderType.recurringBilling">
+            <remarks/>
+        </member>
+        <member name="F:ArbApiSample.profileTransOrderType.recurringBillingSpecified">
+            <remarks/>
+        </member>
+        <member name="F:ArbApiSample.profileTransOrderType.cardCode">
+            <remarks/>
+        </member>
+        <member name="F:ArbApiSample.profileTransOrderType.splitTenderId">
+            <remarks/>
+        </member>
+        <member name="T:ArbApiSample.profileTransCaptureOnlyType">
+            <remarks/>
+        </member>
+        <member name="F:ArbApiSample.profileTransCaptureOnlyType.approvalCode">
+            <remarks/>
+        </member>
+        <member name="T:ArbApiSample.profileTransAuthOnlyType">
+            <remarks/>
+        </member>
+        <member name="T:ArbApiSample.profileTransAuthCaptureType">
+            <remarks/>
+        </member>
+        <member name="T:ArbApiSample.profileTransactionType">
+            <remarks/>
+        </member>
+        <member name="F:ArbApiSample.profileTransactionType.Item">
+            <remarks/>
+        </member>
+        <member name="T:ArbApiSample.driversLicenseMaskedType">
+            <remarks/>
+        </member>
+        <member name="F:ArbApiSample.driversLicenseMaskedType.number">
+            <remarks/>
+        </member>
+        <member name="F:ArbApiSample.driversLicenseMaskedType.state">
+            <remarks/>
+        </member>
+        <member name="F:ArbApiSample.driversLicenseMaskedType.dateOfBirth">
+            <remarks/>
+        </member>
+        <member name="T:ArbApiSample.bankAccountMaskedType">
+            <remarks/>
+        </member>
+        <member name="F:ArbApiSample.bankAccountMaskedType.accountType">
+            <remarks/>
+        </member>
+        <member name="F:ArbApiSample.bankAccountMaskedType.accountTypeSpecified">
+            <remarks/>
+        </member>
+        <member name="F:ArbApiSample.bankAccountMaskedType.routingNumber">
+            <remarks/>
+        </member>
+        <member name="F:ArbApiSample.bankAccountMaskedType.accountNumber">
+            <remarks/>
+        </member>
+        <member name="F:ArbApiSample.bankAccountMaskedType.nameOnAccount">
+            <remarks/>
+        </member>
+        <member name="F:ArbApiSample.bankAccountMaskedType.echeckType">
+            <remarks/>
+        </member>
+        <member name="F:ArbApiSample.bankAccountMaskedType.echeckTypeSpecified">
+            <remarks/>
+        </member>
+        <member name="F:ArbApiSample.bankAccountMaskedType.bankName">
+            <remarks/>
+        </member>
+        <member name="T:ArbApiSample.bankAccountTypeEnum">
+            <remarks/>
+        </member>
+        <member name="F:ArbApiSample.bankAccountTypeEnum.checking">
+            <remarks/>
+        </member>
+        <member name="F:ArbApiSample.bankAccountTypeEnum.savings">
+            <remarks/>
+        </member>
+        <member name="F:ArbApiSample.bankAccountTypeEnum.businessChecking">
+            <remarks/>
+        </member>
+        <member name="T:ArbApiSample.echeckTypeEnum">
+            <remarks/>
+        </member>
+        <member name="F:ArbApiSample.echeckTypeEnum.PPD">
+            <remarks/>
+        </member>
+        <member name="F:ArbApiSample.echeckTypeEnum.WEB">
+            <remarks/>
+        </member>
+        <member name="F:ArbApiSample.echeckTypeEnum.CCD">
+            <remarks/>
+        </member>
+        <member name="F:ArbApiSample.echeckTypeEnum.TEL">
+            <remarks/>
+        </member>
+        <member name="T:ArbApiSample.creditCardMaskedType">
+            <remarks/>
+        </member>
+        <member name="F:ArbApiSample.creditCardMaskedType.cardNumber">
+            <remarks/>
+        </member>
+        <member name="F:ArbApiSample.creditCardMaskedType.expirationDate">
+            <remarks/>
+        </member>
+        <member name="T:ArbApiSample.paymentMaskedType">
+            <remarks/>
+        </member>
+        <member name="F:ArbApiSample.paymentMaskedType.Item">
+            <remarks/>
+        </member>
+        <member name="T:ArbApiSample.customerPaymentProfileBaseType">
+            <remarks/>
+        </member>
+        <member name="F:ArbApiSample.customerPaymentProfileBaseType.customerType">
+            <remarks/>
+        </member>
+        <member name="F:ArbApiSample.customerPaymentProfileBaseType.customerTypeSpecified">
+            <remarks/>
+        </member>
+        <member name="F:ArbApiSample.customerPaymentProfileBaseType.billTo">
+            <remarks/>
+        </member>
+        <member name="T:ArbApiSample.customerTypeEnum">
+            <remarks/>
+        </member>
+        <member name="F:ArbApiSample.customerTypeEnum.individual">
+            <remarks/>
+        </member>
+        <member name="F:ArbApiSample.customerTypeEnum.business">
+            <remarks/>
+        </member>
+        <member name="T:ArbApiSample.customerAddressType">
+            <remarks/>
+        </member>
+        <member name="T:ArbApiSample.nameAndAddressType">
+            <remarks/>
+        </member>
+        <member name="F:ArbApiSample.nameAndAddressType.firstName">
+            <remarks/>
+        </member>
+        <member name="F:ArbApiSample.nameAndAddressType.lastName">
+            <remarks/>
+        </member>
+        <member name="F:ArbApiSample.nameAndAddressType.company">
+            <remarks/>
+        </member>
+        <member name="F:ArbApiSample.nameAndAddressType.address">
+            <remarks/>
+        </member>
+        <member name="F:ArbApiSample.nameAndAddressType.city">
+            <remarks/>
+        </member>
+        <member name="F:ArbApiSample.nameAndAddressType.state">
+            <remarks/>
+        </member>
+        <member name="F:ArbApiSample.nameAndAddressType.zip">
+            <remarks/>
+        </member>
+        <member name="F:ArbApiSample.nameAndAddressType.country">
+            <remarks/>
+        </member>
+        <member name="F:ArbApiSample.customerAddressType.phoneNumber">
+            <remarks/>
+        </member>
+        <member name="F:ArbApiSample.customerAddressType.faxNumber">
+            <remarks/>
+        </member>
+        <member name="T:ArbApiSample.customerAddressExType">
+            <remarks/>
+        </member>
+        <member name="F:ArbApiSample.customerAddressExType.customerAddressId">
+            <remarks/>
+        </member>
+        <member name="T:ArbApiSample.customerPaymentProfileMaskedType">
+            <remarks/>
+        </member>
+        <member name="F:ArbApiSample.customerPaymentProfileMaskedType.customerPaymentProfileId">
+            <remarks/>
+        </member>
+        <member name="F:ArbApiSample.customerPaymentProfileMaskedType.payment">
+            <remarks/>
+        </member>
+        <member name="F:ArbApiSample.customerPaymentProfileMaskedType.driversLicense">
+            <remarks/>
+        </member>
+        <member name="F:ArbApiSample.customerPaymentProfileMaskedType.taxId">
+            <remarks/>
+        </member>
+        <member name="T:ArbApiSample.customerPaymentProfileType">
+            <remarks/>
+        </member>
+        <member name="F:ArbApiSample.customerPaymentProfileType.payment">
+            <remarks/>
+        </member>
+        <member name="F:ArbApiSample.customerPaymentProfileType.driversLicense">
+            <remarks/>
+        </member>
+        <member name="F:ArbApiSample.customerPaymentProfileType.taxId">
+            <remarks/>
+        </member>
+        <member name="T:ArbApiSample.paymentType">
+            <remarks/>
+        </member>
+        <member name="F:ArbApiSample.paymentType.Item">
+            <remarks/>
+        </member>
+        <member name="T:ArbApiSample.bankAccountType">
+            <remarks/>
+        </member>
+        <member name="F:ArbApiSample.bankAccountType.accountType">
+            <remarks/>
+        </member>
+        <member name="F:ArbApiSample.bankAccountType.accountTypeSpecified">
+            <remarks/>
+        </member>
+        <member name="F:ArbApiSample.bankAccountType.routingNumber">
+            <remarks/>
+        </member>
+        <member name="F:ArbApiSample.bankAccountType.accountNumber">
+            <remarks/>
+        </member>
+        <member name="F:ArbApiSample.bankAccountType.nameOnAccount">
+            <remarks/>
+        </member>
+        <member name="F:ArbApiSample.bankAccountType.echeckType">
+            <remarks/>
+        </member>
+        <member name="F:ArbApiSample.bankAccountType.echeckTypeSpecified">
+            <remarks/>
+        </member>
+        <member name="F:ArbApiSample.bankAccountType.bankName">
+            <remarks/>
+        </member>
+        <member name="T:ArbApiSample.creditCardType">
+            <remarks/>
+        </member>
+        <member name="T:ArbApiSample.creditCardSimpleType">
+            <remarks/>
+        </member>
+        <member name="F:ArbApiSample.creditCardSimpleType.cardNumber">
+            <remarks/>
+        </member>
+        <member name="F:ArbApiSample.creditCardSimpleType.expirationDate">
+            <remarks/>
+        </member>
+        <member name="F:ArbApiSample.creditCardType.cardCode">
+            <remarks/>
+        </member>
+        <member name="T:ArbApiSample.driversLicenseType">
+            <remarks/>
+        </member>
+        <member name="F:ArbApiSample.driversLicenseType.number">
+            <remarks/>
+        </member>
+        <member name="F:ArbApiSample.driversLicenseType.state">
+            <remarks/>
+        </member>
+        <member name="F:ArbApiSample.driversLicenseType.dateOfBirth">
+            <remarks/>
+        </member>
+        <member name="T:ArbApiSample.customerPaymentProfileExType">
+            <remarks/>
+        </member>
+        <member name="F:ArbApiSample.customerPaymentProfileExType.customerPaymentProfileId">
+            <remarks/>
+        </member>
+        <member name="T:ArbApiSample.customerProfileBaseType">
+            <remarks/>
+        </member>
+        <member name="F:ArbApiSample.customerProfileBaseType.merchantCustomerId">
+            <remarks/>
+        </member>
+        <member name="F:ArbApiSample.customerProfileBaseType.description">
+            <remarks/>
+        </member>
+        <member name="F:ArbApiSample.customerProfileBaseType.email">
+            <remarks/>
+        </member>
+        <member name="T:ArbApiSample.customerProfileExType">
+            <remarks/>
+        </member>
+        <member name="F:ArbApiSample.customerProfileExType.customerProfileId">
+            <remarks/>
+        </member>
+        <member name="T:ArbApiSample.customerProfileMaskedType">
+            <remarks/>
+        </member>
+        <member name="F:ArbApiSample.customerProfileMaskedType.paymentProfiles">
+            <remarks/>
+        </member>
+        <member name="F:ArbApiSample.customerProfileMaskedType.shipToList">
+            <remarks/>
+        </member>
+        <member name="T:ArbApiSample.customerProfileType">
+            <remarks/>
+        </member>
+        <member name="F:ArbApiSample.customerProfileType.paymentProfiles">
+            <remarks/>
+        </member>
+        <member name="F:ArbApiSample.customerProfileType.shipToList">
+            <remarks/>
+        </member>
+        <member name="T:ArbApiSample.customerType">
+            <remarks/>
+        </member>
+        <member name="F:ArbApiSample.customerType.type">
+            <remarks/>
+        </member>
+        <member name="F:ArbApiSample.customerType.typeSpecified">
+            <remarks/>
+        </member>
+        <member name="F:ArbApiSample.customerType.id">
+            <remarks/>
+        </member>
+        <member name="F:ArbApiSample.customerType.email">
+            <remarks/>
+        </member>
+        <member name="F:ArbApiSample.customerType.phoneNumber">
+            <remarks/>
+        </member>
+        <member name="F:ArbApiSample.customerType.faxNumber">
+            <remarks/>
+        </member>
+        <member name="F:ArbApiSample.customerType.driversLicense">
+            <remarks/>
+        </member>
+        <member name="F:ArbApiSample.customerType.taxId">
+            <remarks/>
+        </member>
+        <member name="T:ArbApiSample.paymentScheduleType">
+            <remarks/>
+        </member>
+        <member name="F:ArbApiSample.paymentScheduleType.interval">
+            <remarks/>
+        </member>
+        <member name="F:ArbApiSample.paymentScheduleType.startDate">
+            <remarks/>
+        </member>
+        <member name="F:ArbApiSample.paymentScheduleType.startDateSpecified">
+            <remarks/>
+        </member>
+        <member name="F:ArbApiSample.paymentScheduleType.totalOccurrences">
+            <remarks/>
+        </member>
+        <member name="F:ArbApiSample.paymentScheduleType.totalOccurrencesSpecified">
+            <remarks/>
+        </member>
+        <member name="F:ArbApiSample.paymentScheduleType.trialOccurrences">
+            <remarks/>
+        </member>
+        <member name="F:ArbApiSample.paymentScheduleType.trialOccurrencesSpecified">
+            <remarks/>
+        </member>
+        <member name="T:ArbApiSample.paymentScheduleTypeInterval">
+            <remarks/>
+        </member>
+        <member name="F:ArbApiSample.paymentScheduleTypeInterval.length">
+            <remarks/>
+        </member>
+        <member name="F:ArbApiSample.paymentScheduleTypeInterval.unit">
+            <remarks/>
+        </member>
+        <member name="T:ArbApiSample.ARBSubscriptionUnitEnum">
+            <remarks/>
+        </member>
+        <member name="F:ArbApiSample.ARBSubscriptionUnitEnum.days">
+            <remarks/>
+        </member>
+        <member name="F:ArbApiSample.ARBSubscriptionUnitEnum.months">
+            <remarks/>
+        </member>
+        <member name="T:ArbApiSample.ARBSubscriptionType">
+            <remarks/>
+        </member>
+        <member name="F:ArbApiSample.ARBSubscriptionType.name">
+            <remarks/>
+        </member>
+        <member name="F:ArbApiSample.ARBSubscriptionType.paymentSchedule">
+            <remarks/>
+        </member>
+        <member name="F:ArbApiSample.ARBSubscriptionType.amount">
+            <remarks/>
+        </member>
+        <member name="F:ArbApiSample.ARBSubscriptionType.amountSpecified">
+            <remarks/>
+        </member>
+        <member name="F:ArbApiSample.ARBSubscriptionType.trialAmount">
+            <remarks/>
+        </member>
+        <member name="F:ArbApiSample.ARBSubscriptionType.trialAmountSpecified">
+            <remarks/>
+        </member>
+        <member name="F:ArbApiSample.ARBSubscriptionType.payment">
+            <remarks/>
+        </member>
+        <member name="F:ArbApiSample.ARBSubscriptionType.order">
+            <remarks/>
+        </member>
+        <member name="F:ArbApiSample.ARBSubscriptionType.customer">
+            <remarks/>
+        </member>
+        <member name="F:ArbApiSample.ARBSubscriptionType.billTo">
+            <remarks/>
+        </member>
+        <member name="F:ArbApiSample.ARBSubscriptionType.shipTo">
+            <remarks/>
+        </member>
+        <member name="T:ArbApiSample.merchantAuthenticationType">
+            <remarks/>
+        </member>
+        <member name="F:ArbApiSample.merchantAuthenticationType.name">
+            <remarks/>
+        </member>
+        <member name="F:ArbApiSample.merchantAuthenticationType.transactionKey">
+            <remarks/>
+        </member>
+        <member name="T:ArbApiSample.ANetApiRequest">
+            <remarks/>
+        </member>
+        <member name="F:ArbApiSample.ANetApiRequest.merchantAuthentication">
+            <remarks/>
+        </member>
+        <member name="F:ArbApiSample.ANetApiRequest.refId">
+            <remarks/>
+        </member>
+        <member name="T:ArbApiSample.isAliveRequest">
+            <remarks/>
+        </member>
+        <member name="F:ArbApiSample.isAliveRequest.refId">
+            <remarks/>
+        </member>
+        <member name="T:ArbApiSample.isAliveResponse">
+            <remarks/>
+        </member>
+        <member name="T:ArbApiSample.authenticateTestRequest">
+            <remarks/>
+        </member>
+        <member name="T:ArbApiSample.authenticateTestResponse">
+            <remarks/>
+        </member>
+        <member name="T:ArbApiSample.ARBCreateSubscriptionRequest">
+            <remarks/>
+        </member>
+        <member name="F:ArbApiSample.ARBCreateSubscriptionRequest.subscription">
+            <remarks/>
+        </member>
+        <member name="T:ArbApiSample.ARBCreateSubscriptionResponse">
+            <remarks/>
+        </member>
+        <member name="F:ArbApiSample.ARBCreateSubscriptionResponse.subscriptionId">
+            <remarks/>
+        </member>
+        <member name="T:ArbApiSample.ARBUpdateSubscriptionRequest">
+            <remarks/>
+        </member>
+        <member name="F:ArbApiSample.ARBUpdateSubscriptionRequest.subscriptionId">
+            <remarks/>
+        </member>
+        <member name="F:ArbApiSample.ARBUpdateSubscriptionRequest.subscription">
+            <remarks/>
+        </member>
+        <member name="T:ArbApiSample.ARBUpdateSubscriptionResponse">
+            <remarks/>
+        </member>
+        <member name="T:ArbApiSample.ARBCancelSubscriptionRequest">
+            <remarks/>
+        </member>
+        <member name="F:ArbApiSample.ARBCancelSubscriptionRequest.subscriptionId">
+            <remarks/>
+        </member>
+        <member name="T:ArbApiSample.ARBCancelSubscriptionResponse">
+            <remarks/>
+        </member>
+        <member name="T:ArbApiSample.ARBGetSubscriptionStatusRequest">
+            <remarks/>
+        </member>
+        <member name="F:ArbApiSample.ARBGetSubscriptionStatusRequest.subscriptionId">
+            <remarks/>
+        </member>
+        <member name="T:ArbApiSample.ARBGetSubscriptionStatusResponse">
+            <remarks/>
+        </member>
+        <member name="F:ArbApiSample.ARBGetSubscriptionStatusResponse.Status">
+            <remarks/>
+        </member>
+        <member name="T:ArbApiSample.ARBSubscriptionStatusEnum">
+            <remarks/>
+        </member>
+        <member name="F:ArbApiSample.ARBSubscriptionStatusEnum.active">
+            <remarks/>
+        </member>
+        <member name="F:ArbApiSample.ARBSubscriptionStatusEnum.expired">
+            <remarks/>
+        </member>
+        <member name="F:ArbApiSample.ARBSubscriptionStatusEnum.suspended">
+            <remarks/>
+        </member>
+        <member name="F:ArbApiSample.ARBSubscriptionStatusEnum.canceled">
+            <remarks/>
+        </member>
+        <member name="F:ArbApiSample.ARBSubscriptionStatusEnum.terminated">
+            <remarks/>
+        </member>
+        <member name="T:ArbApiSample.createCustomerProfileRequest">
+            <remarks/>
+        </member>
+        <member name="F:ArbApiSample.createCustomerProfileRequest.profile">
+            <remarks/>
+        </member>
+        <member name="F:ArbApiSample.createCustomerProfileRequest.validationMode">
+            <remarks/>
+        </member>
+        <member name="F:ArbApiSample.createCustomerProfileRequest.validationModeSpecified">
+            <remarks/>
+        </member>
+        <member name="T:ArbApiSample.validationModeEnum">
+            <remarks/>
+        </member>
+        <member name="F:ArbApiSample.validationModeEnum.none">
+            <remarks/>
+        </member>
+        <member name="F:ArbApiSample.validationModeEnum.testMode">
+            <remarks/>
+        </member>
+        <member name="F:ArbApiSample.validationModeEnum.liveMode">
+            <remarks/>
+        </member>
+        <member name="F:ArbApiSample.validationModeEnum.oldLiveMode">
+            <remarks/>
+        </member>
+        <member name="T:ArbApiSample.createCustomerProfileResponse">
+            <remarks/>
+        </member>
+        <member name="F:ArbApiSample.createCustomerProfileResponse.customerProfileId">
+            <remarks/>
+        </member>
+        <member name="F:ArbApiSample.createCustomerProfileResponse.customerPaymentProfileIdList">
+            <remarks/>
+        </member>
+        <member name="F:ArbApiSample.createCustomerProfileResponse.customerShippingAddressIdList">
+            <remarks/>
+        </member>
+        <member name="F:ArbApiSample.createCustomerProfileResponse.validationDirectResponseList">
+            <remarks/>
+        </member>
+        <member name="T:ArbApiSample.createCustomerPaymentProfileRequest">
+            <remarks/>
+        </member>
+        <member name="F:ArbApiSample.createCustomerPaymentProfileRequest.customerProfileId">
+            <remarks/>
+        </member>
+        <member name="F:ArbApiSample.createCustomerPaymentProfileRequest.paymentProfile">
+            <remarks/>
+        </member>
+        <member name="F:ArbApiSample.createCustomerPaymentProfileRequest.validationMode">
+            <remarks/>
+        </member>
+        <member name="F:ArbApiSample.createCustomerPaymentProfileRequest.validationModeSpecified">
+            <remarks/>
+        </member>
+        <member name="T:ArbApiSample.createCustomerPaymentProfileResponse">
+            <remarks/>
+        </member>
+        <member name="F:ArbApiSample.createCustomerPaymentProfileResponse.customerPaymentProfileId">
+            <remarks/>
+        </member>
+        <member name="F:ArbApiSample.createCustomerPaymentProfileResponse.validationDirectResponse">
+            <remarks/>
+        </member>
+        <member name="T:ArbApiSample.createCustomerShippingAddressRequest">
+            <remarks/>
+        </member>
+        <member name="F:ArbApiSample.createCustomerShippingAddressRequest.customerProfileId">
+            <remarks/>
+        </member>
+        <member name="F:ArbApiSample.createCustomerShippingAddressRequest.address">
+            <remarks/>
+        </member>
+        <member name="T:ArbApiSample.createCustomerShippingAddressResponse">
+            <remarks/>
+        </member>
+        <member name="F:ArbApiSample.createCustomerShippingAddressResponse.customerAddressId">
+            <remarks/>
+        </member>
+        <member name="T:ArbApiSample.getCustomerProfileRequest">
+            <remarks/>
+        </member>
+        <member name="F:ArbApiSample.getCustomerProfileRequest.customerProfileId">
+            <remarks/>
+        </member>
+        <member name="T:ArbApiSample.getCustomerProfileResponse">
+            <remarks/>
+        </member>
+        <member name="F:ArbApiSample.getCustomerProfileResponse.profile">
+            <remarks/>
+        </member>
+        <member name="T:ArbApiSample.getCustomerPaymentProfileRequest">
+            <remarks/>
+        </member>
+        <member name="F:ArbApiSample.getCustomerPaymentProfileRequest.customerProfileId">
+            <remarks/>
+        </member>
+        <member name="F:ArbApiSample.getCustomerPaymentProfileRequest.customerPaymentProfileId">
+            <remarks/>
+        </member>
+        <member name="T:ArbApiSample.getCustomerPaymentProfileResponse">
+            <remarks/>
+        </member>
+        <member name="F:ArbApiSample.getCustomerPaymentProfileResponse.paymentProfile">
+            <remarks/>
+        </member>
+        <member name="T:ArbApiSample.getCustomerShippingAddressRequest">
+            <remarks/>
+        </member>
+        <member name="F:ArbApiSample.getCustomerShippingAddressRequest.customerProfileId">
+            <remarks/>
+        </member>
+        <member name="F:ArbApiSample.getCustomerShippingAddressRequest.customerAddressId">
+            <remarks/>
+        </member>
+        <member name="T:ArbApiSample.getCustomerShippingAddressResponse">
+            <remarks/>
+        </member>
+        <member name="F:ArbApiSample.getCustomerShippingAddressResponse.address">
+            <remarks/>
+        </member>
+        <member name="T:ArbApiSample.updateCustomerProfileRequest">
+            <remarks/>
+        </member>
+        <member name="F:ArbApiSample.updateCustomerProfileRequest.profile">
+            <remarks/>
+        </member>
+        <member name="T:ArbApiSample.updateCustomerProfileResponse">
+            <remarks/>
+        </member>
+        <member name="T:ArbApiSample.updateCustomerPaymentProfileRequest">
+            <remarks/>
+        </member>
+        <member name="F:ArbApiSample.updateCustomerPaymentProfileRequest.customerProfileId">
+            <remarks/>
+        </member>
+        <member name="F:ArbApiSample.updateCustomerPaymentProfileRequest.paymentProfile">
+            <remarks/>
+        </member>
+        <member name="F:ArbApiSample.updateCustomerPaymentProfileRequest.validationMode">
+            <remarks/>
+        </member>
+        <member name="F:ArbApiSample.updateCustomerPaymentProfileRequest.validationModeSpecified">
+            <remarks/>
+        </member>
+        <member name="T:ArbApiSample.updateCustomerPaymentProfileResponse">
+            <remarks/>
+        </member>
+        <member name="F:ArbApiSample.updateCustomerPaymentProfileResponse.validationDirectResponse">
+            <remarks/>
+        </member>
+        <member name="T:ArbApiSample.updateCustomerShippingAddressRequest">
+            <remarks/>
+        </member>
+        <member name="F:ArbApiSample.updateCustomerShippingAddressRequest.customerProfileId">
+            <remarks/>
+        </member>
+        <member name="F:ArbApiSample.updateCustomerShippingAddressRequest.address">
+            <remarks/>
+        </member>
+        <member name="T:ArbApiSample.updateCustomerShippingAddressResponse">
+            <remarks/>
+        </member>
+        <member name="T:ArbApiSample.deleteCustomerProfileRequest">
+            <remarks/>
+        </member>
+        <member name="F:ArbApiSample.deleteCustomerProfileRequest.customerProfileId">
+            <remarks/>
+        </member>
+        <member name="T:ArbApiSample.deleteCustomerProfileResponse">
+            <remarks/>
+        </member>
+        <member name="T:ArbApiSample.deleteCustomerPaymentProfileRequest">
+            <remarks/>
+        </member>
+        <member name="F:ArbApiSample.deleteCustomerPaymentProfileRequest.customerProfileId">
+            <remarks/>
+        </member>
+        <member name="F:ArbApiSample.deleteCustomerPaymentProfileRequest.customerPaymentProfileId">
+            <remarks/>
+        </member>
+        <member name="T:ArbApiSample.deleteCustomerPaymentProfileResponse">
+            <remarks/>
+        </member>
+        <member name="T:ArbApiSample.deleteCustomerShippingAddressRequest">
+            <remarks/>
+        </member>
+        <member name="F:ArbApiSample.deleteCustomerShippingAddressRequest.customerProfileId">
+            <remarks/>
+        </member>
+        <member name="F:ArbApiSample.deleteCustomerShippingAddressRequest.customerAddressId">
+            <remarks/>
+        </member>
+        <member name="T:ArbApiSample.deleteCustomerShippingAddressResponse">
+            <remarks/>
+        </member>
+        <member name="T:ArbApiSample.createCustomerProfileTransactionRequest">
+            <remarks/>
+        </member>
+        <member name="F:ArbApiSample.createCustomerProfileTransactionRequest.transaction">
+            <remarks/>
+        </member>
+        <member name="F:ArbApiSample.createCustomerProfileTransactionRequest.extraOptions">
+            <remarks/>
+        </member>
+        <member name="T:ArbApiSample.createCustomerProfileTransactionResponse">
+            <remarks/>
+        </member>
+        <member name="F:ArbApiSample.createCustomerProfileTransactionResponse.directResponse">
+            <remarks/>
+        </member>
+        <member name="T:ArbApiSample.validateCustomerPaymentProfileRequest">
+            <remarks/>
+        </member>
+        <member name="F:ArbApiSample.validateCustomerPaymentProfileRequest.customerProfileId">
+            <remarks/>
+        </member>
+        <member name="F:ArbApiSample.validateCustomerPaymentProfileRequest.customerPaymentProfileId">
+            <remarks/>
+        </member>
+        <member name="F:ArbApiSample.validateCustomerPaymentProfileRequest.customerShippingAddressId">
+            <remarks/>
+        </member>
+        <member name="F:ArbApiSample.validateCustomerPaymentProfileRequest.cardCode">
+            <remarks/>
+        </member>
+        <member name="F:ArbApiSample.validateCustomerPaymentProfileRequest.validationMode">
+            <remarks/>
+        </member>
+        <member name="T:ArbApiSample.validateCustomerPaymentProfileResponse">
+            <remarks/>
+        </member>
+        <member name="F:ArbApiSample.validateCustomerPaymentProfileResponse.directResponse">
+            <remarks/>
+        </member>
+        <member name="T:ArbApiSample.getCustomerProfileIdsRequest">
+            <remarks/>
+        </member>
+        <member name="T:ArbApiSample.getCustomerProfileIdsResponse">
+            <remarks/>
+        </member>
+        <member name="F:ArbApiSample.getCustomerProfileIdsResponse.ids">
+            <remarks/>
+        </member>
+        <member name="T:ArbApiSample.updateSplitTenderGroupRequest">
+            <remarks/>
+        </member>
+        <member name="F:ArbApiSample.updateSplitTenderGroupRequest.splitTenderId">
+            <remarks/>
+        </member>
+        <member name="F:ArbApiSample.updateSplitTenderGroupRequest.splitTenderStatus">
+            <remarks/>
+        </member>
+        <member name="T:ArbApiSample.splitTenderStatusEnum">
+            <remarks/>
+        </member>
+        <member name="F:ArbApiSample.splitTenderStatusEnum.completed">
+            <remarks/>
+        </member>
+        <member name="F:ArbApiSample.splitTenderStatusEnum.held">
+            <remarks/>
+        </member>
+        <member name="F:ArbApiSample.splitTenderStatusEnum.voided">
+            <remarks/>
+        </member>
+        <member name="T:ArbApiSample.updateSplitTenderGroupResponse">
+            <remarks/>
+        </member>
+        <member name="M:AuthorizeNet.SIMResponse.Validate(System.String,System.String)">
+            <summary>
+            Validates that what was passed by Auth.net is valid
+            </summary>
+        </member>
+        <member name="T:AuthorizeNet.CardPresentResponse">
+            <summary>
+            Parses the response from the transaction (a piped string) into a represenational class
+            </summary>
+        </member>
+        <member name="M:AuthorizeNet.CardPresentResponse.#ctor(System.String[])">
+            <summary>
+            Initializes a new instance of the <see cref="T:AuthorizeNet.CardPresentResponse"/> class.
+            </summary>
+            <param name="RawResponse">The raw response.</param>
+        </member>
+        <member name="P:AuthorizeNet.CardPresentResponse.UserReference">
+            <summary>
+            Gets the user reference.
+            </summary>
+            <value>The user reference.</value>
+        </member>
+        <member name="P:AuthorizeNet.CardPresentResponse.MD5Hash">
+            <summary>
+            Gets the MD5 hash.
+            </summary>
+            <value>The MD5 hash.</value>
+        </member>
+        <member name="P:AuthorizeNet.CardPresentResponse.SplitTenderID">
+            <summary>
+            Gets the split tender ID.
+            </summary>
+            <value>The split tender ID.</value>
+        </member>
+        <member name="P:AuthorizeNet.CardPresentResponse.RemainingBalanceOnCard">
+            <summary>
+            Gets the remaining balance on card.
+            </summary>
+            <value>The remaining balance on card.</value>
+        </member>
+        <member name="P:AuthorizeNet.CardPresentResponse.RequestedAmount">
+            <summary>
+            Gets the requested amount.
+            </summary>
+            <value>The requested amount.</value>
+        </member>
+        <member name="P:AuthorizeNet.CardPresentResponse.AVSResponse">
+            <summary>
+            Gets the AVS response.
+            </summary>
+            <value>The AVS response.</value>
+        </member>
+        <member name="P:AuthorizeNet.CardPresentResponse.CardCodeResponse">
+            <summary>
+            Gets the card code response.
+            </summary>
+            <value>The card code response.</value>
+        </member>
+        <member name="P:AuthorizeNet.CardPresentResponse.Amount">
+            <summary>
+            Gets the amount.
+            </summary>
+            <value>The amount.</value>
+        </member>
+        <member name="P:AuthorizeNet.CardPresentResponse.Approved">
+            <summary>
+            Gets a value indicating whether this <see cref="T:AuthorizeNet.CardPresentResponse"/> is approved.
+            </summary>
+            <value><c>true</c> if approved; otherwise, <c>false</c>.</value>
+        </member>
+        <member name="P:AuthorizeNet.CardPresentResponse.AuthorizationCode">
+            <summary>
+            Gets the authorization code.
+            </summary>
+            <value>The authorization code.</value>
+        </member>
+        <member name="P:AuthorizeNet.CardPresentResponse.InvoiceNumber">
+            <summary>
+            Gets the invoice number.
+            </summary>
+            <value>The invoice number.</value>
+        </member>
+        <member name="P:AuthorizeNet.CardPresentResponse.CardNumber">
+            <summary>
+            Gets the card number.
+            </summary>
+            <value>The card number.</value>
+        </member>
+        <member name="P:AuthorizeNet.CardPresentResponse.ResponseCode">
+            <summary>
+            Gets the response code.
+            </summary>
+            <value>The response code.</value>
+        </member>
+        <member name="P:AuthorizeNet.CardPresentResponse.Message">
+            <summary>
+            Gets the message.
+            </summary>
+            <value>The message.</value>
+        </member>
+        <member name="P:AuthorizeNet.CardPresentResponse.TransactionID">
+            <summary>
+            Gets the transaction ID.
+            </summary>
+            <value>The transaction ID.</value>
+        </member>
+        <member name="T:AuthorizeNet.AuthorizationRequest">
+            <summary>
+            A request that authorizes a transaction, no capture
+            </summary>
+        </member>
+        <member name="M:AuthorizeNet.AuthorizationRequest.#ctor(System.String,System.String,System.Decimal,System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:AuthorizeNet.AuthorizationRequest"/> class.
+            </summary>
+            <param name="cardNumber">The card number.</param>
+            <param name="expirationMonthAndYear">The expiration month and year.</param>
+            <param name="amount">The amount.</param>
+            <param name="description">The description.</param>
+        </member>
+        <member name="M:AuthorizeNet.AuthorizationRequest.#ctor(System.String,System.String,System.Decimal,System.String,System.Boolean)">
+            <summary>
+            Initializes a new instance of the <see cref="T:AuthorizeNet.AuthorizationRequest"/> class.
+            </summary>
+            <param name="cardNumber">The card number.</param>
+            <param name="expirationMonthAndYear">The expiration month and year.</param>
+            <param name="amount">The amount.</param>
+            <param name="description">The description.</param>
+            <param name="includeCapture">if set to <c>true</c> [include capture].</param>
+        </member>
+        <member name="M:AuthorizeNet.AuthorizationRequest.#ctor(System.Collections.Specialized.NameValueCollection)">
+            <summary>
+            Loader for use with form POSTS from web
+            </summary>
+            <param name="post"></param>
+        </member>
+        <member name="T:AuthorizeNet.RequestAction">
+            <summary>
+            The type of API Request being performed
+            </summary>
+        </member>
+        <member name="F:AuthorizeNet.RequestAction.Authorize">
+            <summary>
+            Credit Card authorization
+            </summary>
+        </member>
+        <member name="F:AuthorizeNet.RequestAction.Capture">
+            <summary>
+            Settlement of a previously authorized transaction
+            </summary>
+        </member>
+        <member name="F:AuthorizeNet.RequestAction.AuthorizeAndCapture">
+            <summary>
+            An authorization and capture all in one
+            </summary>
+        </member>
+        <member name="F:AuthorizeNet.RequestAction.Credit">
+            <summary>
+            A Credit
+            </summary>
+        </member>
+        <member name="F:AuthorizeNet.RequestAction.Void">
+            <summary>
+            Voiding of a previously authorized transaction
+            </summary>
+        </member>
+        <member name="F:AuthorizeNet.RequestAction.PriorAuthCapture">
+            <summary>
+            Capturing of a prior authorization
+            </summary>
+        </member>
+        <member name="F:AuthorizeNet.RequestAction.UnlinkedCredit">
+            <summary>
+            Issue a credit for a transaction not based with the API
+            </summary>
+        </member>
+        <member name="T:AuthorizeNet.BankAccountType">
+            <summary>
+            The type of BankAccount to be used
+            </summary>
+        </member>
+        <member name="F:AuthorizeNet.BankAccountType.Checking">
+            <summary>
+            Checking Account
+            </summary>
+        </member>
+        <member name="F:AuthorizeNet.BankAccountType.BusinessChecking">
+            <summary>
+            Business Checking account
+            </summary>
+        </member>
+        <member name="F:AuthorizeNet.BankAccountType.Savings">
+            <summary>
+            Savings Account
+            </summary>
+        </member>
+        <member name="T:AuthorizeNet.EcheckType">
+            <summary>
+            The type of eCheck transaction
+            </summary>
+        </member>
+        <member name="F:AuthorizeNet.EcheckType.ARC">
+            <summary>
+            Accounts Receivable Conversion
+            </summary>
+        </member>
+        <member name="F:AuthorizeNet.EcheckType.BOC">
+            <summary>
+            Back Office Conversion
+            </summary>
+        </member>
+        <member name="F:AuthorizeNet.EcheckType.CCD">
+            <summary>
+            Cash Concentration or Disbursement
+            </summary>
+        </member>
+        <member name="F:AuthorizeNet.EcheckType.PPD">
+            <summary>
+            Prearranged Payment and Deposit Entry
+            </summary>
+        </member>
+        <member name="F:AuthorizeNet.EcheckType.TEL">
+            <summary>
+            Telephone-Initiated Entry
+            </summary>
+        </member>
+        <member name="F:AuthorizeNet.EcheckType.WEB">
+            <summary>
+            Internet-Initiated Entry
+            </summary>
+        </member>
+        <member name="T:AuthorizeNet.DeviceType">
+            <summary>
+            The devise which read in the Credit Card
+            </summary>
+        </member>
+        <member name="F:AuthorizeNet.DeviceType.Unknown">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:AuthorizeNet.DeviceType.UnattendedTerminal">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:AuthorizeNet.DeviceType.SelfServiceTerminal">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:AuthorizeNet.DeviceType.ElectronicCashRegister">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:AuthorizeNet.DeviceType.PersonalComputerBasedTerminal">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:AuthorizeNet.DeviceType.AirPay">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:AuthorizeNet.DeviceType.WirelessPOS">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:AuthorizeNet.DeviceType.Website">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:AuthorizeNet.DeviceType.DialTerminal">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:AuthorizeNet.DeviceType.VirtualTerminal">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:AuthorizeNet.CardPresentGateway">
+            <summary>
+            The gateway which runs the credit card transaction
+            </summary>
+        </member>
+        <member name="M:AuthorizeNet.CardPresentGateway.#ctor(System.String,System.String,System.Boolean)">
+            <summary>
+            Initializes a new instance of the <see cref="T:AuthorizeNet.CardPresentGateway"/> class.
+            </summary>
+            <param name="apiLogin">The API login.</param>
+            <param name="transactionKey">The transaction key.</param>
+            <param name="isTest">if set to <c>true</c> [is test].</param>
+        </member>
+        <member name="M:AuthorizeNet.CardPresentGateway.#ctor(System.String,System.String,System.String,AuthorizeNet.DeviceType,System.Boolean)">
+            <summary>
+            Initializes a new instance of the <see cref="T:AuthorizeNet.CardPresentGateway"/> class.
+            </summary>
+            <param name="apiLogin">The API login.</param>
+            <param name="transactionKey">The transaction key.</param>
+            <param name="marketType">Type of the market.</param>
+            <param name="deviceType">Type of the device.</param>
+            <param name="isTest">if set to <c>true</c> [is test].</param>
+        </member>
+        <member name="M:AuthorizeNet.CardPresentGateway.Send(AuthorizeNet.IGatewayRequest,System.String)">
+            <summary>
+            Sends the specified request.
+            </summary>
+            <param name="request">The request.</param>
+            <param name="description">The description.</param>
+            <returns></returns>
+        </member>
+        <member name="M:AuthorizeNet.Crypto.GenerateFingerprint(System.String,System.String,System.Decimal,System.String,System.String)">
+            <summary>
+            Generates the HMAC-encrypted hash to send along with the SIM form
+            </summary>
+            <param name="transactionKey">The merchant's transaction key</param>
+            <param name="login">The merchant's Authorize.NET API Login</param>
+            <param name="amount">The amount of the transaction</param>
+            <returns></returns>
+        </member>
+        <member name="M:AuthorizeNet.Crypto.IsMatch(System.String,System.String,System.String,System.Decimal,System.String)">
+            <summary>
+            Decrypts provided string parameter
+            </summary>
+        </member>
+        <member name="M:AuthorizeNet.Crypto.EncryptHMAC(System.String,System.String)">
+            <summary>
+            Encrypts the key/value pair supplied using HMAC-MD5
+            </summary>
+        </member>
+        <member name="M:AuthorizeNet.Crypto.GenerateSequence">
+            <summary>
+            Generates a 4-place sequence number randomly
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:AuthorizeNet.Crypto.GenerateTimestamp">
+            <summary>
+            Generates a timestamp in seconds from 1970
+            </summary>
+        </member>
+        <member name="T:AuthorizeNet.APICore.ANetApiResponse">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.ANetApiResponse.refId">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.ANetApiResponse.messages">
+            <remarks/>
+        </member>
+        <member name="T:AuthorizeNet.APICore.messagesType">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.messagesType.resultCode">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.messagesType.message">
+            <remarks/>
+        </member>
+        <member name="T:AuthorizeNet.APICore.messageTypeEnum">
+            <remarks/>
+        </member>
+        <member name="F:AuthorizeNet.APICore.messageTypeEnum.Ok">
+            <remarks/>
+        </member>
+        <member name="F:AuthorizeNet.APICore.messageTypeEnum.Error">
+            <remarks/>
+        </member>
+        <member name="T:AuthorizeNet.APICore.messagesTypeMessage">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.messagesTypeMessage.code">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.messagesTypeMessage.text">
+            <remarks/>
+        </member>
+        <member name="T:AuthorizeNet.APICore.transactionSummaryType">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.transactionSummaryType.transId">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.transactionSummaryType.submitTimeUTC">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.transactionSummaryType.submitTimeLocal">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.transactionSummaryType.transactionStatus">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.transactionSummaryType.invoiceNumber">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.transactionSummaryType.firstName">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.transactionSummaryType.lastName">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.transactionSummaryType.accountType">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.transactionSummaryType.accountNumber">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.transactionSummaryType.settleAmount">
+            <remarks/>
+        </member>
+        <member name="T:AuthorizeNet.APICore.transactionResponse">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.transactionResponse.responseCode">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.transactionResponse.authCode">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.transactionResponse.avsResultCode">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.transactionResponse.cvvResultCode">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.transactionResponse.cavvResultCode">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.transactionResponse.transId">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.transactionResponse.refTransID">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.transactionResponse.transHash">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.transactionResponse.testRequest">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.transactionResponse.accountNumber">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.transactionResponse.accountType">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.transactionResponse.messages">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.transactionResponse.errors">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.transactionResponse.splitTenderPayments">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.transactionResponse.userFields">
+            <remarks/>
+        </member>
+        <member name="T:AuthorizeNet.APICore.transactionResponseMessage">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.transactionResponseMessage.code">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.transactionResponseMessage.description">
+            <remarks/>
+        </member>
+        <member name="T:AuthorizeNet.APICore.transactionResponseError">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.transactionResponseError.errorCode">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.transactionResponseError.errorText">
+            <remarks/>
+        </member>
+        <member name="T:AuthorizeNet.APICore.transactionResponseSplitTenderPayment">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.transactionResponseSplitTenderPayment.transId">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.transactionResponseSplitTenderPayment.responseCode">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.transactionResponseSplitTenderPayment.responseToCustomer">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.transactionResponseSplitTenderPayment.authCode">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.transactionResponseSplitTenderPayment.accountNumber">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.transactionResponseSplitTenderPayment.accountType">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.transactionResponseSplitTenderPayment.requestedAmount">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.transactionResponseSplitTenderPayment.approvedAmount">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.transactionResponseSplitTenderPayment.balanceOnCard">
+            <remarks/>
+        </member>
+        <member name="T:AuthorizeNet.APICore.userField">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.userField.name">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.userField.value">
+            <remarks/>
+        </member>
+        <member name="T:AuthorizeNet.APICore.settingType">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.settingType.settingName">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.settingType.settingValue">
+            <remarks/>
+        </member>
+        <member name="T:AuthorizeNet.APICore.transRetailInfoType">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.transRetailInfoType.marketType">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.transRetailInfoType.deviceType">
+            <remarks/>
+        </member>
+        <member name="T:AuthorizeNet.APICore.ccAuthenticationType">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.ccAuthenticationType.authenticationIndicator">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.ccAuthenticationType.cardholderAuthenticationValue">
+            <remarks/>
+        </member>
+        <member name="T:AuthorizeNet.APICore.transactionRequestType">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.transactionRequestType.transactionType">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.transactionRequestType.amount">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.transactionRequestType.amountSpecified">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.transactionRequestType.payment">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.transactionRequestType.authCode">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.transactionRequestType.refTransId">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.transactionRequestType.splitTenderId">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.transactionRequestType.order">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.transactionRequestType.lineItems">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.transactionRequestType.tax">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.transactionRequestType.duty">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.transactionRequestType.shipping">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.transactionRequestType.taxExempt">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.transactionRequestType.taxExemptSpecified">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.transactionRequestType.poNumber">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.transactionRequestType.customer">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.transactionRequestType.billTo">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.transactionRequestType.shipTo">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.transactionRequestType.customerIP">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.transactionRequestType.cardholderAuthentication">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.transactionRequestType.retail">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.transactionRequestType.transactionSettings">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.transactionRequestType.userFields">
+            <remarks/>
+        </member>
+        <member name="T:AuthorizeNet.APICore.paymentType">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.paymentType.Item">
+            <remarks/>
+        </member>
+        <member name="T:AuthorizeNet.APICore.bankAccountType">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.bankAccountType.accountType">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.bankAccountType.accountTypeSpecified">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.bankAccountType.routingNumber">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.bankAccountType.accountNumber">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.bankAccountType.nameOnAccount">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.bankAccountType.echeckType">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.bankAccountType.echeckTypeSpecified">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.bankAccountType.bankName">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.bankAccountType.checkNumber">
+            <remarks/>
+        </member>
+        <member name="T:AuthorizeNet.APICore.bankAccountTypeEnum">
+            <remarks/>
+        </member>
+        <member name="F:AuthorizeNet.APICore.bankAccountTypeEnum.checking">
+            <remarks/>
+        </member>
+        <member name="F:AuthorizeNet.APICore.bankAccountTypeEnum.savings">
+            <remarks/>
+        </member>
+        <member name="F:AuthorizeNet.APICore.bankAccountTypeEnum.businessChecking">
+            <remarks/>
+        </member>
+        <member name="T:AuthorizeNet.APICore.echeckTypeEnum">
+            <remarks/>
+        </member>
+        <member name="F:AuthorizeNet.APICore.echeckTypeEnum.PPD">
+            <remarks/>
+        </member>
+        <member name="F:AuthorizeNet.APICore.echeckTypeEnum.WEB">
+            <remarks/>
+        </member>
+        <member name="F:AuthorizeNet.APICore.echeckTypeEnum.CCD">
+            <remarks/>
+        </member>
+        <member name="F:AuthorizeNet.APICore.echeckTypeEnum.TEL">
+            <remarks/>
+        </member>
+        <member name="F:AuthorizeNet.APICore.echeckTypeEnum.ARC">
+            <remarks/>
+        </member>
+        <member name="F:AuthorizeNet.APICore.echeckTypeEnum.BOC">
+            <remarks/>
+        </member>
+        <member name="T:AuthorizeNet.APICore.creditCardType">
+            <remarks/>
+        </member>
+        <member name="T:AuthorizeNet.APICore.creditCardSimpleType">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.creditCardSimpleType.cardNumber">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.creditCardSimpleType.expirationDate">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.creditCardType.cardCode">
+            <remarks/>
+        </member>
+        <member name="T:AuthorizeNet.APICore.creditCardTrackType">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.creditCardTrackType.Item">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.creditCardTrackType.ItemElementName">
+            <remarks/>
+        </member>
+        <member name="T:AuthorizeNet.APICore.ItemChoiceType">
+            <remarks/>
+        </member>
+        <member name="F:AuthorizeNet.APICore.ItemChoiceType.track1">
+            <remarks/>
+        </member>
+        <member name="F:AuthorizeNet.APICore.ItemChoiceType.track2">
+            <remarks/>
+        </member>
+        <member name="T:AuthorizeNet.APICore.orderType">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.orderType.invoiceNumber">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.orderType.description">
+            <remarks/>
+        </member>
+        <member name="T:AuthorizeNet.APICore.orderExType">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.orderExType.purchaseOrderNumber">
+            <remarks/>
+        </member>
+        <member name="T:AuthorizeNet.APICore.lineItemType">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.lineItemType.itemId">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.lineItemType.name">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.lineItemType.description">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.lineItemType.quantity">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.lineItemType.unitPrice">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.lineItemType.taxable">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.lineItemType.taxableSpecified">
+            <remarks/>
+        </member>
+        <member name="T:AuthorizeNet.APICore.extendedAmountType">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.extendedAmountType.amount">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.extendedAmountType.name">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.extendedAmountType.description">
+            <remarks/>
+        </member>
+        <member name="T:AuthorizeNet.APICore.customerDataType">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.customerDataType.type">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.customerDataType.typeSpecified">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.customerDataType.id">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.customerDataType.email">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.customerDataType.driversLicense">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.customerDataType.taxId">
+            <remarks/>
+        </member>
+        <member name="T:AuthorizeNet.APICore.customerTypeEnum">
+            <remarks/>
+        </member>
+        <member name="F:AuthorizeNet.APICore.customerTypeEnum.individual">
+            <remarks/>
+        </member>
+        <member name="F:AuthorizeNet.APICore.customerTypeEnum.business">
+            <remarks/>
+        </member>
+        <member name="T:AuthorizeNet.APICore.driversLicenseType">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.driversLicenseType.number">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.driversLicenseType.state">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.driversLicenseType.dateOfBirth">
+            <remarks/>
+        </member>
+        <member name="T:AuthorizeNet.APICore.customerAddressType">
+            <remarks/>
+        </member>
+        <member name="T:AuthorizeNet.APICore.nameAndAddressType">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.nameAndAddressType.firstName">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.nameAndAddressType.lastName">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.nameAndAddressType.company">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.nameAndAddressType.address">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.nameAndAddressType.city">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.nameAndAddressType.state">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.nameAndAddressType.zip">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.nameAndAddressType.country">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.customerAddressType.phoneNumber">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.customerAddressType.faxNumber">
+            <remarks/>
+        </member>
+        <member name="T:AuthorizeNet.APICore.customerAddressExType">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.customerAddressExType.customerAddressId">
+            <remarks/>
+        </member>
+        <member name="T:AuthorizeNet.APICore.batchStatisticType">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.batchStatisticType.accountType">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.batchStatisticType.chargeAmount">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.batchStatisticType.chargeCount">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.batchStatisticType.refundAmount">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.batchStatisticType.refundCount">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.batchStatisticType.voidCount">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.batchStatisticType.declineCount">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.batchStatisticType.errorCount">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.batchStatisticType.returnedItemAmount">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.batchStatisticType.returnedItemAmountSpecified">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.batchStatisticType.returnedItemCount">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.batchStatisticType.returnedItemCountSpecified">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.batchStatisticType.chargebackAmount">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.batchStatisticType.chargebackAmountSpecified">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.batchStatisticType.chargebackCount">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.batchStatisticType.chargebackCountSpecified">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.batchStatisticType.correctionNoticeCount">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.batchStatisticType.correctionNoticeCountSpecified">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.batchStatisticType.chargeChargeBackAmount">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.batchStatisticType.chargeChargeBackAmountSpecified">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.batchStatisticType.chargeChargeBackCount">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.batchStatisticType.chargeChargeBackCountSpecified">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.batchStatisticType.refundChargeBackAmount">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.batchStatisticType.refundChargeBackAmountSpecified">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.batchStatisticType.refundChargeBackCount">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.batchStatisticType.refundChargeBackCountSpecified">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.batchStatisticType.chargeReturnedItemsAmount">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.batchStatisticType.chargeReturnedItemsAmountSpecified">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.batchStatisticType.chargeReturnedItemsCount">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.batchStatisticType.chargeReturnedItemsCountSpecified">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.batchStatisticType.refundReturnedItemsAmount">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.batchStatisticType.refundReturnedItemsAmountSpecified">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.batchStatisticType.refundReturnedItemsCount">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.batchStatisticType.refundReturnedItemsCountSpecified">
+            <remarks/>
+        </member>
+        <member name="T:AuthorizeNet.APICore.batchDetailsType">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.batchDetailsType.batchId">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.batchDetailsType.settlementTimeUTC">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.batchDetailsType.settlementTimeUTCSpecified">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.batchDetailsType.settlementTimeLocal">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.batchDetailsType.settlementTimeLocalSpecified">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.batchDetailsType.settlementState">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.batchDetailsType.paymentMethod">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.batchDetailsType.statistics">
+            <remarks/>
+        </member>
+        <member name="T:AuthorizeNet.APICore.FDSFilterType">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.FDSFilterType.name">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.FDSFilterType.action">
+            <remarks/>
+        </member>
+        <member name="T:AuthorizeNet.APICore.transactionDetailsType">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.transactionDetailsType.transId">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.transactionDetailsType.refTransId">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.transactionDetailsType.splitTenderId">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.transactionDetailsType.submitTimeUTC">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.transactionDetailsType.submitTimeLocal">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.transactionDetailsType.transactionType">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.transactionDetailsType.transactionStatus">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.transactionDetailsType.responseCode">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.transactionDetailsType.responseReasonCode">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.transactionDetailsType.responseReasonDescription">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.transactionDetailsType.authCode">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.transactionDetailsType.AVSResponse">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.transactionDetailsType.cardCodeResponse">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.transactionDetailsType.CAVVResponse">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.transactionDetailsType.FDSFilterAction">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.transactionDetailsType.FDSFilters">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.transactionDetailsType.batch">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.transactionDetailsType.order">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.transactionDetailsType.requestedAmount">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.transactionDetailsType.requestedAmountSpecified">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.transactionDetailsType.authAmount">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.transactionDetailsType.settleAmount">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.transactionDetailsType.tax">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.transactionDetailsType.shipping">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.transactionDetailsType.duty">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.transactionDetailsType.lineItems">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.transactionDetailsType.prepaidBalanceRemaining">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.transactionDetailsType.prepaidBalanceRemainingSpecified">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.transactionDetailsType.taxExempt">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.transactionDetailsType.taxExemptSpecified">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.transactionDetailsType.payment">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.transactionDetailsType.customer">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.transactionDetailsType.billTo">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.transactionDetailsType.shipTo">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.transactionDetailsType.recurringBilling">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.transactionDetailsType.recurringBillingSpecified">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.transactionDetailsType.customerIP">
+            <remarks/>
+        </member>
+        <member name="T:AuthorizeNet.APICore.paymentMaskedType">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.paymentMaskedType.Item">
+            <remarks/>
+        </member>
+        <member name="T:AuthorizeNet.APICore.bankAccountMaskedType">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.bankAccountMaskedType.accountType">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.bankAccountMaskedType.accountTypeSpecified">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.bankAccountMaskedType.routingNumber">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.bankAccountMaskedType.accountNumber">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.bankAccountMaskedType.nameOnAccount">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.bankAccountMaskedType.echeckType">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.bankAccountMaskedType.echeckTypeSpecified">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.bankAccountMaskedType.bankName">
+            <remarks/>
+        </member>
+        <member name="T:AuthorizeNet.APICore.creditCardMaskedType">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.creditCardMaskedType.cardNumber">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.creditCardMaskedType.expirationDate">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.creditCardMaskedType.cardType">
+            <remarks/>
+        </member>
+        <member name="T:AuthorizeNet.APICore.profileTransVoidType">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.profileTransVoidType.customerProfileId">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.profileTransVoidType.customerPaymentProfileId">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.profileTransVoidType.customerShippingAddressId">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.profileTransVoidType.transId">
+            <remarks/>
+        </member>
+        <member name="T:AuthorizeNet.APICore.profileTransAmountType">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.profileTransAmountType.amount">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.profileTransAmountType.tax">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.profileTransAmountType.shipping">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.profileTransAmountType.duty">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.profileTransAmountType.lineItems">
+            <remarks/>
+        </member>
+        <member name="T:AuthorizeNet.APICore.profileTransRefundType">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.profileTransRefundType.customerProfileId">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.profileTransRefundType.customerPaymentProfileId">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.profileTransRefundType.customerShippingAddressId">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.profileTransRefundType.creditCardNumberMasked">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.profileTransRefundType.bankRoutingNumberMasked">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.profileTransRefundType.bankAccountNumberMasked">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.profileTransRefundType.order">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.profileTransRefundType.transId">
+            <remarks/>
+        </member>
+        <member name="T:AuthorizeNet.APICore.profileTransPriorAuthCaptureType">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.profileTransPriorAuthCaptureType.customerProfileId">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.profileTransPriorAuthCaptureType.customerPaymentProfileId">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.profileTransPriorAuthCaptureType.customerShippingAddressId">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.profileTransPriorAuthCaptureType.transId">
+            <remarks/>
+        </member>
+        <member name="T:AuthorizeNet.APICore.profileTransOrderType">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.profileTransOrderType.customerProfileId">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.profileTransOrderType.customerPaymentProfileId">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.profileTransOrderType.customerShippingAddressId">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.profileTransOrderType.order">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.profileTransOrderType.taxExempt">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.profileTransOrderType.taxExemptSpecified">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.profileTransOrderType.recurringBilling">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.profileTransOrderType.recurringBillingSpecified">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.profileTransOrderType.cardCode">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.profileTransOrderType.splitTenderId">
+            <remarks/>
+        </member>
+        <member name="T:AuthorizeNet.APICore.profileTransCaptureOnlyType">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.profileTransCaptureOnlyType.approvalCode">
+            <remarks/>
+        </member>
+        <member name="T:AuthorizeNet.APICore.profileTransAuthOnlyType">
+            <remarks/>
+        </member>
+        <member name="T:AuthorizeNet.APICore.profileTransAuthCaptureType">
+            <remarks/>
+        </member>
+        <member name="T:AuthorizeNet.APICore.profileTransactionType">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.profileTransactionType.Item">
+            <remarks/>
+        </member>
+        <member name="T:AuthorizeNet.APICore.driversLicenseMaskedType">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.driversLicenseMaskedType.number">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.driversLicenseMaskedType.state">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.driversLicenseMaskedType.dateOfBirth">
+            <remarks/>
+        </member>
+        <member name="T:AuthorizeNet.APICore.customerPaymentProfileBaseType">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.customerPaymentProfileBaseType.customerType">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.customerPaymentProfileBaseType.customerTypeSpecified">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.customerPaymentProfileBaseType.billTo">
+            <remarks/>
+        </member>
+        <member name="T:AuthorizeNet.APICore.customerPaymentProfileMaskedType">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.customerPaymentProfileMaskedType.customerPaymentProfileId">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.customerPaymentProfileMaskedType.payment">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.customerPaymentProfileMaskedType.driversLicense">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.customerPaymentProfileMaskedType.taxId">
+            <remarks/>
+        </member>
+        <member name="T:AuthorizeNet.APICore.customerPaymentProfileType">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.customerPaymentProfileType.payment">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.customerPaymentProfileType.driversLicense">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.customerPaymentProfileType.taxId">
+            <remarks/>
+        </member>
+        <member name="T:AuthorizeNet.APICore.customerPaymentProfileExType">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.customerPaymentProfileExType.customerPaymentProfileId">
+            <remarks/>
+        </member>
+        <member name="T:AuthorizeNet.APICore.customerProfileBaseType">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.customerProfileBaseType.merchantCustomerId">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.customerProfileBaseType.description">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.customerProfileBaseType.email">
+            <remarks/>
+        </member>
+        <member name="T:AuthorizeNet.APICore.customerProfileExType">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.customerProfileExType.customerProfileId">
+            <remarks/>
+        </member>
+        <member name="T:AuthorizeNet.APICore.customerProfileMaskedType">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.customerProfileMaskedType.paymentProfiles">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.customerProfileMaskedType.shipToList">
+            <remarks/>
+        </member>
+        <member name="T:AuthorizeNet.APICore.customerProfileType">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.customerProfileType.paymentProfiles">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.customerProfileType.shipToList">
+            <remarks/>
+        </member>
+        <member name="T:AuthorizeNet.APICore.customerType">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.customerType.type">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.customerType.typeSpecified">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.customerType.id">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.customerType.email">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.customerType.phoneNumber">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.customerType.faxNumber">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.customerType.driversLicense">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.customerType.taxId">
+            <remarks/>
+        </member>
+        <member name="T:AuthorizeNet.APICore.paymentScheduleType">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.paymentScheduleType.interval">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.paymentScheduleType.startDate">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.paymentScheduleType.startDateSpecified">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.paymentScheduleType.totalOccurrences">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.paymentScheduleType.totalOccurrencesSpecified">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.paymentScheduleType.trialOccurrences">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.paymentScheduleType.trialOccurrencesSpecified">
+            <remarks/>
+        </member>
+        <member name="T:AuthorizeNet.APICore.paymentScheduleTypeInterval">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.paymentScheduleTypeInterval.length">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.paymentScheduleTypeInterval.unit">
+            <remarks/>
+        </member>
+        <member name="T:AuthorizeNet.APICore.ARBSubscriptionUnitEnum">
+            <remarks/>
+        </member>
+        <member name="F:AuthorizeNet.APICore.ARBSubscriptionUnitEnum.days">
+            <remarks/>
+        </member>
+        <member name="F:AuthorizeNet.APICore.ARBSubscriptionUnitEnum.months">
+            <remarks/>
+        </member>
+        <member name="T:AuthorizeNet.APICore.ARBSubscriptionType">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.ARBSubscriptionType.name">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.ARBSubscriptionType.paymentSchedule">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.ARBSubscriptionType.amount">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.ARBSubscriptionType.amountSpecified">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.ARBSubscriptionType.trialAmount">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.ARBSubscriptionType.trialAmountSpecified">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.ARBSubscriptionType.payment">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.ARBSubscriptionType.order">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.ARBSubscriptionType.customer">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.ARBSubscriptionType.billTo">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.ARBSubscriptionType.shipTo">
+            <remarks/>
+        </member>
+        <member name="T:AuthorizeNet.APICore.merchantAuthenticationType">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.merchantAuthenticationType.name">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.merchantAuthenticationType.transactionKey">
+            <remarks/>
+        </member>
+        <member name="T:AuthorizeNet.APICore.ANetApiRequest">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.ANetApiRequest.merchantAuthentication">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.ANetApiRequest.refId">
+            <remarks/>
+        </member>
+        <member name="T:AuthorizeNet.APICore.isAliveRequest">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.isAliveRequest.refId">
+            <remarks/>
+        </member>
+        <member name="T:AuthorizeNet.APICore.isAliveResponse">
+            <remarks/>
+        </member>
+        <member name="T:AuthorizeNet.APICore.authenticateTestRequest">
+            <remarks/>
+        </member>
+        <member name="T:AuthorizeNet.APICore.authenticateTestResponse">
+            <remarks/>
+        </member>
+        <member name="T:AuthorizeNet.APICore.ARBCreateSubscriptionRequest">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.ARBCreateSubscriptionRequest.subscription">
+            <remarks/>
+        </member>
+        <member name="T:AuthorizeNet.APICore.ARBCreateSubscriptionResponse">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.ARBCreateSubscriptionResponse.subscriptionId">
+            <remarks/>
+        </member>
+        <member name="T:AuthorizeNet.APICore.ARBUpdateSubscriptionRequest">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.ARBUpdateSubscriptionRequest.subscriptionId">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.ARBUpdateSubscriptionRequest.subscription">
+            <remarks/>
+        </member>
+        <member name="T:AuthorizeNet.APICore.ARBUpdateSubscriptionResponse">
+            <remarks/>
+        </member>
+        <member name="T:AuthorizeNet.APICore.ARBCancelSubscriptionRequest">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.ARBCancelSubscriptionRequest.subscriptionId">
+            <remarks/>
+        </member>
+        <member name="T:AuthorizeNet.APICore.ARBCancelSubscriptionResponse">
+            <remarks/>
+        </member>
+        <member name="T:AuthorizeNet.APICore.ARBGetSubscriptionStatusRequest">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.ARBGetSubscriptionStatusRequest.subscriptionId">
+            <remarks/>
+        </member>
+        <member name="T:AuthorizeNet.APICore.ARBGetSubscriptionStatusResponse">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.ARBGetSubscriptionStatusResponse.status">
+            <remarks/>
+        </member>
+        <member name="T:AuthorizeNet.APICore.ARBSubscriptionStatusEnum">
+            <remarks/>
+        </member>
+        <member name="F:AuthorizeNet.APICore.ARBSubscriptionStatusEnum.active">
+            <remarks/>
+        </member>
+        <member name="F:AuthorizeNet.APICore.ARBSubscriptionStatusEnum.expired">
+            <remarks/>
+        </member>
+        <member name="F:AuthorizeNet.APICore.ARBSubscriptionStatusEnum.suspended">
+            <remarks/>
+        </member>
+        <member name="F:AuthorizeNet.APICore.ARBSubscriptionStatusEnum.canceled">
+            <remarks/>
+        </member>
+        <member name="F:AuthorizeNet.APICore.ARBSubscriptionStatusEnum.terminated">
+            <remarks/>
+        </member>
+        <member name="T:AuthorizeNet.APICore.createCustomerProfileRequest">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.createCustomerProfileRequest.profile">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.createCustomerProfileRequest.validationMode">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.createCustomerProfileRequest.validationModeSpecified">
+            <remarks/>
+        </member>
+        <member name="T:AuthorizeNet.APICore.validationModeEnum">
+            <remarks/>
+        </member>
+        <member name="F:AuthorizeNet.APICore.validationModeEnum.none">
+            <remarks/>
+        </member>
+        <member name="F:AuthorizeNet.APICore.validationModeEnum.testMode">
+            <remarks/>
+        </member>
+        <member name="F:AuthorizeNet.APICore.validationModeEnum.liveMode">
+            <remarks/>
+        </member>
+        <member name="F:AuthorizeNet.APICore.validationModeEnum.oldLiveMode">
+            <remarks/>
+        </member>
+        <member name="T:AuthorizeNet.APICore.createCustomerProfileResponse">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.createCustomerProfileResponse.customerProfileId">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.createCustomerProfileResponse.customerPaymentProfileIdList">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.createCustomerProfileResponse.customerShippingAddressIdList">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.createCustomerProfileResponse.validationDirectResponseList">
+            <remarks/>
+        </member>
+        <member name="T:AuthorizeNet.APICore.createCustomerPaymentProfileRequest">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.createCustomerPaymentProfileRequest.customerProfileId">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.createCustomerPaymentProfileRequest.paymentProfile">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.createCustomerPaymentProfileRequest.validationMode">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.createCustomerPaymentProfileRequest.validationModeSpecified">
+            <remarks/>
+        </member>
+        <member name="T:AuthorizeNet.APICore.createCustomerPaymentProfileResponse">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.createCustomerPaymentProfileResponse.customerPaymentProfileId">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.createCustomerPaymentProfileResponse.validationDirectResponse">
+            <remarks/>
+        </member>
+        <member name="T:AuthorizeNet.APICore.createCustomerShippingAddressRequest">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.createCustomerShippingAddressRequest.customerProfileId">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.createCustomerShippingAddressRequest.address">
+            <remarks/>
+        </member>
+        <member name="T:AuthorizeNet.APICore.createCustomerShippingAddressResponse">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.createCustomerShippingAddressResponse.customerAddressId">
+            <remarks/>
+        </member>
+        <member name="T:AuthorizeNet.APICore.getCustomerProfileRequest">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.getCustomerProfileRequest.customerProfileId">
+            <remarks/>
+        </member>
+        <member name="T:AuthorizeNet.APICore.getCustomerProfileResponse">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.getCustomerProfileResponse.profile">
+            <remarks/>
+        </member>
+        <member name="T:AuthorizeNet.APICore.getCustomerPaymentProfileRequest">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.getCustomerPaymentProfileRequest.customerProfileId">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.getCustomerPaymentProfileRequest.customerPaymentProfileId">
+            <remarks/>
+        </member>
+        <member name="T:AuthorizeNet.APICore.getCustomerPaymentProfileResponse">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.getCustomerPaymentProfileResponse.paymentProfile">
+            <remarks/>
+        </member>
+        <member name="T:AuthorizeNet.APICore.getCustomerShippingAddressRequest">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.getCustomerShippingAddressRequest.customerProfileId">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.getCustomerShippingAddressRequest.customerAddressId">
+            <remarks/>
+        </member>
+        <member name="T:AuthorizeNet.APICore.getCustomerShippingAddressResponse">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.getCustomerShippingAddressResponse.address">
+            <remarks/>
+        </member>
+        <member name="T:AuthorizeNet.APICore.updateCustomerProfileRequest">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.updateCustomerProfileRequest.profile">
+            <remarks/>
+        </member>
+        <member name="T:AuthorizeNet.APICore.updateCustomerProfileResponse">
+            <remarks/>
+        </member>
+        <member name="T:AuthorizeNet.APICore.updateCustomerPaymentProfileRequest">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.updateCustomerPaymentProfileRequest.customerProfileId">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.updateCustomerPaymentProfileRequest.paymentProfile">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.updateCustomerPaymentProfileRequest.validationMode">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.updateCustomerPaymentProfileRequest.validationModeSpecified">
+            <remarks/>
+        </member>
+        <member name="T:AuthorizeNet.APICore.updateCustomerPaymentProfileResponse">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.updateCustomerPaymentProfileResponse.validationDirectResponse">
+            <remarks/>
+        </member>
+        <member name="T:AuthorizeNet.APICore.updateCustomerShippingAddressRequest">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.updateCustomerShippingAddressRequest.customerProfileId">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.updateCustomerShippingAddressRequest.address">
+            <remarks/>
+        </member>
+        <member name="T:AuthorizeNet.APICore.updateCustomerShippingAddressResponse">
+            <remarks/>
+        </member>
+        <member name="T:AuthorizeNet.APICore.deleteCustomerProfileRequest">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.deleteCustomerProfileRequest.customerProfileId">
+            <remarks/>
+        </member>
+        <member name="T:AuthorizeNet.APICore.deleteCustomerProfileResponse">
+            <remarks/>
+        </member>
+        <member name="T:AuthorizeNet.APICore.deleteCustomerPaymentProfileRequest">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.deleteCustomerPaymentProfileRequest.customerProfileId">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.deleteCustomerPaymentProfileRequest.customerPaymentProfileId">
+            <remarks/>
+        </member>
+        <member name="T:AuthorizeNet.APICore.deleteCustomerPaymentProfileResponse">
+            <remarks/>
+        </member>
+        <member name="T:AuthorizeNet.APICore.deleteCustomerShippingAddressRequest">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.deleteCustomerShippingAddressRequest.customerProfileId">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.deleteCustomerShippingAddressRequest.customerAddressId">
+            <remarks/>
+        </member>
+        <member name="T:AuthorizeNet.APICore.deleteCustomerShippingAddressResponse">
+            <remarks/>
+        </member>
+        <member name="T:AuthorizeNet.APICore.createCustomerProfileTransactionRequest">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.createCustomerProfileTransactionRequest.transaction">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.createCustomerProfileTransactionRequest.extraOptions">
+            <remarks/>
+        </member>
+        <member name="T:AuthorizeNet.APICore.createCustomerProfileTransactionResponse">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.createCustomerProfileTransactionResponse.directResponse">
+            <remarks/>
+        </member>
+        <member name="T:AuthorizeNet.APICore.validateCustomerPaymentProfileRequest">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.validateCustomerPaymentProfileRequest.customerProfileId">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.validateCustomerPaymentProfileRequest.customerPaymentProfileId">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.validateCustomerPaymentProfileRequest.customerShippingAddressId">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.validateCustomerPaymentProfileRequest.cardCode">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.validateCustomerPaymentProfileRequest.validationMode">
+            <remarks/>
+        </member>
+        <member name="T:AuthorizeNet.APICore.validateCustomerPaymentProfileResponse">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.validateCustomerPaymentProfileResponse.directResponse">
+            <remarks/>
+        </member>
+        <member name="T:AuthorizeNet.APICore.getCustomerProfileIdsRequest">
+            <remarks/>
+        </member>
+        <member name="T:AuthorizeNet.APICore.getCustomerProfileIdsResponse">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.getCustomerProfileIdsResponse.ids">
+            <remarks/>
+        </member>
+        <member name="T:AuthorizeNet.APICore.updateSplitTenderGroupRequest">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.updateSplitTenderGroupRequest.splitTenderId">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.updateSplitTenderGroupRequest.splitTenderStatus">
+            <remarks/>
+        </member>
+        <member name="T:AuthorizeNet.APICore.splitTenderStatusEnum">
+            <remarks/>
+        </member>
+        <member name="F:AuthorizeNet.APICore.splitTenderStatusEnum.completed">
+            <remarks/>
+        </member>
+        <member name="F:AuthorizeNet.APICore.splitTenderStatusEnum.held">
+            <remarks/>
+        </member>
+        <member name="F:AuthorizeNet.APICore.splitTenderStatusEnum.voided">
+            <remarks/>
+        </member>
+        <member name="T:AuthorizeNet.APICore.updateSplitTenderGroupResponse">
+            <remarks/>
+        </member>
+        <member name="T:AuthorizeNet.APICore.getTransactionDetailsRequest">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.getTransactionDetailsRequest.transId">
+            <remarks/>
+        </member>
+        <member name="T:AuthorizeNet.APICore.getTransactionDetailsResponse">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.getTransactionDetailsResponse.transaction">
+            <remarks/>
+        </member>
+        <member name="T:AuthorizeNet.APICore.createTransactionRequest">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.createTransactionRequest.transactionRequest">
+            <remarks/>
+        </member>
+        <member name="T:AuthorizeNet.APICore.createTransactionResponse">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.createTransactionResponse.transactionResponse">
+            <remarks/>
+        </member>
+        <member name="T:AuthorizeNet.APICore.getSettledBatchListRequest">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.getSettledBatchListRequest.includeStatistics">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.getSettledBatchListRequest.includeStatisticsSpecified">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.getSettledBatchListRequest.firstSettlementDate">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.getSettledBatchListRequest.firstSettlementDateSpecified">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.getSettledBatchListRequest.lastSettlementDate">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.getSettledBatchListRequest.lastSettlementDateSpecified">
+            <remarks/>
+        </member>
+        <member name="T:AuthorizeNet.APICore.getUnsettledTransactionListRequest">
+            <remarks/>
+        </member>
+        <member name="T:AuthorizeNet.APICore.getUnsettledTransactionListResponse">
+            is duplicate to the list from a standard transaction list <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.getUnsettledTransactionListResponse.transactions">
+            <remarks/>
+        </member>
+        <member name="T:AuthorizeNet.APICore.getSettledBatchListResponse">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.getSettledBatchListResponse.batchList">
+            <remarks/>
+        </member>
+        <member name="T:AuthorizeNet.APICore.getTransactionListRequest">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.getTransactionListRequest.batchId">
+            <remarks/>
+        </member>
+        <member name="T:AuthorizeNet.APICore.getTransactionListResponse">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.getTransactionListResponse.transactions">
+            <remarks/>
+        </member>
+        <member name="T:AuthorizeNet.APICore.getBatchStatisticsRequest">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.getBatchStatisticsRequest.batchId">
+            <remarks/>
+        </member>
+        <member name="P:AuthorizeNet.APICore.getBatchStatisticsResponse.batchDetails">
+            <remarks/>
+        </member>
+        <member name="T:AuthorizeNet.TransactionStatus">
+            <summary>
+            The status for the transaction
+            </summary>
+        </member>
+        <member name="F:AuthorizeNet.TransactionStatus.Approved">
+            <summary>
+            Approved
+            </summary>
+        </member>
+        <member name="F:AuthorizeNet.TransactionStatus.Declined">
+            <summary>
+            Declined
+            </summary>
+        </member>
+        <member name="F:AuthorizeNet.TransactionStatus.Error">
+            <summary>
+            Error
+            </summary>
+        </member>
+        <member name="F:AuthorizeNet.TransactionStatus.HeldForReview">
+            <summary>
+            HeldForReview
+            </summary>
+        </member>
+        <member name="T:AuthorizeNet.LineItem">
+            <summary>
+            Representational class for a transactional line item
+            </summary>
+        </member>
+        <member name="P:AuthorizeNet.LineItem.ID">
+            <summary>
+            Gets or sets the ID.
+            </summary>
+            <value>The ID.</value>
+        </member>
+        <member name="P:AuthorizeNet.LineItem.Name">
+            <summary>
+            Gets or sets the name.
+            </summary>
+            <value>The name.</value>
+        </member>
+        <member name="P:AuthorizeNet.LineItem.Description">
+            <summary>
+            Gets or sets the description.
+            </summary>
+            <value>The description.</value>
+        </member>
+        <member name="P:AuthorizeNet.LineItem.Quantity">
+            <summary>
+            Gets or sets the quantity.
+            </summary>
+            <value>The quantity.</value>
+        </member>
+        <member name="P:AuthorizeNet.LineItem.UnitPrice">
+            <summary>
+            Gets or sets the unit price.
+            </summary>
+            <value>The unit price.</value>
+        </member>
+        <member name="P:AuthorizeNet.LineItem.Taxable">
+            <summary>
+            Gets or sets a value indicating whether this <see cref="T:AuthorizeNet.LineItem"/> is taxable.
+            </summary>
+            <value><c>true</c> if taxable; otherwise, <c>false</c>.</value>
+        </member>
+        <member name="T:AuthorizeNet.Transaction">
+            <summary>
+            A representational class for a Transaction
+            </summary>
+        </member>
+        <member name="M:AuthorizeNet.Transaction.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:AuthorizeNet.Transaction"/> class.
+            </summary>
+        </member>
+        <member name="M:AuthorizeNet.Transaction.NewListFromResponse(AuthorizeNet.APICore.transactionSummaryType[])">
+            <summary>
+            Creates a list of Transactions directly from the API Response.
+            </summary>
+            <param name="transactions">The transactions.</param>
+            <returns></returns>
+        </member>
+        <member name="M:AuthorizeNet.Transaction.NewFromResponse(AuthorizeNet.APICore.transactionSummaryType)">
+            <summary>
+            Creates a Transaction directly from the API Response
+            </summary>
+            <param name="trans">The trans.</param>
+            <returns></returns>
+        </member>
+        <member name="M:AuthorizeNet.Transaction.NewFromResponse(AuthorizeNet.APICore.transactionDetailsType)">
+            <summary>
+            Creates a Transaction directly from the API Response
+            </summary>
+            <param name="trans">The trans.</param>
+            <returns></returns>
+        </member>
+        <member name="P:AuthorizeNet.Transaction.TransactionID">
+            <summary>
+            Gets or sets the transaction ID.
+            </summary>
+            <value>The transaction ID.</value>
+        </member>
+        <member name="P:AuthorizeNet.Transaction.DateSubmitted">
+            <summary>
+            Gets or sets the date submitted.
+            </summary>
+            <value>The date submitted.</value>
+        </member>
+        <member name="P:AuthorizeNet.Transaction.TransactionType">
+            <summary>
+            Gets or sets the type of the transaction.
+            </summary>
+            <value>The type of the transaction.</value>
+        </member>
+        <member name="P:AuthorizeNet.Transaction.ResponseCode">
+            <summary>
+            Gets or sets the response code.
+            </summary>
+            <value>The response code.</value>
+        </member>
+        <member name="P:AuthorizeNet.Transaction.ResponseReason">
+            <summary>
+            Gets or sets the response reason.
+            </summary>
+            <value>The response reason.</value>
+        </member>
+        <member name="P:AuthorizeNet.Transaction.Description">
+            <summary>
+            Gets or sets the description.
+            </summary>
+            <value>The description.</value>
+        </member>
+        <member name="P:AuthorizeNet.Transaction.AuthorizationCode">
+            <summary>
+            Gets or sets the authorization code.
+            </summary>
+            <value>The authorization code.</value>
+        </member>
+        <member name="P:AuthorizeNet.Transaction.FraudFilters">
+            <summary>
+            Gets or sets the fraud filters.
+            </summary>
+            <value>The fraud filters.</value>
+        </member>
+        <member name="P:AuthorizeNet.Transaction.LineItems">
+            <summary>
+            Gets the line items.
+            </summary>
+            <value>The line items.</value>
+        </member>
+        <member name="P:AuthorizeNet.Transaction.CAVVCode">
+            <summary>
+            Gets or sets the CAVV code.
+            </summary>
+            <value>The CAVV code.</value>
+        </member>
+        <member name="P:AuthorizeNet.Transaction.Status">
+            <summary>
+            Gets or sets the status.
+            </summary>
+            <value>The status.</value>
+        </member>
+        <member name="P:AuthorizeNet.Transaction.LastName">
+            <summary>
+            Gets or sets the last name.
+            </summary>
+            <value>The last name.</value>
+        </member>
+        <member name="P:AuthorizeNet.Transaction.FirstName">
+            <summary>
+            Gets or sets the first name.
+            </summary>
+            <value>The first name.</value>
+        </member>
+        <member name="P:AuthorizeNet.Transaction.InvoiceNumber">
+            <summary>
+            Gets or sets the invoice number.
+            </summary>
+            <value>The invoice number.</value>
+        </member>
+        <member name="P:AuthorizeNet.Transaction.OrderDescription">
+            <summary>
+            Gets or sets the order description.
+            </summary>
+            <value>The order description.</value>
+        </member>
+        <member name="P:AuthorizeNet.Transaction.PONumber">
+            <summary>
+            Gets or sets the PO number.
+            </summary>
+            <value>The PO number.</value>
+        </member>
+        <member name="P:AuthorizeNet.Transaction.RequestedAmount">
+            <summary>
+            Gets or sets the requested amount.
+            </summary>
+            <value>The requested amount.</value>
+        </member>
+        <member name="P:AuthorizeNet.Transaction.AuthorizationAmount">
+            <summary>
+            Gets or sets the authorization amount.
+            </summary>
+            <value>The authorization amount.</value>
+        </member>
+        <member name="P:AuthorizeNet.Transaction.SettleAmount">
+            <summary>
+            Gets or sets the settle amount.
+            </summary>
+            <value>The settle amount.</value>
+        </member>
+        <member name="P:AuthorizeNet.Transaction.Tax">
+            <summary>
+            Gets or sets the tax.
+            </summary>
+            <value>The tax.</value>
+        </member>
+        <member name="P:AuthorizeNet.Transaction.TaxDescription">
+            <summary>
+            Gets or sets the tax description.
+            </summary>
+            <value>The tax description.</value>
+        </member>
+        <member name="P:AuthorizeNet.Transaction.Shipping">
+            <summary>
+            Gets or sets the shipping.
+            </summary>
+            <value>The shipping.</value>
+        </member>
+        <member name="P:AuthorizeNet.Transaction.ShippingDescription">
+            <summary>
+            Gets or sets the shipping description.
+            </summary>
+            <value>The shipping description.</value>
+        </member>
+        <member name="P:AuthorizeNet.Transaction.Duty">
+            <summary>
+            Gets or sets the duty.
+            </summary>
+            <value>The duty.</value>
+        </member>
+        <member name="P:AuthorizeNet.Transaction.DutyDescription">
+            <summary>
+            Gets or sets the duty description.
+            </summary>
+            <value>The duty description.</value>
+        </member>
+        <member name="P:AuthorizeNet.Transaction.BatchSettlementID">
+            <summary>
+            Gets or sets the batch settlement ID.
+            </summary>
+            <value>The batch settlement ID.</value>
+        </member>
+        <member name="P:AuthorizeNet.Transaction.BatchSettledOn">
+            <summary>
+            Gets or sets the batch settled on.
+            </summary>
+            <value>The batch settled on.</value>
+        </member>
+        <member name="P:AuthorizeNet.Transaction.BatchSettlementState">
+            <summary>
+            Gets or sets the state of the batch settlement.
+            </summary>
+            <value>The state of the batch settlement.</value>
+        </member>
+        <member name="P:AuthorizeNet.Transaction.TaxExempt">
+            <summary>
+            Gets or sets a value indicating whether [tax exempt].
+            </summary>
+            <value><c>true</c> if [tax exempt]; otherwise, <c>false</c>.</value>
+        </member>
+        <member name="P:AuthorizeNet.Transaction.CardNumber">
+            <summary>
+            Gets or sets the card number.
+            </summary>
+            <value>The card number.</value>
+        </member>
+        <member name="P:AuthorizeNet.Transaction.CardExpiration">
+            <summary>
+            Gets or sets the card expiration.
+            </summary>
+            <value>The card expiration.</value>
+        </member>
+        <member name="P:AuthorizeNet.Transaction.CardType">
+            <summary>
+            Gets or sets the type of the card.
+            </summary>
+            <value>The type of the card.</value>
+        </member>
+        <member name="P:AuthorizeNet.Transaction.CustomerID">
+            <summary>
+            Gets or sets the customer ID.
+            </summary>
+            <value>The customer ID.</value>
+        </member>
+        <member name="P:AuthorizeNet.Transaction.CustomerEmail">
+            <summary>
+            Gets or sets the customer email.
+            </summary>
+            <value>The customer email.</value>
+        </member>
+        <member name="P:AuthorizeNet.Transaction.BillingAddress">
+            <summary>
+            Gets or sets the billing address.
+            </summary>
+            <value>The billing address.</value>
+        </member>
+        <member name="P:AuthorizeNet.Transaction.ShippingAddress">
+            <summary>
+            Gets or sets the shipping address.
+            </summary>
+            <value>The shipping address.</value>
+        </member>
+        <member name="P:AuthorizeNet.Transaction.IsRecurring">
+            <summary>
+            Gets or sets a value indicating whether this instance is recurring.
+            </summary>
+            <value>
+            	<c>true</c> if this instance is recurring; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="P:AuthorizeNet.Transaction.CAVVResponse">
+            <summary>
+            Gets the CAVV response.
+            </summary>
+            <value>The CAVV response.</value>
+        </member>
+        <member name="P:AuthorizeNet.Transaction.CardResponseCode">
+            <summary>
+            Gets or sets the card response code.
+            </summary>
+            <value>The card response code.</value>
+        </member>
+        <member name="P:AuthorizeNet.Transaction.CardResponse">
+            <summary>
+            Gets the card response.
+            </summary>
+            <value>The card response.</value>
+        </member>
+        <member name="P:AuthorizeNet.Transaction.AVSCode">
+            <summary>
+            Gets or sets the AVS code.
+            </summary>
+            <value>The AVS code.</value>
+        </member>
+        <member name="P:AuthorizeNet.Transaction.AVSResponse">
+            <summary>
+            Gets the AVS response.
+            </summary>
+            <value>The AVS response.</value>
+        </member>
+        <member name="T:AuthorizeNet.ReportingGateway">
+            <summary>
+            The gateway for requesting Reports from Authorize.Net
+            </summary>
+        </member>
+        <member name="M:AuthorizeNet.ReportingGateway.#ctor(System.String,System.String,AuthorizeNet.ServiceMode)">
+            <summary>
+            Initializes a new instance of the <see cref="T:AuthorizeNet.CustomerGateway"/> class.
+            </summary>
+            <param name="apiLogin">The API login.</param>
+            <param name="transactionKey">The transaction key.</param>
+            <param name="mode">Test or Live.</param>
+        </member>
+        <member name="M:AuthorizeNet.ReportingGateway.#ctor(System.String,System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:AuthorizeNet.CustomerGateway"/> class.
+            </summary>
+            <param name="apiLogin">The API login.</param>
+            <param name="transactionKey">The transaction key.</param>
+        </member>
+        <member name="M:AuthorizeNet.ReportingGateway.GetSettledBatchList(System.Boolean)">
+            <summary>
+            Returns all Settled Batches for the last 30 days
+            </summary>
+        </member>
+        <member name="M:AuthorizeNet.ReportingGateway.GetUnsettledTransactionList">
+            <summary>
+            returns the most recent 1000 transactions that are unsettled
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:AuthorizeNet.ReportingGateway.GetSettledBatchList">
+            <summary>
+            Returns all Settled Batches for the last 30 days
+            </summary>
+        </member>
+        <member name="M:AuthorizeNet.ReportingGateway.GetSettledBatchList(System.DateTime,System.DateTime)">
+            <summary>
+            Returns batch settlements for the specified date range
+            </summary>
+        </member>
+        <member name="M:AuthorizeNet.ReportingGateway.GetBatchStatistics(System.String)">
+            <summary>
+            Returns charges and statistics for a given batch
+            </summary>
+            <param name="batchId">the batch id</param>
+            <returns>a batch with statistics</returns>
+        </member>
+        <member name="M:AuthorizeNet.ReportingGateway.GetSettledBatchList(System.DateTime,System.DateTime,System.Boolean)">
+            <summary>
+            Returns batch settlements for the specified date range
+            </summary>
+        </member>
+        <member name="M:AuthorizeNet.ReportingGateway.GetTransactionList(System.String)">
+            <summary>
+            Returns all transaction within a particular batch
+            </summary>
+        </member>
+        <member name="M:AuthorizeNet.ReportingGateway.GetTransactionDetails(System.String)">
+            <summary>
+            Returns Transaction details for a given transaction ID (transid)
+            </summary>
+            <param name="transactionID"></param>
+        </member>
+        <member name="M:AuthorizeNet.ReportingGateway.GetTransactionList">
+            <summary>
+            Returns all transactions for the last 30 days
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:AuthorizeNet.ReportingGateway.GetTransactionList(System.DateTime,System.DateTime)">
+            <summary>
+            Returns all transactions for a given time period. This can result in a number of calls to the API
+            </summary>
+        </member>
+        <member name="T:AuthorizeNet.Charge">
+            <summary>
+            A helper class for representing a charge
+            </summary>
+        </member>
+        <member name="M:AuthorizeNet.Charge.NewFromStat(AuthorizeNet.APICore.batchStatisticType[])">
+            <summary>
+            Creates a List of Charges from the Statistics return from the batch.
+            </summary>
+            <param name="stats">The stats.</param>
+            <returns></returns>
+        </member>
+        <member name="P:AuthorizeNet.Charge.CardType">
+            <summary>
+            Gets or sets the type of the card.
+            </summary>
+            <value>The type of the card.</value>
+        </member>
+        <member name="P:AuthorizeNet.Charge.Amount">
+            <summary>
+            Gets or sets the amount.
+            </summary>
+            <value>The amount.</value>
+        </member>
+        <member name="P:AuthorizeNet.Charge.ChargeBackAmount">
+            <summary>
+            Gets or sets the charge back amount.
+            </summary>
+            <value>The charge back amount.</value>
+        </member>
+        <member name="P:AuthorizeNet.Charge.ChargeBackCount">
+            <summary>
+            Gets or sets the charge back count.
+            </summary>
+            <value>The charge back count.</value>
+        </member>
+        <member name="P:AuthorizeNet.Charge.ReturnedItemsCount">
+            <summary>
+            Gets or sets the returned items count.
+            </summary>
+            <value>The returned items count.</value>
+        </member>
+        <member name="P:AuthorizeNet.Charge.ReturnedItemsAmount">
+            <summary>
+            Gets or sets the returned items amount.
+            </summary>
+            <value>The returned items amount.</value>
+        </member>
+        <member name="P:AuthorizeNet.Charge.CorrectionNoticeCount">
+            <summary>
+            Gets or sets the correction notice count.
+            </summary>
+            <value>The correction notice count.</value>
+        </member>
+        <member name="P:AuthorizeNet.Charge.DeclineCount">
+            <summary>
+            Gets or sets the decline count.
+            </summary>
+            <value>The decline count.</value>
+        </member>
+        <member name="P:AuthorizeNet.Charge.RefundAmount">
+            <summary>
+            Gets or sets the refund amount.
+            </summary>
+            <value>The refund amount.</value>
+        </member>
+        <member name="P:AuthorizeNet.Charge.VoidCount">
+            <summary>
+            Gets or sets the void count.
+            </summary>
+            <value>The void count.</value>
+        </member>
+        <member name="T:AuthorizeNet.Batch">
+            <summary>
+            A class representing a batch-settlement
+            </summary>
+        </member>
+        <member name="M:AuthorizeNet.Batch.NewFromResponse(AuthorizeNet.APICore.getBatchStatisticsResponse)">
+            <summary>
+            Creates a new batch from a stats response
+            </summary>
+        </member>
+        <member name="M:AuthorizeNet.Batch.NewFromResponse(AuthorizeNet.APICore.getSettledBatchListResponse)">
+            <summary>
+            Creates a list of batches directly from the API Response
+            </summary>
+            <param name="batches">The batches.</param>
+            <returns></returns>
+        </member>
+        <member name="P:AuthorizeNet.Batch.Charges">
+            <summary>
+            Gets or sets the charges.
+            </summary>
+            <value>The charges.</value>
+        </member>
+        <member name="P:AuthorizeNet.Batch.ID">
+            <summary>
+            Gets or sets the ID.
+            </summary>
+            <value>The ID.</value>
+        </member>
+        <member name="P:AuthorizeNet.Batch.SettledOn">
+            <summary>
+            Gets or sets the settled on.
+            </summary>
+            <value>The settled on.</value>
+        </member>
+        <member name="P:AuthorizeNet.Batch.State">
+            <summary>
+            Gets or sets the state.
+            </summary>
+            <value>The state.</value>
+        </member>
+        <member name="P:AuthorizeNet.Batch.PaymentMethod">
+            <summary>
+            Gets or sets the payment method.
+            </summary>
+            <value>The payment method.</value>
+        </member>
+        <member name="T:AuthorizeNet.Customer">
+            <summary>
+            This is an abstraction for use with the CIM API. It's a partial class so you can combine it with your class as needed.
+            </summary>
+        </member>
+    </members>
+</doc>

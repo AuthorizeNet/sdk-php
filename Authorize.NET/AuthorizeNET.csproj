@@ -1,0 +1,107 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="3.5" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{5D52EAEC-42FB-4313-83B8-69E2F55EBF14}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>AuthorizeNet</RootNamespace>
+    <AssemblyName>AuthorizeNet</AssemblyName>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <OldToolsVersion>3.5</OldToolsVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <DocumentationFile>bin\Debug\AuthorizeNet.XML</DocumentationFile>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <DocumentationFile>bin\Release\AuthorizeNet.XML</DocumentationFile>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Security" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AIM\Requests\EcheckRequest.cs" />
+    <Compile Include="AIM\Requests\IGatewayRequest.cs" />
+    <Compile Include="AIM\Requests\UnlinkedCredit.cs" />
+    <Compile Include="AIM\Responses\ResponseBase.cs" />
+    <Compile Include="ARB\ARBSchema.cs" />
+    <Compile Include="ARB\ISubscriptionGateway.cs" />
+    <Compile Include="ARB\ISubscriptionRequest.cs" />
+    <Compile Include="ARB\SubscriptionGateway.cs" />
+    <Compile Include="ARB\SubscriptionRequest.cs" />
+    <Compile Include="CIM\Address.cs" />
+    <Compile Include="CIM\Customer.cs" />
+    <Compile Include="CIM\CustomerGateway.cs" />
+    <Compile Include="CIM\ICustomerGateway.cs" />
+    <Compile Include="CIM\Order.cs" />
+    <Compile Include="CIM\PaymentProfile.cs" />
+    <Compile Include="AIM\Requests\AuthorizationRequest.cs" />
+    <Compile Include="AIM\Requests\CaptureRequest.cs" />
+    <Compile Include="AIM\Requests\CreditRequest.cs" />
+    <Compile Include="CP\CardPresentAuthorization.cs" />
+    <Compile Include="CP\CardPresentCaptureOnly.cs" />
+    <Compile Include="CP\CardPresentCredit.cs" />
+    <Compile Include="CP\CardPresentGateway.cs" />
+    <Compile Include="CP\CardPresentResponse.cs" />
+    <Compile Include="CP\CardPresentPriorAuthCapture.cs" />
+    <Compile Include="CP\CardPresentVoid.cs" />
+    <Compile Include="CP\ICardPresentGateway.cs" />
+    <Compile Include="Reporting\Batch.cs" />
+    <Compile Include="Reporting\IReportingGateway.cs" />
+    <Compile Include="Reporting\ReportingGateway.cs" />
+    <Compile Include="Reporting\Transaction.cs" />
+    <Compile Include="Utility\AnetApiSchema.cs" />
+    <Compile Include="Utility\Crypto.cs" />
+    <Compile Include="AIM\Gateway.cs" />
+    <Compile Include="AIM\Requests\GatewayRequest.cs" />
+    <Compile Include="AIM\IGateway.cs" />
+    <Compile Include="AIM\Responses\GatewayResponse.cs" />
+    <Compile Include="AIM\Responses\IGatewayResponse.cs" />
+    <Compile Include="Utility\ApiFields.cs" />
+    <Compile Include="AIM\Responses\SIMResponse.cs" />
+    <Compile Include="AIM\Requests\VoidRequest.cs" />
+    <Compile Include="Utility\HttpXmlUtility.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Properties\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
