@@ -1,6 +1,0 @@
-C:\accurev\Auth_NPP_AnetSDK_Lane\Source\samplecode\SDK\C#\Authorize.NET\bin\Debug\AuthorizeNet.XML
-C:\accurev\Auth_NPP_AnetSDK_Lane\Source\samplecode\SDK\C#\Authorize.NET\bin\Debug\AuthorizeNet.dll
-C:\accurev\Auth_NPP_AnetSDK_Lane\Source\samplecode\SDK\C#\Authorize.NET\bin\Debug\AuthorizeNet.pdb
-C:\accurev\Auth_NPP_AnetSDK_Lane\Source\samplecode\SDK\C#\Authorize.NET\obj\Debug\ResolveAssemblyReference.cache
-C:\accurev\Auth_NPP_AnetSDK_Lane\Source\samplecode\SDK\C#\Authorize.NET\obj\Debug\AuthorizeNet.dll
-C:\accurev\Auth_NPP_AnetSDK_Lane\Source\samplecode\SDK\C#\Authorize.NET\obj\Debug\AuthorizeNet.pdb
