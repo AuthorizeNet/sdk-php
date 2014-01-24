@@ -14,7 +14,7 @@ using System.Xml;
 namespace AuthorizeNet {
 
     public enum ServiceMode {
-        Test,
+        Test, // Test mode points to certification test systems
         Live
     }
 
