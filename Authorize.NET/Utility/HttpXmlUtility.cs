@@ -14,7 +14,7 @@ namespace AuthorizeNet {
     /// </summary>
     public class HttpXmlUtility {
 
-        string _serviceUrl = "https://apitest.authorize.net/xml/v1/request.api";
+        string _serviceUrl = TEST_URL;
         string _apiLogin = "";
         string _transactionKey = "";
 
