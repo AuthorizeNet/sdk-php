@@ -90,9 +90,6 @@ abstract class AuthorizeNetRequest
         curl_setopt($curl_request, CURLOPT_TIMEOUT, 45);
         curl_setopt($curl_request, CURLOPT_RETURNTRANSFER, 1);
         curl_setopt($curl_request, CURLOPT_SSL_VERIFYHOST, 2);
-        curl_setopt($curl_request, CURLOPT_PROXY, "http://internet.visa.com");
-        curl_setopt($curl_request, CURLOPT_PROXYPORT, 80);
-        curl_setopt($curl_request, CURLOPT_PROXYUSERPWD, "qiawang:WloMfe71!");
 
         if ($this->VERIFY_PEER) {
             curl_setopt($curl_request, CURLOPT_CAINFO, dirname(dirname(__FILE__)) . '/ssl/cert.pem');
