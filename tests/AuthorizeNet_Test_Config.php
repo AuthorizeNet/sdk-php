@@ -6,8 +6,8 @@
 /**
  * Enter your test account credentials to run tests against sandbox.
  */
-define("AUTHORIZENET_API_LOGIN_ID", "");
-define("AUTHORIZENET_TRANSACTION_KEY", "");
+define("AUTHORIZENET_API_LOGIN_ID", "6P69Atd7j");
+define("AUTHORIZENET_TRANSACTION_KEY", "7Z5wuJKw8s26u5G7");
 define("AUTHORIZENET_MD5_SETTING", "");
 /**
  * Enter your live account credentials to run tests against production gateway.
@@ -30,17 +30,20 @@ file_put_contents(AUTHORIZENET_LOG_FILE, "");
 
 
 
-if (!function_exists('curl_init')) {
-    throw new Exception('AuthorizeNetSDK needs the CURL PHP extension.');
-}
 
 
 if (!function_exists('simplexml_load_file')) {
   throw new Exception('The AuthorizeNet SDK requires the SimpleXML PHP extension.');
 }
 
+
+if (!function_exists('curl_init')) {
+    throw new Exception('AuthorizeNetSDK needs the CURL PHP extension.');
+}
+
 require_once dirname(dirname(__FILE__)) . '/AuthorizeNet.php';
-require_once 'PHPUnit/Framework.php';
+//require_once 'pear/PHPUnit/Framework.php';
+require_once '/PHPUnit/Autoload.php';
 
 if (AUTHORIZENET_API_LOGIN_ID == "") {
     die('Enter your merchant credentials in '.__FILE__.' before running the test suite.');

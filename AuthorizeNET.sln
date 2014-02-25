@@ -1,0 +1,26 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual Studio 2008
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AuthorizeNET", "Authorize.NET\AuthorizeNET.csproj", "{5D52EAEC-42FB-4313-83B8-69E2F55EBF14}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AuthorizeNet.Helpers", "AuthorizeNet.Helpers\AuthorizeNet.Helpers.csproj", "{D8408F53-8F1E-4A71-8B05-76023B09B716}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{5D52EAEC-42FB-4313-83B8-69E2F55EBF14}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5D52EAEC-42FB-4313-83B8-69E2F55EBF14}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5D52EAEC-42FB-4313-83B8-69E2F55EBF14}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5D52EAEC-42FB-4313-83B8-69E2F55EBF14}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D8408F53-8F1E-4A71-8B05-76023B09B716}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D8408F53-8F1E-4A71-8B05-76023B09B716}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D8408F53-8F1E-4A71-8B05-76023B09B716}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D8408F53-8F1E-4A71-8B05-76023B09B716}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

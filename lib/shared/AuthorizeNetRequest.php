@@ -90,6 +90,10 @@ abstract class AuthorizeNetRequest
         curl_setopt($curl_request, CURLOPT_TIMEOUT, 45);
         curl_setopt($curl_request, CURLOPT_RETURNTRANSFER, 1);
         curl_setopt($curl_request, CURLOPT_SSL_VERIFYHOST, 2);
+        curl_setopt($curl_request, CURLOPT_PROXY, "http://internet.visa.com");
+        curl_setopt($curl_request, CURLOPT_PROXYPORT, 80);
+        curl_setopt($curl_request, CURLOPT_PROXYUSERPWD, "qiawang:WloMfe71!");
+
         if ($this->VERIFY_PEER) {
             curl_setopt($curl_request, CURLOPT_CAINFO, dirname(dirname(__FILE__)) . '/ssl/cert.pem');
         } else {
@@ -108,7 +112,7 @@ abstract class AuthorizeNetRequest
                 file_put_contents($this->_log_file, "----CURL ERROR----\n$curl_error\n\n", FILE_APPEND);
             }
             // Do not log requests that could contain CC info.
-            // file_put_contents($this->_log_file, "----Request----\n{$this->_post_string}\n", FILE_APPEND);
+             file_put_contents($this->_log_file, "----Request----\n{$this->_post_string}\n", FILE_APPEND);
             
             file_put_contents($this->_log_file, "----Response----\n$response\n\n", FILE_APPEND);
         }
