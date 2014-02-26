@@ -444,7 +444,7 @@ class AuthorizeNetCIM_Response extends AuthorizeNetXMLResponse
         $responses = (array)$this->xml->validationDirectResponseList;
         $return = array();
         foreach ((array)$responses["string"] as $response) {
-            $return[] = new AuthorizeNetAIM_Response($response, ",", "|", array());
+            $return[] = new AuthorizeNetAIM_Response($response, ",", "", array());
         }
         return $return;
     }
