@@ -113,7 +113,7 @@ class AuthorizeNetCIM extends AuthorizeNetRequest
         $transactionParent = $this->_xml->addChild("transaction");
         $transactionChild = $transactionParent->addChild("profileTrans" . $transactionType);
         $this->_addObject($transactionChild, $transaction);
-        $this->_extraOptions = $extraOptionsString;
+        $this->_extraOptions = $extraOptionsString . "x_encap_char=|";
         return $this->_sendRequest();
     }
     
@@ -347,7 +347,7 @@ class AuthorizeNetCIM extends AuthorizeNetRequest
         // Add extraOptions CDATA
         if ($this->_extraOptions) {
             $this->_xml->addChild("extraOptions");
-            $this->_post_string = str_replace("<extraOptions></extraOptions>",'<extraOptions><![CDATA[' . $this->_extraOptions . ']]></extraOptions>', $this->_xml->asXML());
+            $this->_post_string = str_replace(array("<extraOptions></extraOptions>","<extraOptions/>"),'<extraOptions><![CDATA[' . $this->_extraOptions . ']]></extraOptions>', $this->_xml->asXML());
             $this->_extraOptions = false;
         }
         // Blank out our validation mode, so that we don't include it in calls that
@@ -433,7 +433,7 @@ class AuthorizeNetCIM_Response extends AuthorizeNetXMLResponse
      */
     public function getTransactionResponse()
     {
-        return new AuthorizeNetAIM_Response($this->_getElementContents("directResponse"), ",", "", array());
+        return new AuthorizeNetAIM_Response($this->_getElementContents("directResponse"), ",", "|", array());
     }
     
     /**
@@ -444,7 +444,7 @@ class AuthorizeNetCIM_Response extends AuthorizeNetXMLResponse
         $responses = (array)$this->xml->validationDirectResponseList;
         $return = array();
         foreach ((array)$responses["string"] as $response) {
-            $return[] = new AuthorizeNetAIM_Response($response, ",", "", array());
+            $return[] = new AuthorizeNetAIM_Response($response, ",", "|", array());
         }
         return $return;
     }
@@ -454,7 +454,7 @@ class AuthorizeNetCIM_Response extends AuthorizeNetXMLResponse
      */
     public function getValidationResponse()
     {
-        return new AuthorizeNetAIM_Response($this->_getElementContents("validationDirectResponse"), ",", "", array());
+        return new AuthorizeNetAIM_Response($this->_getElementContents("validationDirectResponse"), ",", "|", array());
     }
     
     /**
