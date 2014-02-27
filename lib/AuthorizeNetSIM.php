@@ -39,6 +39,12 @@ class AuthorizeNetSIM extends AuthorizeNetResponse
         
         // Set some human readable fields
         $map = array(
+            'invoice_number' => 'x_invoice_num',
+            'transaction_type' => 'x_type',
+            'zip_code' => 'x_zip',
+            'email_address' => 'x_email',
+            'ship_to_zip_code' => 'x_ship_to_zip',
+            'account_number' => 'x_account_number',
             'avs_response' => 'x_avs_code',
             'authorization_code' => 'x_auth_code',
             'transaction_id' => 'x_trans_id',
