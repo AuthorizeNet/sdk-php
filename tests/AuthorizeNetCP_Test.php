@@ -4,7 +4,22 @@ require_once 'AuthorizeNet_Test_Config.php';
 
 class AuthorizeNetCP_Test extends PHPUnit_Framework_TestCase
 {
-    
+    public function testAuthOnly()
+    {
+        $sale = new AuthorizeNetCP(CP_API_LOGIN_ID, CP_TRANSACTION_KEY);
+        $sale->setFields(
+            array(
+                'amount' => rand(1, 1000),
+                'card_num' => '4111111111111111',
+                'exp_date' => '0415',
+                'duplicate_window' => '5',
+                'device_type' => '4',
+            )
+        );
+        $response = $sale->authorizeOnly();
+        $this->assertTrue($response->approved);
+    }
+
     public function testAuthCapture()
     {
         $sale = new AuthorizeNetCP(CP_API_LOGIN_ID, CP_TRANSACTION_KEY);
