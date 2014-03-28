@@ -1,12 +1,21 @@
+    
+##Install:
+
+To use the SDK in your app, create a composer.json file with the following require section and run `composer update`
+
+"require": {
+    "php": ">=5.3.0",
+    "ext-curl": "*",
+    "ext-json": "*",
+    "authorizenet/sdk-php" : "1.8.*"
+}
+
 ##Requirements:
     - cURL PHP Extension
     - PHP 5.2+
     - An Authorize.Net Merchant Account or Test Account. You can get a 
       free test account at http://developer.authorize.net/testaccount/
-    
-##Install:
-    - Include the 'AuthorizeNet.php' file in your application.
-    - Use your desired API.
+
     
 ##Usage Examples:
     See below for basic usage examples. View the tests/ folder for more examples of each API.
@@ -171,6 +180,4 @@
 ##PHPDoc:
   To autogenerate PHPDocs run:
   phpdoc -t phpdocs/ -f AuthorizeNet.php -d lib
-
-
 
