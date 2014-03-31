@@ -1,14 +1,16 @@
     
-##Install:
+Authorize.Net PHP SDK
+======================
 
 To use the SDK in your app, create a composer.json file with the following require section and run `composer update`
-
+```
 "require": {
     "php": ">=5.3.0",
     "ext-curl": "*",
     "ext-json": "*",
     "authorizenet/sdk-php" : "1.8.*"
 }
+```
 
 ##Requirements:
     - cURL PHP Extension
