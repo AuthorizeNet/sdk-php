@@ -1,24 +1,24 @@
 SDK LICENSE AGREEMENT
 
-This Software Development Kit (“SDK”) License Agreement (“Agreement”) is between
+This Software Development Kit ("SDK") License Agreement ("Agreement") is between
 you (both the individual downloading the SDK and any legal entity on behalf of
-which such individual is acting) (“You” or “Your”) and Authorize.Net LLC
-(“Authorize.Net”).
+which such individual is acting) ("You" or "Your") and Authorize.Net LLC
+("Authorize.Net").
 
 IT IS IMPORTANT THAT YOU READ CAREFULLY AND UNDERSTAND THIS AGREEMENT. BY
-CLICKING THE “I ACCEPT” BUTTON OR AN EQUIVALENT INDICATOR OR BY DOWNLOADING,
+CLICKING THE "I ACCEPT" BUTTON OR AN EQUIVALENT INDICATOR OR BY DOWNLOADING,
 INSTALLING OR USING THE SDK OR THE DOCUMENTATION, YOU AGREE TO BE BOUND BY THIS
 AGREEMENT.
 
 1. DEFINITIONS
-    1. “Application(s)” means software programs that You develop to operate with
+    1. "Application(s)" means software programs that You develop to operate with
        the Gateway using components of the Software.
-    2. “Documentation” means the materials made available to You in connection
+    2. "Documentation" means the materials made available to You in connection
        with the Software by or on behalf of Authorize.Net pursuant to this
        Agreement.
-    3. “Gateway” means any electronic payment platform maintained and operated
+    3. "Gateway" means any electronic payment platform maintained and operated
        by Authorize.Net and any of its affiliates.
-    4. “Software” means all of the software included in the software development
+    4. "Software" means all of the software included in the software development
        kit made available to You by or on behalf of Authorize.Net pursuant to
        this Agreement, including but not limited to sample source code, code
        snippets, software tools, code libraries, sample applications,
@@ -55,14 +55,14 @@ AGREEMENT.
        an Application, that interferes with, disrupts, damages, or accesses in
        an unauthorized manner the Gateway or platform, servers, or systems of
        Authorize.Net, any of its affiliates, or any third party; (f) make any
-       statements that Your Application is “certified” or otherwise endorsed, or
+       statements that Your Application is "certified" or otherwise endorsed, or
        that its performance is guaranteed, by Authorize.Net or any of its
        affiliates; or (g) otherwise use or exploit the Software or the
        Documentation for any purpose other than to develop and distribute
        Applications as expressly permitted by this Agreement.
     3. Ownership. You shall retain ownership of Your Applications developed in
-       accordance with this Agreement, subject to Authorize.Net’s ownership of
-       the Software and Documentation (including Authorize.Net’s ownership of
+       accordance with this Agreement, subject to Authorize.Net's ownership of
+       the Software and Documentation (including Authorize.Net's ownership of
        any portion of the Software or Documentation incorporated in Your
        Applications). You acknowledge and agree that all right, title and
        interest in and to the Software and Documentation shall, at all times, be
@@ -72,8 +72,8 @@ AGREEMENT.
     4. No Support. Authorize.Net has no obligation to provide support,
        maintenance, upgrades, modifications or new releases of the Software.
     5. Open Source Software. You hereby acknowledge that the Software may
-       contain software that is distributed under “open source” license terms
-       (“Open Source Software”). You shall review the Documentation in order to
+       contain software that is distributed under "open source" license terms
+       ("Open Source Software"). You shall review the Documentation in order to
        determine which portions of the Software are Open Source Software and are
        licensed under such Open Source Software license terms. To the extent any
        such license requires that Authorize.Net provide You any rights with
@@ -92,7 +92,7 @@ AGREEMENT.
        of any such loss or damage.
     6. License to Authorize.Net. In the event You choose to submit any
        suggestions, feedback or other information or materials related to the
-       Software or Documentation or Your use thereof (collectively, “Feedback”)
+       Software or Documentation or Your use thereof (collectively, "Feedback")
        to Authorize.Net, You hereby grant to Authorize.Net a worldwide,
        non-exclusive, royalty-free, transferable, sublicensable, perpetual and
        irrevocable license to use and otherwise exploit such Feedback in
@@ -122,8 +122,8 @@ AGREEMENT.
            consequences of any such breach.
 
 3. WARRANTY DISCLAIMER; LIMITATION OF LIABILITY
-    1. Disclaimer. THE SOFTWARE AND THE DOCUMENTATION ARE PROVIDED ON AN “AS IS”
-       AND “AS AVAILABLE” BASIS WITH NO WARRANTY. YOU AGREE THAT YOUR USE OF THE
+    1. Disclaimer. THE SOFTWARE AND THE DOCUMENTATION ARE PROVIDED ON AN "AS IS"
+       AND "AS AVAILABLE" BASIS WITH NO WARRANTY. YOU AGREE THAT YOUR USE OF THE
        SOFTWARE AND THE DOCUMENTATION IS AT YOUR SOLE RISK AND YOU ARE SOLELY
        RESPONSIBLE FOR ANY DAMAGE TO YOUR COMPUTER SYSTEM OR OTHER DEVICE OR
        LOSS OF DATA THAT RESULTS FROM SUCH USE. TO THE FULLEST EXTENT
@@ -152,11 +152,11 @@ AGREEMENT.
        HEREIN ARE AN ESSENTIAL ELEMENT OF THE BARGAIN BETWEEN THE PARTIES,
        WITHOUT WHICH AUTHORIZE.NET WOULD NOT HAVE ENTERED INTO THIS AGREEMENT.
 
-4. INDEMNIFICATION. You shall indemnify, hold harmless and, at Authorize.Net’s
+4. INDEMNIFICATION. You shall indemnify, hold harmless and, at Authorize.Net's
    request, defend Authorize.Net and its affiliates and their officers,
    directors, employees, and agents from and against any claim, suit or
    proceeding, and any associated liabilities, costs, damages and expenses,
-   including reasonable attorneys’ fees, that arise out of relate to: (i) Your
+   including reasonable attorneys' fees, that arise out of relate to: (i) Your
    Applications or the use or distribution thereof and Your use or distribution
    of the Software or the Documentation (or any portion thereof including Open
    Source Software), including, but not limited to, any allegation that any such
@@ -183,7 +183,7 @@ AGREEMENT.
    survive termination.
 
 6. CONFIDENTIAL INFORMATION
-    1. You hereby agree (i) to hold Authorize.Net’s Confidential Information in
+    1. You hereby agree (i) to hold Authorize.Net's Confidential Information in
        strict confidence and to take reasonable precautions to protect such
        Confidential Information (including, without limitation, all precautions
        You employ with respect to Your own confidential materials), (ii) not to
@@ -195,8 +195,8 @@ AGREEMENT.
        and approvals required under applicable U.S. and foreign export laws and
        regulations, including, without limitation, those of the U.S. Department
        of Commerce.
-    2. “Confidential Information” shall mean any data or information, oral or
-       written, treated as confidential that relates to Authorize.Net’s past,
+    2. "Confidential Information" shall mean any data or information, oral or
+       written, treated as confidential that relates to Authorize.Net's past,
        present, or future research, development or business activities,
        including without limitation any unannounced products and services, any
        information relating to services, developments, inventions, processes,
@@ -230,21 +230,21 @@ AGREEMENT.
 		   dispose of, whether voluntarily or involuntarily, by operation of law or
 		   otherwise, this Agreement or any rights or obligations under this
 		   Agreement without the prior written consent of Authorize.Net, which may
-       be withheld in Authorize.Net’s sole discretion. Any purported assignment,
+       be withheld in Authorize.Net's sole discretion. Any purported assignment,
        transfer or delegation by You shall be null and void. Subject to the
        foregoing, this Agreement shall be binding upon and shall inure to the
        benefit of the parties and their respective successors and assigns.
     5. Government Rights. If You (or any person or entity to whom you provide
        the Software or Documentation) are an agency or instrumentality of the
-       United States Government, the Software and Documentation are “commercial
-       computer software” and “commercial computer software documentation,” and
+       United States Government, the Software and Documentation are "commercial
+       computer software" and "commercial computer software documentation," and
        pursuant to FAR 12.212 or DFARS 227.7202, and their successors, as
        applicable, use, reproduction and disclosure of the Software and
        Documentation are governed by the terms of this Agreement.
     6. Export Administration. You shall comply fully with all relevant export
        laws and regulations of the United States, including, without limitation,
-       the U.S. Export Administration Regulations (collectively “Export
-       Controls”). Without limiting the generality of the foregoing, You shall
+       the U.S. Export Administration Regulations (collectively "Export
+       Controls"). Without limiting the generality of the foregoing, You shall
        not, and You shall require Your representatives not to, export, direct or
        transfer the Software or the Documentation, or any direct product
        thereof, to any destination, person or entity restricted or prohibited by
