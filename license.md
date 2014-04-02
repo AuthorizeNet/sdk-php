@@ -44,7 +44,8 @@ IT IS IMPORTANT THAT YOU READ CAREFULLY AND UNDERSTAND THIS AGREEMENT. BY CLICKI
 
 Authorize.Net has not made any representations, warranties or agreements of any kind, except as expressly set forth herein.
 
-
 Authorize.Net Software Development Kit (SDK) License Agreement
+
 v. December 12, 2013
+
 1
