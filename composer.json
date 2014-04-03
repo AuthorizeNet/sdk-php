@@ -3,7 +3,7 @@
 	"type": "library",
 	"description": "Official PHP SDK for Authorize.Net",
 	"keywords": ["authorizenet", "authorize.net", "payment", "ecommerce"],
-	"license": "https://github.com/AuthorizeNet/sdk-php/blob/master/license.txt",
+	"license": "Proprietary",
 	"homepage": "http://developer.authorize.net",
 	"require": {
 		"php": ">=5.2.0",
