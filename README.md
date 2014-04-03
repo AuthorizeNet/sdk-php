@@ -15,8 +15,8 @@ To use the SDK in your app, create a composer.json file with the following requi
 ##Requirements:
     - cURL PHP Extension
     - PHP 5.2+
-    - An Authorize.Net Merchant Account or Test Account. You can get a 
-      free test account at http://developer.authorize.net/testaccount/
+    - An Authorize.Net Merchant Account or Sandbox Account. You can get a 
+      free sandbox account at http://developer.authorize.net/sandbox/
 
     
 ##Usage Examples:
