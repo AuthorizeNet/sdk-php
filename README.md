@@ -8,7 +8,7 @@ To use the SDK in your app, create a composer.json file with the following requi
     "php": ">=5.3.0",
     "ext-curl": "*",
     "ext-json": "*",
-    "authorizenet/sdk-php" : "1.8.*"
+    "authorizenet/authorizenet": "dev-master"
 }
 ```
 
