@@ -316,6 +316,31 @@ class AuthorizeNetCIM extends AuthorizeNetRequest
         return $this->_sendRequest();
     }
     
+    /**
+     * Get hosted profile page request token
+     *
+     * @param string $customerProfileId
+     * @param mixed  $settings
+     *
+     * @return AuthorizeNetCIM_Response
+     */
+    public function getHostedProfilePageRequest($customerProfileId, $settings=0)
+    {
+        $this->_constructXml("getHostedProfilePageRequest");
+        $this->_xml->addChild("customerProfileId", $customerProfileId);
+
+        if (!empty($settings)) {
+            $hostedSettings = $this->_xml->addChild("hostedProfileSettings");
+            foreach ($settings as $key => $val) {
+                $setting = $hostedSettings->addChild("setting");
+                $setting->addChild("settingName", $key);
+                $setting->addChild("settingValue", $val);
+            }
+        }
+
+        return $this->_sendRequest();
+    }
+    
      /**
      * @return string
      */
