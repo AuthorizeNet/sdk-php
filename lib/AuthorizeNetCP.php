@@ -48,6 +48,11 @@ class AuthorizeNetCP extends AuthorizeNetAIM
      * 10 = Virtual Terminal
      */
     
+	/**
+     * Only used if merchant wants to send custom fields.
+     */
+    private $_custom_fields = array();
+	
     /**
      * Strip sentinels and set track1 field.
      *
