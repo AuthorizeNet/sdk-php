@@ -1,12 +1,27 @@
 {
-	"name": "authorizenet/authorizenet",
-	"type": "library",
-	"description": "Official PHP SDK for Authorize.Net",
-	"keywords": ["authorizenet", "authorize.net", "payment", "ecommerce"],
-	"license": "proprietary",
-	"homepage": "http://developer.authorize.net",
-	"require": {
-		"php": ">=5.2.0",
-		"ext-curl": "*"
-	}
+    "name": "authorizenet/authorizenet",
+    "type": "library",
+    "description": "Official PHP SDK for Authorize.Net",
+    "keywords": ["authorizenet", "authorize.net", "payment", "ecommerce"],
+    "license": "proprietary",
+    "homepage": "http://developer.authorize.net",
+    "require": {
+        "php": "~5.3",
+        "ext-curl": "*",
+        "ext-json": "*",
+        "ext-simplexml": "*"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "~4.0",
+        "phpmd/phpmd": "~2.0"
+    },
+    "suggest": {
+        "phpdocumentor/phpdocumentor": "For generating API documentation"
+    },
+    "autoload": {
+        "classmap": ["lib"]
+    },
+    "autoload-dev": {
+        "classmap": ["tests"]
+    }
 }
