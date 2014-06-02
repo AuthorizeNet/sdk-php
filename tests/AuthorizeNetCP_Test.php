@@ -1,7 +1,5 @@
 <?php
 
-require_once 'AuthorizeNet_Test_Config.php';
-
 class AuthorizeNetCP_Test extends PHPUnit_Framework_TestCase
 {
     public function testAuthOnly()
@@ -34,7 +32,7 @@ class AuthorizeNetCP_Test extends PHPUnit_Framework_TestCase
         $response = $sale->authorizeAndCapture();
         $this->assertTrue($response->approved);
     }
-    
+
     // public function testMd5()
     // {
     //     return;
@@ -51,7 +49,7 @@ class AuthorizeNetCP_Test extends PHPUnit_Framework_TestCase
     //     $this->assertTrue($response->approved);
     //     $this->assertTrue($response->isAuthorizeNet(CP_API_LOGIN_ID));
     // }
-    
+
     public function testAuthCaptureTrack1()
     {
         $sale = new AuthorizeNetCP(CP_API_LOGIN_ID, CP_TRANSACTION_KEY);
@@ -65,7 +63,7 @@ class AuthorizeNetCP_Test extends PHPUnit_Framework_TestCase
         $response = $sale->authorizeAndCapture();
         $this->assertTrue($response->approved);
     }
-    
+
     public function testAuthCaptureTrack2()
     {
         $sale = new AuthorizeNetCP(CP_API_LOGIN_ID, CP_TRANSACTION_KEY);
@@ -79,7 +77,7 @@ class AuthorizeNetCP_Test extends PHPUnit_Framework_TestCase
         $response = $sale->authorizeAndCapture();
         $this->assertTrue($response->approved);
     }
-    
+
     public function testAuthCaptureTrack2Error()
     {
         $sale = new AuthorizeNetCP(CP_API_LOGIN_ID, CP_TRANSACTION_KEY);
@@ -95,7 +93,7 @@ class AuthorizeNetCP_Test extends PHPUnit_Framework_TestCase
         $this->assertTrue($response->error);
         $this->assertEquals(6, $response->response_reason_code);
     }
-    
+
     public function testResponseFields()
     {
         $sale = new AuthorizeNetCP(CP_API_LOGIN_ID, CP_TRANSACTION_KEY);
@@ -108,8 +106,8 @@ class AuthorizeNetCP_Test extends PHPUnit_Framework_TestCase
         $sale->user_ref = $user_ref = "someCustomVariable123";
         $sale->setTrack1Data('%B4111111111111111^CARDUSER/JOHN^1803101000000000020000831000000?');
         $response = $sale->authorizeAndCapture();
-        
-        
+
+
         $this->assertTrue($response->approved);
         $this->assertEquals('1.0',$response->version);
         $this->assertEquals('1',$response->response_code);
@@ -126,7 +124,7 @@ class AuthorizeNetCP_Test extends PHPUnit_Framework_TestCase
 
 
     }
-    
+
     public function testXmlResponse()
     {
         $sale = new AuthorizeNetCP(CP_API_LOGIN_ID, CP_TRANSACTION_KEY);
@@ -140,8 +138,8 @@ class AuthorizeNetCP_Test extends PHPUnit_Framework_TestCase
         $sale->user_ref = $user_ref = "dummyvalue323";
         $sale->setTrack1Data('%B4111111111111111^CARDUSER/JOHN^1803101000000000020000831000000?');
         $response = $sale->authorizeAndCapture();
-        
-        
+
+
         $this->assertTrue($response->approved);
         $this->assertEquals('1.0',$response->version);
         $this->assertEquals('1',$response->response_code);
@@ -158,7 +156,7 @@ class AuthorizeNetCP_Test extends PHPUnit_Framework_TestCase
 
 
     }
-    
+
     public function testXmlResponseFailure()
     {
         $sale = new AuthorizeNetCP(CP_API_LOGIN_ID, CP_TRANSACTION_KEY);
@@ -172,8 +170,8 @@ class AuthorizeNetCP_Test extends PHPUnit_Framework_TestCase
         $sale->user_ref = $user_ref = "dummyvalue323";
         $sale->setTrack1Data('%B4111111111111^CARDUSER/JOHN^1803101000000000020000831000000?');
         $response = $sale->authorizeAndCapture();
-        
-        
+
+
         $this->assertTrue($response->error);
         $this->assertEquals('1.0',$response->version);
         $this->assertEquals('3',$response->response_code);

@@ -1,7 +1,5 @@
 <?php
 
-require_once 'AuthorizeNet_Test_Config.php';
-
 class AuthorizeNetARB_Test extends PHPUnit_Framework_TestCase
 {
 
@@ -20,18 +18,18 @@ class AuthorizeNetARB_Test extends PHPUnit_Framework_TestCase
         $subscription->creditCardCardCode = "123";
         $subscription->billToFirstName = "john";
         $subscription->billToLastName = "doe";
-        
+
         // Create the subscription.
         $request = new AuthorizeNetARB;
         $response = $request->createSubscription($subscription);
         $this->assertTrue($response->isOk());
         $subscription_id = $response->getSubscriptionId();
-        
+
         // Get the subscription status
         $status_request = new AuthorizeNetARB;
         $status_response = $status_request->getSubscriptionStatus($subscription_id);
         $this->assertEquals("active",$status_response->getSubscriptionStatus());
-        
+
         // Update the subscription
         $update_request = new AuthorizeNetARB;
         $updated_subscription_info = new AuthorizeNet_Subscription;
@@ -42,23 +40,23 @@ class AuthorizeNetARB_Test extends PHPUnit_Framework_TestCase
         $updated_subscription_info->creditCardCardCode = "423";
         $update_response = $update_request->updateSubscription($subscription_id, $updated_subscription_info);
         $this->assertTrue($update_response->isOk());
-        
+
         // Cancel the subscription
         $cancellation = new AuthorizeNetARB;
         $cancel_response = $cancellation->cancelSubscription($subscription_id);
         $this->assertTrue($cancel_response->isOk());
-        
+
         // Get the subscription status
         $status_request = new AuthorizeNetARB;
         $status_response = $status_request->getSubscriptionStatus($subscription_id);
         $this->assertEquals("canceled", $status_response->getSubscriptionStatus());
-        
+
     }
 
 
     public function testCreateSubscriptionLong()
     {
-        
+
         $subscription = new AuthorizeNet_Subscription;
         $subscription->name = "test subscription";
         $subscription->intervalLength = "1";
@@ -99,38 +97,38 @@ class AuthorizeNetARB_Test extends PHPUnit_Framework_TestCase
         $subscription->shipToState = "";
         $subscription->shipToZip = "";
         $subscription->shipToCountry = "";
-        
+
         $refId = "ref" . time();
-        
+
         // Create the request and send it.
         $request = new AuthorizeNetARB;
         $request->setRefId($refId);
         $response = $request->createSubscription($subscription);
-        
-        
+
+
         // Handle the response.
-        
+
         $this->assertTrue($response->isOk());
         $this->assertEquals($response->getMessageCode(), "I00001");
         $this->assertEquals($response->getMessageText(), "Successful.");
         $this->assertEquals($response->getRefId(), $refId);
         $this->assertEquals($response->getResultCode(), "Ok");
-        
+
         // Cancel the subscription to avoid duplicate errors in future
-        
+
         $cancellation = new AuthorizeNetARB;
         $cancellation->setRefId($refId);
         $cancel_response = $cancellation->cancelSubscription($response->getSubscriptionId());
-        
-        
-        
+
+
+
         $this->assertTrue($cancel_response->isOk());
-        
+
     }
-    
+
     public function testCreateSubscriptionECheck()
     {
-        
+
         $subscription = new AuthorizeNet_Subscription;
         $subscription->name = "my test echeck subscription";
         $subscription->intervalLength = "1";
@@ -168,34 +166,34 @@ class AuthorizeNetARB_Test extends PHPUnit_Framework_TestCase
         $subscription->shipToState = "";
         $subscription->shipToZip = "";
         $subscription->shipToCountry = "";
-        
+
         $refId = "ref" . time();
-        
+
         // Create the request and send it.
         $request = new AuthorizeNetARB;
         $request->setRefId($refId);
-        
+
         $response = $request->createSubscription($subscription);
-        
-        
+
+
         // Handle the response.
-        
+
         $this->assertTrue($response->isOk());
         $this->assertEquals($response->getMessageCode(), "I00001");
         $this->assertEquals($response->getMessageText(), "Successful.");
         $this->assertEquals($response->getRefId(), $refId);
         $this->assertEquals($response->getResultCode(), "Ok");
-        
-        
+
+
         // Cancel the subscription to avoid duplicate errors in future
-        
-        
+
+
         $cancellation = new AuthorizeNetARB;
         $cancellation->setRefId($refId);
         $cancel_response = $cancellation->cancelSubscription($response->getSubscriptionId());
-        
+
         $this->assertTrue($cancel_response->isOk());
-        
+
     }
 
 }
