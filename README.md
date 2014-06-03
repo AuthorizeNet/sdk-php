@@ -1,26 +1,38 @@
 Authorize.Net PHP SDK
 ======================
 
-To use the SDK in your app, create a composer.json file with the following require
-section and run `composer update`.
+## License
+Proprietary, see the provided `license.md`.
 
+## Requirements
+
+- PHP 5.3+ *(>=5.3.10 recommended)*
+- cURL PHP Extension
+- JSON PHP Extension
+- SimpleXML PHP Extension
+- An Authorize.Net Merchant Account or Sandbox Account. You can get a 
+	free sandbox account at http://developer.authorize.net/sandbox/
+
+## Autoloading
+
+[`Composer`](http://getcomposer.org) currently has a [MITM](https://github.com/composer/composer/issues/1074)
+security vulnerability.  However, if you wish to use it, require it's autoloader in
+your script or bootstrap file:
+```php
+require 'vendor/autoload.php';
+```
+*Note: you'll need a composer.json file with the following require section and to run
+`composer update`.*
 ```json
 "require": {
     "authorizenet/authorizenet": "~1.8"
 }
 ```
 
-## License
-Proprietary, see `license.md`.
-
-## Requirements
-
-- PHP 5.3+
-- cURL PHP Extension
-- JSON PHP Extension
-- SimpleXML PHP Extension
-- An Authorize.Net Merchant Account or Sandbox Account. You can get a 
-	free sandbox account at http://developer.authorize.net/sandbox/
+Alternatively, we provide a custom `SPL` autoloader:
+```php
+require 'path/to/anet_php_sdk/autoload.php';
+```
     
 ## Usage Examples
 
@@ -30,7 +42,6 @@ each API.  Additional documentation is in the `docs/` folder.
 ### AuthorizeNetAIM.php Quick Usage Example
 
 ```php
-require 'vendor/autoload.php';
 define("AUTHORIZENET_API_LOGIN_ID", "YOURLOGIN");
 define("AUTHORIZENET_TRANSACTION_KEY", "YOURKEY");
 define("AUTHORIZENET_SANDBOX", true);
@@ -47,7 +58,6 @@ if ($response->approved) {
 ### AuthorizeNetAIM.php Advanced Usage Example
 
 ```php
-require 'vendor/autoload.php'; 
 define("AUTHORIZENET_API_LOGIN_ID", "YOURLOGIN");
 define("AUTHORIZENET_TRANSACTION_KEY", "YOURKEY");
 define("AUTHORIZENET_SANDBOX", true);
@@ -93,7 +103,6 @@ if ($response->approved) {
 ### AuthorizeNetARB.php Usage Example
 
 ```php
-require 'vendor/autoload.php';
 define("AUTHORIZENET_API_LOGIN_ID", "YOURLOGIN");
 define("AUTHORIZENET_TRANSACTION_KEY", "YOURKEY");
 $subscription                          = new AuthorizeNet_Subscription;
@@ -118,7 +127,6 @@ $subscription_id = $response->getSubscriptionId();
 ### AuthorizeNetCIM.php Usage Example
 
 ```php
-require 'vendor/autoload.php';
 define("AUTHORIZENET_API_LOGIN_ID", "YOURLOGIN");
 define("AUTHORIZENET_TRANSACTION_KEY", "YOURKEY");
 $request = new AuthorizeNetCIM;
@@ -136,7 +144,6 @@ if ($response->isOk()) {
 ### AuthorizeNetSIM.php Usage Example
 
 ```php
-require 'vendor/autoload.php';
 define("AUTHORIZENET_API_LOGIN_ID", "YOURLOGIN");
 define("AUTHORIZENET_MD5_SETTING", "");
 $message = new AuthorizeNetSIM;
@@ -148,7 +155,6 @@ if ($message->isAuthorizeNet()) {
 ### AuthorizeNetDPM.php Usage Example
 
 ```php
-require 'vendor/autoload.php';
 $url             = "http://YOUR_DOMAIN.com/direct_post.php";
 $api_login_id    = 'YOUR_API_LOGIN_ID';
 $transaction_key = 'YOUR_TRANSACTION_KEY';
@@ -160,7 +166,6 @@ AuthorizeNetDPM::directPostDemo($url, $api_login_id, $transaction_key, $amount, 
 ### AuthorizeNetCP.php Usage Example
 
 ```php
-require 'vendor/autoload.php';
 define("AUTHORIZENET_API_LOGIN_ID", "YOURLOGIN");
 define("AUTHORIZENET_TRANSACTION_KEY", "YOURKEY");
 define("AUTHORIZENET_MD5_SETTING", "");
@@ -175,7 +180,6 @@ $trans_id = $response->transaction_id;
 ### AuthorizeNetTD.php Usage Example
 
 ```php
-require 'vendor/autoload.php';
 define("AUTHORIZENET_API_LOGIN_ID", "YOURLOGIN");
 define("AUTHORIZENET_TRANSACTION_KEY", "YOURKEY");
 $request  = new AuthorizeNetTD;
@@ -189,12 +193,12 @@ Integration tests for the AuthorizeNet SDK are in the `tests` directory. These t
 are mainly for SDK development. However, you can also browse through them to find
 more usage examples for the various APIs.
 
+- Run `composer update --dev` to load the `PHPUnit` test library.
 - Copy the `phpunit.xml.dist` file to `phpunit.xml` and enter your merchant
   credentials in the constant fields.
-- On the command line in the root folder run:
-```shell
-/vendor/bin/phpunit
-```
+- Run `vendor/bin/phpunit` to run the test suite.
+
+*You'll probably want to disable emails on your sandbox account.*
     
 ### Test Credit Card Numbers
 
