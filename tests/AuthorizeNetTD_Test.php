@@ -44,6 +44,36 @@ class AuthorizeNetTD_Test extends PHPUnit_Framework_TestCase
         $this->assertTrue($response->isOk());
     }
 
+    public function testGetTransactionListReturnedItems()
+    {
+        $request = new AuthorizeNetTD;
+        $batchId = 0; // Set your $batchId here
+        $response = $request->getTransactionList($batchId);
+        $this->assertTrue($response->isOk());
+        $transactions = $response->xpath("transactions/transaction");
+        $transId = $transactions[0]->transId;
+
+        $details = new AuthorizeNetTD;
+        $response = $details->getTransactionDetails($transId);
+        $this->assertTrue($response->isOk());
+        $transaction = $response->xml->transaction[0];
+        $this->assertFalse(empty($transaction->returnedItems));
+
+    }
+
+
+    public function testGetTransactionListSubscription()
+    {
+        $transId = 0; // Set your $transId here
+
+        $details = new AuthorizeNetTD;
+        $response = $details->getTransactionDetails($transId);
+        $this->assertTrue($response->isOk());
+        $transaction = $response->xml->transaction[0];
+
+        $this->assertFalse(empty($transaction->subscription));
+    }
+
     public function testGetTransactionDetails()
     {
         $sale = new AuthorizeNetAIM;
@@ -63,6 +93,27 @@ class AuthorizeNetTD_Test extends PHPUnit_Framework_TestCase
 
     }
 
+
+    public function testGetTransactionDetailsWithSolutionId()
+    {
+        $sale = new AuthorizeNetAIM;
+        $amount = rand(1, 100);
+        $sale->setCustomField('x_solution_id', 'A1000002');
+        $response = $sale->authorizeAndCapture($amount, '4012888818888', '04/17');
+        $this->assertTrue($response->approved);
+
+        $transId = $response->transaction_id;
+
+        $request = new AuthorizeNetTD;
+        $response = $request->getTransactionDetails($transId);
+        $this->assertTrue($response->isOk());
+
+        $this->assertEquals($transId, (string)$response->xml->transaction->transId);
+        $this->assertEquals($amount, (string)$response->xml->transaction->authAmount);
+        $this->assertEquals("Visa", (string)$response->xml->transaction->payment->creditCard->cardType);
+        $this->assertEquals("A1000002", (string)$response->xml->transaction->solution->id);
+    }
+
     public function testGetUnsettledTransactionList()
     {
         $sale = new AuthorizeNetAIM;
@@ -76,6 +127,23 @@ class AuthorizeNetTD_Test extends PHPUnit_Framework_TestCase
         $this->assertTrue($response->xml->transactions->count() >= 1);
     }
 
+    public function testGetUnsettledTransactionListHasNoReturnedItems()
+    {
+        $request = new AuthorizeNetTD;
+        $response = $request->getUnsettledTransactionList();
+        $this->assertTrue($response->isOk());
+        $this->assertTrue($response->xml->transactions->count() >= 1);
+
+        foreach($response->xml->transactions->transaction as $transaction)
+        {
+            if($transaction->hasReturnedItems)
+            {
+                $this->assertEquals("false", $transaction->hasReturnedItems);
+            }
+        }
+    }
+
+    
     public function testGetBatchStatistics()
     {
         $request = new AuthorizeNetTD;
