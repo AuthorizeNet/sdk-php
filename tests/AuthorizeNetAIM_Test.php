@@ -584,7 +584,7 @@ class AuthorizeNetAIM_Sandbox_Test extends PHPUnit_Framework_TestCase
         $merchant->allow_partial_auth = "false";
 
         $creditCard = array(
-            'exp_date' => '02/2012',
+            'exp_date' => '02/2020',
             'card_num' => '6011000000000012',
             'card_code' => '452',
             );
@@ -657,7 +657,7 @@ class AuthorizeNetAIM_Sandbox_Test extends PHPUnit_Framework_TestCase
         $merchant->allow_partial_auth = "false";
 
         $creditCard = array(
-            'exp_date' => '02/2012',
+            'exp_date' => '02/2020',
             'card_num' => '6011000000000012',
             'card_code' => '452',
             );

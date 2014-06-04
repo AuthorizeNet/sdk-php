@@ -112,7 +112,7 @@ class AuthorizeNetCP_Test extends PHPUnit_Framework_TestCase
         $this->assertEquals('1.0',$response->version);
         $this->assertEquals('1',$response->response_code);
         $this->assertEquals('1',$response->response_reason_code);
-        $this->assertEquals('(TESTMODE) This transaction has been approved.',$response->response_reason_text);
+        $this->assertEquals('This transaction has been approved.',$response->response_reason_text);
         $this->assertEquals('000000',$response->authorization_code);
         $this->assertEquals('P',$response->avs_code);
         $this->assertEquals('',$response->card_code_response);
