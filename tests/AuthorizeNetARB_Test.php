@@ -10,7 +10,7 @@ class AuthorizeNetARB_Test extends PHPUnit_Framework_TestCase
         $subscription->name = "Short subscription";
         $subscription->intervalLength = "1";
         $subscription->intervalUnit = "months";
-        $subscription->startDate = "2011-03-12";
+        $subscription->startDate = "2020-03-12";
         $subscription->totalOccurrences = "14";
         $subscription->amount = rand(1,100);
         $subscription->creditCardCardNumber = "6011000000000012";
