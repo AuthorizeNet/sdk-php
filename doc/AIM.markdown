@@ -10,10 +10,10 @@ for your transaction, call the method you want to use (Authorize Only, Authorize
 Capture, etc.) and you'll receive an AuthorizeNetAIM response object providing easy access
 to the results of the transaction.
 
-Including the SDK
+Autoloading
 -----------------
 
-require_once 'anet_php_sdk/AuthorizeNet.php'; 
+require 'vendor/autoload.php'; 
 
 Setting Merchant Credentials
 ----------------------------

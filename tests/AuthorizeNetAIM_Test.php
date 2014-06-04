@@ -1,10 +1,8 @@
 <?php
 
-require_once 'AuthorizeNet_Test_Config.php';
-
 class AuthorizeNetAIM_Sandbox_Test extends PHPUnit_Framework_TestCase
 {
-    
+
     public function testAuthCapture()
     {
         $sale = new AuthorizeNetAIM;
@@ -18,7 +16,7 @@ class AuthorizeNetAIM_Sandbox_Test extends PHPUnit_Framework_TestCase
         $response = $sale->authorizeAndCapture();
         $this->assertTrue($response->approved);
     }
-    
+
     public function testAuthCaptureSingleDigitMonth()
     {
         $sale = new AuthorizeNetAIM;
@@ -32,7 +30,7 @@ class AuthorizeNetAIM_Sandbox_Test extends PHPUnit_Framework_TestCase
         $response = $sale->authorizeAndCapture();
         $this->assertTrue($response->approved);
     }
-    
+
     public function testAuthCaptureSingleDigitMonthWithSlash()
     {
         $sale = new AuthorizeNetAIM;
@@ -46,7 +44,7 @@ class AuthorizeNetAIM_Sandbox_Test extends PHPUnit_Framework_TestCase
         $response = $sale->authorizeAndCapture();
         $this->assertTrue($response->approved);
     }
-    
+
     public function testAuthCaptureTwoDigitMonthWithSlash()
     {
         $sale = new AuthorizeNetAIM;
@@ -60,7 +58,7 @@ class AuthorizeNetAIM_Sandbox_Test extends PHPUnit_Framework_TestCase
         $response = $sale->authorizeAndCapture();
         $this->assertTrue($response->approved);
     }
-    
+
     public function testAuthCaptureAlternate()
     {
         $sale = new AuthorizeNetAIM;
@@ -70,18 +68,18 @@ class AuthorizeNetAIM_Sandbox_Test extends PHPUnit_Framework_TestCase
         $response = $sale->authorizeAndCapture();
         $this->assertTrue($response->approved);
     }
-    
+
     public function testAuthCaptureShort()
     {
         $sale = new AuthorizeNetAIM;
         $response = $sale->authorizeAndCapture(rand(1, 100), '6011000000000012', '04/16');
         $this->assertTrue($response->approved);
     }
-    
+
     public function testAuthCapturePartial()
     {
         $amount = 3.69;
-        
+
         $sale = new AuthorizeNetAIM;
         $sale->amount = $amount;
         $sale->card_num = '4222222222222';
@@ -93,7 +91,7 @@ class AuthorizeNetAIM_Sandbox_Test extends PHPUnit_Framework_TestCase
         $this->assertEquals("1.23", $response->amount);
         $this->assertEquals($amount, $response->requested_amount);
         $split_tender_id = $response->split_tender_id;
-        
+
         // Pay the balance with a different card
         $sale = new AuthorizeNetAIM;
         $sale->amount = $amount - $response->amount;
@@ -103,10 +101,10 @@ class AuthorizeNetAIM_Sandbox_Test extends PHPUnit_Framework_TestCase
         $sale->allow_partial_auth = true;
         $response = $sale->authorizeAndCapture();
         $this->assertTrue($response->approved);
-        
-        
+
+
     }
-    
+
     public function testAuthCaptureShortNoVerify()
     {
         $sale = new AuthorizeNetAIM;
@@ -114,7 +112,7 @@ class AuthorizeNetAIM_Sandbox_Test extends PHPUnit_Framework_TestCase
         $response = $sale->authorizeAndCapture(rand(1, 100), '6011000000000012', '04/19');
         $this->assertTrue($response->approved);
     }
-    
+
     // public function testVisaVerify()
     // {
     //     return;  // Remove to enable test
@@ -129,7 +127,7 @@ class AuthorizeNetAIM_Sandbox_Test extends PHPUnit_Framework_TestCase
     //     $response = $verify->authorizeOnly();
     //     $this->assertTrue($response->approved);
     // }
-    // 
+    //
     // public function testVisaVerifyFail()
     // {
     //     return;  // Remove to enable test
@@ -144,7 +142,7 @@ class AuthorizeNetAIM_Sandbox_Test extends PHPUnit_Framework_TestCase
     //     $response = $verify->authorizeOnly();
     //     $this->assertTrue($response->declined);
     // }
-    // 
+    //
     // public function testMastercardVerify()
     // {
     //     return;  // Remove to enable test
@@ -159,7 +157,7 @@ class AuthorizeNetAIM_Sandbox_Test extends PHPUnit_Framework_TestCase
     //     $response = $verify->authorizeOnly();
     //     $this->assertTrue($response->approved);
     // }
-    // 
+    //
     // public function testMastercardVerifyFail()
     // {
     //     return;  // Remove to enable test
@@ -174,10 +172,10 @@ class AuthorizeNetAIM_Sandbox_Test extends PHPUnit_Framework_TestCase
     //     $response = $verify->authorizeOnly();
     //     $this->assertTrue($response->declined);
     // }
-    
+
     public function testAimResponseFields()
     {
-        
+
         $sale = new AuthorizeNetAIM;
         $sale->card_num           = '4111111111111111';
         $sale->exp_date           = '04/16';
@@ -211,8 +209,8 @@ class AuthorizeNetAIM_Sandbox_Test extends PHPUnit_Framework_TestCase
         $sale->tax_exempt         = $tax_exempt = "FALSE";
         $sale->po_num             = $po_num = "12";
 
-        
-        
+
+
         $response = $sale->authorizeAndCapture();
         $this->assertTrue($response->approved);
         $this->assertEquals("1", $response->response_code);
@@ -260,11 +258,11 @@ class AuthorizeNetAIM_Sandbox_Test extends PHPUnit_Framework_TestCase
         $this->assertEquals("", $response->split_tender_id);
         $this->assertEquals("", $response->requested_amount);
         $this->assertEquals("", $response->balance_on_card);
-        
-        
+
+
     }
-    
- 
+
+
     public function testVoid()
     {
         // First create transaction to void.
@@ -279,7 +277,7 @@ class AuthorizeNetAIM_Sandbox_Test extends PHPUnit_Framework_TestCase
         );
         $response = $sale->authorizeAndCapture();
         $this->assertTrue($response->approved);
-        
+
         $void = new AuthorizeNetAIM;
         $void->setFields(
             array(
@@ -291,7 +289,7 @@ class AuthorizeNetAIM_Sandbox_Test extends PHPUnit_Framework_TestCase
         $void_response = $void->Void();
         $this->assertTrue($void_response->approved);
     }
-    
+
     public function testVoidShort()
     {
         // First create transaction to void.
@@ -301,7 +299,7 @@ class AuthorizeNetAIM_Sandbox_Test extends PHPUnit_Framework_TestCase
         $sale = new AuthorizeNetAIM;
         $response = $sale->authorizeAndCapture($amount, $card_num, $exp_date);
         $this->assertTrue($response->approved);
-        
+
         $void = new AuthorizeNetAIM;
         $void_response = $void->void($response->transaction_id);
         $this->assertTrue($void_response->approved);
@@ -325,30 +323,30 @@ class AuthorizeNetAIM_Sandbox_Test extends PHPUnit_Framework_TestCase
         $response = $sale->authorizeAndCapture();
         $this->assertEquals("ECHECK", $response->method);
         $this->assertTrue($response->approved);
-        
+
     }
-   
+
     public function testAmex()
     {
         $sale = new AuthorizeNetAIM;
         $response = $sale->authorizeAndCapture(rand(1, 100), '370000000000002', '04/16');
         $this->assertTrue($response->approved);
     }
-    
+
     public function testDiscover()
     {
         $sale = new AuthorizeNetAIM;
         $response = $sale->authorizeAndCapture(rand(1, 100), '6011000000000012', '04/16');
         $this->assertTrue($response->approved);
     }
-    
+
     public function testVisa()
     {
         $sale = new AuthorizeNetAIM;
         $response = $sale->authorizeAndCapture(rand(1, 100), '4012888818888', '04/16');
         $this->assertTrue($response->approved);
     }
-    
+
     // public function testJCB()
     // {
     //     return; // Remove to enable test
@@ -356,7 +354,7 @@ class AuthorizeNetAIM_Sandbox_Test extends PHPUnit_Framework_TestCase
     //     $response = $sale->authorizeAndCapture(rand(1, 100), '3088000000000017', '0905');
     //     $this->assertTrue($response->approved);
     // }
-    // 
+    //
     // public function testDinersClub()
     // {
     //     return; // Remove to enable test
@@ -364,7 +362,7 @@ class AuthorizeNetAIM_Sandbox_Test extends PHPUnit_Framework_TestCase
     //     $response = $sale->authorizeAndCapture(rand(1, 100), '38000000000006', '0905');
     //     $this->assertTrue($response->approved);
     // }
-    
+
     public function testAuthOnly()
     {
         $auth = new AuthorizeNetAIM;
@@ -378,7 +376,7 @@ class AuthorizeNetAIM_Sandbox_Test extends PHPUnit_Framework_TestCase
         $response = $auth->authorizeOnly();
         $this->assertTrue($response->approved);
     }
-    
+
     public function testAuthCaptureVoid()
     {
         $amount = rand(1, 1000);
@@ -392,7 +390,7 @@ class AuthorizeNetAIM_Sandbox_Test extends PHPUnit_Framework_TestCase
         );
         $auth_response = $auth->authorizeOnly();
         $this->assertTrue($auth_response->approved);
-        
+
         // Now capture.
         $capture = new AuthorizeNetAIM;
         $capture->setFields(
@@ -405,7 +403,7 @@ class AuthorizeNetAIM_Sandbox_Test extends PHPUnit_Framework_TestCase
         );
         $capture_response = $capture->priorAuthCapture();
         $this->assertTrue($capture_response->approved);
-        
+
         // Now void
         $void = new AuthorizeNetAIM;
         $void->setFields(
@@ -418,27 +416,27 @@ class AuthorizeNetAIM_Sandbox_Test extends PHPUnit_Framework_TestCase
         $void_response = $void->void();
         $this->assertTrue($void_response->approved);
     }
-    
+
     // public function testCredit()
     // {
-    //     
+    //
     // }
-    // 
+    //
     // public function testPriorAuthCapture()
     // {
-    //     
+    //
     // }
-    // 
+    //
     // public function testCaptureOnly()
     // {
-    //     
+    //
     // }
-    
+
     public function testAdvancedAIM()
     {
         $auth = new AuthorizeNetAIM;
         $auth->amount = "45.00";
-        
+
         // Use eCheck:
         $auth->setECheck(
             '121042882',
@@ -448,35 +446,35 @@ class AuthorizeNetAIM_Sandbox_Test extends PHPUnit_Framework_TestCase
             'Jane Doe',
             'WEB'
         );
-        
+
         // Set multiple line items:
         $auth->addLineItem('item1', 'Golf tees', 'Blue tees', '2', '5.00', 'N');
         $auth->addLineItem('item2', 'Golf shirt', 'XL', '1', '40.00', 'N');
-        
+
         // Set Invoice Number:
         $auth->invoice_num = time();
-        
+
         // Set a Merchant Defined Field:
         $auth->setCustomField("entrance_source", "Search Engine");
-        
+
         // Authorize Only:
         $response  = $auth->authorizeOnly();
         $this->assertTrue($response->approved);
         if ($response->approved) {
             $auth_code = $response->transaction_id;
-            
+
             // Now capture:
             $capture = new AuthorizeNetAIM;
             $capture_response = $capture->priorAuthCapture($auth_code);
             $this->assertTrue($capture_response->approved);
-            
+
             // Now void:
             $void = new AuthorizeNetAIM;
             $void_response = $void->void($capture_response->transaction_id);
             $this->assertTrue($void_response->approved);
         }
     }
-    
+
     public function testAuthCaptureCustomFields()
     {
         $sale = new AuthorizeNetAIM;
@@ -536,7 +534,7 @@ class AuthorizeNetAIM_Sandbox_Test extends PHPUnit_Framework_TestCase
         $this->assertEquals("bar", $response->foo);
         $this->assertEquals("bar2", $response->foo2);
     }
-    
+
     public function testInvalidMerchantCredentials()
     {
         $auth = new AuthorizeNetAIM('d', 'd');
@@ -545,7 +543,7 @@ class AuthorizeNetAIM_Sandbox_Test extends PHPUnit_Framework_TestCase
         $this->assertEquals($response->response_subcode, 2);
         $this->assertEquals($response->response_reason_code, 13);
     }
-    
+
     public function testInvalidCreditCard()
     {
         $sale = new AuthorizeNetAIM;
@@ -567,17 +565,17 @@ class AuthorizeNetAIM_Sandbox_Test extends PHPUnit_Framework_TestCase
         $sale->unsetField("login");
         $sale->unsetField("tran_key");
         $sale->unsetField("delim_data");
-        
+
         $sale->unsetField("version");
         $sale->unsetField("relay_response");
-        
+
         $response = $sale->authorizeAndCapture();
         // An exception should have been thrown.
         $this->assertFalse($response->approved);
         $this->assertTrue($response->error);
-        
+
     }
-    
+
     public function testMultipleLineItems()
     {
         $merchant = (object)array();
@@ -598,7 +596,7 @@ class AuthorizeNetAIM_Sandbox_Test extends PHPUnit_Framework_TestCase
         'footer_email_receipt' => 'thank you for your business!',
         'header_email_receipt' => 'a copy of your receipt is below',
         );
-            
+
         $order = array(
             'description' => 'Johns Bday Gift',
             'invoice_num' => '3123',
@@ -642,15 +640,15 @@ class AuthorizeNetAIM_Sandbox_Test extends PHPUnit_Framework_TestCase
         $sale->setFields($order);
         $sale->setFields($merchant);
         $sale->setFields($transaction);
-        
+
         $sale->addLineItem('item2', 'golf tees', 'titanium tees', '2', '2.95', 'Y');
         $sale->addLineItem('item3', 'golf shirt', 'red, large', '2', '3.95', 'Y');
-        
+
         $response = $sale->authorizeAndCapture();
 
         $this->assertTrue($response->approved);
     }
-    
+
     public function testAllFieldsLongMethod()
     {
         $merchant = (object)array();
@@ -671,7 +669,7 @@ class AuthorizeNetAIM_Sandbox_Test extends PHPUnit_Framework_TestCase
         'footer_email_receipt' => 'thank you for your business!',
         'header_email_receipt' => 'a copy of your receipt is below',
         );
-            
+
         $order = array(
             'description' => 'Johns Bday Gift',
             'invoice_num' => '3123',
@@ -716,7 +714,7 @@ class AuthorizeNetAIM_Sandbox_Test extends PHPUnit_Framework_TestCase
         $sale->setFields($merchant);
         $sale->setFields($transaction);
         $response = $sale->authorizeAndCapture();
-        
+
         $this->assertTrue($response->approved);
     }
 
@@ -724,7 +722,7 @@ class AuthorizeNetAIM_Sandbox_Test extends PHPUnit_Framework_TestCase
     {
         $amount = rand(1, 1000);
         $zipcode = "02301";
-        
+
         $sale = new AuthorizeNetAIM;
         $sale->setFields(
             array(
@@ -734,12 +732,12 @@ class AuthorizeNetAIM_Sandbox_Test extends PHPUnit_Framework_TestCase
             'zip' => $zipcode,
             )
         );
-        
+
         $sale->setCustomField("custom1", "custom1value");
         $sale->setCustomField("custom2", "custom2value");
         $result = $sale->authorizeAndCapture();
         $this->assertTrue($result->approved);
-        
+
         $this->assertEquals("custom2value", $result->custom2);
         $this->assertEquals($amount, $result->amount);
         $this->assertEquals("CC", $result->method);
@@ -747,13 +745,13 @@ class AuthorizeNetAIM_Sandbox_Test extends PHPUnit_Framework_TestCase
         $this->assertEquals("Discover", $result->card_type);
         $this->assertEquals($zipcode, $result->zip_code);
     }
-    
+
     public function testSetBadField()
     {
         try {
             $amount = rand(1, 1000);
             $zipcode = "02301";
-            
+
             $sale = new AuthorizeNetAIM;
             $sale->setFields(
                 array(
@@ -771,7 +769,7 @@ class AuthorizeNetAIM_Sandbox_Test extends PHPUnit_Framework_TestCase
         }
         catch (AuthorizeNetException $e){
             $this->assertTrue(true);
-        
+
         }
     }
 
@@ -803,7 +801,7 @@ class AuthorizeNetAIM_Live_Test extends PHPUnit_Framework_TestCase
             // $this->assertTrue($response->approved);
         }
     }
-    
+
     public function testAuthCaptureECheck()
     {
         if (MERCHANT_LIVE_API_LOGIN_ID) {
