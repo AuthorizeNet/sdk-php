@@ -97,7 +97,7 @@ if ($response->approved) {
     $capture_response = $capture->priorAuthCapture($auth_code);
 
     // Now void:
-    $void = new AuthorizeNetAIM;
+    $void = new AuthorizeNetAIM(AUTHORIZENET_API_LOGIN_ID, AUTHORIZENET_TRANSACTION_KEY);
     $void_response = $void->void($capture_response->transaction_id);
 }
 ```
@@ -107,7 +107,7 @@ if ($response->approved) {
 ```php
 define("AUTHORIZENET_API_LOGIN_ID", "YOURLOGIN");
 define("AUTHORIZENET_TRANSACTION_KEY", "YOURKEY");
-$subscription                          = new AuthorizeNet_Subscription(AUTHORIZENET_API_LOGIN_ID, AUTHORIZENET_TRANSACTION_KEY);
+$subscription                          = new AuthorizeNet_Subscription();
 $subscription->name                    = "PHP Monthly Magazine";
 $subscription->intervalLength          = "1";
 $subscription->intervalUnit            = "months";
