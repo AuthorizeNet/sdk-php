@@ -45,7 +45,8 @@ each API.  Additional documentation is in the `docs/` folder.
 define("AUTHORIZENET_API_LOGIN_ID", "YOURLOGIN");
 define("AUTHORIZENET_TRANSACTION_KEY", "YOURKEY");
 define("AUTHORIZENET_SANDBOX", true);
-$sale           = new AuthorizeNetAIM;
+$sale           = new AuthorizeNetAIM(AUTHORIZENET_API_LOGIN_ID, AUTHORIZENET_TRANSACTION_KEY);
+$sale->setSandbox(AUTHORIZENET_SANDBOX);
 $sale->amount   = "5.99";
 $sale->card_num = '6011000000000012';
 $sale->exp_date = '04/15';
@@ -61,7 +62,8 @@ if ($response->approved) {
 define("AUTHORIZENET_API_LOGIN_ID", "YOURLOGIN");
 define("AUTHORIZENET_TRANSACTION_KEY", "YOURKEY");
 define("AUTHORIZENET_SANDBOX", true);
-$auth         = new AuthorizeNetAIM;
+$auth         = new AuthorizeNetAIM(AUTHORIZENET_API_LOGIN_ID, AUTHORIZENET_TRANSACTION_KEY);
+$auth->setSandbox(AUTHORIZENET_SANDBOX);
 $auth->amount = "45.00";
 
 // Use eCheck:
@@ -91,7 +93,7 @@ if ($response->approved) {
     $auth_code = $response->transaction_id;
 
     // Now capture:
-    $capture = new AuthorizeNetAIM;
+    $capture = new AuthorizeNetAIM(AUTHORIZENET_API_LOGIN_ID, AUTHORIZENET_TRANSACTION_KEY);
     $capture_response = $capture->priorAuthCapture($auth_code);
 
     // Now void:
@@ -105,7 +107,7 @@ if ($response->approved) {
 ```php
 define("AUTHORIZENET_API_LOGIN_ID", "YOURLOGIN");
 define("AUTHORIZENET_TRANSACTION_KEY", "YOURKEY");
-$subscription                          = new AuthorizeNet_Subscription;
+$subscription                          = new AuthorizeNet_Subscription(AUTHORIZENET_API_LOGIN_ID, AUTHORIZENET_TRANSACTION_KEY);
 $subscription->name                    = "PHP Monthly Magazine";
 $subscription->intervalLength          = "1";
 $subscription->intervalUnit            = "months";
@@ -119,7 +121,7 @@ $subscription->billToFirstName         = "Rasmus";
 $subscription->billToLastName          = "Doe";
 
 // Create the subscription.
-$request         = new AuthorizeNetARB;
+$request         = new AuthorizeNetARB(AUTHORIZENET_API_LOGIN_ID, AUTHORIZENET_TRANSACTION_KEY);
 $response        = $request->createSubscription($subscription);
 $subscription_id = $response->getSubscriptionId();
 ```
@@ -129,9 +131,9 @@ $subscription_id = $response->getSubscriptionId();
 ```php
 define("AUTHORIZENET_API_LOGIN_ID", "YOURLOGIN");
 define("AUTHORIZENET_TRANSACTION_KEY", "YOURKEY");
-$request = new AuthorizeNetCIM;
+$request = new AuthorizeNetCIM(AUTHORIZENET_API_LOGIN_ID, AUTHORIZENET_TRANSACTION_KEY);
 // Create new customer profile
-$customerProfile                     = new AuthorizeNetCustomer;
+$customerProfile                     = new AuthorizeNetCustomer();
 $customerProfile->description        = "Description of customer";
 $customerProfile->merchantCustomerId = time();
 $customerProfile->email              = "test@domain.com";
@@ -146,7 +148,7 @@ if ($response->isOk()) {
 ```php
 define("AUTHORIZENET_API_LOGIN_ID", "YOURLOGIN");
 define("AUTHORIZENET_MD5_SETTING", "");
-$message = new AuthorizeNetSIM;
+$message = new AuthorizeNetSIM(AUTHORIZENET_API_LOGIN_ID, AUTHORIZE_MD5_SETTING);
 if ($message->isAuthorizeNet()) {
     $transactionId = $message->transaction_id;
 }
@@ -168,8 +170,7 @@ AuthorizeNetDPM::directPostDemo($url, $api_login_id, $transaction_key, $amount, 
 ```php
 define("AUTHORIZENET_API_LOGIN_ID", "YOURLOGIN");
 define("AUTHORIZENET_TRANSACTION_KEY", "YOURKEY");
-define("AUTHORIZENET_MD5_SETTING", "");
-$sale              = new AuthorizeNetCP;
+$sale              = new AuthorizeNetCP(AUTHORIZENET_API_LOGIN_ID, AUTHORIZENET_TRANSACTION_KEY);
 $sale->amount      = '59.99';
 $sale->device_type = '4';
 $sale->setTrack1Data('%B4111111111111111^CARDUSER/JOHN^1803101000000000020000831000000?');
@@ -182,7 +183,7 @@ $trans_id = $response->transaction_id;
 ```php
 define("AUTHORIZENET_API_LOGIN_ID", "YOURLOGIN");
 define("AUTHORIZENET_TRANSACTION_KEY", "YOURKEY");
-$request  = new AuthorizeNetTD;
+$request  = new AuthorizeNetTD(AUTHORIZENET_API_LOGIN_ID, AUTHORIZENET_TRANSACTION_KEY);
 $response = $request->getTransactionDetails("12345");
 echo $response->xml->transaction->transactionStatus;
 ```
