@@ -18,6 +18,7 @@ reference.
 
 The code below will generate a buy now button that leads to a hosted order page:
 
+```
 <form method="post" action="https://test.authorize.net/gateway/transact.dll">
 <?php
 $amount = "9.99";
@@ -38,13 +39,14 @@ $sim = new AuthorizeNetSIM_Form(
 echo $sim->getHiddenFieldString();?>
 <input type="submit" value="Buy Now">
 </form>
+```
 
 Fingerprint Generation
 ----------------------
 
 To generate the fingerprint needed for a SIM transaction call the getFingerprint method:
 
-$fingerprint = AuthorizeNetSIM_Form::getFingerprint($api_login_id, $transaction_key, $amount, $fp_sequence, $fp_timestamp);
+    $fingerprint = AuthorizeNetSIM_Form::getFingerprint($api_login_id, $transaction_key, $amount, $fp_sequence, $fp_timestamp);
 
 
 Relay Response
@@ -63,6 +65,7 @@ http://yourdomain.com/response_handler.php and execute any logic you want
 when a transaction occurs. The AuthorizeNetSIM class makes it easy to verify
 the transaction came from Authorize.Net and parse the response:
 
+```
 $response = new AuthorizeNetSIM;
 if ($response->isAuthorizeNet())
 {
@@ -72,3 +75,4 @@ if ($response->isAuthorizeNet())
     magazine_subscription_activate($response->cust_id);
   }
 }
+```
