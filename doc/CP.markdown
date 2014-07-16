@@ -21,7 +21,7 @@ Setting Track Data
 
 To set Track 1 and/or Track 2 data, use the respective methods like so:
 
-```
+```PHP
 $sale = new AuthorizeNetCP(CP_API_LOGIN_ID, CP_TRANSACTION_KEY);
 $sale->setFields(
     array(
