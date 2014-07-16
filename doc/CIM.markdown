@@ -14,7 +14,7 @@ Creating a Customer Profile
 To create a new cusomter profile, first create a new AuthorizeNetCustomer
 object.
 
-```
+```PHP
 $customerProfile = new AuthorizeNetCustomer;
 $customerProfile->description = "Description of customer";
 $customerProfile->merchantCustomerId = 123;
@@ -23,7 +23,7 @@ $customerProfile->email = "user@domain.com";
 You can then create an add payment profiles and addresses to this
 customer object.
 
-```
+```PHP
 // Add payment profile.
 $paymentProfile = new AuthorizeNetPaymentProfile;
 $paymentProfile->customerType = "individual";
@@ -72,26 +72,34 @@ $customerProfile->shipToList[] = $address2;
 
 Next, create an AuthorizeNetCIM object:
 
-    $request = new AuthorizeNetCIM;
+```PHP
+$request = new AuthorizeNetCIM;
+```
 
 Finally, call the createCustomerProfile method and pass in your
 customer object:
 
-    $response = $request->createCustomerProfile($customerProfile);
+```PHP
+$response = $request->createCustomerProfile($customerProfile);
+```
 
 The response object provides some helper methods for easy access to the
 results of the transaction:
 
-    $new_customer_id = $response->getCustomerProfileId();
+```PHP
+$new_customer_id = $response->getCustomerProfileId();
+```
 
 The response object also stores the XML response as a SimpleXml element
 which you can access like so:
 
-    $new_customer_id = $response->xml->customerProfileId
+```PHP
+$new_customer_id = $response->xml->customerProfileId
+```
 
 You can also run xpath queries against the result:
 
-```
+```PHP
 $array = $response->xpath('customerProfileId');
 $new_customer_id = $array[0];
 ```
@@ -101,11 +109,15 @@ Deleting a Customer Profile
 
 To delete a customer profile first create a new AuthorizeNetCIM object:
 
-    $request = new AuthorizeNetCIM;
+```PHP
+$request = new AuthorizeNetCIM;
+```
 
 Then call the deleteCustomerProfile method:
 
-    request->deleteCustomerProfile($customer_id);
+```PHP
+request->deleteCustomerProfile($customer_id);
+```
 
 
 Retrieving a Customer Profile
@@ -113,8 +125,9 @@ Retrieving a Customer Profile
 
 To retrieve a customer profile call the getCustomerProfile method:
 
-    $response = $request->getCustomerProfile($customerProfileId);
-
+```PHP
+$response = $request->getCustomerProfile($customerProfileId);
+```
 
 Validation Mode
 ---------------
@@ -124,12 +137,14 @@ Validation mode allows you to generate a test transaction at the time you create
 To create a customer profile with Validation mode, simply pass in the
 a value for the validation mode parameter on the createCustomerProfile method:
 
-    $response = $request->createCustomerProfile($customerProfile, "testMode");
+```PHP
+$response = $request->createCustomerProfile($customerProfile, "testMode");
+```
 
 You can access the validation response for each payment profile via xpath,
 the SimpleXML element or the getValidationResponses method:
 
-```
+```PHP
 $validationResponses = $response->getValidationResponses();
   foreach ($validationResponses as $vr) {
     echo $vr->approved;
@@ -142,13 +157,14 @@ Updating a Customer Profile
 Call the updateCustomerProfile method with the customerProfileId and customerProfile
 parameters:
 
-    $response = $request->updateCustomerProfile($customerProfileId, $customerProfile);
-
+```PHP
+$response = $request->updateCustomerProfile($customerProfileId, $customerProfile);
+```
 
 Adding a Payment Profile
 ------------------------
 
-```
+```PHP
 $paymentProfile = new AuthorizeNetPaymentProfile;
 $paymentProfile->customerType = "individual";
 $paymentProfile->payment->creditCard->cardNumber = "4111111111111111";
@@ -159,7 +175,7 @@ $response = $request->createCustomerPaymentProfile($customerProfileId, $paymentP
 Updating a Payment Profile
 --------------------------
 
-```
+```PHP
 $paymentProfile->payment->creditCard->cardNumber = "4111111111111111";
 $paymentProfile->payment->creditCard->expirationDate = "2017-11";
 $response = $request->updateCustomerPaymentProfile($customerProfileId,$paymentProfileId, $paymentProfile);
@@ -168,7 +184,7 @@ $response = $request->updateCustomerPaymentProfile($customerProfileId,$paymentPr
 Adding a Shipping Address
 -------------------------
 
-```
+```PHP
 $address = new AuthorizeNetAddress;
 $address->firstName = "john";
 $address->lastName = "Doe";
@@ -187,7 +203,7 @@ $customerAddressId = $response->getCustomerAddressId();
 Updating a Shipping Address
 ---------------------------
 
-```
+```PHP
 // Update shipping address.
 $address->address = "2 First Street";
 $response = $request->updateCustomerShippingAddress($customerProfileId, $customerAddressId, $address);
@@ -196,7 +212,7 @@ $response = $request->updateCustomerShippingAddress($customerProfileId, $custome
 Creating Transactions
 ---------------------
 
-```    
+```PHP    
 // Create Auth & Capture Transaction
 $transaction = new AuthorizeNetTransaction;
 $transaction->amount = "9.79";
@@ -231,7 +247,7 @@ $transactionId = $transactionResponse->transaction_id;
 Voiding a Transaction
 ---------------------
 
-```
+```PHP
 $transaction = new AuthorizeNetTransaction;
 $transaction->transId = $transactionId;
 $response = $request->createCustomerProfileTransaction("Void", $transaction);
@@ -240,17 +256,20 @@ $response = $request->createCustomerProfileTransaction("Void", $transaction);
 Deleting a Shipping Address
 ---------------------------
 
-    $response = $request->deleteCustomerShippingAddress($customerProfileId, $customerAddressId);
-
+```PHP
+$response = $request->deleteCustomerShippingAddress($customerProfileId, $customerAddressId);
+```
 
 Deleting a Payment Profile
 --------------------------
 
-    $response = $request->deleteCustomerPaymentProfile($customerProfileId, $paymentProfileId);
-  
-
+```PHP
+$response = $request->deleteCustomerPaymentProfile($customerProfileId, $paymentProfileId);
+```  
 
 Getting Customer Profile IDs
 ----------------------------
 
-    $response = $request->getCustomerProfileIds();
+```PHP
+$response = $request->getCustomerProfileIds();
+```
