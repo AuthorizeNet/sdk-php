@@ -21,6 +21,7 @@ Setting Track Data
 
 To set Track 1 and/or Track 2 data, use the respective methods like so:
 
+```
 $sale = new AuthorizeNetCP(CP_API_LOGIN_ID, CP_TRANSACTION_KEY);
 $sale->setFields(
     array(
@@ -40,4 +41,4 @@ $sale->setFields(
 );
 $sale->setTrack2Data('4111111111111111=1803101000020000831?');
 $response = $sale->authorizeAndCapture();
-
+```
