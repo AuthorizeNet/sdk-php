@@ -16,7 +16,7 @@ See the SIM.markdown for additional documentation.
 Relay Response Snippet
 ----------------------
 
-The AuthorizeNetDPM class contains a getRelayResponseSnippet($redirect_url)
+The AuthorizeNetDPM class contains a `getRelayResponseSnippet($redirect_url)`
 which generates a snippet of HTML that will redirect a user back to your
 site after submitting a checkout form using DPM/SIM.
 

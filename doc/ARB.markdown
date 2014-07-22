@@ -13,6 +13,7 @@ Creating/Updating Subscriptions
 
 To create or update a subscription first create a subscription object:
 
+```PHP
 $subscription = new AuthorizeNet_Subscription;
 $subscription->name = "Short subscription";
 $subscription->intervalLength = "1";
@@ -25,16 +26,21 @@ $subscription->creditCardExpirationDate = "2018-10";
 $subscription->creditCardCardCode = "123";
 $subscription->billToFirstName = "john";
 $subscription->billToLastName = "doe";
+```
 
 Then create an AuthorizeNetARB object and call the appropriate method
 passing in your subscription object:
 
+```PHP
 $request = new AuthorizeNetARB;
 $response = $request->createSubscription($subscription);
+```
 
-   or for updating a subscription:
-   
+or for updating a subscription:
+
+```PHP
 $response = $request->updateSubscription($subscription_id, $subscription);
+```
 
 Getting Subscription Status
 ---------------------------
@@ -42,11 +48,15 @@ Getting Subscription Status
 Create a new AuthorizeNetARB object and call the getSubscriptionStatus
 method with the subscription_id you want the status of as the parameter:
 
+```PHP
 $status_request = new AuthorizeNetARB;
 $status_response = $status_request->getSubscriptionStatus($subscription_id);
+```
 
 Canceling a Subscription
 ------------------------
 
+```PHP
 $cancellation = new AuthorizeNetARB;
 $cancel_response = $cancellation->cancelSubscription($subscription_id);
+```
