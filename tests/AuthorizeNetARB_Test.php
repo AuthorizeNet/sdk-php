@@ -198,4 +198,32 @@ class AuthorizeNetARB_Test extends PHPUnit_Framework_TestCase
         
     }
 
+    public function testGetSubscriptionList()
+    {
+        $refId = "ref" . time();
+
+        $paging = new paging();
+        $paging->limit=10;
+        $paging->offset=1;
+        $sorting=new sorting();
+        $sorting->orderBy="firstName";
+        $sorting->orderDescending="false";
+
+        $getSubscriptionList = new AuthorizeNet_GetSubscriptionList;
+        $getSubscriptionList->searchType = "subscriptionActive";
+        $getSubscriptionList->paging = $paging;
+        $getSubscriptionList->sorting = $sorting;
+
+        // Create the request and send it.
+        $request = new AuthorizeNetARB;
+        $request->setRefId($refId);
+        $response = $request->getSubscriptionList($getSubscriptionList);
+
+        // Handle the response.
+        $this->assertTrue($response->isOk());
+        $this->assertEquals($response->getMessageCode(), "I00001");
+        $this->assertEquals($response->getMessageText(), "Successful.");
+        $this->assertEquals($response->getRefId(), $refId);
+        $this->assertEquals($response->getResultCode(), "Ok");
+    }
 }
