@@ -12,6 +12,7 @@ abstract class AuthorizeNetRequest
     protected $_transaction_key;
     protected $_post_string; 
     public $VERIFY_PEER = true; // attempt trust validation of SSL certificates when establishing secure connections.
+    public $STREAM_FALLBACK = false; // enable ssl stream fallback when cURL is not present
     protected $_sandbox = true;
     protected $_log_file = false;
     
@@ -82,6 +83,10 @@ abstract class AuthorizeNetRequest
      */
     protected function _sendRequest()
     {
+        if (!defined('CURLOPT_POSTFIELDS') && $this->STREAM_FALLBACK) {
+            return $this->_sendStreamRequest();
+        }
+
         $this->_setPostString();
         $post_url = $this->_getPostUrl();
         $curl_request = curl_init($post_url);
@@ -118,6 +123,39 @@ abstract class AuthorizeNetRequest
         }
         curl_close($curl_request);
         
+        return $this->_handleResponse($response);
+    }
+
+    /**
+     * Posts the request to AuthorizeNet & returns response using streams
+     *
+     * @return AuthorizeNetARB_Response The response.
+     */
+    protected function _sendStreamRequest()
+    {
+        $this->_setPostString();
+        $content_type = preg_match('/xml/', $this->_getPostUrl()) ? 'text/xml' : 'application/x-www-form-urlencoded';
+        $content_length = strlen($this->_post_string);
+        $url = parse_url($this->_getPostUrl());
+        $context = stream_context_create(array(
+            'http' => array(
+                'follow_location' => false,
+                'header'          => "Content-Type: {$content_type}\r\nContent-Length: {$content_length}\r\n",
+                'timeout'         => 45.0,
+                'method'          => 'POST',
+                'content'         => $this->_post_string
+            ),
+            'ssl'  => array(
+                'verify_peer'         => $this->VERIFY_PEER,
+                'cafile'              => dirname(dirname(__FILE__)) . '/ssl/cert.pem',
+                'verify_depth'        => 5,
+                'CN_match'            => $url['host'],
+                'disable_compression' => true,
+                'SNI_enabled'         => true,
+                'ciphers'             => 'ECDHE-RSA-AES128-GCM-SHA256:ECDHE-ECDSA-AES128-GCM-SHA256:ECDHE-RSA-AES256-GCM-SHA384:ECDHE-ECDSA-AES256-GCM-SHA384:DHE-RSA-AES128-GCM-SHA256:DHE-DSS-AES128-GCM-SHA256:kEDH+AESGCM:ECDHE-RSA-AES128-SHA256:ECDHE-ECDSA-AES128-SHA256:ECDHE-RSA-AES128-SHA:ECDHE-ECDSA-AES128-SHA:ECDHE-RSA-AES256-SHA384:ECDHE-ECDSA-AES256-SHA384:ECDHE-RSA-AES256-SHA:ECDHE-ECDSA-AES256-SHA:DHE-RSA-AES128-SHA256:DHE-RSA-AES128-SHA:DHE-DSS-AES128-SHA256:DHE-RSA-AES256-SHA256:DHE-DSS-AES256-SHA:DHE-RSA-AES256-SHA:AES128-GCM-SHA256:AES256-GCM-SHA384:ECDHE-RSA-RC4-SHA:ECDHE-ECDSA-RC4-SHA:AES128:AES256:RC4-SHA:HIGH:!aNULL:!eNULL:!EXPORT:!DES:!3DES:!MD5:!PSK',
+            ),
+        ));
+        $response = file_get_contents($this->_getPostUrl(), false, $context);
         return $this->_handleResponse($response);
     }
 
