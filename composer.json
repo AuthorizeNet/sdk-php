@@ -7,7 +7,7 @@
     "homepage": "http://developer.authorize.net",
     "require": {
         "php": "~5.3",
-        "ext-curl": "*",
+//        "ext-curl": "*",
         "ext-json": "*",
         "ext-simplexml": "*"
     },
