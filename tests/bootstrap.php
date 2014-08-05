@@ -12,11 +12,14 @@ if (!function_exists('simplexml_load_file')) {
     );
 }
 
+// @note, File stream fallback added to AuthorizeNetRequest.php
+/*
 if (!function_exists('curl_init')) {
     throw new RuntimeException(
         'The AuthorizeNet SDK requires the cURL PHP extension.'
     );
 }
+*/
 
 if (AUTHORIZENET_API_LOGIN_ID == "") {
     throw new RuntimeException(

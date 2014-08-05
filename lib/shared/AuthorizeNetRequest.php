@@ -74,6 +74,30 @@ abstract class AuthorizeNetRequest
     {
         return $this->_post_string;
     }
+
+    /**
+     * Posts the request to AuthorizeNet & returns response using streams
+     *
+     * @return AuthorizeNetARB_Response The response.
+     */
+    protected function _sendStreamRequest()
+    {
+        $this->_setPostString();
+        $content_type = preg_match('/xml/', $this->_getPostUrl()) ? 'text/xml' : 'application/x-www-form-urlencoded';
+        $content_length = strlen($this->_post_string);
+        $context = stream_context_create(array(
+            'http' => array(
+                'header'        => "Content-Type: {$content_type}\r\nContentLength: {$content_length}\r\n",
+                'timeout'       => 45.0,
+                'ignore_errors' => true,
+                'method'        => 'POST',
+                'content'       => $this->_post_string,
+            ),
+        ));
+        $response = file_get_contents($this->_getPostUrl(), false, $context);
+
+        return $this->_handleResponse($response);
+    }
     
     /**
      * Posts the request to AuthorizeNet & returns response.
@@ -82,6 +106,10 @@ abstract class AuthorizeNetRequest
      */
     protected function _sendRequest()
     {
+        if (!defined('CURLOPT_POSTFIELDS')) {
+            return $this->_sendStreamRequest();
+        }
+
         $this->_setPostString();
         $post_url = $this->_getPostUrl();
         $curl_request = curl_init($post_url);
