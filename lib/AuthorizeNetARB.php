@@ -20,6 +20,7 @@ class AuthorizeNetARB extends AuthorizeNetRequest
     const LIVE_URL = "https://api.authorize.net/xml/v1/request.api";
     const SANDBOX_URL = "https://apitest.authorize.net/xml/v1/request.api";
 
+
     private $_request_type;
     private $_request_payload;
     
@@ -91,6 +92,20 @@ class AuthorizeNetARB extends AuthorizeNetRequest
         return $this->_sendRequest();
     }
     
+     /**
+     * Create an ARB subscription
+     *
+     * @param AuthorizeNet_Subscription $subscription
+     *
+     * @return AuthorizeNetARB_Response
+     */
+    public function getSubscriptionList(AuthorizeNet_GetSubscriptionList $subscriptionList)
+    {
+        $this->_request_type = "GetSubscriptionListRequest";
+        $this->_request_payload .= $subscriptionList->getXml();
+        return $this->_sendRequest();
+    }
+
      /**
      *
      *
