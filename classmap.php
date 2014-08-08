@@ -36,4 +36,7 @@ return array(
     'AuthorizeNetTransaction'    => $sharedDir . 'AuthorizeNetTypes.php',
     'AuthorizeNetXMLResponse'    => $sharedDir . 'AuthorizeNetXMLResponse.php',
     'AuthorizeNet_Subscription'  => $sharedDir . 'AuthorizeNetTypes.php',
+    'AuthorizeNetGetSubscriptionList'     => $sharedDir . 'AuthorizeNetTypes.php',
+    'AuthorizeNetSubscriptionListSorting' => $sharedDir . 'AuthorizeNetTypes.php',
+    'AuthorizeNetSubscriptionListPaging'  => $sharedDir . 'AuthorizeNetTypes.php',
 );
