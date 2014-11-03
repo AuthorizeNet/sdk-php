@@ -16,7 +16,7 @@ Proprietary, see the provided `license.md`.
 ## Autoloading
 
 [`Composer`](http://getcomposer.org) currently has a [MITM](https://github.com/composer/composer/issues/1074)
-security vulnerability.  However, if you wish to use it, require it's autoloader in
+security vulnerability.  However, if you wish to use it, require its autoloader in
 your script or bootstrap file:
 ```php
 require 'vendor/autoload.php';
