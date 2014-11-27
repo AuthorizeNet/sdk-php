@@ -74,4 +74,3 @@ echo Generator output is in file: $logfile
 # zendframework/zend-code suggests installing doctrine/common (Doctrine\Common >=2.1 for annotation features)
 # symfony/console suggests installing symfony/event-dispatcher ()
 # symfony/console suggests installing psr/log (For using the console logger)
-
