@@ -1,0 +1,24 @@
+net\authorize\api\contract\v1\CreateFingerPrintResponse:
+    xml_root_name: createFingerPrintResponse
+    xml_root_namespace: AnetApi/xml/v1/schema/AnetApiSchema.xsd
+    properties:
+        fingerPrint:
+            expose: true
+            access_type: public_method
+            serialized_name: fingerPrint
+            xml_element:
+                namespace: AnetApi/xml/v1/schema/AnetApiSchema.xsd
+            accessor:
+                getter: getFingerPrint
+                setter: setFingerPrint
+            type: net\authorize\api\contract\v1\FingerPrintType
+        supportInformation:
+            expose: true
+            access_type: public_method
+            serialized_name: supportInformation
+            xml_element:
+                namespace: AnetApi/xml/v1/schema/AnetApiSchema.xsd
+            accessor:
+                getter: getSupportInformation
+                setter: setSupportInformation
+            type: net\authorize\api\contract\v1\FingerPrintSupportInformationType
