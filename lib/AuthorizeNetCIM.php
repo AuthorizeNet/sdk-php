@@ -490,6 +490,18 @@ class AuthorizeNetCIM_Response extends AuthorizeNetXMLResponse
         $ids = (array)$this->xml->ids;
         return $ids["numericString"];
     }
+	
+	/**
+     * @return array
+     */
+    public function getCustomerProfile(){
+        return array(
+			'merchantCustomerId' => (int)$this->xml->profile->merchantCustomerId,
+			'customerProfileId' => (int)$this->xml->profile->customerProfileId,
+			'email' => (string)$this->xml->profile->email,
+			'description' => (string)$this->xml->profile->description,
+		);
+    }
     
     /**
      * @return array
