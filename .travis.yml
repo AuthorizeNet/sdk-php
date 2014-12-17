@@ -9,7 +9,7 @@ before_script:
 #  - echo "xdebug.max_nesting_level=1000" >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini
   - composer install --prefer-dist --dev
 
-script: vendor/phpunit/phpunit/phpunit --coverage-clover=coverage.clover
+# script: vendor/phpunit/phpunit/phpunit --coverage-clover=coverage.clover
 
 # after_script:
 #  - wget https://scrutinizer-ci.com/ocular.phar
