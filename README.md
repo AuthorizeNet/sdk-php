@@ -33,7 +33,18 @@ Alternatively, we provide a custom `SPL` autoloader:
 ```php
 require 'path/to/anet_php_sdk/autoload.php';
 ```
-    
+
+## Authentication
+To authenticate with the Authorize.Net API you will need to retrieve your API Login ID & Transaction Key from the [`Merchant Interface`](https://account.authorize.net/).  You can find these details in the Settings section.
+If you need a sandbox account you can sign up for one really easily [`here`](https://developer.authorize.net/sandbox/).
+
+Once you have your keys simply plug them into the appropriate variables as per the samples below.
+
+````php
+define("AUTHORIZENET_API_LOGIN_ID", "YOURLOGIN");
+define("AUTHORIZENET_TRANSACTION_KEY", "YOURKEY");
+````
+
 ## Usage Examples
 
 See below for basic usage examples. View the `tests/` folder for more examples of
