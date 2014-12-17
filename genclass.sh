@@ -18,7 +18,7 @@ vendor/goetas/xsd2php/bin/xsd2php.php  convert:php \
 	--ns-dest='net.authorize.api.contract.v1.;lib/net/authorize/api/contract/v1' \
 	--ns-map='http://www.w3.org/2001/XMLSchema;W3/XMLSchema/2001/' \
 	--ns-map='AnetApi/xml/v1/schema/AnetApiSchema.xsd;net.authorize.api.contract.v1' \
-	/home/ramittal/AnetApiSchema.xsd  >> $logfile 2>> $logfile
+	./AnetApiSchema.xsd  >> $logfile 2>> $logfile
 echo Generation of PHP Classes complete >> $logfile
 
 jmsdir=lib/net/authorize/api/yml/v1
@@ -31,7 +31,7 @@ vendor/goetas/xsd2php/bin/xsd2php.php  convert:jms-yaml \
 	--ns-dest='net.authorize.api.contract.v1.;lib/net/authorize/api/yml/v1' \
 	--ns-map='http://www.w3.org/2001/XMLSchema;W3/XMLSchema/2001/' \
 	--ns-map='AnetApi/xml/v1/schema/AnetApiSchema.xsd;net.authorize.api.contract.v1' \
-	/home/ramittal/AnetApiSchema.xsd  >> $logfile
+	./AnetApiSchema.xsd  >> $logfile
 echo Generator output is in file: $logfile
 
 #GOOD
@@ -68,3 +68,9 @@ echo Generator output is in file: $logfile
 # phpunit/phpunit suggests installing phpunit/php-invoker (~1.1)
 # symfony/dependency-injection suggests installing symfony/proxy-manager-bridge (Generate service proxies to lazy load them)
 
+# ----------------
+# zendframework/zend-stdlib suggests installing zendframework/zend-serializer (Zend\Serializer component)
+# zendframework/zend-stdlib suggests installing zendframework/zend-servicemanager (To support hydrator plugin manager usage)
+# zendframework/zend-code suggests installing doctrine/common (Doctrine\Common >=2.1 for annotation features)
+# symfony/console suggests installing symfony/event-dispatcher ()
+# symfony/console suggests installing psr/log (For using the console logger)

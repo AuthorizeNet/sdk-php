@@ -1,0 +1,22 @@
+net\authorize\api\contract\v1\OpaqueDataType:
+    properties:
+        dataDescriptor:
+            expose: true
+            access_type: public_method
+            serialized_name: dataDescriptor
+            xml_element:
+                namespace: AnetApi/xml/v1/schema/AnetApiSchema.xsd
+            accessor:
+                getter: getDataDescriptor
+                setter: setDataDescriptor
+            type: string
+        dataValue:
+            expose: true
+            access_type: public_method
+            serialized_name: dataValue
+            xml_element:
+                namespace: AnetApi/xml/v1/schema/AnetApiSchema.xsd
+            accessor:
+                getter: getDataValue
+                setter: setDataValue
+            type: string
