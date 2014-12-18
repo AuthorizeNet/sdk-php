@@ -36,8 +36,8 @@
         <const name="AUTHORIZENET_MD5_SETTING" value="" />
         
         <!-- Enter your live account credentials to run tests against production gateway. -->
-        <const name="MERCHANT_LIVE_API_LOGIN_ID" value="" />
-        <const name="MERCHANT_LIVE_TRANSACTION_KEY" value="" />
+        <const name="MERCHANT_LIVE_API_LOGIN_ID" value="5KP3u95bQpv" />
+        <const name="MERCHANT_LIVE_TRANSACTION_KEY" value="4Ktq966gC55GAX7S" />
         
         <!-- Card Present Sandbox Credentials -->
         <const name="CP_API_LOGIN_ID" value="" />
