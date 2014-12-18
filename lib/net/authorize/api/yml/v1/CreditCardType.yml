@@ -1,0 +1,12 @@
+net\authorize\api\contract\v1\CreditCardType:
+    properties:
+        cardCode:
+            expose: true
+            access_type: public_method
+            serialized_name: cardCode
+            xml_element:
+                namespace: AnetApi/xml/v1/schema/AnetApiSchema.xsd
+            accessor:
+                getter: getCardCode
+                setter: setCardCode
+            type: string

@@ -327,7 +327,7 @@ class AuthorizeNet_Subscription
  * @package    AuthorizeNet
  * @subpackage AuthorizeNetARB
  */
-class AuthorizeNet_GetSubscriptionList
+class AuthorizeNetGetSubscriptionList
 {
     public $searchType;
     public $sorting;
@@ -370,7 +370,7 @@ class AuthorizeNet_GetSubscriptionList
     }
 }
 
-class paging
+class AuthorizeNetSubscriptionListPaging
 {
     public $limit;
     public $offset;
@@ -386,7 +386,7 @@ class paging
     }
 }
 
-class sorting
+class AuthorizeNetSubscriptionListSorting
 {
     public $orderBy;
     public $orderDescending;

@@ -1,0 +1,22 @@
+net\authorize\api\contract\v1\OrderType:
+    properties:
+        invoiceNumber:
+            expose: true
+            access_type: public_method
+            serialized_name: invoiceNumber
+            xml_element:
+                namespace: AnetApi/xml/v1/schema/AnetApiSchema.xsd
+            accessor:
+                getter: getInvoiceNumber
+                setter: setInvoiceNumber
+            type: string
+        description:
+            expose: true
+            access_type: public_method
+            serialized_name: description
+            xml_element:
+                namespace: AnetApi/xml/v1/schema/AnetApiSchema.xsd
+            accessor:
+                getter: getDescription
+                setter: setDescription
+            type: string
