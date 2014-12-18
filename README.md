@@ -2,8 +2,8 @@ Authorize.Net PHP SDK
 ======================
 
 [![Build Status]
-(https://travis-ci.org/ramittal/sdk-php.png?branch=master)]
-(https://travis-ci.org/ramittal/sdk-php)
+(https://travis-ci.org/AuthorizeNet/sdk-php.png?branch=future)]
+(https://travis-ci.org/AuthorizeNet/sdk-php)
 
 ## License
 Proprietary, see the provided `license.md`.
