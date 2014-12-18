@@ -23,7 +23,7 @@ class HttpClient
      */
     public function __construct()
     {
-        $this->_log_file = AUTHORIZENET_LOG_FILE;
+        $this->_log_file = (defined('AUTHORIZENET_LOG_FILE') ? AUTHORIZENET_LOG_FILE : false);
         date_default_timezone_set('UTC');
     }
 

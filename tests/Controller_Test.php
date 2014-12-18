@@ -2,7 +2,9 @@
 use \net\authorize\api\controller\base\ApiOperationBase;
 
 require_once __DIR__ . '/../autoload.php';
-require_once "../phpunit_config.php";
+//include if tests/bootstrap.php is not loaded automatically
+require_once __DIR__ . '/bootstrap.php';
+
 
 class Controller_Test extends PHPUnit_Framework_TestCase
 {
@@ -35,7 +37,7 @@ class Controller_Test extends PHPUnit_Framework_TestCase
 
         //$controller = new ApiOperationBase($request, 'net\authorize\api\contract\v1\ARBGetSubscriptionListResponse');
         $controller = new TestController( $request);
-        $response = $controller->executeWithApiResponse();
+        $response = $controller->executeWithApiResponse(\net\authorize\api\constants\ANetEnvironment::SANDBOX);
 
         // Handle the response.
         $this->assertNotNull($response, "null response");
