@@ -3,9 +3,18 @@
  * Bootstraps the AuthorizeNet PHP SDK test suite
  */
 
-define( "AUTHORIZENET_API_LOGIN_ID", $_ENV["api_login_id"]); //TODO
-define( "AUTHORIZENET_TRANSACTION_KEY", $_ENV["transaction_key"]); //TODO
-define( "AUTHORIZENET_LOG_FILE",  "./authorize-net.log");
+if (!defined('AUTHORIZENET_API_LOGIN_ID'))
+{
+    define( "AUTHORIZENET_API_LOGIN_ID", ( ( null == getenv("api_login_id")) ? getenv("api_login_id") : ""));
+}
+if (!defined('AUTHORIZENET_LOG_FILE'))
+{
+    define( "AUTHORIZENET_TRANSACTION_KEY", ( ( null == getenv("transaction_key")) ? getenv("transaction_key") : ""));
+}
+if (!defined('AUTHORIZENET_LOG_FILE'))
+{
+    define( "AUTHORIZENET_LOG_FILE",  "./authorize-net.log");
+}
 
 // Append to log file
 date_default_timezone_set('UTC'); //necessary for the following date to set timezone
@@ -33,23 +42,22 @@ if (!defined('AUTHORIZENET_API_LOGIN_ID') ||
     throw new RuntimeException( $errorMessage );
 }
 
+if (null == AUTHORIZENET_API_LOGIN_ID || null == AUTHORIZENET_LOG_FILE)
+{
+    $errorMessage = "Property 'AUTHORIZENET_API_LOGIN_ID' or 'AUTHORIZENET_TRANSACTION_KEY' not found.";
+    throw new RuntimeException( $errorMessage );
+}
+
 if (AUTHORIZENET_API_LOGIN_ID == "")
 {
-    AUTHORIZENET_API_LOGIN_ID == $_ENV["api_login_id"]; //TODO
-    if (AUTHORIZENET_API_LOGIN_ID == "")
-    {
-        $errorMessage = "Property 'AUTHORIZENET_API_LOGIN_ID' not found. Define the property value or set the environment 'AUTHORIZENET_API_LOGIN_ID'";
-        throw new RuntimeException( $errorMessage );
-    }
+    $errorMessage = "Property 'AUTHORIZENET_API_LOGIN_ID' not found. Define the property value or set the environment 'AUTHORIZENET_API_LOGIN_ID'";
+    throw new RuntimeException( $errorMessage );
 }
 
 if (AUTHORIZENET_TRANSACTION_KEY == "")
 {
-    AUTHORIZENET_TRANSACTION_KEY == $_ENV["transaction_key"]; //TODO
-    if (AUTHORIZENET_TRANSACTION_KEY == "") {
-        $errorMessage = "Property 'AUTHORIZENET_TRANSACTION_KEY' not found. Define the property value or set the environment 'AUTHORIZENET_TRANSACTION_KEY'";
-        throw new RuntimeException( $errorMessage );
-    }
+    $errorMessage = "Property 'AUTHORIZENET_TRANSACTION_KEY' not found. Define the property value or set the environment 'AUTHORIZENET_TRANSACTION_KEY'";
+    throw new RuntimeException( $errorMessage );
 }
 
 ini_set('error_reporting', E_ALL);

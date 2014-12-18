@@ -1,6 +1,5 @@
 <?php
 
-require_once "../autoload.php";
 //include if tests/bootstrap.php is not loaded automatically
 //require_once __DIR__ . '/bootstrap.php';
 
