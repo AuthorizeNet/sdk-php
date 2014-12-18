@@ -15,7 +15,6 @@ $vendorDir = $baseDir . '/vendor';
 
 return array(
 
-    'Doctrine\Common\Annotations\Annotation' => $vendorDir . '/doctrine/annotations/lib/Doctrine/Common/Annotations/Annotation',
     'Doctrine\Common\Annotations\Annotation' => $vendorDir . '/doctrine/annotations/lib/Doctrine/Common/Annotations/Annotation.php',
     'Doctrine\Common\Annotations\AnnotationException' => $vendorDir . '/doctrine/annotations/lib/Doctrine/Common/Annotations/AnnotationException.php',
     'Doctrine\Common\Annotations\AnnotationReader' => $vendorDir . '/doctrine/annotations/lib/Doctrine/Common/Annotations/AnnotationReader.php',
@@ -161,8 +160,6 @@ return array(
     'Metadata\Driver\FileLocatorInterface' => $vendorDir . '/jms/metadata/src/Metadata/Driver/FileLocatorInterface.php',
     'Metadata\Driver\LazyLoadingDriver' => $vendorDir . '/jms/metadata/src/Metadata/Driver/LazyLoadingDriver.php',
     'Metadata\AdvancedMetadataFactoryInterface' => $vendorDir . '/jms/metadata/src/Metadata/AdvancedMetadataFactoryInterface.php',
-    'Metadata\ClassHierarchyMetadata' => $vendorDir . '/jms/metadata/src/Metadata/ClassHierarchyMetadata.php',
-    'Metadata\ClassMetadata' => $vendorDir . '/jms/metadata/src/Metadata/ClassMetadata.php',
     'Metadata\MergeableClassMetadata' => $vendorDir . '/jms/metadata/src/Metadata/MergeableClassMetadata.php',
     'Metadata\MergeableInterface' => $vendorDir . '/jms/metadata/src/Metadata/MergeableInterface.php',
     'Metadata\MetadataFactory' => $vendorDir . '/jms/metadata/src/Metadata/MetadataFactory.php',
@@ -217,12 +214,19 @@ return array(
     'AuthorizeNetSubscriptionListSorting' => $sharedDir . 'AuthorizeNetTypes.php',
     'AuthorizeNetSubscriptionListPaging'  => $sharedDir . 'AuthorizeNetTypes.php',
 
+    // Following section contains the new controller model classes needed
+    //Utils
     //'net\authorize\util\ObjectToXml' => $libDir . 'net/authorize/util/ObjectToXml.php',
     'net\authorize\util\HttpClient' => $libDir . 'net/authorize/util/HttpClient.php',
 
+    //constants
+    'net\authorize\api\constants\ANetEnvironment' => $libDir . 'net/authorize/api/constants/ANetEnvironment.php',
+
+    //base classes
+    'net\authorize\api\controller\base\IApiOperation' => $libDir . 'net/authorize/api/controller/base/IApiOperation.php',
     'net\authorize\api\controller\base\ApiOperationBase' => $libDir . 'net/authorize/api/controller/base/ApiOperationBase.php',
 
-//    'net\authorize\api\contract\v1\AccountTypeEnum' => $libDir . 'net/authorize/api/contract/v1/AccountTypeEnum.php',
+    //following are generated class mappings
     'net\authorize\api\contract\v1\ANetApiRequestType' => $libDir . 'net/authorize/api/contract/v1/ANetApiRequestType.php',
     'net\authorize\api\contract\v1\ANetApiResponseType' => $libDir . 'net/authorize/api/contract/v1/ANetApiResponseType.php',
     'net\authorize\api\contract\v1\ARBCancelSubscriptionRequest' => $libDir . 'net/authorize/api/contract/v1/ARBCancelSubscriptionRequest.php',
@@ -392,5 +396,8 @@ return array(
     'net\authorize\api\contract\v1\TransactionResponseType\ErrorsAType\ErrorAType' => $libDir . 'net/authorize/api/contract/v1/TransactionResponseType/ErrorsAType/ErrorAType.php',
     'net\authorize\api\contract\v1\TransactionResponseType\MessagesAType\MessageAType' => $libDir . 'net/authorize/api/contract/v1/TransactionResponseType/MessagesAType/MessageAType.php',
     'net\authorize\api\contract\v1\TransactionResponseType\SplitTenderPaymentsAType\SplitTenderPaymentAType' => $libDir . 'net/authorize/api/contract/v1/TransactionResponseType/SplitTenderPaymentsAType/SplitTenderPaymentAType.php',
+
+    //Controllers
+    'net\authorize\api\controller\LogoutController' => $libDir . 'net/authorize/api/controller/LogoutController.php',
 
 );

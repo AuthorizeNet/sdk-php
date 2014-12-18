@@ -5,9 +5,9 @@ CDIR=`pwd`
 SRCDIR=lib
 GENFOLDER=net/authorize/api/contract/v1
 CONTROLLERFOLDER=net/authorize/api/controller
-namespace=${GENFOLDER//\//\\}
+CNTNAMESPACE=${CONTROLLERFOLDER//\//\\}
 CLASSMAP=./ControllerClassMap.php
-echo "Using namespace: ${namespace}"
+echo "Using CNTNAMESPACE: ${CNTNAMESPACE}"
 
 GENLOG=$CDIR/log/generator.log
 SRCLOG=$CDIR/log/Sources
@@ -81,7 +81,7 @@ sort -u ${SRCLOG}3.log > ${SRCLOG}.log
 
 while read aLine; do
     CNTNAME=${CNTFULL}/${aLine}Controller.php
-    echo  "'${namespace}\\${aLine}Controller' => $libDir . '${GENFOLDER}/${aLine}Controller.php'," | tee >> ${CLASSMAP}
+    echo  "'${CNTNAMESPACE}\\${aLine}Controller' => \$libDir . '${CONTROLLERFOLDER}/${aLine}Controller.php'," | tee >> ${CLASSMAP}
 
     echo "Processing Controller for Request/Respose: ${aLine}, Controller=${CNTNAME}" | tee >> ${GENLOG}
     if [ -f ${CNTNAME} ]; then

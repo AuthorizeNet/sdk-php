@@ -2,9 +2,6 @@
 namespace net\authorize\api\controller\base;
 
 use InvalidArgumentException;
-use HttpException;
-//use net\authorize\util\ObjectToXml;
-//use stdClass;
 use JMS\Serializer\SerializerBuilder;
 use JMS\Serializer\handler\HandlerRegistryInterface;
 use Goetas\Xsd\XsdToPhp\Jms\Handler\BaseTypesHandler;
@@ -12,9 +9,7 @@ use Goetas\Xsd\XsdToPhp\Jms\Handler\XmlSchemaDateHandler;
 
 use \net\authorize\util\HttpClient;
 
-//use Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
-
-class ApiOperationBase
+abstract class ApiOperationBase implements IApiOperation
 {
     /**
      * @var \net\authorize\api\contract\v1\AnetApiRequestType
@@ -67,6 +62,9 @@ class ApiOperationBase
         }
 
         $this->apiRequest = $request;
+
+        self::validate();
+
         $this->apiResponseType = $responseType;
         $this->httpClient = new HttpClient;
 
@@ -84,28 +82,57 @@ class ApiOperationBase
         );
         $this->serializer = $serializerBuilder->build();
     }
-    
+
+    /**
+     * Retrieves response
+     * @return \net\authorize\api\contract\v1\AnetApiResponseType
+     */
+    public function getApiResponse()
+    {
+        return $this->apiResponse;
+    }
+
     /**
      * Sends request and retrieves response
      * @return \net\authorize\api\contract\v1\AnetApiResponseType
      */
-    public function executeWithApiResponse()
+    public function executeWithApiResponse($endPoint = \net\authorize\api\constants\ANetEnvironment::CUSTOM)
     {
-        $this->execute();
+        $this->execute($endPoint);
         return $this->apiResponse;
     }
 
-    public function execute()
+    public function execute($endPoint = \net\authorize\api\constants\ANetEnvironment::CUSTOM)
     {
+        $this->beforeExecute();
+
         $xmlRequest = $this->serializer->serialize($this->apiRequest, 'xml');
 /*
         //$xmlRequest = '<?xml version="1.0" encoding="UTF-8"?>  <ARBGetSubscriptionListRequest xmlns="AnetApi/xml/v1/schema/AnetApiSchema.xsd">  <merchantAuthentication>  <name>4YJmeW7V77us</name>  <transactionKey>4qHK9u63F753be4Z</transactionKey>  </merchantAuthentication>  <refId><![CDATA[ref1416999093]]></refId>  <searchType><![CDATA[subscriptionActive]]></searchType>  <sorting>  <orderBy><![CDATA[firstName]]></orderBy>  <orderDescending>false</orderDescending>  </sorting>  <paging>  <limit>10</limit>  <offset>1</offset>  </paging>  </ARBGetSubscriptionListRequest>  ';
 */
+        $this->httpClient->setPostUrl( $endPoint);
         $xmlResponse = $this->httpClient->_sendRequest($xmlRequest);
         if ( null == $xmlResponse)
         {
-            throw new HttpException( "response from api is null");
+            throw new \Exception( "Error getting valid response from api. Check log file for error details");
         }
         $this->apiResponse = $this->serializer->deserialize( $xmlResponse, $this->apiResponseType , 'xml');
+
+        $this->afterExecute();
     }
+
+    private function validate()
+    {
+        $merchantAuthentication = $this->apiRequest->getMerchantAuthentication();
+        if ( null == $merchantAuthentication)
+        {
+            throw new \InvalidArgumentException( "MerchantAuthentication cannot be null");
+        }
+
+        $this->validateRequest();
+    }
+
+    protected function beforeExecute() {}
+    protected function afterExecute()  {}
+    protected function validateRequest() {} //need to make this abstract
 }
