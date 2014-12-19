@@ -1,0 +1,42 @@
+net\authorize\api\contract\v1\CustomerPaymentProfileMaskedType:
+    properties:
+        customerPaymentProfileId:
+            expose: true
+            access_type: public_method
+            serialized_name: customerPaymentProfileId
+            xml_element:
+                namespace: AnetApi/xml/v1/schema/AnetApiSchema.xsd
+            accessor:
+                getter: getCustomerPaymentProfileId
+                setter: setCustomerPaymentProfileId
+            type: string
+        payment:
+            expose: true
+            access_type: public_method
+            serialized_name: payment
+            xml_element:
+                namespace: AnetApi/xml/v1/schema/AnetApiSchema.xsd
+            accessor:
+                getter: getPayment
+                setter: setPayment
+            type: net\authorize\api\contract\v1\PaymentMaskedType
+        driversLicense:
+            expose: true
+            access_type: public_method
+            serialized_name: driversLicense
+            xml_element:
+                namespace: AnetApi/xml/v1/schema/AnetApiSchema.xsd
+            accessor:
+                getter: getDriversLicense
+                setter: setDriversLicense
+            type: net\authorize\api\contract\v1\DriversLicenseMaskedType
+        taxId:
+            expose: true
+            access_type: public_method
+            serialized_name: taxId
+            xml_element:
+                namespace: AnetApi/xml/v1/schema/AnetApiSchema.xsd
+            accessor:
+                getter: getTaxId
+                setter: setTaxId
+            type: string

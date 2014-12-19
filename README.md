@@ -1,6 +1,10 @@
 Authorize.Net PHP SDK
 ======================
 
+[![Build Status]
+(https://travis-ci.org/AuthorizeNet/sdk-php.png?branch=future)]
+(https://travis-ci.org/AuthorizeNet/sdk-php)
+
 ## License
 Proprietary, see the provided `license.md`.
 
@@ -35,7 +39,7 @@ require 'path/to/anet_php_sdk/autoload.php';
 ```
 
 ## Authentication
-To authenticate with the Authorize.Net API you will need to retrieve your API Login ID & Transaction Key from the [`Merchant Interface`](https://account.authorize.net/).  You can find these details in the Settings section.
+To authenticate with the Authorize.Net API you will need to retrieve your API Login ID and Transaction Key from the [`Merchant Interface`](https://account.authorize.net/).  You can find these details in the Settings section.
 If you need a sandbox account you can sign up for one really easily [`here`](https://developer.authorize.net/sandbox/).
 
 Once you have your keys simply plug them into the appropriate variables as per the samples below.
