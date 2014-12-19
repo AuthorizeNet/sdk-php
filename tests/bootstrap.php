@@ -44,9 +44,11 @@ if (null == $global_transaction_key || "" == $global_transaction_key)
 
 ini_set('error_reporting', E_ALL);
 
+/*
 $loader = require '../vendor/autoload.php';
 if (!isset($loader))
 {
     $errorMessage = 'vendor/autoload.php could not be found.';
     throw new RuntimeException( $errorMessage );
 }
+*/
