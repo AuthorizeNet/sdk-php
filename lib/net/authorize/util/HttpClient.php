@@ -1,8 +1,6 @@
 <?php
 namespace net\authorize\util;
 
-//use \net\authorize\api\constants\ANetEnvironment;
-
 /**
  * A class to send a request to the XML API.
  *
@@ -11,7 +9,6 @@ namespace net\authorize\util;
  */
 class HttpClient
 {
-    //const URL = "https://apitest.authorize.net/xml/v1/request.api";
     private $_Url = "";
 
     public $VERIFY_PEER = true; // attempt trust validation of SSL certificates when establishing secure connections.
@@ -23,7 +20,7 @@ class HttpClient
      */
     public function __construct()
     {
-        $this->_log_file = AUTHORIZENET_LOG_FILE;
+        $this->_log_file = (defined('AUTHORIZENET_LOG_FILE') ? AUTHORIZENET_LOG_FILE : false);
         date_default_timezone_set('UTC');
     }
 
@@ -79,7 +76,7 @@ class HttpClient
         file_put_contents($this->_log_file, sprintf("\n%s:Request to AnetApi: \n%s", $this->now(), $xmlRequest), FILE_APPEND);
 
         if ($this->VERIFY_PEER) {
-            curl_setopt($curl_request, CURLOPT_CAINFO, dirname(dirname(__FILE__)) . '../../../ssl/cert.pem');//..\..\..\ssl\cert.pem
+            curl_setopt($curl_request, CURLOPT_CAINFO, dirname(dirname(__FILE__)) . '/../../ssl/cert.pem');
         } else {
             if ($this->_log_file) {
                 file_put_contents($this->_log_file, "\nInvalid SSL option for the request", FILE_APPEND);

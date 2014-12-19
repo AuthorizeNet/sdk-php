@@ -2,14 +2,15 @@
 use \net\authorize\api\controller\base\ApiOperationBase;
 
 require_once __DIR__ . '/../autoload.php';
-require_once "../phpunit_config.php";
+//include if tests/bootstrap.php is not loaded automatically
+//require_once __DIR__ . '/bootstrap.php';
 
 class Controller_Test extends PHPUnit_Framework_TestCase
 {
     public function testARBGetSubscriptionList()
     {
-        $name = AUTHORIZENET_API_LOGIN_ID;
-        $transactionKey = AUTHORIZENET_TRANSACTION_KEY;
+        $name =           (defined('AUTHORIZENET_API_LOGIN_ID')    && ''!=AUTHORIZENET_API_LOGIN_ID)    ? AUTHORIZENET_API_LOGIN_ID    : getenv("api_login_id");
+        $transactionKey = (defined('AUTHORIZENET_TRANSACTION_KEY') && ''!=AUTHORIZENET_TRANSACTION_KEY) ? AUTHORIZENET_TRANSACTION_KEY : getenv("transaction_key");
 
         $merchantAuthentication = new net\authorize\api\contract\v1\MerchantAuthenticationType();
         $merchantAuthentication->setName($name);
@@ -35,7 +36,7 @@ class Controller_Test extends PHPUnit_Framework_TestCase
 
         //$controller = new ApiOperationBase($request, 'net\authorize\api\contract\v1\ARBGetSubscriptionListResponse');
         $controller = new TestController( $request);
-        $response = $controller->executeWithApiResponse();
+        $response = $controller->executeWithApiResponse(\net\authorize\api\constants\ANetEnvironment::SANDBOX);
 
         // Handle the response.
         $this->assertNotNull($response, "null response");

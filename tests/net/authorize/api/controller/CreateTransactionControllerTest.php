@@ -14,10 +14,9 @@ use net\authorize\api\contract\v1\TransactionRequestType;
 
 use \net\authorize\api\controller\CreateTransactionController;
 
-//use net\authorize\api\contract\v1\
-
 require_once __DIR__ . '/../../../../../autoload.php';
-require_once __DIR__ . '/../../../../../phpunit_config.php';
+//include if tests/bootstrap.php is not loaded automatically
+//require_once __DIR__ . '/../../../../bootstrap.php';
 
 class CreateTransactionControllerTest extends \PHPUnit_Framework_TestCase
 {
@@ -81,8 +80,8 @@ class CreateTransactionControllerTest extends \PHPUnit_Framework_TestCase
 
     public function testCreateTransactionCreditCard()
     {
-        $name = AUTHORIZENET_API_LOGIN_ID;
-        $transactionKey = AUTHORIZENET_TRANSACTION_KEY;
+        $name =           (defined('AUTHORIZENET_API_LOGIN_ID')    && ''!=AUTHORIZENET_API_LOGIN_ID)    ? AUTHORIZENET_API_LOGIN_ID    : getenv("api_login_id");
+        $transactionKey = (defined('AUTHORIZENET_TRANSACTION_KEY') && ''!=AUTHORIZENET_TRANSACTION_KEY) ? AUTHORIZENET_TRANSACTION_KEY : getenv("transaction_key");
         $merchantAuthentication = new MerchantAuthenticationType();
         $merchantAuthentication->setName($name);
         $merchantAuthentication->setTransactionKey($transactionKey);
@@ -104,7 +103,7 @@ class CreateTransactionControllerTest extends \PHPUnit_Framework_TestCase
         $request->setTransactionRequest( $transactionRequestType);
 
         $controller = new CreateTransactionController($request);
-        $controller->executeWithApiResponse( \net\authorize\api\constants\ANetEnvironment::CUSTOM);
+        $controller->executeWithApiResponse( \net\authorize\api\constants\ANetEnvironment::SANDBOX);
         $response = $controller->getApiResponse();
 
         // Handle the response.
