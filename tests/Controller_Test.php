@@ -3,8 +3,7 @@ use \net\authorize\api\controller\base\ApiOperationBase;
 
 require_once __DIR__ . '/../autoload.php';
 //include if tests/bootstrap.php is not loaded automatically
-require_once __DIR__ . '/bootstrap.php';
-
+//require_once __DIR__ . '/bootstrap.php';
 
 class Controller_Test extends PHPUnit_Framework_TestCase
 {
