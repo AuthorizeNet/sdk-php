@@ -127,7 +127,7 @@ class CreateTransactionControllerTest extends \PHPUnit_Framework_TestCase
 
     private function setValidAmount( $number)
     {
-        return max( $number, self::MaxTransactionAmount);
+        return min( $number, self::MaxTransactionAmount);
     }
 
     const MaxTransactionAmount = 10000; //214747;
