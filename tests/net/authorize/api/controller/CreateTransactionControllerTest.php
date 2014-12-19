@@ -80,8 +80,8 @@ class CreateTransactionControllerTest extends \PHPUnit_Framework_TestCase
 
     public function testCreateTransactionCreditCard()
     {
-        $name = $global_api_login_id;
-        $transactionKey = $tglobal_ransaction_key;
+        $name =           (defined('AUTHORIZENET_API_LOGIN_ID')    && ''!=AUTHORIZENET_API_LOGIN_ID)    ? AUTHORIZENET_API_LOGIN_ID    : getenv("api_login_id");
+        $transactionKey = (defined('AUTHORIZENET_TRANSACTION_KEY') && ''!=AUTHORIZENET_TRANSACTION_KEY) ? AUTHORIZENET_TRANSACTION_KEY : getenv("transaction_key");
         $merchantAuthentication = new MerchantAuthenticationType();
         $merchantAuthentication->setName($name);
         $merchantAuthentication->setTransactionKey($transactionKey);
