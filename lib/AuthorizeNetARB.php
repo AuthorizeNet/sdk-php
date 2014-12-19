@@ -16,13 +16,8 @@
  */
 class AuthorizeNetARB extends AuthorizeNetRequest
 {
-
-    /*
     const LIVE_URL = "https://api.authorize.net/xml/v1/request.api";
     const SANDBOX_URL = "https://apitest.authorize.net/xml/v1/request.api";
-    */
-    const LIVE_URL = "http://ww730vsmbu114.visa.com/xml/v1/request.api";
-    const SANDBOX_URL = "http://ww730vsmbu114.visa.com/xml/v1/request.api";
 
     private $_request_type;
     private $_request_payload;
