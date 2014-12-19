@@ -10,8 +10,8 @@ class Controller_Test extends PHPUnit_Framework_TestCase
 {
     public function testARBGetSubscriptionList()
     {
-        $name = AUTHORIZENET_API_LOGIN_ID;
-        $transactionKey = AUTHORIZENET_TRANSACTION_KEY;
+        $name = $global_api_login_id;
+        $transactionKey = $global_transaction_key;
 
         $merchantAuthentication = new net\authorize\api\contract\v1\MerchantAuthenticationType();
         $merchantAuthentication->setName($name);

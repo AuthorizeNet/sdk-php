@@ -13,8 +13,8 @@ class LogoutControllerTest extends \PHPUnit_Framework_TestCase
 {
     public function testLogout()
     {
-        $name = AUTHORIZENET_API_LOGIN_ID;
-        $transactionKey = AUTHORIZENET_TRANSACTION_KEY;
+        $name = $global_api_login_id;
+        $transactionKey = $global_transaction_key;
         $merchantAuthentication = new MerchantAuthenticationType();
         $merchantAuthentication->setName($name);
         $merchantAuthentication->setTransactionKey($transactionKey);
