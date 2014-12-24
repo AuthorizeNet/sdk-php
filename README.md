@@ -303,21 +303,17 @@ Here's the PHP code :
 
   $controller = new AnetController\CreateTransactionController($request);
   $response = $controller->executeWithApiResponse( \net\authorize\api\constants\ANetEnvironment::SANDBOX);
-  
+ 
   if ($response != null)
   {
-      echo "\n REF ID IS " . $response->getRefId();
-      echo "\n Error Code is " . $response->getMessages()->getResultCode();
+    $tresponse = $response->getTransactionResponse();
+
+    if (($tresponse != null) && ($tresponse->getResponseCode()=="1") )   
+    {
+      echo " AUTH CODE : " . $tresponse->getAuthCode() . "\n";
+      echo " TRANS ID  : " . $tresponse->getTransId() . "\n";
+    }
   }
-
-  $tresponse = $response->getTransactionResponse();
-
-  echo "\nchecking transaction response\n";
-
-  if ($tresponse != null)
-  {
-    echo " AUTH CODE : " . $tresponse->getAuthCode() . "\n";
-  }
-        
+  
 ?>
 ````
