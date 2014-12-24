@@ -56,8 +56,8 @@ class HttpClient
     /**
      * Posts the request to AuthorizeNet endpoint using Curl & returns response.
      *
-     * @param $xmlRequest
-     * @return bool|mixed $xmlResponse The response.
+     * @param string $xmlRequest
+     * @return string $xmlResponse The response.
      */
     public function _sendRequest($xmlRequest)
     {
