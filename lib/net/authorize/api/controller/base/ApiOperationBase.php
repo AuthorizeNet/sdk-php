@@ -36,6 +36,7 @@ abstract class ApiOperationBase implements IApiOperation
      */
     public $httpClient = null;
 
+    private $_log_file = false;
 
     /**
      * Constructor.
@@ -46,6 +47,9 @@ abstract class ApiOperationBase implements IApiOperation
      */
     public function __construct(\net\authorize\api\contract\v1\AnetApiRequestType $request, $responseType)
     {
+        date_default_timezone_set('UTC');
+        $this->_log_file = (defined('AUTHORIZENET_LOG_FILE') ? AUTHORIZENET_LOG_FILE : false);
+
         if ( null == $request)
         {
             throw new InvalidArgumentException( "request cannot be null");
@@ -62,8 +66,7 @@ abstract class ApiOperationBase implements IApiOperation
         }
 
         $this->apiRequest = $request;
-
-        self::validate();
+        $this->validate();
 
         $this->apiResponseType = $responseType;
         $this->httpClient = new HttpClient;
@@ -106,7 +109,9 @@ abstract class ApiOperationBase implements IApiOperation
     {
         $this->beforeExecute();
 
+        file_put_contents($this->_log_file, sprintf("\n%s: Request Serialization Begin", $this->now()), FILE_APPEND);
         $xmlRequest = $this->serializer->serialize($this->apiRequest, 'xml');
+        file_put_contents($this->_log_file, sprintf("\n%s: Request  Serialization End", $this->now()), FILE_APPEND);
 /*
         //$xmlRequest = '<?xml version="1.0" encoding="UTF-8"?>  <ARBGetSubscriptionListRequest xmlns="AnetApi/xml/v1/schema/AnetApiSchema.xsd">  <merchantAuthentication>  <name>4YJmeW7V77us</name>  <transactionKey>4qHK9u63F753be4Z</transactionKey>  </merchantAuthentication>  <refId><![CDATA[ref1416999093]]></refId>  <searchType><![CDATA[subscriptionActive]]></searchType>  <sorting>  <orderBy><![CDATA[firstName]]></orderBy>  <orderDescending>false</orderDescending>  </sorting>  <paging>  <limit>10</limit>  <offset>1</offset>  </paging>  </ARBGetSubscriptionListRequest>  ';
 */
@@ -116,7 +121,9 @@ abstract class ApiOperationBase implements IApiOperation
         {
             throw new \Exception( "Error getting valid response from api. Check log file for error details");
         }
+        file_put_contents($this->_log_file, sprintf("\n%s: Response De-Serialization Begin", $this->now()), FILE_APPEND);
         $this->apiResponse = $this->serializer->deserialize( $xmlResponse, $this->apiResponseType , 'xml');
+        file_put_contents($this->_log_file, sprintf("\n%s: Response De-Serialization End", $this->now()), FILE_APPEND);
 
         $this->afterExecute();
     }
@@ -135,4 +142,9 @@ abstract class ApiOperationBase implements IApiOperation
     protected function beforeExecute() {}
     protected function afterExecute()  {}
     protected function validateRequest() {} //need to make this abstract
+
+    protected function now()
+    {
+        return date( DATE_RFC2822);
+    }
 }

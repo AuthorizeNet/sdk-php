@@ -218,6 +218,7 @@ return array(
     //Utils
     //'net\authorize\util\ObjectToXml' => $libDir . 'net/authorize/util/ObjectToXml.php',
     'net\authorize\util\HttpClient' => $libDir . 'net/authorize/util/HttpClient.php',
+    'net\authorize\util\Helpers' => $libDir . 'net/authorize/util/Helpers.php',
 
     //constants
     'net\authorize\api\constants\ANetEnvironment' => $libDir . 'net/authorize/api/constants/ANetEnvironment.php',
