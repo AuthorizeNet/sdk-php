@@ -47,6 +47,9 @@ class ApiCoreTestBase extends \PHPUnit_Framework_TestCase
 
     protected function setUp()
     {
+        $logMessage = sprintf("\n%s: Test '%s' Starting.", \net\authorize\util\Helpers::now(), $this->getName());
+        echo $logMessage; file_put_contents(self::$log_file, $logMessage, FILE_APPEND);
+
         $this->refId = 'ref' . time();
 
         $this->counter = rand();
@@ -107,7 +110,8 @@ class ApiCoreTestBase extends \PHPUnit_Framework_TestCase
 
     protected function tearDown()
     {
-
+        $logMessage = sprintf("\n%s: Test '%s' Completed.\n", \net\authorize\util\Helpers::now(), $this->getName());
+        echo $logMessage; file_put_contents(self::$log_file, $logMessage, FILE_APPEND);
     }
 
     protected function getRandomString( $title)
@@ -117,7 +121,12 @@ class ApiCoreTestBase extends \PHPUnit_Framework_TestCase
 
     protected function setValidAmount( $number)
     {
-        return min( $number, self::MaxTransactionAmount);
+        $amount = $number;
+        if ( self::MaxTransactionAmount < $amount)
+        {
+            $amount = rand(1, self::MaxTransactionAmount); //generate between 1 and MaxTransactionAmount, inclusive
+        }
+        return $amount;
     }
 
     /**
