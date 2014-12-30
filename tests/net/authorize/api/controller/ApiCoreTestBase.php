@@ -32,10 +32,8 @@ class ApiCoreTestBase extends \PHPUnit_Framework_TestCase
         {
             define( "AUTHORIZENET_LOG_FILE",  __DIR__ . "/../../../../../log/authorize-net.log");
         }
-        //self::$name =           (defined('AUTHORIZENET_API_LOGIN_ID')    && ''!=AUTHORIZENET_API_LOGIN_ID)    ? AUTHORIZENET_API_LOGIN_ID    : getenv("api_login_id");
-        //self::$transactionKey = (defined('AUTHORIZENET_TRANSACTION_KEY') && ''!=AUTHORIZENET_TRANSACTION_KEY) ? AUTHORIZENET_TRANSACTION_KEY : getenv("transaction_key");
-        self::$LoginName = '9q2yWeA3J3Q';
-        self::$TransactionKey = '7KTb8aThMJ35y879';
+        self::$LoginName      = (defined('AUTHORIZENET_API_LOGIN_ID')    && ''!=AUTHORIZENET_API_LOGIN_ID)    ? AUTHORIZENET_API_LOGIN_ID    : getenv("api_login_id");
+        self::$TransactionKey = (defined('AUTHORIZENET_TRANSACTION_KEY') && ''!=AUTHORIZENET_TRANSACTION_KEY) ? AUTHORIZENET_TRANSACTION_KEY : getenv("transaction_key");
         self::$log_file = (defined('AUTHORIZENET_LOG_FILE') ? AUTHORIZENET_LOG_FILE : false);
     }
 
@@ -120,6 +118,41 @@ class ApiCoreTestBase extends \PHPUnit_Framework_TestCase
     protected function setValidAmount( $number)
     {
         return min( $number, self::MaxTransactionAmount);
+    }
+
+    /**
+     * @param apiContract\ANetApiResponseType $response
+     */
+    protected static function displayMessages( apiContract\ANetApiResponseType $response)
+    {
+        if ( null != $response)
+        {
+            $logMessage = sprintf("\n%s: Controller Response is not null, iterating messages.", \net\authorize\util\Helpers::now());
+            echo $logMessage; file_put_contents(self::$log_file, $logMessage, FILE_APPEND);
+            $msgCount = 0;
+            $allMessages = $response->getMessages();
+            if ( null != $allMessages )
+            {
+                $logMessage = sprintf("\n%s: Controller ResultCode: '%s'.", \net\authorize\util\Helpers::now(), $allMessages->getResultCode());
+                echo $logMessage; file_put_contents(self::$log_file, $logMessage, FILE_APPEND);
+                if (null != $allMessages->getMessage())
+                {
+                    foreach ($allMessages->getMessage() as $message)
+                    {
+                        $msgCount++;
+                        $logMessage = sprintf("\n%d - Message, Code: '%s', Text: '%s'", $msgCount, $message->getCode(), $message->getText());
+                        echo $logMessage; file_put_contents(self::$log_file, $logMessage, FILE_APPEND);
+                    }
+                }
+            }
+            $logMessage = sprintf("\n%s: Controller Response contains '%d' messages.", \net\authorize\util\Helpers::now(), $msgCount);
+            echo $logMessage; file_put_contents(self::$log_file, $logMessage, FILE_APPEND);
+        }
+        else
+        {
+            $logMessage = sprintf("\n%s: Response is null.", \net\authorize\util\Helpers::now());
+            echo $logMessage; file_put_contents(self::$log_file, $logMessage, FILE_APPEND);
+        }
     }
 
     const MaxTransactionAmount = 10000; //214747;
