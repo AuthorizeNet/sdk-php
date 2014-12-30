@@ -92,7 +92,7 @@ class CreateTransactionControllerTest extends ApiCoreTestBase
         }
     }
 
-    public function testCreateTransactionApplyPay()
+    public function testCreateTransactionApplePay()
     {
         $merchantAuthentication = new apiContract\MerchantAuthenticationType();
         $merchantAuthentication->setName(self::$LoginName);
