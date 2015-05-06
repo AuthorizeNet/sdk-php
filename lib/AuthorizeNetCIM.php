@@ -113,7 +113,7 @@ class AuthorizeNetCIM extends AuthorizeNetRequest
         $transactionParent = $this->_xml->addChild("transaction");
         $transactionChild = $transactionParent->addChild("profileTrans" . $transactionType);
         $this->_addObject($transactionChild, $transaction);
-        $this->_extraOptions = $extraOptionsString . "x_encap_char=|";
+        $this->_extraOptions = $extraOptionsString;
         return $this->_sendRequest();
     }
     
@@ -458,7 +458,7 @@ class AuthorizeNetCIM_Response extends AuthorizeNetXMLResponse
      */
     public function getTransactionResponse()
     {
-        return new AuthorizeNetAIM_Response($this->_getElementContents("directResponse"), ",", "|", array());
+        return new AuthorizeNetAIM_Response($this->_getElementContents("directResponse"), ",", "", array());
     }
     
     /**
@@ -479,7 +479,7 @@ class AuthorizeNetCIM_Response extends AuthorizeNetXMLResponse
      */
     public function getValidationResponse()
     {
-        return new AuthorizeNetAIM_Response($this->_getElementContents("validationDirectResponse"), ",", "|", array());
+        return new AuthorizeNetAIM_Response($this->_getElementContents("validationDirectResponse"), ",", "", array());
     }
     
     /**
