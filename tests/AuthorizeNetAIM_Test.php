@@ -10,7 +10,7 @@ class AuthorizeNetAIM_Sandbox_Test extends PHPUnit_Framework_TestCase
             array(
             'amount' => rand(1, 1000),
             'card_num' => '4111111111111111',
-            'exp_date' => '0415'
+            'exp_date' => '0422'
             )
         );
         $response = $sale->authorizeAndCapture();
@@ -24,7 +24,7 @@ class AuthorizeNetAIM_Sandbox_Test extends PHPUnit_Framework_TestCase
             array(
             'amount' => rand(1, 1000),
             'card_num' => '4111111111111111',
-            'exp_date' => '415'
+            'exp_date' => '422'
             )
         );
         $response = $sale->authorizeAndCapture();
@@ -38,7 +38,7 @@ class AuthorizeNetAIM_Sandbox_Test extends PHPUnit_Framework_TestCase
             array(
             'amount' => rand(1, 1000),
             'card_num' => '4111111111111111',
-            'exp_date' => '4/15'
+            'exp_date' => '4/22'
             )
         );
         $response = $sale->authorizeAndCapture();
@@ -52,7 +52,7 @@ class AuthorizeNetAIM_Sandbox_Test extends PHPUnit_Framework_TestCase
             array(
             'amount' => rand(1, 1000),
             'card_num' => '4111111111111111',
-            'exp_date' => '04/15'
+            'exp_date' => '04/22'
             )
         );
         $response = $sale->authorizeAndCapture();
@@ -64,7 +64,7 @@ class AuthorizeNetAIM_Sandbox_Test extends PHPUnit_Framework_TestCase
         $sale = new AuthorizeNetAIM;
         $sale->amount = rand(1, 10000);
         $sale->card_num = '6011000000000012';
-        $sale->exp_date = '04/15';
+        $sale->exp_date = '04/22';
         $response = $sale->authorizeAndCapture();
         $this->assertTrue($response->approved);
     }
@@ -72,7 +72,7 @@ class AuthorizeNetAIM_Sandbox_Test extends PHPUnit_Framework_TestCase
     public function testAuthCaptureShort()
     {
         $sale = new AuthorizeNetAIM;
-        $response = $sale->authorizeAndCapture(rand(1, 100), '6011000000000012', '04/16');
+        $response = $sale->authorizeAndCapture(rand(1, 100), '6011000000000012', '04/22');
         $this->assertTrue($response->approved);
     }
 
@@ -85,7 +85,7 @@ class AuthorizeNetAIM_Sandbox_Test extends PHPUnit_Framework_TestCase
         $sale->amount = $amount;
         $sale->card_num = '4222222222222';
         $sale->zip = "46225";
-        $sale->exp_date = '04/15';
+        $sale->exp_date = '04/22';
         $sale->allow_partial_auth = true;
         $response = $sale->authorizeAndCapture();
         $this->assertTrue($response->held);
@@ -97,7 +97,7 @@ class AuthorizeNetAIM_Sandbox_Test extends PHPUnit_Framework_TestCase
         $sale = new AuthorizeNetAIM;
         $sale->amount = $amount - $response->amount;
         $sale->card_num = '6011000000000012';
-        $sale->exp_date = '04/20';
+        $sale->exp_date = '04/22';
         $sale->split_tender_id = $split_tender_id;
         $sale->allow_partial_auth = true;
         $response = $sale->authorizeAndCapture();
@@ -180,7 +180,7 @@ class AuthorizeNetAIM_Sandbox_Test extends PHPUnit_Framework_TestCase
 
         $sale = new AuthorizeNetAIM;
         $sale->card_num           = '4111111111111111';
-        $sale->exp_date           = '04/16';
+        $sale->exp_date           = '04/22';
         $sale->amount             = $amount = rand(1,99);
         $sale->description        = $description = "Sale description";
         $sale->first_name         = $first_name = "Jane";
@@ -274,7 +274,7 @@ class AuthorizeNetAIM_Sandbox_Test extends PHPUnit_Framework_TestCase
             array(
             'amount' => $amount,
             'card_num' => '6011000000000012',
-            'exp_date' => '0415'
+            'exp_date' => '0422'
             )
         );
         $response = $sale->authorizeAndCapture();
@@ -297,7 +297,7 @@ class AuthorizeNetAIM_Sandbox_Test extends PHPUnit_Framework_TestCase
         // First create transaction to void.
         $amount = rand(1, 1000);
         $card_num = '6011000000000012';
-        $exp_date = '0415';
+        $exp_date = '0422';
         $sale = new AuthorizeNetAIM;
         $response = $sale->authorizeAndCapture($amount, $card_num, $exp_date);
         $this->assertTrue($response->approved);
@@ -332,21 +332,21 @@ class AuthorizeNetAIM_Sandbox_Test extends PHPUnit_Framework_TestCase
     public function testAmex()
     {
         $sale = new AuthorizeNetAIM;
-        $response = $sale->authorizeAndCapture(rand(1, 100), '370000000000002', '04/16');
+        $response = $sale->authorizeAndCapture(rand(1, 100), '370000000000002', '04/22');
         $this->assertTrue($response->approved);
     }
 
     public function testDiscover()
     {
         $sale = new AuthorizeNetAIM;
-        $response = $sale->authorizeAndCapture(rand(1, 100), '6011000000000012', '04/16');
+        $response = $sale->authorizeAndCapture(rand(1, 100), '6011000000000012', '04/22');
         $this->assertTrue($response->approved);
     }
 
     public function testVisa()
     {
         $sale = new AuthorizeNetAIM;
-        $response = $sale->authorizeAndCapture(rand(1, 100), '4012888818888', '04/16');
+        $response = $sale->authorizeAndCapture(rand(1, 100), '4012888818888', '04/22');
         $this->assertTrue($response->approved);
     }
 
@@ -373,7 +373,7 @@ class AuthorizeNetAIM_Sandbox_Test extends PHPUnit_Framework_TestCase
             array(
             'amount' => rand(1, 1000),
             'card_num' => '6011000000000012',
-            'exp_date' => '0415'
+            'exp_date' => '0422'
             )
         );
         $response = $auth->authorizeOnly();
@@ -388,7 +388,7 @@ class AuthorizeNetAIM_Sandbox_Test extends PHPUnit_Framework_TestCase
             array(
             'amount' => $amount,
             'card_num' => '6011000000000012',
-            'exp_date' => '0415'
+            'exp_date' => '0422'
             )
         );
         $auth_response = $auth->authorizeOnly();
@@ -400,7 +400,7 @@ class AuthorizeNetAIM_Sandbox_Test extends PHPUnit_Framework_TestCase
             array(
                 'amount' => $amount,
                 'card_num' => '6011000000000012',
-                'exp_date' => '0415',
+                'exp_date' => '0422',
                 'trans_id' => $auth_response->transaction_id,
                 )
         );
@@ -485,7 +485,7 @@ class AuthorizeNetAIM_Sandbox_Test extends PHPUnit_Framework_TestCase
             array(
             'amount' => rand(1, 1000),
             'card_num' => '6011000000000012',
-            'exp_date' => '0415'
+            'exp_date' => '0422'
             )
         );
         $sale->setCustomField("foo", "bar");
@@ -510,7 +510,7 @@ class AuthorizeNetAIM_Sandbox_Test extends PHPUnit_Framework_TestCase
             array(
             'amount' => $amount,
             'card_num' => '6011000000000012',
-            'exp_date' => '0415',
+            'exp_date' => '0422',
             'encap_char' => '$',
             'description' => $description,
             )
@@ -528,7 +528,7 @@ class AuthorizeNetAIM_Sandbox_Test extends PHPUnit_Framework_TestCase
             array(
             'amount' => rand(1, 1000),
             'card_num' => '6011000000000012',
-            'exp_date' => '0415'
+            'exp_date' => '0422'
             )
         );
         $sale->setCustomFields(array("foo" => "bar", "foo2" => "bar2"));
@@ -554,7 +554,7 @@ class AuthorizeNetAIM_Sandbox_Test extends PHPUnit_Framework_TestCase
             array(
             'amount' => rand(1, 1000),
             'card_num' => '123',
-            'exp_date' => '0415'
+            'exp_date' => '0422'
             )
         );
         $response = $sale->authorizeAndCapture();
@@ -731,7 +731,7 @@ class AuthorizeNetAIM_Sandbox_Test extends PHPUnit_Framework_TestCase
             array(
             'amount' => $amount,
             'card_num' => '6011000000000012',
-            'exp_date' => '0415',
+            'exp_date' => '0422',
             'zip' => $zipcode,
             )
         );
@@ -760,7 +760,7 @@ class AuthorizeNetAIM_Sandbox_Test extends PHPUnit_Framework_TestCase
                 array(
                 'amount' => $amount,
                 'card_num' => '6011000000000012',
-                'exp_date' => '0415',
+                'exp_date' => '0422',
                 'zipcode' => $zipcode, // Should actually be just "zip"
                 )
             );
@@ -840,7 +840,7 @@ class AuthorizeNetAIM_Live_Test extends PHPUnit_Framework_TestCase
                 array(
                 'amount' => rand(1, 1000),
                 'card_num' => '6011000000000012',
-                'exp_date' => '0415'
+                'exp_date' => '0422'
                 )
             );
             $sale->setField('test_request', 'TRUE');
@@ -859,7 +859,7 @@ class AuthorizeNetAIM_Live_Test extends PHPUnit_Framework_TestCase
                 array(
                 'amount' => rand(1, 1000),
                 'card_num' => '6011000000000012',
-                'exp_date' => '0415'
+                'exp_date' => '0422'
                 )
             );
             $response = $sale->authorizeAndCapture();
@@ -877,7 +877,7 @@ class AuthorizeNetAIM_Live_Test extends PHPUnit_Framework_TestCase
                 array(
                 'amount' => rand(1, 1000),
                 'card_num' => '6011000000000012',
-                'exp_date' => '0415'
+                'exp_date' => '0422'
                 )
             );
             $response = $sale->authorizeAndCapture();
