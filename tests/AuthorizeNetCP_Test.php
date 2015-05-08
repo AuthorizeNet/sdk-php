@@ -9,7 +9,7 @@ class AuthorizeNetCP_Test extends PHPUnit_Framework_TestCase
             array(
                 'amount' => rand(1, 1000),
                 'card_num' => '4111111111111111',
-                'exp_date' => '0415',
+                'exp_date' => '0422',
                 'duplicate_window' => '5',
                 'device_type' => '4',
             )
@@ -25,7 +25,7 @@ class AuthorizeNetCP_Test extends PHPUnit_Framework_TestCase
             array(
             'amount' => rand(1, 1000),
             'card_num' => '4111111111111111',
-            'exp_date' => '0415',
+            'exp_date' => '0422',
             'device_type' => '4',
             )
         );

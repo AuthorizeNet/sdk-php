@@ -65,7 +65,7 @@ class AuthorizeNetARB_Test extends PHPUnit_Framework_TestCase
         $subscription->name = "test subscription";
         $subscription->intervalLength = "1";
         $subscription->intervalUnit = "months";
-        $subscription->startDate = "2015-03-12";
+        $subscription->startDate = "2018-03-12";
         $subscription->totalOccurrences = "14";
         $subscription->trialOccurrences = "";
         $subscription->amount = "6.99";
@@ -137,7 +137,7 @@ class AuthorizeNetARB_Test extends PHPUnit_Framework_TestCase
         $subscription->name = "my test echeck subscription";
         $subscription->intervalLength = "1";
         $subscription->intervalUnit = "months";
-        $subscription->startDate = "2015-04-12";
+        $subscription->startDate = "2019-04-12";
         $subscription->totalOccurrences = "2";
         $subscription->trialOccurrences = "";
         $subscription->amount = "11.99";
