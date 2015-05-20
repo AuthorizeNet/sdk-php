@@ -19,7 +19,7 @@ class GetSettledBatchListResponse extends ANetApiResponseType
      * @return self
      * @param \net\authorize\api\contract\v1\BatchDetailsType $batch
      */
-    public function addBatchToBatchList(\net\authorize\api\contract\v1\BatchDetailsType $batch)
+    public function addToBatchList(\net\authorize\api\contract\v1\BatchDetailsType $batch)
     {
         $this->batchList[] = $batch;
         return $this;

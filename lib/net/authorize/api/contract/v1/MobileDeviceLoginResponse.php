@@ -51,7 +51,7 @@ class MobileDeviceLoginResponse extends ANetApiResponseType
      * @return self
      * @param \net\authorize\api\contract\v1\PermissionType $permission
      */
-    public function addPermissionToUserPermissions(\net\authorize\api\contract\v1\PermissionType $permission)
+    public function addToUserPermissions(\net\authorize\api\contract\v1\PermissionType $permission)
     {
         $this->userPermissions[] = $permission;
         return $this;

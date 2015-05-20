@@ -23,7 +23,7 @@ class SplitTenderPaymentsAType
      * \net\authorize\api\contract\v1\TransactionResponseType\SplitTenderPaymentsAType\SplitTenderPaymentAType
      * $splitTenderPayment
      */
-    public function addSplitTenderPaymentToSplitTenderPayment(\net\authorize\api\contract\v1\TransactionResponseType\SplitTenderPaymentsAType\SplitTenderPaymentAType $splitTenderPayment)
+    public function addToSplitTenderPayment(\net\authorize\api\contract\v1\TransactionResponseType\SplitTenderPaymentsAType\SplitTenderPaymentAType $splitTenderPayment)
     {
         $this->splitTenderPayment[] = $splitTenderPayment;
         return $this;
