@@ -263,7 +263,7 @@ class AuthorizeNetCIM_Test extends PHPUnit_Framework_TestCase
     $request = new AuthorizeNetCIM;
     $customerProfile = new AuthorizeNetCustomer;
     $customerProfile->description = "Description of customer";
-    $customerProfile->merchantCustomerId = time().rand(1,10);
+    $customerProfile->merchantCustomerId = time().rand(1,100);
     $customerProfile->email = "blahblahblah@domain.com";
     $response = $request->createCustomerProfile($customerProfile);
     $this->assertTrue($response->isOk());
@@ -376,7 +376,7 @@ class AuthorizeNetCIM_Test extends PHPUnit_Framework_TestCase
     $request = new AuthorizeNetCIM;
     $customerProfile = new AuthorizeNetCustomer;
     $customerProfile->description = "Description of customer";
-    $customerProfile->merchantCustomerId = time().rand(1,10);
+    $customerProfile->merchantCustomerId = time().rand(1,100);
     $customerProfile->email = "blahblahblah@domain.com";
     $response = $request->createCustomerProfile($customerProfile);
     $this->assertTrue($response->isOk());
