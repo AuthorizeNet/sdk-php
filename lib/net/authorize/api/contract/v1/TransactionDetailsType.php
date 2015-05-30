@@ -5,7 +5,7 @@ namespace net\authorize\api\contract\v1;
 /**
  * Class representing TransactionDetailsType
  *
- * 
+ *
  * XSD Type: transactionDetailsType
  */
 class TransactionDetailsType
@@ -564,7 +564,7 @@ class TransactionDetailsType
      * @return self
      * @param \net\authorize\api\contract\v1\FDSFilterType $fDSFilter
      */
-    public function addFDSFilterToFDSFilters(\net\authorize\api\contract\v1\FDSFilterType $fDSFilter)
+    public function addToFDSFilters(\net\authorize\api\contract\v1\FDSFilterType $fDSFilter)
     {
         $this->fDSFilters[] = $fDSFilter;
         return $this;
@@ -796,7 +796,7 @@ class TransactionDetailsType
      * @return self
      * @param \net\authorize\api\contract\v1\LineItemType $lineItem
      */
-    public function addLineItemToLineItems(\net\authorize\api\contract\v1\LineItemType $lineItem)
+    public function addToLineItems(\net\authorize\api\contract\v1\LineItemType $lineItem)
     {
         $this->lineItems[] = $lineItem;
         return $this;
@@ -1094,7 +1094,7 @@ class TransactionDetailsType
      * @return self
      * @param \net\authorize\api\contract\v1\ReturnedItemType $returnedItem
      */
-    public function addReturnedItemToReturnedItems(\net\authorize\api\contract\v1\ReturnedItemType $returnedItem)
+    public function addToReturnedItems(\net\authorize\api\contract\v1\ReturnedItemType $returnedItem)
     {
         $this->returnedItems[] = $returnedItem;
         return $this;

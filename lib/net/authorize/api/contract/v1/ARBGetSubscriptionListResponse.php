@@ -47,7 +47,7 @@ class ARBGetSubscriptionListResponse extends ANetApiResponseType
      * @return self
      * @param \net\authorize\api\contract\v1\SubscriptionDetailType $subscriptionDetail
      */
-    public function addSubscriptionDetailToSubscriptionDetails(\net\authorize\api\contract\v1\SubscriptionDetailType $subscriptionDetail)
+    public function addToSubscriptionDetails(\net\authorize\api\contract\v1\SubscriptionDetailType $subscriptionDetail)
     {
         $this->subscriptionDetails[] = $subscriptionDetail;
         return $this;

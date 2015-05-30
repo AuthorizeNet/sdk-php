@@ -60,6 +60,16 @@ net\authorize\api\contract\v1\TransactionRequestType:
                 getter: getSolution
                 setter: setSolution
             type: net\authorize\api\contract\v1\SolutionType
+        callId:
+            expose: true
+            access_type: public_method
+            serialized_name: callId
+            xml_element:
+                namespace: AnetApi/xml/v1/schema/AnetApiSchema.xsd
+            accessor:
+                getter: getCallId
+                setter: setCallId
+            type: string
         authCode:
             expose: true
             access_type: public_method
@@ -224,6 +234,16 @@ net\authorize\api\contract\v1\TransactionRequestType:
                 getter: getRetail
                 setter: setRetail
             type: net\authorize\api\contract\v1\TransRetailInfoType
+        employeeId:
+            expose: true
+            access_type: public_method
+            serialized_name: employeeId
+            xml_element:
+                namespace: AnetApi/xml/v1/schema/AnetApiSchema.xsd
+            accessor:
+                getter: getEmployeeId
+                setter: setEmployeeId
+            type: string
         transactionSettings:
             expose: true
             access_type: public_method

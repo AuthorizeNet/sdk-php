@@ -19,7 +19,7 @@ class GetCustomerProfileIdsResponse extends ANetApiResponseType
      * @return self
      * @param string $numericString
      */
-    public function addNumericStringToIds($numericString)
+    public function addToIds($numericString)
     {
         $this->ids[] = $numericString;
         return $this;

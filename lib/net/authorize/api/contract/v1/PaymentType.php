@@ -5,7 +5,7 @@ namespace net\authorize\api\contract\v1;
 /**
  * Class representing PaymentType
  *
- * 
+ *
  * XSD Type: paymentType
  */
 class PaymentType

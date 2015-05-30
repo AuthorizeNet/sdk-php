@@ -5,7 +5,7 @@ namespace net\authorize\api\contract\v1;
 /**
  * Class representing TransactionRequestType
  *
- * 
+ *
  * XSD Type: transactionRequestType
  */
 class TransactionRequestType
@@ -40,6 +40,11 @@ class TransactionRequestType
      * @property \net\authorize\api\contract\v1\SolutionType $solution
      */
     private $solution = null;
+
+    /**
+     * @property string $callId
+     */
+    private $callId = null;
 
     /**
      * @property string $authCode
@@ -121,6 +126,11 @@ class TransactionRequestType
      * @property \net\authorize\api\contract\v1\TransRetailInfoType $retail
      */
     private $retail = null;
+
+    /**
+     * @property string $employeeId
+     */
+    private $employeeId = null;
 
     /**
      * Allowed values for settingName are: emailCustomer, merchantEmail,
@@ -269,6 +279,28 @@ class TransactionRequestType
     }
 
     /**
+     * Gets as callId
+     *
+     * @return string
+     */
+    public function getCallId()
+    {
+        return $this->callId;
+    }
+
+    /**
+     * Sets a new callId
+     *
+     * @param string $callId
+     * @return self
+     */
+    public function setCallId($callId)
+    {
+        $this->callId = $callId;
+        return $this;
+    }
+
+    /**
      * Gets as authCode
      *
      * @return string
@@ -362,7 +394,7 @@ class TransactionRequestType
      * @return self
      * @param \net\authorize\api\contract\v1\LineItemType $lineItem
      */
-    public function addLineItemToLineItems(\net\authorize\api\contract\v1\LineItemType $lineItem)
+    public function addToLineItems(\net\authorize\api\contract\v1\LineItemType $lineItem)
     {
         $this->lineItems[] = $lineItem;
         return $this;
@@ -656,6 +688,28 @@ class TransactionRequestType
     }
 
     /**
+     * Gets as employeeId
+     *
+     * @return string
+     */
+    public function getEmployeeId()
+    {
+        return $this->employeeId;
+    }
+
+    /**
+     * Sets a new employeeId
+     *
+     * @param string $employeeId
+     * @return self
+     */
+    public function setEmployeeId($employeeId)
+    {
+        $this->employeeId = $employeeId;
+        return $this;
+    }
+
+    /**
      * Adds as setting
      *
      * Allowed values for settingName are: emailCustomer, merchantEmail,
@@ -665,7 +719,7 @@ class TransactionRequestType
      * @return self
      * @param \net\authorize\api\contract\v1\SettingType $setting
      */
-    public function addSettingToTransactionSettings(\net\authorize\api\contract\v1\SettingType $setting)
+    public function addToTransactionSettings(\net\authorize\api\contract\v1\SettingType $setting)
     {
         $this->transactionSettings[] = $setting;
         return $this;
@@ -737,7 +791,7 @@ class TransactionRequestType
      * @return self
      * @param \net\authorize\api\contract\v1\UserFieldType $userField
      */
-    public function addUserFieldToUserFields(\net\authorize\api\contract\v1\UserFieldType $userField)
+    public function addToUserFields(\net\authorize\api\contract\v1\UserFieldType $userField)
     {
         $this->userFields[] = $userField;
         return $this;

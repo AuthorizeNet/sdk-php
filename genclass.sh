@@ -14,7 +14,7 @@ echo Make sure the ns-dest uses destination as: $apidir
 logfile=./xsdgen.log
 echo `date` > $logfile
 echo Generating PHP Classes >> $logfile
-vendor/goetas/xsd2php/bin/xsd2php.php  convert:php \
+vendor/goetas/xsd2php/bin/xsd2php  convert:php \
 	--ns-dest='net.authorize.api.contract.v1.;lib/net/authorize/api/contract/v1' \
 	--ns-map='http://www.w3.org/2001/XMLSchema;W3/XMLSchema/2001/' \
 	--ns-map='AnetApi/xml/v1/schema/AnetApiSchema.xsd;net.authorize.api.contract.v1' \
@@ -27,7 +27,7 @@ if [ -d "$jmsdir" ]; then
 fi
 mkdir -p "$jmsdir"
 echo Generating Serializers for Classes >> $logfile
-vendor/goetas/xsd2php/bin/xsd2php.php  convert:jms-yaml \
+vendor/goetas/xsd2php/bin/xsd2php  convert:jms-yaml \
 	--ns-dest='net.authorize.api.contract.v1.;lib/net/authorize/api/yml/v1' \
 	--ns-map='http://www.w3.org/2001/XMLSchema;W3/XMLSchema/2001/' \
 	--ns-map='AnetApi/xml/v1/schema/AnetApiSchema.xsd;net.authorize.api.contract.v1' \

@@ -5,7 +5,7 @@ namespace net\authorize\api\contract\v1;
 /**
  * Class representing MessagesType
  *
- * 
+ *
  * XSD Type: messagesType
  */
 class MessagesType
@@ -49,7 +49,7 @@ class MessagesType
      * @return self
      * @param \net\authorize\api\contract\v1\MessagesType\MessageAType $message
      */
-    public function addMessageToMessage(\net\authorize\api\contract\v1\MessagesType\MessageAType $message)
+    public function addToMessage(\net\authorize\api\contract\v1\MessagesType\MessageAType $message)
     {
         $this->message[] = $message;
         return $this;
