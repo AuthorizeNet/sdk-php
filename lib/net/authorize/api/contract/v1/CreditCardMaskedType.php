@@ -5,7 +5,7 @@ namespace net\authorize\api\contract\v1;
 /**
  * Class representing CreditCardMaskedType
  *
- * 
+ *
  * XSD Type: creditCardMaskedType
  */
 class CreditCardMaskedType
@@ -25,6 +25,11 @@ class CreditCardMaskedType
      * @property string $cardType
      */
     private $cardType = null;
+
+    /**
+     * @property \net\authorize\api\contract\v1\CardArtType $cardArt
+     */
+    private $cardArt = null;
 
     /**
      * Gets as cardNumber
@@ -89,6 +94,28 @@ class CreditCardMaskedType
     public function setCardType($cardType)
     {
         $this->cardType = $cardType;
+        return $this;
+    }
+
+    /**
+     * Gets as cardArt
+     *
+     * @return \net\authorize\api\contract\v1\CardArtType
+     */
+    public function getCardArt()
+    {
+        return $this->cardArt;
+    }
+
+    /**
+     * Sets a new cardArt
+     *
+     * @param \net\authorize\api\contract\v1\CardArtType $cardArt
+     * @return self
+     */
+    public function setCardArt(\net\authorize\api\contract\v1\CardArtType $cardArt)
+    {
+        $this->cardArt = $cardArt;
         return $this;
     }
 

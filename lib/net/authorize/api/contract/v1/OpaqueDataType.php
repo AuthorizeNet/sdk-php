@@ -5,7 +5,7 @@ namespace net\authorize\api\contract\v1;
 /**
  * Class representing OpaqueDataType
  *
- * 
+ *
  * XSD Type: opaqueDataType
  */
 class OpaqueDataType
@@ -20,6 +20,11 @@ class OpaqueDataType
      * @property string $dataValue
      */
     private $dataValue = null;
+
+    /**
+     * @property string $dataKey
+     */
+    private $dataKey = null;
 
     /**
      * Gets as dataDescriptor
@@ -62,6 +67,28 @@ class OpaqueDataType
     public function setDataValue($dataValue)
     {
         $this->dataValue = $dataValue;
+        return $this;
+    }
+
+    /**
+     * Gets as dataKey
+     *
+     * @return string
+     */
+    public function getDataKey()
+    {
+        return $this->dataKey;
+    }
+
+    /**
+     * Sets a new dataKey
+     *
+     * @param string $dataKey
+     * @return self
+     */
+    public function setDataKey($dataKey)
+    {
+        $this->dataKey = $dataKey;
         return $this;
     }
 

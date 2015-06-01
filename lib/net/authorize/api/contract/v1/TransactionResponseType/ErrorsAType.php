@@ -23,7 +23,7 @@ class ErrorsAType
      * \net\authorize\api\contract\v1\TransactionResponseType\ErrorsAType\ErrorAType
      * $error
      */
-    public function addErrorToError(\net\authorize\api\contract\v1\TransactionResponseType\ErrorsAType\ErrorAType $error)
+    public function addToError(\net\authorize\api\contract\v1\TransactionResponseType\ErrorsAType\ErrorAType $error)
     {
         $this->error[] = $error;
         return $this;

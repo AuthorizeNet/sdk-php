@@ -23,7 +23,7 @@ class MessagesAType
      * \net\authorize\api\contract\v1\TransactionResponseType\MessagesAType\MessageAType
      * $message
      */
-    public function addMessageToMessage(\net\authorize\api\contract\v1\TransactionResponseType\MessagesAType\MessageAType $message)
+    public function addToMessage(\net\authorize\api\contract\v1\TransactionResponseType\MessagesAType\MessageAType $message)
     {
         $this->message[] = $message;
         return $this;

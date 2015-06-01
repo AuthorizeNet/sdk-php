@@ -5,7 +5,7 @@ namespace net\authorize\api\contract\v1;
 /**
  * Class representing TransactionResponseType
  *
- * 
+ *
  * XSD Type: transactionResponse
  */
 class TransactionResponseType
@@ -438,7 +438,7 @@ class TransactionResponseType
      * \net\authorize\api\contract\v1\TransactionResponseType\MessagesAType\MessageAType
      * $message
      */
-    public function addMessageToMessages(\net\authorize\api\contract\v1\TransactionResponseType\MessagesAType\MessageAType $message)
+    public function addToMessages(\net\authorize\api\contract\v1\TransactionResponseType\MessagesAType\MessageAType $message)
     {
         $this->messages[] = $message;
         return $this;
@@ -499,7 +499,7 @@ class TransactionResponseType
      * \net\authorize\api\contract\v1\TransactionResponseType\ErrorsAType\ErrorAType
      * $error
      */
-    public function addErrorToErrors(\net\authorize\api\contract\v1\TransactionResponseType\ErrorsAType\ErrorAType $error)
+    public function addToErrors(\net\authorize\api\contract\v1\TransactionResponseType\ErrorsAType\ErrorAType $error)
     {
         $this->errors[] = $error;
         return $this;
@@ -560,7 +560,7 @@ class TransactionResponseType
      * \net\authorize\api\contract\v1\TransactionResponseType\SplitTenderPaymentsAType\SplitTenderPaymentAType
      * $splitTenderPayment
      */
-    public function addSplitTenderPaymentToSplitTenderPayments(\net\authorize\api\contract\v1\TransactionResponseType\SplitTenderPaymentsAType\SplitTenderPaymentAType $splitTenderPayment)
+    public function addToSplitTenderPayments(\net\authorize\api\contract\v1\TransactionResponseType\SplitTenderPaymentsAType\SplitTenderPaymentAType $splitTenderPayment)
     {
         $this->splitTenderPayments[] = $splitTenderPayment;
         return $this;
@@ -619,7 +619,7 @@ class TransactionResponseType
      * @return self
      * @param \net\authorize\api\contract\v1\UserFieldType $userField
      */
-    public function addUserFieldToUserFields(\net\authorize\api\contract\v1\UserFieldType $userField)
+    public function addToUserFields(\net\authorize\api\contract\v1\UserFieldType $userField)
     {
         $this->userFields[] = $userField;
         return $this;

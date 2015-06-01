@@ -20,3 +20,13 @@ net\authorize\api\contract\v1\CustomerAddressType:
                 getter: getFaxNumber
                 setter: setFaxNumber
             type: string
+        email:
+            expose: true
+            access_type: public_method
+            serialized_name: email
+            xml_element:
+                namespace: AnetApi/xml/v1/schema/AnetApiSchema.xsd
+            accessor:
+                getter: getEmail
+                setter: setEmail
+            type: string

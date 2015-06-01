@@ -20,13 +20,3 @@ net\authorize\api\contract\v1\CreditCardSimpleType:
                 getter: getExpirationDate
                 setter: setExpirationDate
             type: string
-        paymentToken:
-            expose: true
-            access_type: public_method
-            serialized_name: paymentToken
-            xml_element:
-                namespace: AnetApi/xml/v1/schema/AnetApiSchema.xsd
-            accessor:
-                getter: getPaymentToken
-                setter: setPaymentToken
-            type: boolean
