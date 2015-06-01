@@ -318,3 +318,6 @@ Here's the PHP code :
   
 ?>
 ````
+### Visa Checkout Examples
+"Check out" the Visa Checkout samples at https://github.com/AuthorizeNet/sample-code-php/tree/master/VisaCheckout
+
