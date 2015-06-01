@@ -1,12 +1,8 @@
 Authorize.Net PHP SDK
 ======================
 
-[![Build Status] (https://travis-ci.org/ramittal/sdk-php.png?branch=master)]
-(https://travis-ci.org/ramittal/sdk-php)
-[![Code Coverage](https://scrutinizer-ci.com/g/ramittal/sdk-php/badges/coverage.png?b=master)]
-(https://scrutinizer-ci.com/g/ramittal/sdk-php/?branch=master)
-[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/ramittal/sdk-php/badges/quality-score.png?b=master)]
-(https://scrutinizer-ci.com/g/ramittal/sdk-php/?branch=master)
+[![Build Status] (https://travis-ci.org/AuthorizeNet/sdk-php.png?branch=master)]
+(https://travis-ci.org/AuthorizeNet/sdk-php)
 
 Convert XSD into PHP classes.
 
