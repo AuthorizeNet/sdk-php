@@ -4,7 +4,6 @@ Authorize.Net PHP SDK
 [![Build Status] (https://travis-ci.org/AuthorizeNet/sdk-php.png?branch=master)]
 (https://travis-ci.org/AuthorizeNet/sdk-php)
 
-Convert XSD into PHP classes.
 
 ## License
 Proprietary, see the provided `license.md`.
