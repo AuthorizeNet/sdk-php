@@ -11,7 +11,7 @@
         "ext-json": "*",
         "ext-simplexml": "*",
         "ext-xmlwriter": "*",
-        "jms/serializer": "^1.0.0"
+        "jms/serializer": "xsd2php-dev as 0.18.0"
     },
     "require-dev": {
         "phpunit/phpunit": "~4.0",
