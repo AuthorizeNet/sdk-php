@@ -14,7 +14,5 @@ spl_autoload_register(function($className) {
 
     if (isset($classMap[$className])) {
         include $classMap[$className];
-    } else {
-        echo 'Class not loaded: ' . $className;
     }
 });
