@@ -8,6 +8,11 @@ use Goetas\Xsd\XsdToPhp\Jms\Handler\BaseTypesHandler;
 use Goetas\Xsd\XsdToPhp\Jms\Handler\XmlSchemaDateHandler;
 
 use \net\authorize\util\HttpClient;
+use \net\authorize\util\Helpers;
+use \net\authorize\util\LogFactory as LogFactory;
+//use \net\authorize\util\LogHelper;
+use \net\authorize\util\Log;
+
 
 abstract class ApiOperationBase implements IApiOperation
 {
@@ -15,7 +20,7 @@ abstract class ApiOperationBase implements IApiOperation
      * @var \net\authorize\api\contract\v1\AnetApiRequestType
      */
     private $apiRequest = null;
-    
+
     /**
      * @var \net\authorize\api\contract\v1\AnetApiResponseType
      */
@@ -37,7 +42,7 @@ abstract class ApiOperationBase implements IApiOperation
     public $httpClient = null;
 
     private $_log_file = false;
-
+    private $logger = null;
     /**
      * Constructor.
      *
@@ -49,6 +54,7 @@ abstract class ApiOperationBase implements IApiOperation
     {
         date_default_timezone_set('UTC');
         $this->_log_file = (defined('AUTHORIZENET_LOG_FILE') ? AUTHORIZENET_LOG_FILE : false);
+        $this->logger = LogFactory::getLog(get_class($this));
 
         if ( null == $request)
         {
@@ -109,12 +115,14 @@ abstract class ApiOperationBase implements IApiOperation
     {
         $this->beforeExecute();
 
+        $this->logger->info("Request Serialization Begin");
         file_put_contents($this->_log_file, sprintf("\n%s: Request Serialization Begin", $this->now()), FILE_APPEND);
         $xmlRequest = $this->serializer->serialize($this->apiRequest, 'xml');
+        $this->logger->info(sprintf("\n%s: Request  Serialization End", $this->now()));
         file_put_contents($this->_log_file, sprintf("\n%s: Request  Serialization End", $this->now()), FILE_APPEND);
-/*
-        //$xmlRequest = '<?xml version="1.0" encoding="UTF-8"?>  <ARBGetSubscriptionListRequest xmlns="AnetApi/xml/v1/schema/AnetApiSchema.xsd">  <merchantAuthentication>  <name>4YJmeW7V77us</name>  <transactionKey>4qHK9u63F753be4Z</transactionKey>  </merchantAuthentication>  <refId><![CDATA[ref1416999093]]></refId>  <searchType><![CDATA[subscriptionActive]]></searchType>  <sorting>  <orderBy><![CDATA[firstName]]></orderBy>  <orderDescending>false</orderDescending>  </sorting>  <paging>  <limit>10</limit>  <offset>1</offset>  </paging>  </ARBGetSubscriptionListRequest>  ';
-*/
+        /*
+                //$xmlRequest = '<?xml version="1.0" encoding="UTF-8"?>  <ARBGetSubscriptionListRequest xmlns="AnetApi/xml/v1/schema/AnetApiSchema.xsd">  <merchantAuthentication>  <name>4YJmeW7V77us</name>  <transactionKey>4qHK9u63F753be4Z</transactionKey>  </merchantAuthentication>  <refId><![CDATA[ref1416999093]]></refId>  <searchType><![CDATA[subscriptionActive]]></searchType>  <sorting>  <orderBy><![CDATA[firstName]]></orderBy>  <orderDescending>false</orderDescending>  </sorting>  <paging>  <limit>10</limit>  <offset>1</offset>  </paging>  </ARBGetSubscriptionListRequest>  ';
+        */
         $this->httpClient->setPostUrl( $endPoint);
         $xmlResponse = $this->httpClient->_sendRequest($xmlRequest);
         if ( null == $xmlResponse)

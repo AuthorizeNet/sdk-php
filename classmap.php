@@ -1,6 +1,6 @@
 <?php
-    spl_autoload_extensions(".php"); // comma-separated list
-    spl_autoload_register();
+spl_autoload_extensions(".php"); // comma-separated list
+spl_autoload_register();
 
 /**
  * A map of classname => filename for SPL autoloading.
@@ -219,6 +219,9 @@ return array(
     //'net\authorize\util\ObjectToXml' => $libDir . 'net/authorize/util/ObjectToXml.php',
     'net\authorize\util\HttpClient' => $libDir . 'net/authorize/util/HttpClient.php',
     'net\authorize\util\Helpers' => $libDir . 'net/authorize/util/Helpers.php',
+    'net\authorize\util\Log' => $libDir . 'net/authorize/util/LogHelper.php',
+    'net\authorize\util\LogFactory' => $libDir . 'net/authorize/util/LogHelper.php',
+    'net\authorize\util\LogHelper' => $libDir . 'net/authorize/util/LogHelper.php',
 
     //constants
     'net\authorize\api\constants\ANetEnvironment' => $libDir . 'net/authorize/api/constants/ANetEnvironment.php',

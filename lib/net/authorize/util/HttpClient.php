@@ -1,6 +1,9 @@
 <?php
 namespace net\authorize\util;
 
+use net\authorize\util\LogFactory;
+use net\authorize\util\Log;
+
 /**
  * A class to send a request to the XML API.
  *
@@ -13,7 +16,7 @@ class HttpClient
 
     public $VERIFY_PEER = true; // attempt trust validation of SSL certificates when establishing secure connections.
     private $_log_file = false;
-
+    private $logger = NULL;
     /**
      * Constructor.
      *
@@ -21,6 +24,8 @@ class HttpClient
     public function __construct()
     {
         $this->_log_file = (defined('AUTHORIZENET_LOG_FILE') ? AUTHORIZENET_LOG_FILE : false);
+        $this->logger = LogFactory::getLog(get_class($this));
+        $this->logger->debug("logger used in HttpClient");
         date_default_timezone_set('UTC');
     }
 
@@ -71,8 +76,10 @@ class HttpClient
         curl_setopt($curl_request, CURLOPT_RETURNTRANSFER, 1);
         curl_setopt($curl_request, CURLOPT_SSL_VERIFYHOST, 2);
 
+        $this->logger->info(sprintf(" Url: %s", $post_url));
         file_put_contents($this->_log_file, sprintf("\n%s: Url: %s", $this->now(), $post_url), FILE_APPEND);
         // Do not log requests that could contain CC info.
+        $this->logger->info(sprintf("Request to AnetApi: \n%s", $xmlRequest));
         file_put_contents($this->_log_file, sprintf("\n%s:Request to AnetApi: \n%s", $this->now(), $xmlRequest), FILE_APPEND);
 
         if ($this->VERIFY_PEER) {
@@ -87,22 +94,28 @@ class HttpClient
         if (preg_match('/xml/',$post_url)) {
             curl_setopt($curl_request, CURLOPT_HTTPHEADER, Array("Content-Type: text/xml"));
             file_put_contents($this->_log_file, "\nSending 'XML' Request type", FILE_APPEND);
+            $this->logger->info("Sending 'XML' Request type");
         }
 
         try
         {
             file_put_contents($this->_log_file, sprintf("\n%s:Sending http request via Curl", $this->now()), FILE_APPEND);
+            $this->logger->info("Sending http request via Curl");
             $xmlResponse = curl_exec($curl_request);
             file_put_contents($this->_log_file, sprintf("\n%s:Response from AnetApi: \n%s\n", $this->now(), $xmlResponse), FILE_APPEND);
+            $this->logger->info("Response from AnetApi: $xmlResponse");
+
         } catch (\Exception $ex)
         {
             $errorMessage = sprintf("\n%s:Error making http request via curl: Code:'%s', Message:'%s', Trace:'%s', File:'%s':'%s'",
                 $this->now(), $ex->getCode(), $ex->getMessage(), $ex->getTraceAsString(), $ex->getFile(), $ex->getLine() );
             file_put_contents($this->_log_file, $errorMessage, FILE_APPEND);
+            $this->logger->error($errorMessage);
         }
         if ($this->_log_file) {
             if ($curl_error = curl_error($curl_request)) {
                 file_put_contents($this->_log_file, sprintf("\n%s:CURL ERROR: %s", $this->now(), $curl_error), FILE_APPEND);
+                $this->logger->error("CURL ERROR: $curl_error");
             }
 
         }
