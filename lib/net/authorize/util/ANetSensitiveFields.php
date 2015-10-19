@@ -35,9 +35,7 @@ class ANetSensitiveFields
             }
             else{
                 array_push($applySensitiveTags,$sensitiveTag);
-            }
-            echo "applying: "; print_r($sensitiveTag);
-        }
+            }        }
         return $applySensitiveTags;
     }
 }
