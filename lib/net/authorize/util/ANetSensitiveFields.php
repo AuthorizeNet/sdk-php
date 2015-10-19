@@ -1,7 +1,7 @@
 <?php
 namespace net\authorize\util;
 
-define("ANET_SENSITIVE_XMLTAGS_JSON_FILE","AuthorizedNetSensitiveTags.json");
+define("ANET_SENSITIVE_XMLTAGS_JSON_FILE","AuthorizedNetSensitiveTagsConfig.json");
 
 class ANetSensitiveFields
 {
@@ -22,12 +22,20 @@ class ANetSensitiveFields
         if (file_exists(ANET_SENSITIVE_XMLTAGS_JSON_FILE)) {
             //read list of tags(and associate regex-patterns and replacements) from .json file
             $sensitiveTags = json_decode(file_get_contents(ANET_SENSITIVE_XMLTAGS_JSON_FILE));
+            if (json_last_error() === JSON_ERROR_NONE) {
+                // JSON is valid
+            }
+            else{
+                echo sprinf("Invalid json in %s json_last_error  ",  ANET_SENSITIVE_XMLTAGS_JSON_FILE, json_last_error());
+                return self::getDefaulSensitiveXmlTags();
+            }
         }
         else {
-            // if not present, create a local file
+            // if not present, create a local config file
             $sensitiveTags = self::getDefaulSensitiveXmlTags();
             file_put_contents(ANET_SENSITIVE_XMLTAGS_JSON_FILE, json_encode($sensitiveTags, JSON_PRETTY_PRINT));
         }
+        //Check for disableMask flag in case of client json.
         $applySensitiveTags = array();
         foreach($sensitiveTags as $sensitiveTag){
             if($sensitiveTag->disableMask){
