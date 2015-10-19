@@ -222,6 +222,9 @@ return array(
     'net\authorize\util\Log' => $libDir . 'net/authorize/util/LogHelper.php',
     'net\authorize\util\LogFactory' => $libDir . 'net/authorize/util/LogHelper.php',
     'net\authorize\util\LogHelper' => $libDir . 'net/authorize/util/LogHelper.php',
+    'net\authorize\util\ANetSensitiveFields' => $libDir . 'net/authorize/util/ANetSensitiveFields.php',
+    'net\authorize\util\SensitiveTag' => $libDir . 'net/authorize/util/SensitiveTag.php',
+
 
     //constants
     'net\authorize\api\constants\ANetEnvironment' => $libDir . 'net/authorize/api/constants/ANetEnvironment.php',

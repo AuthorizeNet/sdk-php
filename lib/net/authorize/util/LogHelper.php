@@ -1,6 +1,8 @@
 <?php
 namespace net\authorize\util;
 
+use net\authorize\util\ANetSensitiveFields;
+
 define ("ANET_LOG_FILES_APPEND",true);
 define ("ANET_LOG_FILE","phplog");
 
@@ -17,48 +19,46 @@ define("ANET_LOG_ERROR",4);
 //set level
 define("ANET_LOG_LEVEL",ANET_LOG_DEBUG);
 
-
 class Log
 {
-    private function maskSensitiveString($rawString){
-//        echo("\n Start masking \n");
-        //Tag name is compulsory, can leave patterns and repalcements blank
-        $tags= array("cardCode","cardNumber","expirationDate");
-        $patterns=array("","([^0-9]*)(\d+)(\d{4})(.*)","");
-        $replacements=array("","$1xxxx-$3$4","");
+    private $sensitiveXmlTags = NULL;
 
-        foreach ($patterns as $i => $inputPattern) {
-            $tag=$tags[$i];
+    private function maskSensitiveXmlString($rawString){
+        //Tag name is compulsory, can leave patterns and repalcements blank
+//        $tags= array("cardCode","cardNumber","expirationDate");
+//        $patterns=array("","([^0-9]*)(\d+)(\d{4})(.*)","");
+        $patterns=array();
+//        $replacements=array("","$1xxxx-$3$4","");
+        $replacements=array();
+        foreach ($this->sensitiveXmlTags as $i => $sensitiveTag){
+            $tag = $sensitiveTag->tagName;
+            $inputPattern = $sensitiveTag->pattern;
+            $inputReplacement = "XXXX";
+
             if(!trim($inputPattern)) {
                 $inputPattern = "(.+)"; //no need to mask null data
             }
             $pattern = "/<" . $tag . ">". $inputPattern ."<\/" . $tag . ">/";
-//            echo("\npattern used: " . $pattern);
 
-            $inputReplacement = "xxxx";
-            if(trim($replacements[$i])) {
-                $inputReplacement = $replacements[$i];
+            if(trim($sensitiveTag->replacement)) {
+                $inputReplacement = $sensitiveTag->replacement;
             }
             $replacement = "<" . $tag . ">" . $inputReplacement . "</" . $tag . ">";
-//            echo("\nreplace string:" . $replacement);
-//
-            $patterns[$i]=$pattern;
-            $replacements[$i]=$replacement;
+
+            $patterns [$i] = $pattern;
+            $replacements[$i]  = $replacement;
         }
         $maskedString = preg_replace($patterns, $replacements, $rawString);
-//        echo( "\nreplaced: " . $maskedString . "\n\n");
         return $maskedString;
     }
+
     private function getMasked($raw)
     {
-//        echo "raw data to mask:" . $raw;
         $messageType = gettype($raw);
-//        echo("Mesage Raw Type: ". $messageType);
         $message="";
         if ($messageType == "string") {
-            $message = $this->maskSensitiveString($raw);
+            $message = $this->maskSensitiveXmlString($raw);
         }
-//        echo"\n here\n";
         return $message;
     }
     public function debug($logMessage, $flags=FILE_APPEND)
@@ -83,7 +83,9 @@ class Log
         //log level, timestamp
         $logString = "\n".$prefix . ": " . \net\authorize\util\Helpers::now() . ":" . $logMessage;
         file_put_contents(ANET_LOG_FILE, "$logString", $flags);
-        echo $logString; //REMOVE
+    }
+    public function __construct(){
+        $this->sensitiveXmlTags = ANetSensitiveFields::getSensitiveXmlTags();
     }
 }
 
