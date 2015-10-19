@@ -26,7 +26,7 @@ class ANetSensitiveFields
                 // JSON is valid
             }
             else{
-                echo sprinf("Invalid json in %s json_last_error  ",  ANET_SENSITIVE_XMLTAGS_JSON_FILE, json_last_error());
+                echo "ERROR: Invalid json in: " . ANET_SENSITIVE_XMLTAGS_JSON_FILE  . " json_last_error_msg : " . json_last_error_msg();
                 return self::getDefaulSensitiveXmlTags();
             }
         }
