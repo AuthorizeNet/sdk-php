@@ -374,6 +374,13 @@ class AuthorizeNetCIM_Test extends PHPUnit_Framework_TestCase
 
   public function testGetCustomerProfileIds()
   {
+    // A valid response should be received when a merchant has zero customer profiles...
+    // Hence, first testing using specific credentials for a merchant which has zero customer profiles...  
+    $request = new AuthorizeNetCIM('3qkNY3db6jB','7s8B76QvsPet82HH');
+    $response = $request->getCustomerProfileIds();
+    $this->assertTrue($response->isOk());
+    $this->assertTrue(empty($response->getCustomerProfileIds()));
+	  
     // Create new customer profile
     $request = new AuthorizeNetCIM;
     $customerProfile = new AuthorizeNetCustomer;
