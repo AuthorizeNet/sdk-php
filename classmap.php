@@ -219,9 +219,8 @@ return array(
     //'net\authorize\util\ObjectToXml' => $libDir . 'net/authorize/util/ObjectToXml.php',
     'net\authorize\util\HttpClient' => $libDir . 'net/authorize/util/HttpClient.php',
     'net\authorize\util\Helpers' => $libDir . 'net/authorize/util/Helpers.php',
-    'net\authorize\util\Log' => $libDir . 'net/authorize/util/LogHelper.php',
-    'net\authorize\util\LogFactory' => $libDir . 'net/authorize/util/LogHelper.php',
-    'net\authorize\util\LogHelper' => $libDir . 'net/authorize/util/LogHelper.php',
+    'net\authorize\util\Log' => $libDir . 'net/authorize/util/Log.php',
+    'net\authorize\util\LogFactory' => $libDir . 'net/authorize/util/LogFactory.php',
     'net\authorize\util\ANetSensitiveFields' => $libDir . 'net/authorize/util/ANetSensitiveFields.php',
     'net\authorize\util\SensitiveTag' => $libDir . 'net/authorize/util/SensitiveTag.php',
 

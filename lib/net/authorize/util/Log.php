@@ -88,15 +88,4 @@ class Log
         $this->sensitiveXmlTags = ANetSensitiveFields::getSensitiveXmlTags();
     }
 }
-
-class LogFactory
-{
-    private static $logger = NULL;
-    public static function getLog($classType){
-        if(NULL == self::$logger){
-            self::$logger = new Log();
-        }
-        return self::$logger;
-    }
-}
 ?>

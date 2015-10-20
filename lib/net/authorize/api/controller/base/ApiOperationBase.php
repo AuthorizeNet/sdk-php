@@ -40,8 +40,6 @@ abstract class ApiOperationBase implements IApiOperation
      * @var \net\authorize\util\HttpClient;
      */
     public $httpClient = null;
-
-    private $_log_file = false;
     private $logger = null;
     /**
      * Constructor.
@@ -53,7 +51,6 @@ abstract class ApiOperationBase implements IApiOperation
     public function __construct(\net\authorize\api\contract\v1\AnetApiRequestType $request, $responseType)
     {
         date_default_timezone_set('UTC');
-        $this->_log_file = (defined('AUTHORIZENET_LOG_FILE') ? AUTHORIZENET_LOG_FILE : false);
         $this->logger = LogFactory::getLog(get_class($this));
 
         if ( null == $request)
@@ -116,10 +113,8 @@ abstract class ApiOperationBase implements IApiOperation
         $this->beforeExecute();
 
         $this->logger->info("Request Serialization Begin");
-        file_put_contents($this->_log_file, sprintf("\n%s: Request Serialization Begin", $this->now()), FILE_APPEND);
         $xmlRequest = $this->serializer->serialize($this->apiRequest, 'xml');
-        $this->logger->info(sprintf("\n%s: Request  Serialization End", $this->now()));
-        file_put_contents($this->_log_file, sprintf("\n%s: Request  Serialization End", $this->now()), FILE_APPEND);
+        $this->logger->info("Request  Serialization End");
         /*
                 //$xmlRequest = '<?xml version="1.0" encoding="UTF-8"?>  <ARBGetSubscriptionListRequest xmlns="AnetApi/xml/v1/schema/AnetApiSchema.xsd">  <merchantAuthentication>  <name>4YJmeW7V77us</name>  <transactionKey>4qHK9u63F753be4Z</transactionKey>  </merchantAuthentication>  <refId><![CDATA[ref1416999093]]></refId>  <searchType><![CDATA[subscriptionActive]]></searchType>  <sorting>  <orderBy><![CDATA[firstName]]></orderBy>  <orderDescending>false</orderDescending>  </sorting>  <paging>  <limit>10</limit>  <offset>1</offset>  </paging>  </ARBGetSubscriptionListRequest>  ';
         */
@@ -129,9 +124,9 @@ abstract class ApiOperationBase implements IApiOperation
         {
             throw new \Exception( "Error getting valid response from api. Check log file for error details");
         }
-        file_put_contents($this->_log_file, sprintf("\n%s: Response De-Serialization Begin", $this->now()), FILE_APPEND);
+        $this->logger->info("Response De-Serialization Begin");
         $this->apiResponse = $this->serializer->deserialize( $xmlResponse, $this->apiResponseType , 'xml');
-        file_put_contents($this->_log_file, sprintf("\n%s: Response De-Serialization End", $this->now()), FILE_APPEND);
+        $this->logger->info("Response De-Serialization End");
 
         $this->afterExecute();
     }
