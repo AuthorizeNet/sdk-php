@@ -111,7 +111,8 @@ abstract class ApiOperationBase implements IApiOperation
     public function execute($endPoint = \net\authorize\api\constants\ANetEnvironment::CUSTOM)
     {
         $this->beforeExecute();
-
+//        $this->logger->debugFormat("Request object :%s", $this->apiRequest);
+        $this->logger->debug($this->apiRequest);
         $this->logger->info("Request Serialization Begin");
         $xmlRequest = $this->serializer->serialize($this->apiRequest, 'xml');
         $this->logger->info("Request  Serialization End");

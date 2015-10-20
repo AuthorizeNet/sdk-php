@@ -51,13 +51,54 @@ class Log
         $maskedString = preg_replace($patterns, $replacements, $rawString);
         return $maskedString;
     }
-
-    private function getMasked($raw)
+    private function maskSensitiveProperties ($obj)
     {
+        $reflectObj = new \ReflectionObject($obj);
+//        //echo "reflection object name: " . $reflectObj->getName();
+//        if($reflectObj->getName()=="name"){
+//            return;
+//        }
+        $props = $reflectObj->getParentClass()->getProperties();
+        print_r($props);
+        foreach($props as $i => $prop){
+            $prop->setAccessible(true);
+//
+//            echo "propValue: " ;
+              print_r($prop->getValue($obj));
+//            print_r($propValue);
+
+            if(is_object($prop->getValue($obj))){
+                echo "Is object\n";
+                $prop->setValue($obj, null);
+//                $prop->setValue($obj, $this->maskSensitiveProperties($prop->getValue($obj)));
+            }
+            else{
+                echo "leaf value: " ; $prop->getValue($obj);
+            }
+
+//            var_dump($obj);
+        }
+//NULL even obj disp>layed        print_r(get_object_vars($obj));
+//        print_r($obj);
+//NULL even obj displayed    print_r(get_class_vars(get_class($obj)));
+        echo "************************";
+        print_r($obj);
+        print_r('size...'.count($props));
+        return $obj;
+//        echo"var_dump-------";
+//        var_dump($reflectObj);
+//        echo"var_dump-------";
+//        return $reflectObj;
+    }
+    private function getMasked($raw)
+    { //always returns string
         $messageType = gettype($raw);
         $message="";
         if ($messageType == "string") {
             $message = $this->maskSensitiveXmlString($raw);
+        }
+        else if($messageType == "object"){
+            $message = print_r($this->maskSensitiveProperties($raw), true); //object to string
         }
         return $message;
     }
