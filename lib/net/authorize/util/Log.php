@@ -77,12 +77,25 @@ class Log
             $this->log(ANET_LOG_ERROR_PREFIX, $logMessage,$flags);
         }
     }
-    private function log($prefix, $logMessage, $flags){
+    private function log($logLevelPrefix, $logMessage, $flags){
         //masking
         $logMessage = $this->getMasked($logMessage);
-        //log level, timestamp
-        $logString = "\n".$prefix . ": " . \net\authorize\util\Helpers::now() . ":" . $logMessage;
-        file_put_contents(ANET_LOG_FILE, "$logString", $flags);
+
+        //debug_backtrace
+        $fileName = 'n/a';
+        $methodName = 'n/a';
+        $lineNumber = 'n/a';
+        $debugTrace = debug_backtrace();
+        if (isset($debugTrace[1])) {
+            $fileName = $debugTrace[1]['file'] ? $debugTrace[1]['file'] : 'n/a';
+            $lineNumber = $debugTrace[1]['line'] ? $debugTrace[1]['line'] : 'n/a';
+        }
+        if (isset($debugTrace[2])) $methodName = $debugTrace[2]['function'] ? $debugTrace[2]['function'] : 'n/a';
+
+        //Add timestamp, log level, method, file, line
+        $logString = sprintf("\n %s %s : [%s] (%s : %s) - %s", \net\authorize\util\Helpers::now(), $logLevelPrefix,
+            $methodName, $fileName, $lineNumber, $logMessage);
+        file_put_contents(ANET_LOG_FILE, $logString, $flags);
     }
     public function __construct(){
         $this->sensitiveXmlTags = ANetSensitiveFields::getSensitiveXmlTags();
