@@ -33,7 +33,7 @@ class Log
         foreach ($this->sensitiveXmlTags as $i => $sensitiveTag){
             $tag = $sensitiveTag->tagName;
             $inputPattern = $sensitiveTag->pattern;
-            $inputReplacement = "XXXX";
+            $inputReplacement = "xxxx";
 
             if(!trim($inputPattern)) {
                 $inputPattern = "(.+)"; //no need to mask null data
@@ -51,45 +51,89 @@ class Log
         $maskedString = preg_replace($patterns, $replacements, $rawString);
         return $maskedString;
     }
+	
+	private function getPropertiesInclBase($reflClass)
+	{
+		$properties = array();
+		try {
+			do {
+				$curClassPropList = $reflClass->getProperties();
+				foreach ($curClassPropList as $p) {
+					$p->setAccessible(true);
+				}
+				$properties = array_merge($curClassPropList, $properties);
+			} while ($reflClass = $reflClass->getParentClass());
+		} catch (\ReflectionException $e) { }
+		return $properties;
+	}
+	
+	// recieves a ReflectionProperty and an object, and returns a masked object if its a sensitive field, else false
+	private function checkAndMask($prop,$obj){
+		foreach($this->sensitiveXmlTags as $i => $sensitiveTag)
+		{
+			echo "strcmp ". $prop->getName().'---'.$sensitiveTag->tagName . PHP_EOL;
+			$inputPattern = "(.+)";
+			$inputReplacement = "xxxx";
+
+            if(trim($sensitiveTag->pattern)) {
+                $inputPattern = $sensitiveTag->pattern;
+            }
+			$inputPattern='/'.$inputPattern.'/';
+			
+            if(trim($sensitiveTag->replacement)) {
+                $inputReplacement = $sensitiveTag->replacement;
+            }
+			
+			if(strcmp($prop->getName(),$sensitiveTag->tagName)==0)
+			{
+				echo '|||'.preg_replace($inputPattern,$inputReplacement,$prop->getValue($obj));
+				$prop->setValue($obj,preg_replace($inputPattern,$inputReplacement,$prop->getValue($obj)));
+				return $prop->getValue($obj);
+			}
+		}
+		return false;
+		// ($prop->getValue($obj))
+	}
+	
     private function maskSensitiveProperties ($obj)
     {
+		// retrieve all properties of the passed object
+		echo "here:";
         $reflectObj = new \ReflectionObject($obj);
-//        //echo "reflection object name: " . $reflectObj->getName();
-//        if($reflectObj->getName()=="name"){
-//            return;
-//        }
-        $props = $reflectObj->getParentClass()->getProperties();
-        print_r($props);
-        foreach($props as $i => $prop){
-            $prop->setAccessible(true);
-//
-//            echo "propValue: " ;
-              print_r($prop->getValue($obj));
-//            print_r($propValue);
+        $props = $this->getPropertiesInclBase($reflectObj);
 
-            if(is_object($prop->getValue($obj))){
-                echo "Is object\n";
-                $prop->setValue($obj, null);
-//                $prop->setValue($obj, $this->maskSensitiveProperties($prop->getValue($obj)));
+        foreach($props as $i => $prop){
+            print_r($prop->getValue($obj));
+			if(is_object($prop->getValue($obj))){
+				echo "Is object".$prop->getName()."\n";
+				//$prop->setValue($obj, null);
+				$prop->setValue($obj, $this->maskSensitiveProperties($prop->getValue($obj)));
+            }
+			else if(is_array($prop->getValue($obj))){
+				echo "Is array".$prop->getName()."\n";
+				//$prop->setValue($obj, null);
+				$newVals=array();
+				foreach($prop->getValue($obj) as $i=>$arrEle)
+				{
+					$newVals[]=$this->maskSensitiveProperties($arrEle);
+				}
+				$prop->setValue($obj, $newVals);
             }
             else{
                 echo "leaf value: " ; $prop->getValue($obj);
+				$res=$this->checkAndMask($prop,$obj);
+				if($res)
+					$prop->setValue($obj, $res);
             }
-
-//            var_dump($obj);
         }
-//NULL even obj disp>layed        print_r(get_object_vars($obj));
-//        print_r($obj);
-//NULL even obj displayed    print_r(get_class_vars(get_class($obj)));
+
         echo "************************";
         print_r($obj);
         print_r('size...'.count($props));
+		
         return $obj;
-//        echo"var_dump-------";
-//        var_dump($reflectObj);
-//        echo"var_dump-------";
-//        return $reflectObj;
     }
+	
     private function getMasked($raw)
     { //always returns string
         $messageType = gettype($raw);
@@ -98,7 +142,9 @@ class Log
             $message = $this->maskSensitiveXmlString($raw);
         }
         else if($messageType == "object"){
-            $message = print_r($this->maskSensitiveProperties($raw), true); //object to string
+			$obj = unserialize(serialize($raw));
+			// deep copying objects http://stackoverflow.com/questions/185934/how-do-i-create-a-copy-of-an-object-in-php
+			$message = print_r($this->maskSensitiveProperties($obj), true); //object to string
         }
         return $message;
     }
