@@ -16,27 +16,39 @@ define('ANET_LOG_DEBUG',1);
 define("ANET_LOG_INFO",2);
 define("ANET_LOG_WARN",3);
 define("ANET_LOG_ERROR",4);
+
 //set level
 define("ANET_LOG_LEVEL",ANET_LOG_DEBUG);
+
+/**
+ * A class to implement logging.
+ *
+ * @package    AuthorizeNet
+ * @subpackage net\authorize\util
+ */
 
 class Log
 {
     private $sensitiveXmlTags = NULL;
-
+	
+	/**
+	* Takes an xml as string and masks the sensitive fields.
+	*
+	* @param string $rawString		The xml as a string.
+	*
+	* @return string 		The xml as a string after masking sensitive fields
+	*/
     private function maskSensitiveXmlString($rawString){
-        //Tag name is compulsory, can leave patterns and repalcements blank
-//        $tags= array("cardCode","cardNumber","expirationDate");
-//        $patterns=array("","([^0-9]*)(\d+)(\d{4})(.*)","");
         $patterns=array();
-//        $replacements=array("","$1xxxx-$3$4","");
         $replacements=array();
+		
         foreach ($this->sensitiveXmlTags as $i => $sensitiveTag){
             $tag = $sensitiveTag->tagName;
-            $inputPattern = $sensitiveTag->pattern;
+            $inputPattern = "(.+)"; //no need to mask null data
             $inputReplacement = "xxxx";
 
-            if(!trim($inputPattern)) {
-                $inputPattern = "(.+)"; //no need to mask null data
+            if(trim($sensitiveTag->pattern)) {
+                $inputPattern = $sensitiveTag->pattern;
             }
             $pattern = "/<" . $tag . ">". $inputPattern ."<\/" . $tag . ">/";
 
@@ -51,7 +63,22 @@ class Log
         $maskedString = preg_replace($patterns, $replacements, $rawString);
         return $maskedString;
     }
+
+	/**
+	* Object data masking related functions START
+	*/
 	
+	/**
+	* private function getPropertiesInclBase($reflClass).
+	* 
+	* Receives a ReflectionObject, ...
+	* iteratively fetches the properties of the object (including from the base classes up the hierarchy), ...
+	* collects them in an array of ReflectionProperty and returns the array.
+	*
+	* @param ReflectionObject $reflClass
+	*
+	* @return \ReflectionProperty[]
+	*/
 	private function getPropertiesInclBase($reflClass)
 	{
 		$properties = array();
@@ -67,11 +94,19 @@ class Log
 		return $properties;
 	}
 	
-	// recieves a ReflectionProperty and an object, and returns a masked object if its a sensitive field, else false
-	private function checkAndMask($prop,$obj){
+	/**
+	* private function checkAndMask($prop, $obj).
+	* 
+	* Receives a ReflectionProperty and an object, and returns a masked object if the ReflectionProperty corresponds to a sensitive field, else returns false.
+	*
+	* @param ReflectionProperty $prop
+	* @param object $obj
+	*
+	* @return string|bool
+	*/
+	private function checkAndMask($prop, $obj){
 		foreach($this->sensitiveXmlTags as $i => $sensitiveTag)
 		{
-			echo "strcmp ". $prop->getName().'---'.$sensitiveTag->tagName . PHP_EOL;
 			$inputPattern = "(.+)";
 			$inputReplacement = "xxxx";
 
@@ -86,54 +121,66 @@ class Log
 			
 			if(strcmp($prop->getName(),$sensitiveTag->tagName)==0)
 			{
-				echo '|||'.preg_replace($inputPattern,$inputReplacement,$prop->getValue($obj));
 				$prop->setValue($obj,preg_replace($inputPattern,$inputReplacement,$prop->getValue($obj)));
 				return $prop->getValue($obj);
 			}
 		}
 		return false;
-		// ($prop->getValue($obj))
 	}
 	
+	/**
+	* called by getMasked() to mask sensitive fields of an object.
+	*
+	* @param object $obj
+	*
+	* @return object
+	*/
     private function maskSensitiveProperties ($obj)
     {
-		// retrieve all properties of the passed object
-		echo "here:";
+		// first retrieve all properties of the passed object
         $reflectObj = new \ReflectionObject($obj);
         $props = $this->getPropertiesInclBase($reflectObj);
 
+		// for composite property recursively execute; for scalars, do a check and mask
         foreach($props as $i => $prop){
-            print_r($prop->getValue($obj));
-			if(is_object($prop->getValue($obj))){
-				echo "Is object".$prop->getName()."\n";
-				//$prop->setValue($obj, null);
-				$prop->setValue($obj, $this->maskSensitiveProperties($prop->getValue($obj)));
+			$propValue=$prop->getValue($obj);
+			
+			// for object and arrays, recursively call for inner elements
+			if(is_object($propValue)){
+				$prop->setValue($obj, $this->maskSensitiveProperties($propValue));
             }
-			else if(is_array($prop->getValue($obj))){
-				echo "Is array".$prop->getName()."\n";
-				//$prop->setValue($obj, null);
+			else if(is_array($propValue)){
 				$newVals=array();
-				foreach($prop->getValue($obj) as $i=>$arrEle)
+				foreach($propValue as $i=>$arrEle)
 				{
 					$newVals[]=$this->maskSensitiveProperties($arrEle);
 				}
 				$prop->setValue($obj, $newVals);
             }
+			// else check if the property represents a sensitive field. If so, mask.
             else{
-                echo "leaf value: " ; $prop->getValue($obj);
-				$res=$this->checkAndMask($prop,$obj);
+				$res=$this->checkAndMask($prop, $obj);
 				if($res)
 					$prop->setValue($obj, $res);
             }
         }
-
-        echo "************************";
-        print_r($obj);
-        print_r('size...'.count($props));
 		
         return $obj;
     }
 	
+	/**
+	* Object data masking related functions END
+	*/
+	
+	/**
+	* private function getMasked($raw).
+	*
+	* called by log()
+	*
+	* @param mixed $raw
+	*
+	* @return string
+	*/
     private function getMasked($raw)
     { //always returns string
         $messageType = gettype($raw);
@@ -142,29 +189,13 @@ class Log
             $message = $this->maskSensitiveXmlString($raw);
         }
         else if($messageType == "object"){
-			$obj = unserialize(serialize($raw));
-			// deep copying objects http://stackoverflow.com/questions/185934/how-do-i-create-a-copy-of-an-object-in-php
+			$obj = unserialize(serialize($raw)); // deep copying the object
 			$message = print_r($this->maskSensitiveProperties($obj), true); //object to string
         }
         return $message;
     }
-    public function debug($logMessage, $flags=FILE_APPEND)
-    {
-        if(ANET_LOG_DEBUG >= ANET_LOG_LEVEL){
-            $this->log(ANET_LOG_DEBUG_PREFIX, $logMessage,$flags);
-        }
-    }
-    public function info($logMessage, $flags=FILE_APPEND){
-        if(ANET_LOG_INFO >= ANET_LOG_LEVEL) {
-            $this->log(ANET_LOG_INFO_PREFIX, $logMessage,$flags);
-        }
-    }
-    public function error($logMessage, $flags=FILE_APPEND){
-        if(ANET_LOG_ERROR >= ANET_LOG_LEVEL) {
-            $this->log(ANET_LOG_ERROR_PREFIX, $logMessage,$flags);
-        }
-    }
-    private function log($logLevelPrefix, $logMessage, $flags){
+	
+	private function log($logLevelPrefix, $logMessage, $flags){
         //masking
         $logMessage = $this->getMasked($logMessage);
 
@@ -184,6 +215,26 @@ class Log
             $methodName, $fileName, $lineNumber, $logMessage);
         file_put_contents(ANET_LOG_FILE, $logString, $flags);
     }
+	
+    public function debug($logMessage, $flags=FILE_APPEND)
+    {
+        if(ANET_LOG_DEBUG >= ANET_LOG_LEVEL){
+            $this->log(ANET_LOG_DEBUG_PREFIX, $logMessage,$flags);
+        }
+    }
+	
+    public function info($logMessage, $flags=FILE_APPEND){
+        if(ANET_LOG_INFO >= ANET_LOG_LEVEL) {
+            $this->log(ANET_LOG_INFO_PREFIX, $logMessage,$flags);
+        }
+    }
+	
+    public function error($logMessage, $flags=FILE_APPEND){
+        if(ANET_LOG_ERROR >= ANET_LOG_LEVEL) {
+            $this->log(ANET_LOG_ERROR_PREFIX, $logMessage,$flags);
+        }
+    }
+	
     public function __construct(){
         $this->sensitiveXmlTags = ANetSensitiveFields::getSensitiveXmlTags();
     }
