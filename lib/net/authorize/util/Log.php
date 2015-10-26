@@ -64,7 +64,28 @@ class Log
         return $maskedString;
     }
 
-	/**
+    /**
+     * Takes a string and masks credit card regex matching parts.
+     *
+     * @param string $rawString		The string.
+     *
+     * @return string 		The string after masking credit card regex matching parts.
+     */
+    private function maskCreditCards($rawString){
+        $patterns=array();
+        $replacements=array();
+
+        foreach ($this->sensitiveStringRegexes as $i => $creditCardRegex){
+            $pattern = "/" . $creditCardRegex . "/";
+
+            $replacement = "xxxx";
+            $patterns [$i] = $pattern;
+            $replacements[$i]  = $replacement;
+        }
+        $maskedString = preg_replace($patterns, $replacements, $rawString);
+        echo "maskedString: $maskedString\n";
+        return $maskedString;
+    }/**
 	* Object data masking related functions START
 	*/
 	
@@ -186,7 +207,9 @@ class Log
         $messageType = gettype($raw);
         $message="";
         if ($messageType == "string") {
-            $message = $this->maskSensitiveXmlString($raw);
+            $maskedXml = $this->maskSensitiveXmlString($raw);
+            //mask credit card numbers
+            $message = $this->maskCreditCards($maskedXml);
         }
         else if($messageType == "object"){
 			$obj = unserialize(serialize($raw)); // deep copying the object
@@ -281,6 +304,7 @@ class Log
 	
     public function __construct(){
         $this->sensitiveXmlTags = ANetSensitiveFields::getSensitiveXmlTags();
+        $this->sensitiveStringRegexes = ANetSensitiveFields::getSensitiveStringRegexes();
     }
 }
 ?>

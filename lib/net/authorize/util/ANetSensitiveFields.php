@@ -5,27 +5,18 @@ define("ANET_SENSITIVE_XMLTAGS_JSON_FILE","AuthorizedNetSensitiveTagsConfig.json
 
 class ANetSensitiveFields
 {
-    private static function getDefaulSensitiveXmlTags(){
-//        return array( //format for each element: array(tag name, regex-pattern, regex-replacement)
-//            array("tagName" => "cardCode","pattern" => "","replacement" => "","disableMask"=>false),
-//            array("tagName" => "cardNumber","pattern" => "([^0-9]*)(\d+)(\d{4})(.*)","replacement" => "$1xxxx-$3$4","disableMask"=>false),
-//            array("tagName" => "expirationDate","pattern" => "","replacement" => "","disableMask"=>false)
-//        );
-        return array( //format for each element: array(tag name, regex-pattern, regex-replacement)
-            new SensitiveTag("cardCode"),
-            new SensitiveTag("cardNumber","(\d+)(\d{4})","$1xxxx-$3$4",false),
-            new SensitiveTag("expirationDate")
-        );
-    }
-    public static function getSensitiveXmlTags(){
-        $sensitiveTags = array();
+    private static $sensitiveTags = NULL;
+    private static $sensitiveStringRegexes = NULL;
+
+    private static function fetchFromConfigFiles(){
         $configFilePath = dirname(__FILE__) . "/" . ANET_SENSITIVE_XMLTAGS_JSON_FILE;
         $userConfigFile = ANET_SENSITIVE_XMLTAGS_JSON_FILE;
         $presentUserConfigFile = file_exists($userConfigFile);
         if ($presentUserConfigFile) { //client config for tags
             //read list of tags(and associate regex-patterns and replacements) from .json file
             $jsonFileObejct = json_decode(file_get_contents($userConfigFile));
-            $sensitiveTags = $jsonFileObejct["sensitiveTags"];
+            self::$sensitiveTags = $jsonFileObejct->sensitiveTags;
+            self::$sensitiveStringRegexes = $jsonFileObejct->sensitiveStringRegexes;
             if (json_last_error() === JSON_ERROR_NONE) {// JSON is valid
             }
             else{
@@ -38,22 +29,25 @@ class ANetSensitiveFields
                 exit("ERROR: No config file: " . $configFilePath);
             }
             $jsonFileObejct = json_decode(file_get_contents($configFilePath));
-            $sensitiveTags = $jsonFileObejct->sensitiveTags;
+            self::$sensitiveTags = $jsonFileObejct->sensitiveTags;
+            self::$sensitiveStringRegexes = $jsonFileObejct->sensitiveStringRegexes;
             if (json_last_error() === JSON_ERROR_NONE) {
             }
             else{
                 exit("ERROR: Invalid json in: " . $configFilePath  . " json_last_error_msg : " . json_last_error_msg());
             }
         }
-        //Check for disableMask flag in case of client json.
-        $applySensitiveTags = array();
-        foreach($sensitiveTags as $sensitiveTag){
-            if($sensitiveTag->disableMask){
-                //skip masking continue;
-            }
-            else{
-                array_push($applySensitiveTags,$sensitiveTag);
-            }        }
-        return $applySensitiveTags;
+    }
+    public static function getSensitiveStringRegexes(){
+        if(NULL == self::$sensitiveStringRegexes) {
+            self::fetchFromConfigFiles();
+        }
+        return self::$sensitiveStringRegexes;
+    }
+    public static function getSensitiveXmlTags(){
+        if(NULL == self::$sensitiveTags) {
+            self::fetchFromConfigFiles();
+        }
+        return self::$sensitiveTags;
     }
 }
