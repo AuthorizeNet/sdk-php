@@ -19,21 +19,22 @@ class ANetSensitiveFields
     }
     public static function getSensitiveXmlTags(){
         $sensitiveTags = array();
-        if (file_exists(ANET_SENSITIVE_XMLTAGS_JSON_FILE)) {
+        $configFilePath = dirname(__FILE__) . "/" . ANET_SENSITIVE_XMLTAGS_JSON_FILE;
+        if (file_exists($configFilePath)) {
             //read list of tags(and associate regex-patterns and replacements) from .json file
-            $sensitiveTags = json_decode(file_get_contents(ANET_SENSITIVE_XMLTAGS_JSON_FILE));
+            $sensitiveTags = json_decode(file_get_contents($configFilePath));
             if (json_last_error() === JSON_ERROR_NONE) {
                 // JSON is valid
             }
             else{
-                echo "ERROR: Invalid json in: " . ANET_SENSITIVE_XMLTAGS_JSON_FILE  . " json_last_error_msg : " . json_last_error_msg();
+                echo "ERROR: Invalid json in: " . $configFilePath  . " json_last_error_msg : " . json_last_error_msg();
                 return self::getDefaulSensitiveXmlTags();
             }
         }
         else {
             // if not present, create a local config file
             $sensitiveTags = self::getDefaulSensitiveXmlTags();
-            file_put_contents(ANET_SENSITIVE_XMLTAGS_JSON_FILE, json_encode($sensitiveTags, JSON_PRETTY_PRINT));
+            file_put_contents($configFilePath, json_encode($sensitiveTags, JSON_PRETTY_PRINT));
         }
         //Check for disableMask flag in case of client json.
         $applySensitiveTags = array();
