@@ -50,7 +50,7 @@ class Log
             if(trim($sensitiveTag->pattern)) {
                 $inputPattern = $sensitiveTag->pattern;
             }
-            $pattern = "/<" . $tag . ">". $inputPattern ."<\/" . $tag . ">/";
+            $pattern = "/<" . $tag . ">(?:.*)". $inputPattern ."(?:.*)<\/" . $tag . ">/";
 
             if(trim($sensitiveTag->replacement)) {
                 $inputReplacement = $sensitiveTag->replacement;
