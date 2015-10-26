@@ -42,233 +42,88 @@ require 'path/to/anet_php_sdk/autoload.php';
 To authenticate with the Authorize.Net API you will need to retrieve your API Login ID and Transaction Key from the [`Merchant Interface`](https://account.authorize.net/).  You can find these details in the Settings section.
 If you need a sandbox account you can sign up for one really easily [`here`](https://developer.authorize.net/sandbox/).
 
-Once you have your keys simply plug them into the appropriate variables as per the samples below.
+Once you have your keys simply plug them into the appropriate variables, as per the below code dealing with the authentication part of the flow.
 
 ````php
-define("AUTHORIZENET_API_LOGIN_ID", "YOURLOGIN");
-define("AUTHORIZENET_TRANSACTION_KEY", "YOURKEY");
+$merchantAuthentication = new AnetAPI\MerchantAuthenticationType();
+$merchantAuthentication->setName("YOURLOGIN");
+$merchantAuthentication->setTransactionKey("YOURKEY");
 ````
+...
+
+````php
+$request = new AnetAPI\CreateTransactionRequest();
+$request->setMerchantAuthentication($merchantAuthentication);
+````
+...
 
 ## Usage Examples
+*Users of previous SDK model please note: The SDK is moving towards using a new model. This model allows us to maintain SDKs better by being more responsive to API changes. (To determine if a code is using the old model or new, a prominent difference is the usage of controllers, which is used only with the new model.) Refer the [old README](README_OLD.md) for samples of the old model.*
 
-See below for basic usage examples. View the `tests/` folder for more examples of
-each API.  Additional documentation is in the `docs/` folder.
+Apart from this README, you can find details and examples of using the SDK in the following places:
+- [Developer Center Reference](http://developer.authorize.net/api/reference/index.html)
+- [Github Sample Code Repositories](http://developer.authorize.net/api/samplecode/), [php](https://github.com/AuthorizeNet/sample-code-php)
       
-### AuthorizeNetAIM.php Quick Usage Example
+### Quick Usage Example (with Charge Credit Card - Authorize and Capture)
+- Save the below code to a php file named, say, `charge-credit-card.php`
+- Open command prompt and navigate to your sdk folder
+- Update dependecies - e.g., With composer, type `composer update`
+- Type `php [<path to folder containing the php file>\]charge-credit-card.php`
 
 ```php
-define("AUTHORIZENET_API_LOGIN_ID", "YOURLOGIN");
-define("AUTHORIZENET_TRANSACTION_KEY", "YOURKEY");
-define("AUTHORIZENET_SANDBOX", true);
-$sale           = new AuthorizeNetAIM;
-$sale->amount   = "5.99";
-$sale->card_num = '6011000000000012';
-$sale->exp_date = '04/15';
-$response = $sale->authorizeAndCapture();
-if ($response->approved) {
-    $transaction_id = $response->transaction_id;
+require 'vendor/autoload.php';
+/* provide full path to the sdk in the above code, if you want to run it from some place other than the sdk folder
+e.g. if sdk is in c:\anet-sdk-php,
+require 'c:/anet-sdk-php/vendor/autoload.php'; */
+use net\authorize\api\contract\v1 as AnetAPI;
+use net\authorize\api\controller as AnetController;
+define("AUTHORIZENET_LOG_FILE", "phplog");
+
+// Common setup for API credentials
+$merchantAuthentication = new AnetAPI\MerchantAuthenticationType();
+$merchantAuthentication->setName("556KThWQ6vf2");
+$merchantAuthentication->setTransactionKey("9ac2932kQ7kN2Wzq");
+
+// Create the payment data for a credit card
+$creditCard = new AnetAPI\CreditCardType();
+$creditCard->setCardNumber( "4111111111111111" );
+$creditCard->setExpirationDate( "2038-12");
+$paymentOne = new AnetAPI\PaymentType();
+$paymentOne->setCreditCard($creditCard);
+
+// Create a transaction
+$transactionRequestType = new AnetAPI\TransactionRequestType();
+$transactionRequestType->setTransactionType( "authCaptureTransaction"); 
+$transactionRequestType->setAmount(151.51);
+$transactionRequestType->setPayment($paymentOne);
+
+$request = new AnetAPI\CreateTransactionRequest();
+$request->setMerchantAuthentication($merchantAuthentication);
+$request->setTransactionRequest( $transactionRequestType);
+$controller = new AnetController\CreateTransactionController($request);
+$response = $controller->executeWithApiResponse( \net\authorize\api\constants\ANetEnvironment::SANDBOX);
+
+if ($response != null)
+{
+	$tresponse = $response->getTransactionResponse();
+
+	if (($tresponse != null) && ($tresponse->getResponseCode()=="1") )   
+	{
+		echo "Charge Credit Card AUTH CODE : " . $tresponse->getAuthCode() . "\n";
+		echo "Charge Credit Card TRANS ID  : " . $tresponse->getTransId() . "\n";
+	}
+	else
+	{
+		echo  "Charge Credit Card ERROR :  Invalid response\n";
+	}
+}
+else
+{
+	echo  "Charge Credit card Null response returned";
 }
 ```
-    
-### AuthorizeNetAIM.php Advanced Usage Example
-
-```php
-define("AUTHORIZENET_API_LOGIN_ID", "YOURLOGIN");
-define("AUTHORIZENET_TRANSACTION_KEY", "YOURKEY");
-define("AUTHORIZENET_SANDBOX", true);
-$auth         = new AuthorizeNetAIM;
-$auth->amount = "45.00";
-
-// Use eCheck:
-$auth->setECheck(
-    '121042882',
-    '123456789123',
-    'CHECKING',
-    'Bank of Earth',
-    'Jane Doe',
-    'WEB'
-);
-
-// Set multiple line items:
-$auth->addLineItem('item1', 'Golf tees', 'Blue tees', '2', '5.00', 'N');
-$auth->addLineItem('item2', 'Golf shirt', 'XL', '1', '40.00', 'N');
-
-// Set Invoice Number:
-$auth->invoice_num = time();
-
-// Set a Merchant Defined Field:
-$auth->setCustomField("entrance_source", "Search Engine");
-
-// Authorize Only:
-$response  = $auth->authorizeOnly();
-
-if ($response->approved) {
-    $auth_code = $response->transaction_id;
-
-    // Now capture:
-    $capture = new AuthorizeNetAIM;
-    $capture_response = $capture->priorAuthCapture($auth_code);
-
-    // Now void:
-    $void = new AuthorizeNetAIM;
-    $void_response = $void->void($capture_response->transaction_id);
-}
-```
-
-### AuthorizeNetARB.php Usage Example
-
-```php
-define("AUTHORIZENET_API_LOGIN_ID", "YOURLOGIN");
-define("AUTHORIZENET_TRANSACTION_KEY", "YOURKEY");
-$subscription                          = new AuthorizeNet_Subscription;
-$subscription->name                    = "PHP Monthly Magazine";
-$subscription->intervalLength          = "1";
-$subscription->intervalUnit            = "months";
-$subscription->startDate               = "2011-03-12";
-$subscription->totalOccurrences        = "12";
-$subscription->amount                  = "12.99";
-$subscription->creditCardCardNumber    = "6011000000000012";
-$subscription->creditCardExpirationDate= "2018-10";
-$subscription->creditCardCardCode      = "123";
-$subscription->billToFirstName         = "Rasmus";
-$subscription->billToLastName          = "Doe";
-
-// Create the subscription.
-$request         = new AuthorizeNetARB;
-$response        = $request->createSubscription($subscription);
-$subscription_id = $response->getSubscriptionId();
-```
-
-### AuthorizeNetCIM.php Usage Example
-
-```php
-define("AUTHORIZENET_API_LOGIN_ID", "YOURLOGIN");
-define("AUTHORIZENET_TRANSACTION_KEY", "YOURKEY");
-$request = new AuthorizeNetCIM;
-// Create new customer profile
-$customerProfile                     = new AuthorizeNetCustomer;
-$customerProfile->description        = "Description of customer";
-$customerProfile->merchantCustomerId = time();
-$customerProfile->email              = "test@domain.com";
-$response = $request->createCustomerProfile($customerProfile);
-if ($response->isOk()) {
-    $customerProfileId = $response->getCustomerProfileId();
-}
-```
-
-### AuthorizeNetSIM.php Usage Example
-
-```php
-define("AUTHORIZENET_API_LOGIN_ID", "YOURLOGIN");
-define("AUTHORIZENET_MD5_SETTING", "");
-$message = new AuthorizeNetSIM;
-if ($message->isAuthorizeNet()) {
-    $transactionId = $message->transaction_id;
-}
-```
-    
-### AuthorizeNetDPM.php Usage Example
-
-```php
-$url             = "http://YOUR_DOMAIN.com/direct_post.php";
-$api_login_id    = 'YOUR_API_LOGIN_ID';
-$transaction_key = 'YOUR_TRANSACTION_KEY';
-$md5_setting     = 'YOUR_MD5_SETTING'; // Your MD5 Setting
-$amount          = "5.99";
-AuthorizeNetDPM::directPostDemo($url, $api_login_id, $transaction_key, $amount, $md5_setting);
-```
-
-### AuthorizeNetCP.php Usage Example
-
-```php
-define("AUTHORIZENET_API_LOGIN_ID", "YOURLOGIN");
-define("AUTHORIZENET_TRANSACTION_KEY", "YOURKEY");
-define("AUTHORIZENET_MD5_SETTING", "");
-$sale              = new AuthorizeNetCP;
-$sale->amount      = '59.99';
-$sale->device_type = '4';
-$sale->setTrack1Data('%B4111111111111111^CARDUSER/JOHN^1803101000000000020000831000000?');
-$response = $sale->authorizeAndCapture();
-$trans_id = $response->transaction_id;
-```
-
-### AuthorizeNetTD.php Usage Example
-
-```php
-define("AUTHORIZENET_API_LOGIN_ID", "YOURLOGIN");
-define("AUTHORIZENET_TRANSACTION_KEY", "YOURKEY");
-$request  = new AuthorizeNetTD;
-$response = $request->getTransactionDetails("12345");
-echo $response->xml->transaction->transactionStatus;
-```
-
-## Testing
-
-Integration tests for the AuthorizeNet SDK are in the `tests` directory. These tests
-are mainly for SDK development. However, you can also browse through them to find
-more usage examples for the various APIs.
-
-- Run `composer update --dev` to load the `PHPUnit` test library.
-- Copy the `phpunit.xml.dist` file to `phpunit.xml` and enter your merchant
-  credentials in the constant fields.
-- Run `vendor/bin/phpunit` to run the test suite.
-
-*You'll probably want to disable emails on your sandbox account.*
-    
-### Test Credit Card Numbers
-
-| Card Type                  | Card Number      |
-|----------------------------|------------------|
-| American Express Test Card | 370000000000002  |
-| Discover Test Card         | 6011000000000012 |
-| Visa Test Card             | 4007000000027    |
-| Second Visa Test Card      | 4012888818888    |
-| JCB                        | 3088000000000017 |
-| Diners Club/ Carte Blanche | 38000000000006   |
-
-*Set the expiration date to anytime in the future.*
-
-## PHPDoc
-
-Add PhpDocumentor to your composer.json and run `composer update --dev`:
-```json
-"require-dev": {
-    "phpdocumentor/phpdocumentor": "*"
-}
-```
-To autogenerate PHPDocs run:
-```shell
-vendor/bin/phpdoc -t doc/api/ -d lib
-```
-
-## New Model
-
-We’re exploring a new model of maintaining the SDKs which allows us to be more responsive to API changes.  This model is consistent across the different SDK languages, which is great for us, however we do not want to sacrifice your productivity by losing the inherent efficiencies in the PHP language or our object model.  To this end we’re introducing the new model as purely “experimental” at this time and we would appreciate your feedback.  Let us know what you really think!  Here’s an example of a server side call with ApplePay data in the new model.
 
 ### Apple Pay Example
-You'll need to introduce some new dependencies into composer.json
-````json
-{
-
-  "require": {
-  "php": ">=5.2.0",
-  "ext-curl": "*",
-  "authorizenet/authorizenet": "1.8.3",
-  "jms/serializer": "xsd2php-dev as 0.18.0"
-},
-"require-dev": {
-  "goetas/xsd2php": "2.*@dev",
-  "goetas/xsd-reader": "2.*@dev"
-},
-"repositories": [{
-	"type": "vcs",
-	"url": "https://github.com/goetas/serializer.git"
-	}]
-
-}
-````
-
-Here's the PHP code :
 
 ````php
   <?php
@@ -317,6 +172,42 @@ Here's the PHP code :
   
 ?>
 ````
-### Visa Checkout Examples
-"Check out" the Visa Checkout samples at https://github.com/AuthorizeNet/sample-code-php/tree/master/VisaCheckout
 
+## Testing
+
+Integration tests for the AuthorizeNet SDK are in the `tests` directory. These tests
+are mainly for SDK development. However, you can also browse through them to find
+more usage examples for the various APIs.
+
+- Run `composer update --dev` to load the `PHPUnit` test library.
+- Copy the `phpunit.xml.dist` file to `phpunit.xml` and enter your merchant
+  credentials in the constant fields.
+- Run `vendor/bin/phpunit` to run the test suite.
+
+*You'll probably want to disable emails on your sandbox account.*
+    
+### Test Credit Card Numbers
+
+| Card Type                  | Card Number      |
+|----------------------------|------------------|
+| American Express Test Card | 370000000000002  |
+| Discover Test Card         | 6011000000000012 |
+| Visa Test Card             | 4007000000027    |
+| Second Visa Test Card      | 4012888818888    |
+| JCB                        | 3088000000000017 |
+| Diners Club/ Carte Blanche | 38000000000006   |
+
+*Set the expiration date to anytime in the future.*
+
+## PHPDoc
+
+Add PhpDocumentor to your composer.json and run `composer update --dev`:
+```json
+"require-dev": {
+    "phpdocumentor/phpdocumentor": "*"
+}
+```
+To autogenerate PHPDocs run:
+```shell
+vendor/bin/phpdoc -t doc/api/ -d lib
+```
