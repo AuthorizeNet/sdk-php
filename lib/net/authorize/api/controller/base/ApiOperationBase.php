@@ -113,6 +113,7 @@ abstract class ApiOperationBase implements IApiOperation
         $this->beforeExecute();
 
         $this->logger->info("Request Serialization Begin");
+        $this->logger->debug($this->apiRequest);
         $xmlRequest = $this->serializer->serialize($this->apiRequest, 'xml');
         $this->logger->info("Request  Serialization End");
         /*

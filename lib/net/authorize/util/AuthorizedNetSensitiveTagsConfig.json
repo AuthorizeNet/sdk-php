@@ -8,7 +8,7 @@
     {
         "tagName": "cardNumber",
         "pattern": "^(\\d+)(\\d{4})$",
-        "replacement": "$xxxx-$3$4",
+        "replacement": "xxxx-$2",
         "disableMask": false
     },
     {
