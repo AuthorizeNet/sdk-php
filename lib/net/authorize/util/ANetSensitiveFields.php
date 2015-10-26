@@ -13,26 +13,32 @@ class ANetSensitiveFields
 //        );
         return array( //format for each element: array(tag name, regex-pattern, regex-replacement)
             new SensitiveTag("cardCode"),
-            new SensitiveTag("cardNumber","([^0-9]*)(\d+)(\d{4})(.*)","$1xxxx-$3$4",false),
+            new SensitiveTag("cardNumber","(\d+)(\d{4})","$1xxxx-$3$4",false),
             new SensitiveTag("expirationDate")
         );
     }
     public static function getSensitiveXmlTags(){
         $sensitiveTags = array();
         $configFilePath = dirname(__FILE__) . "/" . ANET_SENSITIVE_XMLTAGS_JSON_FILE;
-        $userConfigFilePath = ANET_SENSITIVE_XMLTAGS_JSON_FILE;
-        if (file_exists($userConfigFilePath)) { //client config for tags
+        $userConfigFile = ANET_SENSITIVE_XMLTAGS_JSON_FILE;
+        $presentUserConfigFile = file_exists($userConfigFile);
+        if ($presentUserConfigFile) { //client config for tags
             //read list of tags(and associate regex-patterns and replacements) from .json file
-            $sensitiveTags = json_decode(file_get_contents($configFilePath));
+            $jsonFileObejct = json_decode(file_get_contents($userConfigFile));
+            $sensitiveTags = $jsonFileObejct["sensitiveTags"];
             if (json_last_error() === JSON_ERROR_NONE) {// JSON is valid
             }
             else{
-                echo "ERROR: Invalid json in: " . $userConfigFilePath  . " json_last_error_msg : " . json_last_error_msg();
-                return self::getDefaulSensitiveXmlTags();
+                echo "ERROR: Invalid json in: " . $userConfigFile  . " json_last_error_msg : " . json_last_error_msg();
+                $presentUserConfigFile = false;
             }
         }
-        else if (file_exists($configFilePath)) { //default sdk config for tags
-            $sensitiveTags = json_decode(file_get_contents($configFilePath));
+        if (!$presentUserConfigFile) { //default sdk config for tags
+            if(!file_exists($configFilePath)){
+                exit("ERROR: No config file: " . $configFilePath);
+            }
+            $jsonFileObejct = json_decode(file_get_contents($configFilePath));
+            $sensitiveTags = $jsonFileObejct->sensitiveTags;
             if (json_last_error() === JSON_ERROR_NONE) {
             }
             else{

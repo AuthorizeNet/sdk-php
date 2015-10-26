@@ -1,20 +1,23 @@
-[
-    {
-        "tagName": "cardCode",
-        "pattern": "",
-        "replacement": "",
-        "disableMask": false
-    },
-    {
-        "tagName": "cardNumber",
-        "pattern": "(\\d+)(\\d{4})",
-        "replacement": "xxxx-$2",
-        "disableMask": false
-    },
-    {
-        "tagName": "expirationDate",
-        "pattern": "",
-        "replacement": "",
-        "disableMask": false
-    }
-]
+{
+    "sensitiveTags": [
+        {
+            "tagName": "cardCode",
+            "pattern": "",
+            "replacement": "",
+            "disableMask": false
+        },
+        {
+            "tagName": "cardNumber",
+            "pattern": "(\\d+)(\\d{4})",
+            "replacement": "xxxx-$2",
+            "disableMask": false
+        },
+        {
+            "tagName": "expirationDate",
+            "pattern": "",
+            "replacement": "",
+            "disableMask": false
+        }
+    ]
+}
+
