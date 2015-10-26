@@ -83,7 +83,6 @@ class Log
             $replacements[$i]  = $replacement;
         }
         $maskedString = preg_replace($patterns, $replacements, $rawString);
-        echo "maskedString: $maskedString\n";
         return $maskedString;
     }/**
 	* Object data masking related functions START

@@ -17,6 +17,24 @@
             "pattern": "",
             "replacement": "",
             "disableMask": false
+        },
+        {
+            "tagName": "accountNumber",
+            "pattern": "(\\d+)(\\d{4})",
+            "replacement": "xxxx-$2",
+            "disableMask": false
+        },
+        {
+            "tagName": "nameOnAccount",
+            "pattern": "",
+            "replacement": "",
+            "disableMask": false
+        },
+        {
+            "tagName": "transactionKey",
+            "pattern": "",
+            "replacement": "",
+            "disableMask": false
         }
     ],
     "sensitiveStringRegexes": [
