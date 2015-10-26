@@ -229,9 +229,53 @@ class Log
         }
     }
 	
+	public function warn($logMessage, $flags=FILE_APPEND){
+        if(ANET_LOG_WARN >= ANET_LOG_LEVEL) {
+            $this->log(ANET_LOG_WARN_PREFIX, $logMessage,$flags);
+        }
+    }
+	
     public function error($logMessage, $flags=FILE_APPEND){
         if(ANET_LOG_ERROR >= ANET_LOG_LEVEL) {
             $this->log(ANET_LOG_ERROR_PREFIX, $logMessage,$flags);
+        }
+    }
+	
+	private function logFormat($logLevelPrefix, $format, $objects, $flags){
+        try {
+            foreach($objects as $i => $testObject){
+                $objects[$i] = getMasked($testObject);
+            }
+            $logMessage = vsprintf($format, $objects);
+            log($logLevelPrefix, $logMessage, $flags);
+        }
+        catch(Exception $e){
+            $this->debug("Incorrect log message format: " . $e->getMessage());
+        }
+    }
+	
+	public function debugFormat($format, $args=array(),  $flags=FILE_APPEND)
+    {
+        if(ANET_LOG_DEBUG >= ANET_LOG_LEVEL){
+            $this->logFormat(ANET_LOG_DEBUG_PREFIX, $format, $args , $flags);
+        }
+    }
+	
+	public function infoFormat($format, $args=array(),  $flags=FILE_APPEND){
+        if(ANET_LOG_INFO >= ANET_LOG_LEVEL) {
+            $this->logFormat(ANET_LOG_INFO_PREFIX, $format, $args , $flags);
+        }
+    }
+	
+	public function warnFormat($format, $args=array(),  $flags=FILE_APPEND){
+        if(ANET_LOG_WARN >= ANET_LOG_LEVEL) {
+            $this->logFormat(ANET_LOG_WARN_PREFIX, $format, $args , $flags);
+        }
+    }
+	
+    public function errorFormat($format, $args=array(),  $flags=FILE_APPEND){
+        if(ANET_LOG_ERROR >= ANET_LOG_LEVEL) {
+			$this->logFormat(ANET_LOG_ERROR_PREFIX, $format, $args , $flags);
         }
     }
 	
