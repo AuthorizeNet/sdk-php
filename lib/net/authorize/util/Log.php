@@ -244,7 +244,7 @@ class Log
 	private function logFormat($logLevelPrefix, $format, $objects, $flags){
         try {
             foreach($objects as $i => $testObject){
-                $objects[$i] = getMasked($testObject);
+                $objects[$i] = $this->getMasked($testObject);
             }
             $logMessage = vsprintf($format, $objects);
             log($logLevelPrefix, $logMessage, $flags);
