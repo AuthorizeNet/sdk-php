@@ -5,7 +5,7 @@ namespace net\authorize\api\contract\v1;
 /**
  * Class representing CreditCardSimpleType
  *
- * 
+ *
  * XSD Type: creditCardSimpleType
  */
 class CreditCardSimpleType
@@ -20,11 +20,6 @@ class CreditCardSimpleType
      * @property string $expirationDate
      */
     private $expirationDate = null;
-
-    /**
-     * @property boolean $paymentToken
-     */
-    private $paymentToken = null;
 
     /**
      * Gets as cardNumber
@@ -67,28 +62,6 @@ class CreditCardSimpleType
     public function setExpirationDate($expirationDate)
     {
         $this->expirationDate = $expirationDate;
-        return $this;
-    }
-
-    /**
-     * Gets as paymentToken
-     *
-     * @return boolean
-     */
-    public function getPaymentToken()
-    {
-        return $this->paymentToken;
-    }
-
-    /**
-     * Sets a new paymentToken
-     *
-     * @param boolean $paymentToken
-     * @return self
-     */
-    public function setPaymentToken($paymentToken)
-    {
-        $this->paymentToken = $paymentToken;
         return $this;
     }
 

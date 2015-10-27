@@ -1,9 +1,9 @@
 Authorize.Net PHP SDK
 ======================
 
-[![Build Status]
-(https://travis-ci.org/AuthorizeNet/sdk-php.png?branch=master)]
+[![Build Status] (https://travis-ci.org/AuthorizeNet/sdk-php.png?branch=master)]
 (https://travis-ci.org/AuthorizeNet/sdk-php)
+
 
 ## License
 Proprietary, see the provided `license.md`.
@@ -317,3 +317,6 @@ Here's the PHP code :
   
 ?>
 ````
+### Visa Checkout Examples
+"Check out" the Visa Checkout samples at https://github.com/AuthorizeNet/sample-code-php/tree/master/VisaCheckout
+

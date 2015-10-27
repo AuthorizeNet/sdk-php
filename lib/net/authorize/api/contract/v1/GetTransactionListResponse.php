@@ -19,7 +19,7 @@ class GetTransactionListResponse extends ANetApiResponseType
      * @return self
      * @param \net\authorize\api\contract\v1\TransactionSummaryType $transaction
      */
-    public function addTransactionToTransactions(\net\authorize\api\contract\v1\TransactionSummaryType $transaction)
+    public function addToTransactions(\net\authorize\api\contract\v1\TransactionSummaryType $transaction)
     {
         $this->transactions[] = $transaction;
         return $this;

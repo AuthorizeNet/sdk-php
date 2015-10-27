@@ -1,6 +1,6 @@
 <?php
-    spl_autoload_extensions(".php"); // comma-separated list
-    spl_autoload_register();
+spl_autoload_extensions(".php"); // comma-separated list
+spl_autoload_register();
 
 /**
  * A map of classname => filename for SPL autoloading.
@@ -218,6 +218,12 @@ return array(
     //Utils
     //'net\authorize\util\ObjectToXml' => $libDir . 'net/authorize/util/ObjectToXml.php',
     'net\authorize\util\HttpClient' => $libDir . 'net/authorize/util/HttpClient.php',
+    'net\authorize\util\Helpers' => $libDir . 'net/authorize/util/Helpers.php',
+    'net\authorize\util\Log' => $libDir . 'net/authorize/util/Log.php',
+    'net\authorize\util\LogFactory' => $libDir . 'net/authorize/util/LogFactory.php',
+    'net\authorize\util\ANetSensitiveFields' => $libDir . 'net/authorize/util/ANetSensitiveFields.php',
+    'net\authorize\util\SensitiveTag' => $libDir . 'net/authorize/util/SensitiveTag.php',
+
 
     //constants
     'net\authorize\api\constants\ANetEnvironment' => $libDir . 'net/authorize/api/constants/ANetEnvironment.php',
@@ -248,6 +254,7 @@ return array(
     'net\authorize\api\contract\v1\BankAccountType' => $libDir . 'net/authorize/api/contract/v1/Bank`AccountType.php',
     'net\authorize\api\contract\v1\BatchDetailsType' => $libDir . 'net/authorize/api/contract/v1/BatchDetailsType.php',
     'net\authorize\api\contract\v1\BatchStatisticType' => $libDir . 'net/authorize/api/contract/v1/BatchStatisticType.php',
+    'net\authorize\api\contract\v1\CardArtType' => $libDir . 'net/authorize/api/contract/v1/CardArtType.php',
     'net\authorize\api\contract\v1\CcAuthenticationType' => $libDir . 'net/authorize/api/contract/v1/CcAuthenticationType.php',
     'net\authorize\api\contract\v1\CreateCustomerPaymentProfileRequest' => $libDir . 'net/authorize/api/contract/v1/CreateCustomerPaymentProfileRequest.php',
     'net\authorize\api\contract\v1\CreateCustomerPaymentProfileResponse' => $libDir . 'net/authorize/api/contract/v1/CreateCustomerPaymentProfileResponse.php',
@@ -258,8 +265,6 @@ return array(
     'net\authorize\api\contract\v1\CreateCustomerProfileTransactionResponse' => $libDir . 'net/authorize/api/contract/v1/CreateCustomerProfileTransactionResponse.php',
     'net\authorize\api\contract\v1\CreateCustomerShippingAddressRequest' => $libDir . 'net/authorize/api/contract/v1/CreateCustomerShippingAddressRequest.php',
     'net\authorize\api\contract\v1\CreateCustomerShippingAddressResponse' => $libDir . 'net/authorize/api/contract/v1/CreateCustomerShippingAddressResponse.php',
-    'net\authorize\api\contract\v1\CreateFingerPrintRequest' => $libDir . 'net/authorize/api/contract/v1/CreateFingerPrintRequest.php',
-    'net\authorize\api\contract\v1\CreateFingerPrintResponse' => $libDir . 'net/authorize/api/contract/v1/CreateFingerPrintResponse.php',
     'net\authorize\api\contract\v1\CreateProfileResponseType' => $libDir . 'net/authorize/api/contract/v1/CreateProfileResponseType.php',
     'net\authorize\api\contract\v1\CreateTransactionRequest' => $libDir . 'net/authorize/api/contract/v1/CreateTransactionRequest.php',
     'net\authorize\api\contract\v1\CreateTransactionResponse' => $libDir . 'net/authorize/api/contract/v1/CreateTransactionResponse.php',
@@ -281,6 +286,8 @@ return array(
     'net\authorize\api\contract\v1\CustomerProfileSummaryType' => $libDir . 'net/authorize/api/contract/v1/CustomerProfileSummaryType.php',
     'net\authorize\api\contract\v1\CustomerProfileType' => $libDir . 'net/authorize/api/contract/v1/CustomerProfileType.php',
     'net\authorize\api\contract\v1\CustomerType' => $libDir . 'net/authorize/api/contract/v1/CustomerType.php',
+    'net\authorize\api\contract\v1\DecryptPaymentDataRequest' => $libDir . 'net/authorize/api/contract/v1/DecryptPaymentDataRequest.php',
+    'net\authorize\api\contract\v1\DecryptPaymentDataResponse' => $libDir . 'net/authorize/api/contract/v1/DecryptPaymentDataResponse.php',
     'net\authorize\api\contract\v1\DeleteCustomerPaymentProfileRequest' => $libDir . 'net/authorize/api/contract/v1/DeleteCustomerPaymentProfileRequest.php',
     'net\authorize\api\contract\v1\DeleteCustomerPaymentProfileResponse' => $libDir . 'net/authorize/api/contract/v1/DeleteCustomerPaymentProfileResponse.php',
     'net\authorize\api\contract\v1\DeleteCustomerProfileRequest' => $libDir . 'net/authorize/api/contract/v1/DeleteCustomerProfileRequest.php',
@@ -295,7 +302,6 @@ return array(
     'net\authorize\api\contract\v1\ErrorResponse' => $libDir . 'net/authorize/api/contract/v1/ErrorResponse.php',
     'net\authorize\api\contract\v1\ExtendedAmountType' => $libDir . 'net/authorize/api/contract/v1/ExtendedAmountType.php',
     'net\authorize\api\contract\v1\FDSFilterType' => $libDir . 'net/authorize/api/contract/v1/FDSFilterType.php',
-    'net\authorize\api\contract\v1\FingerPrintSupportInformationType' => $libDir . 'net/authorize/api/contract/v1/FingerPrintSupportInformationType.php',
     'net\authorize\api\contract\v1\FingerPrintType' => $libDir . 'net/authorize/api/contract/v1/FingerPrintType.php',
     'net\authorize\api\contract\v1\GetBatchStatisticsRequest' => $libDir . 'net/authorize/api/contract/v1/GetBatchStatisticsRequest.php',
     'net\authorize\api\contract\v1\GetBatchStatisticsResponse' => $libDir . 'net/authorize/api/contract/v1/GetBatchStatisticsResponse.php',
@@ -339,6 +345,7 @@ return array(
     'net\authorize\api\contract\v1\OrderExType' => $libDir . 'net/authorize/api/contract/v1/OrderExType.php',
     'net\authorize\api\contract\v1\OrderType' => $libDir . 'net/authorize/api/contract/v1/OrderType.php',
     'net\authorize\api\contract\v1\PagingType' => $libDir . 'net/authorize/api/contract/v1/PagingType.php',
+    'net\authorize\api\contract\v1\PaymentDetailsType' => $libDir . 'net/authorize/api/contract/v1/PaymentDetailsType.php',
     'net\authorize\api\contract\v1\PaymentMaskedType' => $libDir . 'net/authorize/api/contract/v1/PaymentMaskedType.php',
     'net\authorize\api\contract\v1\PaymentProfileType' => $libDir . 'net/authorize/api/contract/v1/PaymentProfileType.php',
     'net\authorize\api\contract\v1\PaymentScheduleType' => $libDir . 'net/authorize/api/contract/v1/PaymentScheduleType.php',
@@ -409,8 +416,8 @@ return array(
     'net\authorize\api\controller\CreateCustomerProfileFromTransactionController' => $libDir . 'net/authorize/api/controller/CreateCustomerProfileFromTransactionController.php',
     'net\authorize\api\controller\CreateCustomerProfileTransactionController' => $libDir . 'net/authorize/api/controller/CreateCustomerProfileTransactionController.php',
     'net\authorize\api\controller\CreateCustomerShippingAddressController' => $libDir . 'net/authorize/api/controller/CreateCustomerShippingAddressController.php',
-    'net\authorize\api\controller\CreateFingerPrintController' => $libDir . 'net/authorize/api/controller/CreateFingerPrintController.php',
     'net\authorize\api\controller\CreateTransactionController' => $libDir . 'net/authorize/api/controller/CreateTransactionController.php',
+    'net\authorize\api\controller\DecryptPaymentDataController' => $libDir . 'net/authorize/api/controller/DecryptPaymentDataController.php',
     'net\authorize\api\controller\DeleteCustomerPaymentProfileController' => $libDir . 'net/authorize/api/controller/DeleteCustomerPaymentProfileController.php',
     'net\authorize\api\controller\DeleteCustomerProfileController' => $libDir . 'net/authorize/api/controller/DeleteCustomerProfileController.php',
     'net\authorize\api\controller\DeleteCustomerShippingAddressController' => $libDir . 'net/authorize/api/controller/DeleteCustomerShippingAddressController.php',

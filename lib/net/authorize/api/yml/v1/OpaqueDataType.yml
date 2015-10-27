@@ -20,3 +20,13 @@ net\authorize\api\contract\v1\OpaqueDataType:
                 getter: getDataValue
                 setter: setDataValue
             type: string
+        dataKey:
+            expose: true
+            access_type: public_method
+            serialized_name: dataKey
+            xml_element:
+                namespace: AnetApi/xml/v1/schema/AnetApiSchema.xsd
+            accessor:
+                getter: getDataKey
+                setter: setDataKey
+            type: string

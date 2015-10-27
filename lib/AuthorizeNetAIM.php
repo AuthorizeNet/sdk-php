@@ -2,6 +2,7 @@
 /**
  * Easily interact with the Authorize.Net AIM API.
  *
+ * 
  * Example Authorize and Capture Transaction against the Sandbox:
  * <code>
  * <?php require_once 'AuthorizeNet.php'
@@ -42,7 +43,7 @@
 class AuthorizeNetAIM extends AuthorizeNetRequest
 {
 
-    const LIVE_URL = 'https://secure.authorize.net/gateway/transact.dll';
+    const LIVE_URL = 'https://secure2.authorize.net/gateway/transact.dll';
     const SANDBOX_URL = 'https://test.authorize.net/gateway/transact.dll';
     
     /**

@@ -12,7 +12,8 @@ for cmd in $cmdlist ; do
         echo "Script $currdir/scripts/$cmd not found"
         exit 1
     fi
-    echo ***FIXME*** $currdir/scripts/$cmd
+    $currdir/scripts/$cmd
+    # echo ***FIXME*** $currdir/scripts/$cmd
     ERRORCODE=$?
     if [ $ERRORCODE -ne 0 ];then
         echo "########################################################################"

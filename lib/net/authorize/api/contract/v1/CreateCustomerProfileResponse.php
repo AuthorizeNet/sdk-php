@@ -56,7 +56,7 @@ class CreateCustomerProfileResponse extends ANetApiResponseType
      * @return self
      * @param string $numericString
      */
-    public function addNumericStringToCustomerPaymentProfileIdList($numericString)
+    public function addToCustomerPaymentProfileIdList($numericString)
     {
         $this->customerPaymentProfileIdList[] = $numericString;
         return $this;
@@ -112,7 +112,7 @@ class CreateCustomerProfileResponse extends ANetApiResponseType
      * @return self
      * @param string $numericString
      */
-    public function addNumericStringToCustomerShippingAddressIdList($numericString)
+    public function addToCustomerShippingAddressIdList($numericString)
     {
         $this->customerShippingAddressIdList[] = $numericString;
         return $this;
@@ -168,7 +168,7 @@ class CreateCustomerProfileResponse extends ANetApiResponseType
      * @return self
      * @param string $string
      */
-    public function addStringToValidationDirectResponseList($string)
+    public function addToValidationDirectResponseList($string)
     {
         $this->validationDirectResponseList[] = $string;
         return $this;
