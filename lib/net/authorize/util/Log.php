@@ -32,6 +32,19 @@ class Log
     private $sensitiveXmlTags = NULL;
 	
 	/**
+	* Takes a regex pattern (string) as argument and adds the forward slash delimiter.
+	* Also adds the u flag to enable Unicode mode regex.
+	*
+	* @param string $regexPattern
+	*
+	* @return string
+	*/
+	private function addDelimiterFwdSlash($regexPattern)
+	{
+		return '/'.$regexPattern.'/u';
+	}
+	
+	/**
 	* Takes an xml as string and masks the sensitive fields.
 	*
 	* @param string $rawString		The xml as a string.
@@ -50,7 +63,8 @@ class Log
             if(trim($sensitiveTag->pattern)) {
                 $inputPattern = $sensitiveTag->pattern;
             }
-            $pattern = "/<" . $tag . ">(?:.*)". $inputPattern ."(?:.*)<\/" . $tag . ">/";
+            $pattern = "<" . $tag . ">(?:.*)". $inputPattern ."(?:.*)<\/" . $tag . ">";
+			$pattern = $this->addDelimiterFwdSlash($pattern);
 
             if(trim($sensitiveTag->replacement)) {
                 $inputReplacement = $sensitiveTag->replacement;
@@ -76,7 +90,8 @@ class Log
         $replacements=array();
 
         foreach ($this->sensitiveStringRegexes as $i => $creditCardRegex){
-            $pattern = "/" . $creditCardRegex . "/";
+            $pattern = $creditCardRegex;
+			$pattern = $this->addDelimiterFwdSlash($pattern);
 
             $replacement = "xxxx";
             $patterns [$i] = $pattern;
@@ -84,7 +99,9 @@ class Log
         }
         $maskedString = preg_replace($patterns, $replacements, $rawString);
         return $maskedString;
-    }/**
+    }
+	
+	/**
 	* Object data masking related functions START
 	*/
 	
@@ -133,7 +150,7 @@ class Log
             if(trim($sensitiveField->pattern)) {
                 $inputPattern = $sensitiveField->pattern;
             }
-			$inputPattern='/'.$inputPattern.'/';
+			$inputPattern = $this->addDelimiterFwdSlash($inputPattern);
 			
             if(trim($sensitiveField->replacement)) {
                 $inputReplacement = $sensitiveField->replacement;
