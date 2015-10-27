@@ -115,7 +115,7 @@ class Log
 	}
 	
 	/**
-	* private function checkAndMask($prop, $obj).
+	* private function checkPropertyAndMask($prop, $obj).
 	* 
 	* Receives a ReflectionProperty and an object, and returns a masked object if the ReflectionProperty corresponds to a sensitive field, else returns false.
 	*
@@ -124,22 +124,22 @@ class Log
 	*
 	* @return string|bool
 	*/
-	private function checkAndMask($prop, $obj){
-		foreach($this->sensitiveXmlTags as $i => $sensitiveTag)
+	private function checkPropertyAndMask($prop, $obj){
+		foreach($this->sensitiveXmlTags as $i => $sensitiveField)
 		{
 			$inputPattern = "(.+)";
 			$inputReplacement = "xxxx";
 
-            if(trim($sensitiveTag->pattern)) {
-                $inputPattern = $sensitiveTag->pattern;
+            if(trim($sensitiveField->pattern)) {
+                $inputPattern = $sensitiveField->pattern;
             }
 			$inputPattern='/'.$inputPattern.'/';
 			
-            if(trim($sensitiveTag->replacement)) {
-                $inputReplacement = $sensitiveTag->replacement;
+            if(trim($sensitiveField->replacement)) {
+                $inputReplacement = $sensitiveField->replacement;
             }
 			
-			if(strcmp($prop->getName(),$sensitiveTag->tagName)==0)
+			if(strcmp($prop->getName(),$sensitiveField->tagName)==0)
 			{
 				$prop->setValue($obj,preg_replace($inputPattern,$inputReplacement,$prop->getValue($obj)));
 				return $prop->getValue($obj);
@@ -179,7 +179,7 @@ class Log
             }
 			// else check if the property represents a sensitive field. If so, mask.
             else{
-				$res=$this->checkAndMask($prop, $obj);
+				$res=$this->checkPropertyAndMask($prop, $obj);
 				if($res)
 					$prop->setValue($obj, $res);
             }
@@ -205,14 +205,26 @@ class Log
     { //always returns string
         $messageType = gettype($raw);
         $message="";
-        if ($messageType == "string") {
-            $maskedXml = $this->maskSensitiveXmlString($raw);
-            //mask credit card numbers
-            $message = $this->maskCreditCards($maskedXml);
-        }
-        else if($messageType == "object"){
+        if($messageType == "object"){
 			$obj = unserialize(serialize($raw)); // deep copying the object
 			$message = print_r($this->maskSensitiveProperties($obj), true); //object to string
+        }
+        else if($messageType == "array"){
+            $copyArray = unserialize(serialize($raw));
+            foreach($copyArray as $i => $element){
+                $copyArray[$i] = $this->getMasked($element);
+            }
+            $message = print_r($copyArray, true); // returns string
+        }
+        else { //$messageType == "string")
+            $primtiveTypeAsString = strval($raw);
+
+            $maskedXml = $primtiveTypeAsString;
+            if($messageType == "string") {
+                $maskedXml = $this->maskSensitiveXmlString($primtiveTypeAsString);
+            }
+            //mask credit card numbers
+            $message = $this->maskCreditCards($maskedXml);
         }
         return $message;
     }
