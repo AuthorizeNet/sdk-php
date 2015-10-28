@@ -10,17 +10,17 @@ class ANetSensitiveFields
 
     private static function fetchFromConfigFiles(){
         $configFilePath = dirname(__FILE__) . "/" . ANET_SENSITIVE_XMLTAGS_JSON_FILE;
-        $userConfigFile = ANET_SENSITIVE_XMLTAGS_JSON_FILE;
-        $presentUserConfigFile = file_exists($userConfigFile);
+        $userConfigFilePath = ANET_SENSITIVE_XMLTAGS_JSON_FILE;
+        $presentUserConfigFile = file_exists($userConfigFilePath);
         if ($presentUserConfigFile) { //client config for tags
             //read list of tags(and associate regex-patterns and replacements) from .json file
-            $jsonFileObejct = json_decode(file_get_contents($userConfigFile));
+            $jsonFileObejct = json_decode(file_get_contents($userConfigFilePath));
             $sensitiveTags = $jsonFileObejct->sensitiveTags;
             self::$sensitiveStringRegexes = $jsonFileObejct->sensitiveStringRegexes;
             if (json_last_error() === JSON_ERROR_NONE) {// JSON is valid
             }
             else{
-                echo "ERROR: Invalid json in: " . $userConfigFile  . " json_last_error_msg : " . json_last_error_msg();
+                echo "ERROR: Invalid json in: " . $userConfigFilePath  . " json_last_error_msg : " . json_last_error_msg();
                 $presentUserConfigFile = false;
             }
         }
@@ -29,6 +29,7 @@ class ANetSensitiveFields
                 exit("ERROR: No config file: " . $configFilePath);
             }
             $jsonFileObejct = json_decode(file_get_contents($configFilePath));
+            file_put_contents($userConfigFilePath, json_encode($jsonFileObejct, JSON_PRETTY_PRINT));
             $sensitiveTags = $jsonFileObejct->sensitiveTags;
             self::$sensitiveStringRegexes = $jsonFileObejct->sensitiveStringRegexes;
             if (json_last_error() === JSON_ERROR_NONE) {
