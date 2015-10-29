@@ -1,7 +1,7 @@
 Old Usage Examples (Of Deprecated SDK Functionality)
 =======================================
 
-** PLEASE NOTE: These examples are for deprecated functionality. Refer to the [README](README.md) in root folder of the SDK for the new examples.**
+**PLEASE NOTE: These examples are for deprecated functionality. Refer to the [README](/README.md) in root folder of the SDK for the new examples.**
 
 ## Requirements
 
