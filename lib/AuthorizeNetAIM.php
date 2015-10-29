@@ -2,6 +2,7 @@
 /**
  * Easily interact with the Authorize.Net AIM API.
  *
+ * 
  * Example Authorize and Capture Transaction against the Sandbox:
  * <code>
  * <?php require_once 'AuthorizeNet.php'
