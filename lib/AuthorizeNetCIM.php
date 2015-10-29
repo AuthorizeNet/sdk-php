@@ -488,7 +488,10 @@ class AuthorizeNetCIM_Response extends AuthorizeNetXMLResponse
     public function getCustomerProfileIds()
     {
         $ids = (array)$this->xml->ids;
-        return $ids["numericString"];
+        if(!empty($ids))
+            return $ids["numericString"];
+        else
+            return $ids;
     }
     
     /**
@@ -497,7 +500,10 @@ class AuthorizeNetCIM_Response extends AuthorizeNetXMLResponse
     public function getCustomerPaymentProfileIds()
     {
         $ids = (array)$this->xml->customerPaymentProfileIdList;
-        return $ids["numericString"];
+        if(!empty($ids))
+            return $ids["numericString"];
+        else
+            return $ids;
     }
     
     /**
@@ -506,7 +512,10 @@ class AuthorizeNetCIM_Response extends AuthorizeNetXMLResponse
     public function getCustomerShippingAddressIds()
     {
         $ids = (array)$this->xml->customerShippingAddressIdList;
-        return $ids["numericString"];
+        if(!empty($ids))
+            return $ids["numericString"];
+        else
+            return $ids;
     }
     
     /**
