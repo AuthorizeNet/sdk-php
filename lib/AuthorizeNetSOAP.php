@@ -17,8 +17,8 @@
  */
 class AuthorizeNetSOAP extends SoapClient
 {
-    const WSDL_URL = "https://api.authorize.net/soap/v1/Service.asmx?WSDL";
-    const LIVE_URL = "https://api.authorize.net/soap/v1/Service.asmx";
+    const WSDL_URL = "https://api2.authorize.net/soap/v1/Service.asmx?WSDL";
+    const LIVE_URL = "https://api2.authorize.net/soap/v1/Service.asmx";
     const SANDBOX_URL = "https://apitest.authorize.net/soap/v1/Service.asmx";
     
     public $sandbox;

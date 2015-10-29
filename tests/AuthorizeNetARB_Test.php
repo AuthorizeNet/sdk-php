@@ -81,8 +81,8 @@ class AuthorizeNetARB_Test extends PHPUnit_Framework_TestCase
         $subscription->bankAccountBankName = "";
         $subscription->orderInvoiceNumber = "";
         $subscription->orderDescription = "";
-        $subscription->customerId = "12";
-        $subscription->customerEmail = "foo@domain.com";
+        $subscription->customerId = rand(1, 1000000);
+        $subscription->customerEmail = rand(1, 1000000) . "foo@domain.com";
         $subscription->customerPhoneNumber = "";
         $subscription->customerFaxNumber = "";
         $subscription->billToFirstName = "john";
@@ -150,8 +150,8 @@ class AuthorizeNetARB_Test extends PHPUnit_Framework_TestCase
         $subscription->bankAccountBankName = "Bank of Earth";
         $subscription->orderInvoiceNumber = "";
         $subscription->orderDescription = "";
-        $subscription->customerId = "12";
-        $subscription->customerEmail = "foo@domain.com";
+        $subscription->customerId = rand(1, 1000000);
+        $subscription->customerEmail = rand(1, 1000000) . "foo@domain.com";
         $subscription->customerPhoneNumber = "";
         $subscription->customerFaxNumber = "";
         $subscription->billToFirstName = "john";
