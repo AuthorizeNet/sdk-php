@@ -1,12 +1,7 @@
-Authorize.Net PHP SDK
-======================
+Old Usage Examples (Of Deprecated SDK Functionality)
+=======================================
 
-[![Build Status] (https://travis-ci.org/AuthorizeNet/sdk-php.png?branch=master)]
-(https://travis-ci.org/AuthorizeNet/sdk-php)
-
-
-## License
-Proprietary, see the provided `license.md`.
+** PLEASE NOTE: These examples are for deprecated functionality. Refer to the [README](README.md) in root folder of the SDK for the new examples.**
 
 ## Requirements
 
@@ -201,51 +196,3 @@ $request  = new AuthorizeNetTD;
 $response = $request->getTransactionDetails("12345");
 echo $response->xml->transaction->transactionStatus;
 ```
-
-## Testing
-
-Integration tests for the AuthorizeNet SDK are in the `tests` directory. These tests
-are mainly for SDK development. However, you can also browse through them to find
-more usage examples for the various APIs.
-
-- Run `composer update --dev` to load the `PHPUnit` test library.
-- Copy the `phpunit.xml.dist` file to `phpunit.xml` and enter your merchant
-  credentials in the constant fields.
-- Run `vendor/bin/phpunit` to run the test suite.
-
-*You'll probably want to disable emails on your sandbox account.*
-    
-### Test Credit Card Numbers
-
-| Card Type                  | Card Number      |
-|----------------------------|------------------|
-| American Express Test Card | 370000000000002  |
-| Discover Test Card         | 6011000000000012 |
-| Visa Test Card             | 4007000000027    |
-| Second Visa Test Card      | 4012888818888    |
-| JCB                        | 3088000000000017 |
-| Diners Club/ Carte Blanche | 38000000000006   |
-
-*Set the expiration date to anytime in the future.*
-
-## PHPDoc
-
-Add PhpDocumentor to your composer.json and run `composer update --dev`:
-```json
-"require-dev": {
-    "phpdocumentor/phpdocumentor": "*"
-}
-```
-To autogenerate PHPDocs run:
-```shell
-vendor/bin/phpdoc -t doc/api/ -d lib
-```
-
-## New Model
-
-We’re exploring a new model of maintaining the SDKs which allows us to be more responsive to API changes.  This model is consistent across the different SDK languages, which is great for us, however we do not want to sacrifice your productivity by losing the inherent efficiencies in the PHP language or our object model.  To this end we’re introducing the new model as purely “experimental” at this time and we would appreciate your feedback.  Let us know what you really think!
-
-You can find examples of using the new model in the following places:
-- [Developer Center Reference](http://developer.authorize.net/api/reference/index.html)
-- [Github Sample Code Repositories](http://developer.authorize.net/api/samplecode/), [php](https://github.com/AuthorizeNet/sample-code-php)
-- [SDK README (New Version)](README.md)
