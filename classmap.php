@@ -223,7 +223,7 @@ return array(
     'net\authorize\util\LogFactory' => $libDir . 'net/authorize/util/LogFactory.php',
     'net\authorize\util\ANetSensitiveFields' => $libDir . 'net/authorize/util/ANetSensitiveFields.php',
     'net\authorize\util\SensitiveTag' => $libDir . 'net/authorize/util/SensitiveTag.php',
-
+	'net\authorize\util\SensitiveDataConfigType' => $libDir . 'net/authorize/util/SensitiveDataConfigType.php',
 
     //constants
     'net\authorize\api\constants\ANetEnvironment' => $libDir . 'net/authorize/api/constants/ANetEnvironment.php',
@@ -251,7 +251,7 @@ return array(
     'net\authorize\api\contract\v1\AuthenticateTestRequest' => $libDir . 'net/authorize/api/contract/v1/AuthenticateTestRequest.php',
     'net\authorize\api\contract\v1\AuthenticateTestResponse' => $libDir . 'net/authorize/api/contract/v1/AuthenticateTestResponse.php',
     'net\authorize\api\contract\v1\BankAccountMaskedType' => $libDir . 'net/authorize/api/contract/v1/BankAccountMaskedType.php',
-    'net\authorize\api\contract\v1\BankAccountType' => $libDir . 'net/authorize/api/contract/v1/Bank`AccountType.php',
+    'net\authorize\api\contract\v1\BankAccountType' => $libDir . 'net/authorize/api/contract/v1/BankAccountType.php',
     'net\authorize\api\contract\v1\BatchDetailsType' => $libDir . 'net/authorize/api/contract/v1/BatchDetailsType.php',
     'net\authorize\api\contract\v1\BatchStatisticType' => $libDir . 'net/authorize/api/contract/v1/BatchStatisticType.php',
     'net\authorize\api\contract\v1\CardArtType' => $libDir . 'net/authorize/api/contract/v1/CardArtType.php',
