@@ -10,8 +10,6 @@ use Goetas\Xsd\XsdToPhp\Jms\Handler\XmlSchemaDateHandler;
 use \net\authorize\util\HttpClient;
 use \net\authorize\util\Helpers;
 use \net\authorize\util\LogFactory as LogFactory;
-//use \net\authorize\util\LogHelper;
-use \net\authorize\util\Log;
 
 
 abstract class ApiOperationBase implements IApiOperation

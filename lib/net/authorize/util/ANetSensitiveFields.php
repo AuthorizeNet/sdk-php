@@ -16,15 +16,16 @@ class ANetSensitiveFields
             exit("Class (".ANET_SENSITIVE_DATE_CONFIG_CLASS.") doesn't exist; can't deserialize json; can't log. Exiting.");
         
 		$serializer = SerializerBuilder::create()->build();
+
+		$userConfigFilePath = ANET_SENSITIVE_XMLTAGS_JSON_FILE;
+        $presentUserConfigFile = file_exists($userConfigFilePath);
 		
-        $userConfigFile = ANET_SENSITIVE_XMLTAGS_JSON_FILE;
         $configFilePath = dirname(__FILE__) . "/" . ANET_SENSITIVE_XMLTAGS_JSON_FILE;
-        
-        $presentUserConfigFile = file_exists($userConfigFile);
         $useDefaultConfigFile = !$presentUserConfigFile;
+		
         if ($presentUserConfigFile) { //client config for tags
             //read list of tags (and associated regex-patterns and replacements) from .json file
-            $jsonFileData=file_get_contents($userConfigFile);
+            $jsonFileData=file_get_contents($userConfigFilePath);
             $sensitiveDataConfig = $serializer->deserialize($jsonFileData, ANET_SENSITIVE_DATE_CONFIG_CLASS, 'json');
             
             $sensitiveTags = $sensitiveDataConfig->sensitiveTags;
@@ -33,7 +34,7 @@ class ANetSensitiveFields
             if (json_last_error() === JSON_ERROR_NONE) {// JSON is valid
             }
             else{
-                echo "ERROR: Invalid json in: " . $userConfigFile  . " json_last_error_msg : " . json_last_error_msg();
+                echo "ERROR: Invalid json in: " . $userConfigFilePath  . " json_last_error_msg : " . json_last_error_msg();
                 $useDefaultConfigFile = true;
             }
         }
