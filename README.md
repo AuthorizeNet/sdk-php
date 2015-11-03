@@ -66,7 +66,7 @@ $request->setMerchantAuthentication($merchantAuthentication);
 
 Apart from this README, you can find details and examples of using the SDK in the following places:
 - [Developer Center Reference](http://developer.authorize.net/api/reference/index.html)
-- [Github Sample Code Repositories](http://developer.authorize.net/api/samplecode/), [php](https://github.com/AuthorizeNet/sample-code-php)
+- [Github Sample Code Repositories](https://github.com/AuthorizeNet/sample-code-php)
       
       
 ### Quick Usage Example (with Charge Credit Card - Authorize and Capture)
