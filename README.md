@@ -126,6 +126,30 @@ else
 }
 ```
 
+## Logging
+
+SDK generates log with masking for sensitive data like credit card, expiration dates. The provided levels for logging are 
+ `debug`, `info`, `warn`, `error`. Add ````use \net\authorize\util\LogFactory;````. Logger can be initialized using `$logger = LogFactory::getLog(get_class($this));`
+The default log file `phplog` gets generated in the current folder. The subsequent logs are appended to the same file, unless the execution folder is changed, and a new log file is generated.
+
+### Usage Examples
+- Logging a string message `$logger->debug("Sending 'XML' Request type");`
+- Logging xml strings `$logger->debug($xmlRequest);`
+- Logging using formatting `$logger->debugFormat("Integer: %d, Float: %f, Xml-Request: %s\n", array(100, 1.29f, $xmlRequest));`
+
+### Customizing Sensitive Tags
+A local copy of [AuthorizedNetSensitiveTagsConfig.json](/lib/net/authorize/util/ANetSensitiveFields.php) gets generated when code invoking the logger first gets executed. The local file can later be edited by developer to re-configure what is masked and what is visible (*Do not edit the json in sdk*). 
+- For each element of the `sensitiveTags` array, 
+  - `tagName` field corresponds to the name of the property in object, or xml-tag that should be hidden entirely ( *XXXX* shown if no replacement specified ) or masked (e.g. showing the last 4 digits of credit card number).
+  - `pattern`[<sup>[Note]</sup>](#regex-note) and `replacement`[<sup>[Note]</sup>](#regex-note) can be left `""`, if the default is to be used (as defined in [Log.php](/lib/net/authorize/util/Log.php)). `pattern` gives the regex to identify, while `replacement` defines the visible part.
+  - `disableMask` can be set to *true* to allow the log to fully display that property in an object, or tag in a xml string.
+- `sensitiveStringRegexes`[<sup>[Note]</sup>](#regex-note) has list of credit-card regexes. So if credit-card number is not already masked, it would get entirely masked.
+- Take care of non-ascii characters (refer [manual](http://php.net/manual/en/regexp.reference.unicode.php)) while defining the regex, e.g. use 
+`"pattern": "(\\p{N}+)(\\p{N}{4})"` instead of `"pattern": "(\\d+)(\\d{4})"`. Also note `\\` escape sequence is used.
+
+**<a name="regex-note">Note</a>:**
+**For any regex, no starting or ending '/' or any other delimiter should be defined. The '/' delimiter and unicode flag is added in the code.**
+
 ## Testing
 
 Integration tests for the AuthorizeNet SDK are in the `tests` directory. These tests
