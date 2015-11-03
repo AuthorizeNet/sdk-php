@@ -44,6 +44,11 @@ If you need a sandbox account you can sign up for one really easily [`here`](htt
 
 Once you have your keys simply plug them into the appropriate variables, as per the below code dealing with the authentication part of the flow.
 
+...
+````php
+use net\authorize\api\contract\v1 as AnetAPI;
+````
+...
 ````php
 $merchantAuthentication = new AnetAPI\MerchantAuthenticationType();
 $merchantAuthentication->setName("YOURLOGIN");
@@ -63,7 +68,63 @@ Apart from this README, you can find details and examples of using the SDK in th
 - [Developer Center Reference](http://developer.authorize.net/api/reference/index.html)
 - [Github Sample Code Repositories](http://developer.authorize.net/api/samplecode/), [php](https://github.com/AuthorizeNet/sample-code-php)
       
-While using these samples, load the appropriate dependencies of the sdk (e.g. 'composer update') and modify paths as needed (e.g. in 'require' statement) for the code to work in your system.
+      
+### Quick Usage Example (with Charge Credit Card - Authorize and Capture)
+Note: The following is a php console application. Ensure that you can invoke the php command from command line.
+- Save the below code to a php file named, say, `charge-credit-card.php`
+- Open command prompt and navigate to your sdk folder ( if want to run from a different folder, modify the `require` statement to have the full path to the sdk e.g. `require 'c:/anet-sdk-php/vendor/autoload.php'` in place of `require 'vendor/autoload.php'` )
+- Update dependecies - e.g., With composer, type `composer update`
+- Type `php [<path to folder containing the php file>\]charge-credit-card.php`
+
+```php
+require 'vendor/autoload.php';
+use net\authorize\api\contract\v1 as AnetAPI;
+use net\authorize\api\controller as AnetController;
+define("AUTHORIZENET_LOG_FILE", "phplog");
+
+// Common setup for API credentials
+$merchantAuthentication = new AnetAPI\MerchantAuthenticationType();
+$merchantAuthentication->setName("556KThWQ6vf2");
+$merchantAuthentication->setTransactionKey("9ac2932kQ7kN2Wzq");
+
+// Create the payment data for a credit card
+$creditCard = new AnetAPI\CreditCardType();
+$creditCard->setCardNumber("4111111111111111");
+$creditCard->setExpirationDate("2038-12");
+$paymentOne = new AnetAPI\PaymentType();
+$paymentOne->setCreditCard($creditCard);
+
+// Create a transaction
+$transactionRequestType = new AnetAPI\TransactionRequestType();
+$transactionRequestType->setTransactionType( "authCaptureTransaction"); 
+$transactionRequestType->setAmount(151.51);
+$transactionRequestType->setPayment($paymentOne);
+
+$request = new AnetAPI\CreateTransactionRequest();
+$request->setMerchantAuthentication($merchantAuthentication);
+$request->setTransactionRequest( $transactionRequestType);
+$controller = new AnetController\CreateTransactionController($request);
+$response = $controller->executeWithApiResponse( \net\authorize\api\constants\ANetEnvironment::SANDBOX);
+
+if ($response != null)
+{
+	$tresponse = $response->getTransactionResponse();
+
+	if (($tresponse != null) && ($tresponse->getResponseCode()=="1") )   
+	{
+		echo "Charge Credit Card AUTH CODE : " . $tresponse->getAuthCode() . "\n";
+		echo "Charge Credit Card TRANS ID  : " . $tresponse->getTransId() . "\n";
+	}
+	else
+	{
+		echo  "Charge Credit Card ERROR :  Invalid response\n";
+	}
+}
+else
+{
+	echo  "Charge Credit card Null response returned";
+}
+```
 
 ## Testing
 
