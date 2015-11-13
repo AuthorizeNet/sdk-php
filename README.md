@@ -28,8 +28,22 @@ require 'vendor/autoload.php';
 *Note: you'll need a composer.json file with the following require section and to run
 `composer update`.*
 ```json
-"require": {
-    "authorizenet/authorizenet": "~1.8"
+{
+  "require": {
+  "php": ">=5.2.0",
+  "ext-curl": "*",
+  "authorizenet/authorizenet": "1.8.4",
+  "jms/serializer": "xsd2php-dev as 0.18.0"
+},
+"require-dev": {
+  "goetas/xsd2php": "2.*@dev",
+  "goetas/xsd-reader": "2.*@dev"
+},
+"repositories": [{
+    "type": "vcs",
+    "url": "https://github.com/goetas/serializer.git"
+    }]
+
 }
 ```
 
