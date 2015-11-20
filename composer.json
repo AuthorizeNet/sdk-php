@@ -1,7 +1,6 @@
 {
     "name": "authorizenet/authorizenet",
     "type": "library",
-    "version": "1.8.8",
     "description": "Official PHP SDK for Authorize.Net",
     "keywords": ["authorizenet", "authorize.net", "payment", "ecommerce"],
     "license": "proprietary",
