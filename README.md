@@ -61,6 +61,8 @@ Once you have your keys simply plug them into the appropriate variables as per t
 ````php
 define("AUTHORIZENET_API_LOGIN_ID", "YOURLOGIN");
 define("AUTHORIZENET_TRANSACTION_KEY", "YOURKEY");
+//Uncomment the next line to enable live API
+//define("AUTHORIZENET_SANDBOX", false);
 ````
 
 ## Usage Examples

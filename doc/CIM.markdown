@@ -170,6 +170,7 @@ $paymentProfile->customerType = "individual";
 $paymentProfile->payment->creditCard->cardNumber = "4111111111111111";
 $paymentProfile->payment->creditCard->expirationDate = "2015-10";
 $response = $request->createCustomerPaymentProfile($customerProfileId, $paymentProfile);
+$customerPaymentProfileId = $response->getPaymentProfileId();
 ```
 
 Updating a Payment Profile
@@ -241,7 +242,9 @@ $transaction->lineItems[] = $lineItem2;
     
 $response = $request->createCustomerProfileTransaction("AuthCapture", $transaction);
 $transactionResponse = $response->getTransactionResponse();
-$transactionId = $transactionResponse->transaction_id;
+if ($response->isOk()) {
+  $transactionId = $transactionResponse->transaction_id;
+}
 ```
     
 Voiding a Transaction
