@@ -54,6 +54,85 @@ class Controller_Test extends PHPUnit_Framework_TestCase
        }
     }
 
+    public function testARBGetSubscription()
+    {
+        $name =           (defined('AUTHORIZENET_API_LOGIN_ID')    && ''!=AUTHORIZENET_API_LOGIN_ID)    ? AUTHORIZENET_API_LOGIN_ID    : getenv("api_login_id");
+        $transactionKey = (defined('AUTHORIZENET_TRANSACTION_KEY') && ''!=AUTHORIZENET_TRANSACTION_KEY) ? AUTHORIZENET_TRANSACTION_KEY : getenv("transaction_key");
+
+        $merchantAuthentication = new net\authorize\api\contract\v1\MerchantAuthenticationType();
+        $merchantAuthentication->setName($name);
+        $merchantAuthentication->setTransactionKey($transactionKey);
+
+        $refId = 'ref' . time();
+
+        $request = new net\authorize\api\contract\v1\ARBGetSubscriptionRequest();
+        $request->setMerchantAuthentication($merchantAuthentication);
+        $request->setRefId($refId);
+        $request->setSubscriptionId("2930242");
+
+        $controller = new net\authorize\api\controller\ARBGetSubscriptionController($request);
+
+        $response = $controller->executeWithApiResponse( \net\authorize\api\constants\ANetEnvironment::SANDBOX);
+
+        $this->assertNotNull($response, "null response");
+        $this->assertNotNull($response->getMessages());
+
+        $this->assertEquals("Ok", $response->getMessages()->getResultCode());
+        $this->assertEquals($response->getRefId(), $refId);
+        $this->assertTrue(0 < count($response->getMessages()));
+
+        foreach ($response->getMessages() as $message)
+        {
+            $this->assertEquals("I00001", $message->getCode());
+            $this->assertEquals("Successful.", $response->getText());
+        }
+    }
+
+    public function testGetCustomerPaymentProfileList()
+    {
+        $name =           (defined('AUTHORIZENET_API_LOGIN_ID')    && ''!=AUTHORIZENET_API_LOGIN_ID)    ? AUTHORIZENET_API_LOGIN_ID    : getenv("api_login_id");
+        $transactionKey = (defined('AUTHORIZENET_TRANSACTION_KEY') && ''!=AUTHORIZENET_TRANSACTION_KEY) ? AUTHORIZENET_TRANSACTION_KEY : getenv("transaction_key");
+
+        $merchantAuthentication = new net\authorize\api\contract\v1\MerchantAuthenticationType();
+        $merchantAuthentication->setName($name);
+        $merchantAuthentication->setTransactionKey($transactionKey);
+
+        $refId = 'ref' . time();
+
+        $paging = new net\authorize\api\contract\v1\PagingType();
+        $paging->setLimit("1000");
+        $paging->setOffset("1");
+
+
+        $sorting = new net\authorize\api\contract\v1\CustomerPaymentProfileSortingType();
+        $sorting->setOrderBy("id");
+        $sorting->setOrderDescending("false");
+
+        $request = new net\authorize\api\contract\v1\GetCustomerPaymentProfileListRequest();
+        $request->setMerchantAuthentication($merchantAuthentication);
+        $request->setRefId($refId);
+        $request->setPaging($paging);
+        $request->setSorting($sorting);
+        $request->setSearchType("cardsExpiringInMonth");
+        $request->setMonth("2020-12");
+
+        $controller = new net\authorize\api\controller\GetCustomerPaymentProfileListController($request);
+        $response = $controller->executeWithApiResponse( \net\authorize\api\constants\ANetEnvironment::SANDBOX);
+
+        $this->assertNotNull($response, "null response");
+        $this->assertNotNull($response->getMessages());
+
+        $this->assertEquals("Ok", $response->getMessages()->getResultCode());
+        $this->assertEquals($response->getRefId(), $refId);
+        $this->assertTrue(0 < count($response->getMessages()));
+
+        foreach ($response->getMessages() as $message)
+        {
+            $this->assertEquals("I00001", $message->getCode());
+            $this->assertEquals("Successful.", $response->getText());
+        }
+    }
+
     public function testDecryptPaymentData()
     {
         //$this->markTestSkipped('Ignoring for Travis. Will fix after release.'); //TODO
