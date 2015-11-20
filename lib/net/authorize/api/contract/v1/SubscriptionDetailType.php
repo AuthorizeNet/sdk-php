@@ -77,6 +77,21 @@ class SubscriptionDetailType
     private $currencyCode = null;
 
     /**
+     * @property integer $customerProfileId
+     */
+    private $customerProfileId = null;
+
+    /**
+     * @property integer $customerPaymentProfileId
+     */
+    private $customerPaymentProfileId = null;
+
+    /**
+     * @property integer $customerShippingProfileId
+     */
+    private $customerShippingProfileId = null;
+
+    /**
      * Gets as id
      *
      * @return integer
@@ -359,6 +374,72 @@ class SubscriptionDetailType
     public function setCurrencyCode($currencyCode)
     {
         $this->currencyCode = $currencyCode;
+        return $this;
+    }
+
+    /**
+     * Gets as customerProfileId
+     *
+     * @return integer
+     */
+    public function getCustomerProfileId()
+    {
+        return $this->customerProfileId;
+    }
+
+    /**
+     * Sets a new customerProfileId
+     *
+     * @param integer $customerProfileId
+     * @return self
+     */
+    public function setCustomerProfileId($customerProfileId)
+    {
+        $this->customerProfileId = $customerProfileId;
+        return $this;
+    }
+
+    /**
+     * Gets as customerPaymentProfileId
+     *
+     * @return integer
+     */
+    public function getCustomerPaymentProfileId()
+    {
+        return $this->customerPaymentProfileId;
+    }
+
+    /**
+     * Sets a new customerPaymentProfileId
+     *
+     * @param integer $customerPaymentProfileId
+     * @return self
+     */
+    public function setCustomerPaymentProfileId($customerPaymentProfileId)
+    {
+        $this->customerPaymentProfileId = $customerPaymentProfileId;
+        return $this;
+    }
+
+    /**
+     * Gets as customerShippingProfileId
+     *
+     * @return integer
+     */
+    public function getCustomerShippingProfileId()
+    {
+        return $this->customerShippingProfileId;
+    }
+
+    /**
+     * Sets a new customerShippingProfileId
+     *
+     * @param integer $customerShippingProfileId
+     * @return self
+     */
+    public function setCustomerShippingProfileId($customerShippingProfileId)
+    {
+        $this->customerShippingProfileId = $customerShippingProfileId;
         return $this;
     }
 
