@@ -11,13 +11,13 @@
         "ext-json": "*",
         "ext-simplexml": "*",
         "ext-xmlwriter": "*",
+        "goetas/xsd2php":"2.*@dev",
+        "goetas/xsd-reader":"2.*@dev",
         "jms/serializer": "xsd2php-dev as 0.18.0"
     },
     "require-dev": {
         "phpunit/phpunit": "~4.0",
-        "phpmd/phpmd": "~2.0",
-        "goetas/xsd2php":"2.*@dev",
-        "goetas/xsd-reader":"2.*@dev"
+        "phpmd/phpmd": "~2.0"
     },
     "suggest": {
         "phpdocumentor/phpdocumentor": "For generating API documentation"

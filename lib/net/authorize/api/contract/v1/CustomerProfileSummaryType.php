@@ -8,7 +8,7 @@ namespace net\authorize\api\contract\v1;
  *
  * XSD Type: customerProfileSummaryType
  */
-class CustomerProfileSummaryType extends SearchCriteriaCustomerProfileType
+class CustomerProfileSummaryType
 {
 
     /**
@@ -20,6 +20,21 @@ class CustomerProfileSummaryType extends SearchCriteriaCustomerProfileType
      * @property string $description
      */
     private $description = null;
+
+    /**
+     * @property string $merchantCustomerId
+     */
+    private $merchantCustomerId = null;
+
+    /**
+     * @property string $email
+     */
+    private $email = null;
+
+    /**
+     * @property \DateTime $createdDate
+     */
+    private $createdDate = null;
 
     /**
      * Gets as customerProfileId
@@ -62,6 +77,72 @@ class CustomerProfileSummaryType extends SearchCriteriaCustomerProfileType
     public function setDescription($description)
     {
         $this->description = $description;
+        return $this;
+    }
+
+    /**
+     * Gets as merchantCustomerId
+     *
+     * @return string
+     */
+    public function getMerchantCustomerId()
+    {
+        return $this->merchantCustomerId;
+    }
+
+    /**
+     * Sets a new merchantCustomerId
+     *
+     * @param string $merchantCustomerId
+     * @return self
+     */
+    public function setMerchantCustomerId($merchantCustomerId)
+    {
+        $this->merchantCustomerId = $merchantCustomerId;
+        return $this;
+    }
+
+    /**
+     * Gets as email
+     *
+     * @return string
+     */
+    public function getEmail()
+    {
+        return $this->email;
+    }
+
+    /**
+     * Sets a new email
+     *
+     * @param string $email
+     * @return self
+     */
+    public function setEmail($email)
+    {
+        $this->email = $email;
+        return $this;
+    }
+
+    /**
+     * Gets as createdDate
+     *
+     * @return \DateTime
+     */
+    public function getCreatedDate()
+    {
+        return $this->createdDate;
+    }
+
+    /**
+     * Sets a new createdDate
+     *
+     * @param \DateTime $createdDate
+     * @return self
+     */
+    public function setCreatedDate(\DateTime $createdDate)
+    {
+        $this->createdDate = $createdDate;
         return $this;
     }
 

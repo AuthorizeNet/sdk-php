@@ -1,22 +1,22 @@
-net\authorize\api\contract\v1\SearchCriteriaCustomerProfileType:
+net\authorize\api\contract\v1\CustomerPaymentProfileSortingType:
     properties:
-        merchantCustomerId:
+        orderBy:
             expose: true
             access_type: public_method
-            serialized_name: merchantCustomerId
+            serialized_name: orderBy
             xml_element:
                 namespace: AnetApi/xml/v1/schema/AnetApiSchema.xsd
             accessor:
-                getter: getMerchantCustomerId
-                setter: setMerchantCustomerId
+                getter: getOrderBy
+                setter: setOrderBy
             type: string
-        email:
+        orderDescending:
             expose: true
             access_type: public_method
-            serialized_name: email
+            serialized_name: orderDescending
             xml_element:
                 namespace: AnetApi/xml/v1/schema/AnetApiSchema.xsd
             accessor:
-                getter: getEmail
-                setter: setEmail
-            type: string
+                getter: getOrderDescending
+                setter: setOrderDescending
+            type: boolean
