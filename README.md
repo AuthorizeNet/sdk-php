@@ -3,6 +3,8 @@ Authorize.Net PHP SDK
 
 [![Build Status] (https://travis-ci.org/AuthorizeNet/sdk-php.png?branch=master)]
 (https://travis-ci.org/AuthorizeNet/sdk-php)
+[![Code Coverage](https://scrutinizer-ci.com/g/namanbansal/sdk-php/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/namanbansal/sdk-php/?branch=master)
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/namanbansal/sdk-php/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/namanbansal/sdk-php/?branch=master)
 
 
 ## License
