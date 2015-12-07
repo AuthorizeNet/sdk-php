@@ -9,7 +9,7 @@ before_script:
     - pecl install xmldiff
     - composer install --prefer-dist --dev
     - chmod +x ./test-sample-codes.sh
-    
+    - git submodule update --recursive
 script:
     - vendor/phpunit/phpunit/phpunit --coverage-clover=coverage.clover
 
