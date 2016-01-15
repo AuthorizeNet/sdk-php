@@ -61,7 +61,7 @@ url in the Merchant Interface or specify the url when submitting a transaction
 with SIM using the "x_relay_url" field.
 
 When a transaction occurs, Authorize.Net will post the transaction details to
-this url. You can then craete a page on your server at a url such as
+this url. You can then create a page on your server at a url such as
 http://yourdomain.com/response_handler.php and execute any logic you want
 when a transaction occurs. The AuthorizeNetSIM class makes it easy to verify
 the transaction came from Authorize.Net and parse the response:
