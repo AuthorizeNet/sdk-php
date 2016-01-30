@@ -1,4 +1,6 @@
 <?php
+use net\authorize\util\LogFactory;
+
 /**
  * Sends requests to the Authorize.Net gateways.
  *
@@ -13,7 +15,7 @@ abstract class AuthorizeNetRequest
     protected $_post_string; 
     public $VERIFY_PEER = true; // attempt trust validation of SSL certificates when establishing secure connections.
     protected $_sandbox = true;
-    protected $_log_file = false;
+    protected $_logger = null;
     
     /**
      * Set the _post_string
@@ -42,7 +44,7 @@ abstract class AuthorizeNetRequest
         $this->_api_login = ($api_login_id ? $api_login_id : (defined('AUTHORIZENET_API_LOGIN_ID') ? AUTHORIZENET_API_LOGIN_ID : ""));
         $this->_transaction_key = ($transaction_key ? $transaction_key : (defined('AUTHORIZENET_TRANSACTION_KEY') ? AUTHORIZENET_TRANSACTION_KEY : ""));
         $this->_sandbox = (defined('AUTHORIZENET_SANDBOX') ? AUTHORIZENET_SANDBOX : true);
-        $this->_log_file = (defined('AUTHORIZENET_LOG_FILE') ? AUTHORIZENET_LOG_FILE : false);
+        $this->_logger = LogFactory::getLog(get_class($this));
     }
     
     /**
@@ -62,7 +64,7 @@ abstract class AuthorizeNetRequest
      */
     public function setLogFile($filepath)
     {
-        $this->_log_file = $filepath;
+        $this->_logger->setLogFile($filepath);
     }
     
     /**
@@ -94,9 +96,9 @@ abstract class AuthorizeNetRequest
         if ($this->VERIFY_PEER) {
             curl_setopt($curl_request, CURLOPT_CAINFO, dirname(dirname(__FILE__)) . '/ssl/cert.pem');
         } else {
-			if ($this->_log_file) {
-				file_put_contents($this->_log_file, "----Request----\nInvalid SSL option\n", FILE_APPEND);
-			}
+            if ($this->_logger) {
+                $this->_logger->error("----Request----\nInvalid SSL option\n");
+            }
 			return false;
         }
         
@@ -106,15 +108,13 @@ abstract class AuthorizeNetRequest
         
         $response = curl_exec($curl_request);
         
-        if ($this->_log_file) {
-        
+        if ($this->_logger) {
             if ($curl_error = curl_error($curl_request)) {
-                file_put_contents($this->_log_file, "----CURL ERROR----\n$curl_error\n\n", FILE_APPEND);
+                $this->_logger->error("----CURL ERROR----\n$curl_error\n\n");
             }
             // Do not log requests that could contain CC info.
-             file_put_contents($this->_log_file, "----Request----\n{$this->_post_string}\n", FILE_APPEND);
-            
-            file_put_contents($this->_log_file, "----Response----\n$response\n\n", FILE_APPEND);
+            $this->_logger->info("----Request----\n{$this->_post_string}\n");
+            $this->_logger->info("----Response----\n$response\n\n");
         }
         curl_close($curl_request);
         
