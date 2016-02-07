@@ -139,6 +139,11 @@ else
 	echo  "Charge Credit card Null response returned";
 }
 ```
+### Setting Production Environment  
+Replace the environment constant in the execute method.  For example, in the method above:
+```php
+$response = $controller->executeWithApiResponse( \net\authorize\api\constants\ANetEnvironment::PRODUCTION);
+```  
 
 ## Logging
 
