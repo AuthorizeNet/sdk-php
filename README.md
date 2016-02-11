@@ -27,6 +27,7 @@ require 'vendor/autoload.php';
 ```
 *Note: you'll need a composer.json file with the following require section and to run
 `composer update`.*
+
 ```json
 {
   "require": {
@@ -50,6 +51,15 @@ require 'vendor/autoload.php';
 Alternatively, we provide a custom `SPL` autoloader:
 ```php
 require 'path/to/anet_php_sdk/autoload.php';
+```
+
+**Issue with PHP 7:** *You may get below error when run the composer update with PHP 7. To get rid of this error, use `composer update --ignore-platform-reqs`*
+```php
+Problem 1
+    - Installation request for authorizenet/authorizenet 1.8.6.2 -> satisfiable
+by authorizenet/authorizenet[1.8.6.2].
+    - authorizenet/authorizenet 1.8.6.2 requires php ~5.3 -> your PHP version (7
+.0.3RC1) or value of "config.platform.php" in composer.json does not satisfy that requirement.
 ```
 
 ## Authentication
@@ -139,6 +149,11 @@ else
 	echo  "Charge Credit card Null response returned";
 }
 ```
+### Setting Production Environment  
+Replace the environment constant in the execute method.  For example, in the method above:
+```php
+$response = $controller->executeWithApiResponse( \net\authorize\api\constants\ANetEnvironment::PRODUCTION);
+```  
 
 ## Logging
 
