@@ -102,7 +102,7 @@ class HttpClient
                 $this->now(), $ex->getCode(), $ex->getMessage(), $ex->getTraceAsString(), $ex->getFile(), $ex->getLine() );
             $this->logger->error($errorMessage);
         }
-        if ($this->logger->getLogFile()) {
+        if ($this->logger && $this->logger->getLogFile()) {
             if ($curl_error = curl_error($curl_request)) {
                 $this->logger->error("CURL ERROR: $curl_error");
             }
