@@ -94,10 +94,10 @@ abstract class AuthorizeNetRequest
         if ($this->VERIFY_PEER) {
             curl_setopt($curl_request, CURLOPT_CAINFO, dirname(dirname(__FILE__)) . '/ssl/cert.pem');
         } else {
-			if ($this->_log_file) {
-				file_put_contents($this->_log_file, "----Request----\nInvalid SSL option\n", FILE_APPEND);
-			}
-			return false;
+            curl_setopt($curl_request, CURLOPT_SSL_VERIFYPEER, false);
+            if ($this->_log_file) {
+                file_put_contents($this->_log_file, "----Request----\nUnsafe SSL option\n", FILE_APPEND);
+            }
         }
         
         if (preg_match('/xml/',$post_url)) {
