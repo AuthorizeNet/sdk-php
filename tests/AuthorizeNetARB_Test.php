@@ -29,6 +29,11 @@ class AuthorizeNetARB_Test extends PHPUnit_Framework_TestCase
         $this->assertTrue($response->isOk());
         $subscription_id = $response->getSubscriptionId();
 
+        // Get the subscription
+        $get_request = new AuthorizeNetARB;
+        $get_response = $get_request->getSubscription($subscription_id);
+        $this->assertTrue($get_response->isOk());
+
         // Get the subscription status
         $status_request = new AuthorizeNetARB;
         $status_response = $status_request->getSubscriptionStatus($subscription_id);
