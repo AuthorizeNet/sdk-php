@@ -119,9 +119,6 @@ class AuthorizeNetCIM_Test extends PHPUnit_Framework_TestCase
     $this->assertEquals($customerProfile->description, (string)$response->xml->profile->description);
     $this->assertEquals($customerProfile->merchantCustomerId, (string)$response->xml->profile->merchantCustomerId);
     $this->assertEquals($customerProfile->email, (string)$response->xml->profile->email);
-    $this->assertEquals(substr($customerProfile->paymentProfiles[0]->payment->creditCard->cardNumber, -4, 4), substr((string)$response->xml->profile->paymentProfiles->payment->creditCard->cardNumber, -4, 4));
-
-
 
     $this->assertTrue($response->isOk());
 
