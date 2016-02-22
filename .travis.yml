@@ -17,4 +17,5 @@ script:
 after_script:
     - wget https://scrutinizer-ci.com/ocular.phar
     - php ocular.phar code-coverage:upload --format=php-clover coverage.clover
-    - vendor/phpunit/phpunit/phpunit sample-code-php/test-runner.php
+    - cd sample-code-php
+    - ../vendor/phpunit/phpunit/phpunit ./test-runner.php
