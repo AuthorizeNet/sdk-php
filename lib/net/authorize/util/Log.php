@@ -4,7 +4,6 @@ namespace net\authorize\util;
 use net\authorize\util\ANetSensitiveFields;
 
 define ("ANET_LOG_FILES_APPEND",true);
-define ("ANET_LOG_FILE","phplog");
 
 define("ANET_LOG_DEBUG_PREFIX","DEBUG");
 define("ANET_LOG_INFO_PREFIX","INFO");
@@ -30,6 +29,7 @@ define("ANET_LOG_LEVEL",ANET_LOG_DEBUG);
 class Log
 {
     private $sensitiveXmlTags = NULL;
+    private $logFile = '';
 	
 	/**
 	* Takes a regex pattern (string) as argument and adds the forward slash delimiter.
@@ -247,6 +247,7 @@ class Log
     }
 	
 	private function log($logLevelPrefix, $logMessage, $flags){
+        if (!$this->logFile) return;
         //masking
         $logMessage = $this->getMasked($logMessage);
 
@@ -264,7 +265,7 @@ class Log
         //Add timestamp, log level, method, file, line
         $logString = sprintf("\n %s %s : [%s] (%s : %s) - %s", \net\authorize\util\Helpers::now(), $logLevelPrefix,
             $methodName, $fileName, $lineNumber, $logMessage);
-        file_put_contents(ANET_LOG_FILE, $logString, $flags);
+        file_put_contents($this->logFile, $logString, $flags);
     }
 	
     public function debug($logMessage, $flags=FILE_APPEND)
@@ -298,9 +299,9 @@ class Log
                 $objects[$i] = $this->getMasked($testObject);
             }
             $logMessage = vsprintf($format, $objects);
-            log($logLevelPrefix, $logMessage, $flags);
+            $this->log($logLevelPrefix, $logMessage, $flags);
         }
-        catch(Exception $e){
+        catch(\Exception $e){
             $this->debug("Incorrect log message format: " . $e->getMessage());
         }
     }
@@ -328,6 +329,20 @@ class Log
         if(ANET_LOG_ERROR >= ANET_LOG_LEVEL) {
 			$this->logFormat(ANET_LOG_ERROR_PREFIX, $format, $args , $flags);
         }
+    }
+
+    /**
+     * @param string $logFile
+     */
+    public function setLogFile($logFile){
+        $this->logFile = $logFile;
+    }
+
+    /**
+     * @return string
+     */
+    public function getLogFile(){
+        return $this->logFile;
     }
 	
     public function __construct(){

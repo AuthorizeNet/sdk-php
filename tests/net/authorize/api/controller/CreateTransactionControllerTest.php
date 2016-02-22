@@ -36,7 +36,12 @@ class CreateTransactionControllerTest extends ApiCoreTestBase
         self::displayMessages( $response);
         $this->assertNotNull($response, "null response");
         $this->assertNotNull($response->getMessages());
-        file_put_contents(self::$log_file, sprintf("\n%s: Controller Response ResultCode: '%s'.", \net\authorize\util\Helpers::now() ,$response->getMessages()->getResultCode()), FILE_APPEND);
+        $logMessage = sprintf("\n%s: Controller Response ResultCode: '%s'.", \net\authorize\util\Helpers::now(), $response->getMessages()->getResultCode());
+        if (self::$log_file) {
+            file_put_contents(self::$log_file, $logMessage, FILE_APPEND);
+        } else {
+            echo $logMessage;
+        }
         $this->assertEquals("Ok", $response->getMessages()->getResultCode());
         $this->assertEquals( $this->refId, $response->getRefId());
         $this->assertTrue(0 < count($response->getMessages()));
@@ -147,12 +152,20 @@ class CreateTransactionControllerTest extends ApiCoreTestBase
         if ( null != $response)
         {
             $logMessage = sprintf("\n%s: Displaying Transaction Response.", \net\authorize\util\Helpers::now());
-            echo $logMessage; file_put_contents(self::$log_file, $logMessage, FILE_APPEND);
+            echo $logMessage;
+            if (self::$log_file)
+            {
+                file_put_contents(self::$log_file, $logMessage, FILE_APPEND);
+            }
 
             if ( null != $response->getTransactionResponse())
             {
                 $logMessage = sprintf("\n%s: Transaction Response Code: '%s'.", \net\authorize\util\Helpers::now(), $response->getTransactionResponse()->getResponseCode());
-                echo $logMessage; file_put_contents(self::$log_file, $logMessage, FILE_APPEND);
+                echo $logMessage;
+                if (self::$log_file)
+                {
+                    file_put_contents(self::$log_file, $logMessage, FILE_APPEND);
+                }
 
                 $allMessages = $response->getTransactionResponse()->getMessages();
                 $allErrors = $response->getTransactionResponse()->getErrors();
@@ -163,7 +176,11 @@ class CreateTransactionControllerTest extends ApiCoreTestBase
                     {
                         $errorCount++;
                         $logMessage = sprintf("\n%s: %d - Error: Code:'%s', Text:'%s'", \net\authorize\util\Helpers::now(), $errorCount, $error->getErrorCode(), $error->getErrorText());
-                        echo $logMessage; file_put_contents(self::$log_file, $logMessage, FILE_APPEND);
+                        echo $logMessage;
+                        if (self::$log_file)
+                        {
+                            file_put_contents(self::$log_file, $logMessage, FILE_APPEND);
+                        }
                     }
                 }
                 $messageCount = 0;
@@ -174,11 +191,19 @@ class CreateTransactionControllerTest extends ApiCoreTestBase
                         $messageCount++;
                         //$logMessage = sprintf("\n%s: %d - Message: Code:'%s', Description:'%s'", \net\authorize\util\Helpers::now(), $errorCount, $message->getCode(), $message->getDescription());
                         $logMessage = sprintf("\n%s: %d - Message: ", \net\authorize\util\Helpers::now(), $messageCount);
-                        echo $logMessage; file_put_contents(self::$log_file, $logMessage, FILE_APPEND);
+                        echo $logMessage;
+                        if (self::$log_file)
+                        {
+                            file_put_contents(self::$log_file, $logMessage, FILE_APPEND);
+                        }
                     }
                 }
                 $logMessage = sprintf("\n%s: Transaction Response, Errors: '%d', Messages: '%d'.", \net\authorize\util\Helpers::now(), $errorCount, $messageCount);
-                echo $logMessage; file_put_contents(self::$log_file, $logMessage, FILE_APPEND);
+                echo $logMessage;
+                if (self::$log_file)
+                {
+                    file_put_contents(self::$log_file, $logMessage, FILE_APPEND);
+                }
             }
         }
     }
