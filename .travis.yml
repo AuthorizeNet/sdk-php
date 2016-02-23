@@ -3,7 +3,7 @@ language: php
 php:
     - 5.6
     - 7.0
-    
+
 sudo: false
 
 before_script:
@@ -11,7 +11,7 @@ before_script:
     - composer install --prefer-dist --ignore-platform-reqs
     - chmod +x ./test-sample-codes.sh
     - git submodule update --remote --recursive 
-    
+
 script:
     - vendor/phpunit/phpunit/phpunit --coverage-clover=coverage.clover
 	- vendor/phpunit/phpunit/phpunit sample-code-php/test-runner.php sample-code-php/
@@ -19,4 +19,3 @@ script:
 after_script:
     - wget https://scrutinizer-ci.com/ocular.phar
     - php ocular.phar code-coverage:upload --format=php-clover coverage.clover
-    
