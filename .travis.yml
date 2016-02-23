@@ -9,7 +9,6 @@ sudo: false
 before_script:
     - pecl install xmldiff
     - composer install --prefer-dist --ignore-platform-reqs
-    - chmod +x ./test-sample-codes.sh
     - git submodule update --remote --recursive
 
 script:
