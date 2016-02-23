@@ -10,11 +10,11 @@ before_script:
     - pecl install xmldiff
     - composer install --prefer-dist --ignore-platform-reqs
     - chmod +x ./test-sample-codes.sh
-    - git submodule update --remote --recursive 
+    - git submodule update --remote --recursive
 
 script:
     - vendor/phpunit/phpunit/phpunit --coverage-clover=coverage.clover
-	- vendor/phpunit/phpunit/phpunit sample-code-php/test-runner.php sample-code-php/
+    - vendor/phpunit/phpunit/phpunit sample-code-php/test-runner.php sample-code-php/
 
 after_script:
     - wget https://scrutinizer-ci.com/ocular.phar
