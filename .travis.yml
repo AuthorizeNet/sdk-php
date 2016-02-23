@@ -14,7 +14,9 @@ before_script:
 
 script:
     - vendor/phpunit/phpunit/phpunit --coverage-clover=coverage.clover
-    - vendor/phpunit/phpunit/phpunit sample-code-php/test-runner.php sample-code-php/
+    - cd sample-code-php
+    - composer update
+    - vendor/phpunit/phpunit/phpunit test-runner.php .
 
 after_script:
     - wget https://scrutinizer-ci.com/ocular.phar
