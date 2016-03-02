@@ -2,6 +2,7 @@
 /**
  * Easily interact with the Authorize.Net AIM API.
  *
+ * 
  * Example Authorize and Capture Transaction against the Sandbox:
  * <code>
  * <?php require_once 'AuthorizeNet.php'
@@ -286,7 +287,7 @@ class AuthorizeNetAIM extends AuthorizeNetRequest
             'bank_acct_num' => $bank_acct_num,
             'bank_acct_type' => $bank_acct_type,
             'bank_name' => $bank_name,
-            'bank_acct_name' => $bank_acct_type,
+            'bank_acct_name' => $bank_acct_name,
             'echeck_type' => $echeck_type,
             )
         );

@@ -2,16 +2,21 @@ language: php
 
 php:
     - 5.6
+    - 7.0
+
+sudo: false
 
 before_script:
     - pecl install xmldiff
-    - composer install --prefer-dist --dev
+    - composer install --prefer-dist --ignore-platform-reqs
+    - git submodule update --remote --recursive
 
 script:
     - vendor/phpunit/phpunit/phpunit --coverage-clover=coverage.clover
+    - cd sample-code-php
+    - composer install --prefer-dist --ignore-platform-reqs
+    - vendor/phpunit/phpunit/phpunit test-runner.php .
 
 after_script:
     - wget https://scrutinizer-ci.com/ocular.phar
     - php ocular.phar code-coverage:upload --format=php-clover coverage.clover
-    - php vendor/bin/coveralls -v
-

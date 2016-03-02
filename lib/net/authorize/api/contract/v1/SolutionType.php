@@ -22,6 +22,11 @@ class SolutionType
     private $name = null;
 
     /**
+     * @property string $vendorName
+     */
+    private $vendorName = null;
+
+    /**
      * Gets as id
      *
      * @return string
@@ -62,6 +67,28 @@ class SolutionType
     public function setName($name)
     {
         $this->name = $name;
+        return $this;
+    }
+
+    /**
+     * Gets as vendorName
+     *
+     * @return string
+     */
+    public function getVendorName()
+    {
+        return $this->vendorName;
+    }
+
+    /**
+     * Sets a new vendorName
+     *
+     * @param string $vendorName
+     * @return self
+     */
+    public function setVendorName($vendorName)
+    {
+        $this->vendorName = $vendorName;
         return $this;
     }
 

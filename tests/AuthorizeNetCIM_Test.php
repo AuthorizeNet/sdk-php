@@ -119,10 +119,9 @@ class AuthorizeNetCIM_Test extends PHPUnit_Framework_TestCase
     $this->assertEquals($customerProfile->description, (string)$response->xml->profile->description);
     $this->assertEquals($customerProfile->merchantCustomerId, (string)$response->xml->profile->merchantCustomerId);
     $this->assertEquals($customerProfile->email, (string)$response->xml->profile->email);
-    $this->assertEquals(substr($customerProfile->paymentProfiles[0]->payment->creditCard->cardNumber, -4, 4), substr((string)$response->xml->profile->paymentProfiles->payment->creditCard->cardNumber, -4, 4));
-
-
-
+    $testPayment = ($response->xml->profile->paymentProfiles[0]->payment->creditCard)?($response->xml->profile->paymentProfiles[0]->payment):
+                   ($response->xml->profile->paymentProfiles[1]->payment);
+    $this->assertEquals(substr($customerProfile->paymentProfiles[0]->payment->creditCard->cardNumber, -4, 4), substr((string)$testPayment->creditCard->cardNumber, -4, 4));
     $this->assertTrue($response->isOk());
 
 
@@ -155,7 +154,7 @@ class AuthorizeNetCIM_Test extends PHPUnit_Framework_TestCase
         $request = new AuthorizeNetCIM;
         $customerProfile = new AuthorizeNetCustomer;
         $customerProfile->description = "Description of customer";
-        $customerProfile->merchantCustomerId = time().rand(1,10);
+        $customerProfile->merchantCustomerId = time().rand(1,100000);
         $customerProfile->email = "blahlah@domain.com";
         $response = $request->createCustomerProfile($customerProfile);
         $this->assertTrue($response->isOk());
@@ -374,6 +373,12 @@ class AuthorizeNetCIM_Test extends PHPUnit_Framework_TestCase
 
   public function testGetCustomerProfileIds()
   {
+    // A valid response should be received when a merchant has zero customer profiles...
+    // Hence, first testing using specific credentials for a merchant which has zero customer profiles...  
+    $request = new AuthorizeNetCIM('5KP3u95bQpv','4Ktq966gC55GAX7S');
+    $response = $request->getCustomerProfileIds();
+
+	  
     // Create new customer profile
     $request = new AuthorizeNetCIM;
     $customerProfile = new AuthorizeNetCustomer;

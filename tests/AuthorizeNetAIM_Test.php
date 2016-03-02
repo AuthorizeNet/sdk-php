@@ -268,7 +268,7 @@ class AuthorizeNetAIM_Sandbox_Test extends PHPUnit_Framework_TestCase
     public function testVoid()
     {
         // First create transaction to void.
-        $amount = rand(1, 1000);
+        $amount = rand(1, 100000);
         $sale = new AuthorizeNetAIM;
         $sale->setFields(
             array(
