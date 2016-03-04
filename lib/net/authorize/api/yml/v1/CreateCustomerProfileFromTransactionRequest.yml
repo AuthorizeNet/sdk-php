@@ -12,3 +12,23 @@ net\authorize\api\contract\v1\CreateCustomerProfileFromTransactionRequest:
                 getter: getTransId
                 setter: setTransId
             type: string
+        customer:
+            expose: true
+            access_type: public_method
+            serialized_name: customer
+            xml_element:
+                namespace: AnetApi/xml/v1/schema/AnetApiSchema.xsd
+            accessor:
+                getter: getCustomer
+                setter: setCustomer
+            type: net\authorize\api\contract\v1\CustomerProfileBaseType
+        customerProfileId:
+            expose: true
+            access_type: public_method
+            serialized_name: customerProfileId
+            xml_element:
+                namespace: AnetApi/xml/v1/schema/AnetApiSchema.xsd
+            accessor:
+                getter: getCustomerProfileId
+                setter: setCustomerProfileId
+            type: string
