@@ -193,7 +193,7 @@ class AuthorizeNetCIM extends AuthorizeNetRequest
      *
      * @param int $customerProfileId
      * @param int $customerPaymentProfileId
-	 * @param boolean $unmaskExpirationDate
+     * @param boolean $unmaskExpirationDate
      *
      * @return AuthorizeNetCIM_Response
      */
@@ -202,9 +202,9 @@ class AuthorizeNetCIM extends AuthorizeNetRequest
         $this->_constructXml("getCustomerPaymentProfileRequest");
         $this->_xml->addChild("customerProfileId", $customerProfileId);
         $this->_xml->addChild("customerPaymentProfileId", $customerPaymentProfileId);
-		if ( $unmaskExpirationDate ) {
-			$this->_xml->addChild("unmaskExpirationDate", true);
-		}
+        if ( $unmaskExpirationDate ) {
+            $this->_xml->addChild("unmaskExpirationDate", true);
+        }
 
         return $this->_sendRequest();
     }

@@ -189,13 +189,13 @@ class AuthorizeNetCIM_Test extends PHPUnit_Framework_TestCase
 
     }
 
-	public function testGetCustomerPaymentProfile()
-	{
-		$expirationDate = "2015-10";
-		$cardNumber = "4111111111111111";
-		$expectedCardNumber = 'XXXX' . substr($cardNumber, -4);
-		$expectedExpiration = 'XXXX';
-		
+    public function testGetCustomerPaymentProfile()
+    {
+        $expirationDate = "2015-10";
+        $cardNumber = "4111111111111111";
+        $expectedCardNumber = 'XXXX' . substr($cardNumber, -4);
+        $expectedExpiration = 'XXXX';
+    
         // Create new customer profile
         $request = new AuthorizeNetCIM;
         $customerProfile = new AuthorizeNetCustomer;
@@ -210,7 +210,7 @@ class AuthorizeNetCIM_Test extends PHPUnit_Framework_TestCase
         $paymentProfile = new AuthorizeNetPaymentProfile;
         $paymentProfile->customerType = "individual";
         $paymentProfile->payment->creditCard->cardNumber = $cardNumber;
-       	$paymentProfile->payment->creditCard->expirationDate = $expirationDate;
+        $paymentProfile->payment->creditCard->expirationDate = $expirationDate;
         $response = $request->createCustomerPaymentProfile($customerProfileId, $paymentProfile);
         $this->assertTrue($response->isOk());
         $paymentProfileId = $response->getPaymentProfileId();
@@ -218,19 +218,19 @@ class AuthorizeNetCIM_Test extends PHPUnit_Framework_TestCase
         $request = new AuthorizeNetCIM;
         $response = $request->getCustomerPaymentProfile($customerProfileId, $paymentProfileId);
         if ($response->isOk()) {
-			$recdCardNumber = (string)$response->xml->paymentProfile->payment->creditCard->cardNumber; 
-			$recdExpiration = (string)$response->xml->paymentProfile->payment->creditCard->expirationDate;
-			$this->assertEquals($expectedCardNumber, $recdCardNumber);
-			$this->assertEquals($expectedExpiration, $recdExpiration);
-		}
-	}
+            $recdCardNumber = (string)$response->xml->paymentProfile->payment->creditCard->cardNumber; 
+            $recdExpiration = (string)$response->xml->paymentProfile->payment->creditCard->expirationDate;
+            $this->assertEquals($expectedCardNumber, $recdCardNumber);
+            $this->assertEquals($expectedExpiration, $recdExpiration);
+        }
+    }
 
-	public function testGetCustomerPaymentProfileWithUnmaskedExpiration()
-	{
-		$expirationDate = "2015-10";
-		$cardNumber = "4111111111111111";
-		$expectedCardNumber = 'XXXX' . substr($cardNumber, -4);
-		
+    public function testGetCustomerPaymentProfileWithUnmaskedExpiration()
+    {
+        $expirationDate = "2015-10";
+        $cardNumber = "4111111111111111";
+        $expectedCardNumber = 'XXXX' . substr($cardNumber, -4);
+    
         // Create new customer profile
         $request = new AuthorizeNetCIM;
         $customerProfile = new AuthorizeNetCustomer;
@@ -245,7 +245,7 @@ class AuthorizeNetCIM_Test extends PHPUnit_Framework_TestCase
         $paymentProfile = new AuthorizeNetPaymentProfile;
         $paymentProfile->customerType = "individual";
         $paymentProfile->payment->creditCard->cardNumber = $cardNumber;
-       	$paymentProfile->payment->creditCard->expirationDate = $expirationDate;
+         $paymentProfile->payment->creditCard->expirationDate = $expirationDate;
         $response = $request->createCustomerPaymentProfile($customerProfileId, $paymentProfile, true);
         $this->assertTrue($response->isOk());
         $paymentProfileId = $response->getPaymentProfileId();
@@ -253,12 +253,12 @@ class AuthorizeNetCIM_Test extends PHPUnit_Framework_TestCase
         $request = new AuthorizeNetCIM;
         $response = $request->getCustomerPaymentProfile($customerProfileId, $paymentProfileId, true);
         if ($response->isOk()) {
-			$recdCardNumber = (string)$response->xml->paymentProfile->payment->creditCard->cardNumber; 
-			$recdExpiration = (string)$response->xml->paymentProfile->payment->creditCard->expirationDate;
-			$this->assertEquals($expectedCardNumber, $recdCardNumber);
-			$this->assertEquals($expirationDate, $recdExpiration);
-		}
-	}
+            $recdCardNumber = (string)$response->xml->paymentProfile->payment->creditCard->cardNumber; 
+            $recdExpiration = (string)$response->xml->paymentProfile->payment->creditCard->expirationDate;
+            $this->assertEquals($expectedCardNumber, $recdCardNumber);
+            $this->assertEquals($expirationDate, $recdExpiration);
+        }
+    }
 
   public function testCreateCustomerProfileWithValidationMode()
   {
@@ -449,7 +449,7 @@ class AuthorizeNetCIM_Test extends PHPUnit_Framework_TestCase
     $request = new AuthorizeNetCIM('5KP3u95bQpv','4Ktq966gC55GAX7S');
     $response = $request->getCustomerProfileIds();
 
-	  
+    
     // Create new customer profile
     $request = new AuthorizeNetCIM;
     $customerProfile = new AuthorizeNetCustomer;
