@@ -15,7 +15,6 @@ class HttpClient
     private $_Url = "";
 
     public $VERIFY_PEER = true; // attempt trust validation of SSL certificates when establishing secure connections.
-    private $_log_file = false;
     private $logger = NULL;
     /**
      * Constructor.
@@ -23,9 +22,7 @@ class HttpClient
      */
     public function __construct()
     {
-        $this->_log_file = (defined('AUTHORIZENET_LOG_FILE') ? AUTHORIZENET_LOG_FILE : false);
         $this->logger = LogFactory::getLog(get_class($this));
-        date_default_timezone_set('UTC');
     }
 
     /**
@@ -54,7 +51,7 @@ class HttpClient
      */
     public function setLogFile($filepath)
     {
-        $this->_log_file = $filepath;
+        $this->logger->setLogFile($filepath);
     }
 
     /**
@@ -82,7 +79,7 @@ class HttpClient
         if ($this->VERIFY_PEER) {
             curl_setopt($curl_request, CURLOPT_CAINFO, dirname(dirname(__FILE__)) . '/../../ssl/cert.pem');
         } else {
-            $this->logger("Invalid SSL option for the request");
+            $this->logger->error("Invalid SSL option for the request");
             return false;
         }
 
@@ -104,7 +101,7 @@ class HttpClient
                 $this->now(), $ex->getCode(), $ex->getMessage(), $ex->getTraceAsString(), $ex->getFile(), $ex->getLine() );
             $this->logger->error($errorMessage);
         }
-        if ($this->_log_file) {
+        if ($this->logger && $this->logger->getLogFile()) {
             if ($curl_error = curl_error($curl_request)) {
                 $this->logger->error("CURL ERROR: $curl_error");
             }

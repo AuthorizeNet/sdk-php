@@ -19,7 +19,6 @@ class Helpers
         //init only once
         if ( ! self::$initialized)
         {
-            date_default_timezone_set('UTC');
             self::$initialized = true;
         }
         return date( DATE_RFC2822);

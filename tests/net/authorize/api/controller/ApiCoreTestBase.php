@@ -48,7 +48,11 @@ class ApiCoreTestBase extends \PHPUnit_Framework_TestCase
     protected function setUp()
     {
         $logMessage = sprintf("\n%s: Test '%s' Starting.", \net\authorize\util\Helpers::now(), $this->getName());
-        echo $logMessage; file_put_contents(self::$log_file, $logMessage, FILE_APPEND);
+        echo $logMessage;
+        if (self::$log_file)
+        {
+            file_put_contents(self::$log_file, $logMessage, FILE_APPEND);
+        }
 
         $this->refId = 'ref' . time();
 
@@ -111,7 +115,11 @@ class ApiCoreTestBase extends \PHPUnit_Framework_TestCase
     protected function tearDown()
     {
         $logMessage = sprintf("\n%s: Test '%s' Completed.\n", \net\authorize\util\Helpers::now(), $this->getName());
-        echo $logMessage; file_put_contents(self::$log_file, $logMessage, FILE_APPEND);
+        echo $logMessage;
+        if (self::$log_file)
+        {
+            file_put_contents(self::$log_file, $logMessage, FILE_APPEND);
+        }
     }
 
     protected function getRandomString( $title)
@@ -137,30 +145,50 @@ class ApiCoreTestBase extends \PHPUnit_Framework_TestCase
         if ( null != $response)
         {
             $logMessage = sprintf("\n%s: Controller Response is not null, iterating messages.", \net\authorize\util\Helpers::now());
-            echo $logMessage; file_put_contents(self::$log_file, $logMessage, FILE_APPEND);
+            echo $logMessage;
+            if (self::$log_file)
+            {
+                file_put_contents(self::$log_file, $logMessage, FILE_APPEND);
+            }
             $msgCount = 0;
             $allMessages = $response->getMessages();
             if ( null != $allMessages )
             {
                 $logMessage = sprintf("\n%s: Controller ResultCode: '%s'.", \net\authorize\util\Helpers::now(), $allMessages->getResultCode());
-                echo $logMessage; file_put_contents(self::$log_file, $logMessage, FILE_APPEND);
+                echo $logMessage;
+                if (self::$log_file)
+                {
+                    file_put_contents(self::$log_file, $logMessage, FILE_APPEND);
+                }
                 if (null != $allMessages->getMessage())
                 {
                     foreach ($allMessages->getMessage() as $message)
                     {
                         $msgCount++;
                         $logMessage = sprintf("\n%d - Message, Code: '%s', Text: '%s'", $msgCount, $message->getCode(), $message->getText());
-                        echo $logMessage; file_put_contents(self::$log_file, $logMessage, FILE_APPEND);
+                        echo $logMessage;
+                        if (self::$log_file)
+                        {
+                            file_put_contents(self::$log_file, $logMessage, FILE_APPEND);
+                        }
                     }
                 }
             }
             $logMessage = sprintf("\n%s: Controller Response contains '%d' messages.", \net\authorize\util\Helpers::now(), $msgCount);
-            echo $logMessage; file_put_contents(self::$log_file, $logMessage, FILE_APPEND);
+            echo $logMessage;
+            if (self::$log_file)
+            {
+                file_put_contents(self::$log_file, $logMessage, FILE_APPEND);
+            }
         }
         else
         {
             $logMessage = sprintf("\n%s: Response is null.", \net\authorize\util\Helpers::now());
-            echo $logMessage; file_put_contents(self::$log_file, $logMessage, FILE_APPEND);
+            echo $logMessage;
+            if (self::$log_file)
+            {
+                file_put_contents(self::$log_file, $logMessage, FILE_APPEND);
+            }
         }
     }
 
