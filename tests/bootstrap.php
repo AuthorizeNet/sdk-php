@@ -13,7 +13,6 @@ if (!defined('AUTHORIZENET_LOG_FILE'))
 }
 
 // Append to log file
-date_default_timezone_set('UTC'); //necessary for the following date to set timezone
 $logMessage = sprintf("Logging Started: %s\n", date(DATE_RFC2822));
 if (AUTHORIZENET_LOG_FILE)
 {
