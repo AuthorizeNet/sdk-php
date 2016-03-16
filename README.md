@@ -217,4 +217,3 @@ To autogenerate PHPDocs run:
 ```shell
 vendor/bin/phpdoc -t doc/api/ -d lib
 ```
- 
