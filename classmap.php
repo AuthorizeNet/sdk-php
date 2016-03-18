@@ -281,6 +281,7 @@ return array(
     'net\authorize\api\contract\v1\CustomerAddressExType' => $libDir . 'net/authorize/api/contract/v1/CustomerAddressExType.php',
     'net\authorize\api\contract\v1\CustomerAddressType' => $libDir . 'net/authorize/api/contract/v1/CustomerAddressType.php',
     'net\authorize\api\contract\v1\CustomerDataType' => $libDir . 'net/authorize/api/contract/v1/CustomerDataType.php',
+	'net\authorize\api\contract\v1\CustomerProfileIdType' => $libDir . 'net/authorize/api/contract/v1/CustomerProfileIdType.php',
     'net\authorize\api\contract\v1\CustomerPaymentProfileBaseType' => $libDir . 'net/authorize/api/contract/v1/CustomerPaymentProfileBaseType.php',
     'net\authorize\api\contract\v1\CustomerPaymentProfileExType' => $libDir . 'net/authorize/api/contract/v1/CustomerPaymentProfileExType.php',
     'net\authorize\api\contract\v1\CustomerPaymentProfileListItemType' => $libDir . 'net/authorize/api/contract/v1/CustomerPaymentProfileListItemType.php',
@@ -414,6 +415,7 @@ return array(
     'net\authorize\api\contract\v1\TransactionResponseType\ErrorsAType\ErrorAType' => $libDir . 'net/authorize/api/contract/v1/TransactionResponseType/ErrorsAType/ErrorAType.php',
     'net\authorize\api\contract\v1\TransactionResponseType\MessagesAType\MessageAType' => $libDir . 'net/authorize/api/contract/v1/TransactionResponseType/MessagesAType/MessageAType.php',
     'net\authorize\api\contract\v1\TransactionResponseType\SplitTenderPaymentsAType\SplitTenderPaymentAType' => $libDir . 'net/authorize/api/contract/v1/TransactionResponseType/SplitTenderPaymentsAType/SplitTenderPaymentAType.php',
+
 
     //Controllers
     'net\authorize\api\controller\ARBCancelSubscriptionController' => $libDir . 'net/authorize/api/controller/ARBCancelSubscriptionController.php',
