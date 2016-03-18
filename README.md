@@ -35,7 +35,7 @@ require 'vendor/autoload.php';
   "require": {
   "php": ">=5.2.0",
   "ext-curl": "*",
-  "authorizenet/authorizenet": "1.8.7",
+  "authorizenet/authorizenet": "1.8.8",
   "jms/serializer": "xsd2php-dev as 0.18.0"
 },
 "require-dev": {
