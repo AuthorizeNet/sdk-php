@@ -14,6 +14,16 @@ class CreateCustomerProfileFromTransactionRequest extends ANetApiRequestType
     private $transId = null;
 
     /**
+     * @property \net\authorize\api\contract\v1\CustomerProfileBaseType $customer
+     */
+    private $customer = null;
+
+    /**
+     * @property string $customerProfileId
+     */
+    private $customerProfileId = null;
+
+    /**
      * Gets as transId
      *
      * @return string
@@ -32,6 +42,50 @@ class CreateCustomerProfileFromTransactionRequest extends ANetApiRequestType
     public function setTransId($transId)
     {
         $this->transId = $transId;
+        return $this;
+    }
+
+    /**
+     * Gets as customer
+     *
+     * @return \net\authorize\api\contract\v1\CustomerProfileBaseType
+     */
+    public function getCustomer()
+    {
+        return $this->customer;
+    }
+
+    /**
+     * Sets a new customer
+     *
+     * @param \net\authorize\api\contract\v1\CustomerProfileBaseType $customer
+     * @return self
+     */
+    public function setCustomer(\net\authorize\api\contract\v1\CustomerProfileBaseType $customer)
+    {
+        $this->customer = $customer;
+        return $this;
+    }
+
+    /**
+     * Gets as customerProfileId
+     *
+     * @return string
+     */
+    public function getCustomerProfileId()
+    {
+        return $this->customerProfileId;
+    }
+
+    /**
+     * Sets a new customerProfileId
+     *
+     * @param string $customerProfileId
+     * @return self
+     */
+    public function setCustomerProfileId($customerProfileId)
+    {
+        $this->customerProfileId = $customerProfileId;
         return $this;
     }
 

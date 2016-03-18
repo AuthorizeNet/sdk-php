@@ -14,6 +14,11 @@ class ARBCreateSubscriptionResponse extends ANetApiResponseType
     private $subscriptionId = null;
 
     /**
+     * @property \net\authorize\api\contract\v1\CustomerProfileIdType $profile
+     */
+    private $profile = null;
+
+    /**
      * Gets as subscriptionId
      *
      * @return string
@@ -32,6 +37,28 @@ class ARBCreateSubscriptionResponse extends ANetApiResponseType
     public function setSubscriptionId($subscriptionId)
     {
         $this->subscriptionId = $subscriptionId;
+        return $this;
+    }
+
+    /**
+     * Gets as profile
+     *
+     * @return \net\authorize\api\contract\v1\CustomerProfileIdType
+     */
+    public function getProfile()
+    {
+        return $this->profile;
+    }
+
+    /**
+     * Sets a new profile
+     *
+     * @param \net\authorize\api\contract\v1\CustomerProfileIdType $profile
+     * @return self
+     */
+    public function setProfile(\net\authorize\api\contract\v1\CustomerProfileIdType $profile)
+    {
+        $this->profile = $profile;
         return $this;
     }
 

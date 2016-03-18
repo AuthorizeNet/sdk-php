@@ -48,7 +48,6 @@ abstract class ApiOperationBase implements IApiOperation
      */
     public function __construct(\net\authorize\api\contract\v1\AnetApiRequestType $request, $responseType)
     {
-        date_default_timezone_set('UTC');
         $this->logger = LogFactory::getLog(get_class($this));
 
         if ( null == $request)

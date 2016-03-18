@@ -182,9 +182,9 @@ return array(
     'PhpOption\None' => $vendorDir . '/phpoption/phpoption/src/PhpOption/None.php',
     'PhpOption\Option' => $vendorDir . '/phpoption/phpoption/src/PhpOption/Option.php',
     'PhpOption\Some' => $vendorDir . '/phpoption/phpoption/src/PhpOption/Some.php',
-    'Symfony\Component\Yaml\Yaml' => $vendorDir . '/Symfony/Yaml/Yaml.php',
-    'Symfony\Component\Yaml\Parser' => $vendorDir . '/Symfony/Yaml/Parser.php',
-    'Symfony\Component\Yaml\Inline' => $vendorDir . '/Symfony/Yaml/Inline.php',
+    'Symfony\Component\Yaml\Yaml' => $vendorDir . '/symfony/yaml/Yaml.php',
+    'Symfony\Component\Yaml\Parser' => $vendorDir . '/symfony/yaml/Parser.php',
+    'Symfony\Component\Yaml\Inline' => $vendorDir . '/symfony/yaml/Inline.php',
 
     'AuthorizeNetAIM'            => $libDir    . 'AuthorizeNetAIM.php',
     'AuthorizeNetAIM_Response'   => $libDir    . 'AuthorizeNetAIM.php',
@@ -281,6 +281,7 @@ return array(
     'net\authorize\api\contract\v1\CustomerAddressExType' => $libDir . 'net/authorize/api/contract/v1/CustomerAddressExType.php',
     'net\authorize\api\contract\v1\CustomerAddressType' => $libDir . 'net/authorize/api/contract/v1/CustomerAddressType.php',
     'net\authorize\api\contract\v1\CustomerDataType' => $libDir . 'net/authorize/api/contract/v1/CustomerDataType.php',
+	'net\authorize\api\contract\v1\CustomerProfileIdType' => $libDir . 'net/authorize/api/contract/v1/CustomerProfileIdType.php',
     'net\authorize\api\contract\v1\CustomerPaymentProfileBaseType' => $libDir . 'net/authorize/api/contract/v1/CustomerPaymentProfileBaseType.php',
     'net\authorize\api\contract\v1\CustomerPaymentProfileExType' => $libDir . 'net/authorize/api/contract/v1/CustomerPaymentProfileExType.php',
     'net\authorize\api\contract\v1\CustomerPaymentProfileListItemType' => $libDir . 'net/authorize/api/contract/v1/CustomerPaymentProfileListItemType.php',
@@ -414,6 +415,7 @@ return array(
     'net\authorize\api\contract\v1\TransactionResponseType\ErrorsAType\ErrorAType' => $libDir . 'net/authorize/api/contract/v1/TransactionResponseType/ErrorsAType/ErrorAType.php',
     'net\authorize\api\contract\v1\TransactionResponseType\MessagesAType\MessageAType' => $libDir . 'net/authorize/api/contract/v1/TransactionResponseType/MessagesAType/MessageAType.php',
     'net\authorize\api\contract\v1\TransactionResponseType\SplitTenderPaymentsAType\SplitTenderPaymentAType' => $libDir . 'net/authorize/api/contract/v1/TransactionResponseType/SplitTenderPaymentsAType/SplitTenderPaymentAType.php',
+
 
     //Controllers
     'net\authorize\api\controller\ARBCancelSubscriptionController' => $libDir . 'net/authorize/api/controller/ARBCancelSubscriptionController.php',

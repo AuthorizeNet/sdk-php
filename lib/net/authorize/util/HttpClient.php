@@ -23,7 +23,6 @@ class HttpClient
     public function __construct()
     {
         $this->logger = LogFactory::getLog(get_class($this));
-        date_default_timezone_set('UTC');
     }
 
     /**
