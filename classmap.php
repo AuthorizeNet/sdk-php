@@ -182,9 +182,9 @@ return array(
     'PhpOption\None' => $vendorDir . '/phpoption/phpoption/src/PhpOption/None.php',
     'PhpOption\Option' => $vendorDir . '/phpoption/phpoption/src/PhpOption/Option.php',
     'PhpOption\Some' => $vendorDir . '/phpoption/phpoption/src/PhpOption/Some.php',
-    'Symfony\Component\Yaml\Yaml' => $vendorDir . '/Symfony/Yaml/Yaml.php',
-    'Symfony\Component\Yaml\Parser' => $vendorDir . '/Symfony/Yaml/Parser.php',
-    'Symfony\Component\Yaml\Inline' => $vendorDir . '/Symfony/Yaml/Inline.php',
+    'Symfony\Component\Yaml\Yaml' => $vendorDir . '/symfony/yaml/Yaml.php',
+    'Symfony\Component\Yaml\Parser' => $vendorDir . '/symfony/yaml/Parser.php',
+    'Symfony\Component\Yaml\Inline' => $vendorDir . '/symfony/yaml/Inline.php',
 
     'AuthorizeNetAIM'            => $libDir    . 'AuthorizeNetAIM.php',
     'AuthorizeNetAIM_Response'   => $libDir    . 'AuthorizeNetAIM.php',
