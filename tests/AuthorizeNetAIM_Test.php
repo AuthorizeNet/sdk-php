@@ -253,7 +253,7 @@ class AuthorizeNetAIM_Sandbox_Test extends PHPUnit_Framework_TestCase
         $this->assertEquals($tax_exempt, $response->tax_exempt);
         $this->assertEquals($po_num, $response->purchase_order_number);
         $this->assertGreaterThan(1, strlen($response->md5_hash));
-        $this->assertEquals("", $response->card_code_response);
+        $this->assertEquals("P", $response->card_code_response);
         $this->assertEquals("2", $response->cavv_response);
         $this->assertEquals("XXXX1111", $response->account_number);
         $this->assertEquals("Visa", $response->card_type);
