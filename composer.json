@@ -10,11 +10,11 @@
         "ext-curl": "*",
         "ext-json": "*",
         "ext-simplexml": "*",
-        "ext-xmlwriter": "*",
-        "goetas/xsd2php":"2.0.0",
-        "goetas-webservices/xsd-reader":"^0.1"
+        "ext-xmlwriter": "*"
     },
     "require-dev": {
+        "goetas/xsd2php":"2.0.0",
+        "goetas-webservices/xsd-reader":"^0.1",
         "jms/serializer": "serializer-master-dev as 1.0",
         "phpunit/phpunit": "~4.0",
         "phpmd/phpmd": "~2.0"
