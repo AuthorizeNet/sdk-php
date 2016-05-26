@@ -12,7 +12,7 @@
         "ext-simplexml": "*",
         "ext-xmlwriter": "*",
         "goetas/xsd2php":"2.0.0",
-        "goetas-webservices/xsd-reader":"^0.1",
+        "goetas-webservices/xsd-reader":"^0.1"
     },
     "require-dev": {
         "jms/serializer": "serializer-master-dev as 1.0",
