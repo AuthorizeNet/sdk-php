@@ -17,7 +17,7 @@ Proprietary, see the provided `license.md`.
 - JSON PHP Extension
 - SimpleXML PHP Extension
 - An Authorize.Net Merchant Account or Sandbox Account. You can get a 
-	free sandbox account at http://developer.authorize.net/sandbox/
+	free sandbox account at http://developer.authorize.net/hello_world/sandbox/
 
 ## Autoloading
 
