@@ -39,7 +39,7 @@ net\authorize\api\contract\v1\TransactionDetailsType:
             accessor:
                 getter: getSubmitTimeUTC
                 setter: setSubmitTimeUTC
-            type: Goetas\Xsd\XsdToPhp\XMLSchema\DateTime
+            type: GoetasWebservices\Xsd\XsdToPhp\XMLSchema\DateTime
         submitTimeLocal:
             expose: true
             access_type: public_method
@@ -49,7 +49,7 @@ net\authorize\api\contract\v1\TransactionDetailsType:
             accessor:
                 getter: getSubmitTimeLocal
                 setter: setSubmitTimeLocal
-            type: Goetas\Xsd\XsdToPhp\XMLSchema\DateTime
+            type: GoetasWebservices\Xsd\XsdToPhp\XMLSchema\DateTime
         transactionType:
             expose: true
             access_type: public_method

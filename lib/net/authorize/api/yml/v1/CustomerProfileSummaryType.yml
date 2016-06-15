@@ -49,4 +49,4 @@ net\authorize\api\contract\v1\CustomerProfileSummaryType:
             accessor:
                 getter: getCreatedDate
                 setter: setCreatedDate
-            type: Goetas\Xsd\XsdToPhp\XMLSchema\DateTime
+            type: GoetasWebservices\Xsd\XsdToPhp\XMLSchema\DateTime
