@@ -19,9 +19,6 @@
         "phpunit/phpunit": "~4.0",
         "phpmd/phpmd": "~2.0"
     },
-    "suggest": {
-        "phpdocumentor/phpdocumentor": "For generating API documentation"
-    },
     "autoload": {
         "classmap": ["lib"]
     },
