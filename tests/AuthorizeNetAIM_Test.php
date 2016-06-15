@@ -484,7 +484,7 @@ class AuthorizeNetAIM_Sandbox_Test extends PHPUnit_Framework_TestCase
         $sale = new AuthorizeNetAIM;
         $sale->setFields(
             array(
-            'amount' => rand(1, 1000),
+            'amount' => rand(1, 90000),
             'card_num' => '6011000000000012',
             'exp_date' => '0420'
             )
