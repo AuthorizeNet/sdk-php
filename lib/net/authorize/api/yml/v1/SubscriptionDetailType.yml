@@ -39,7 +39,7 @@ net\authorize\api\contract\v1\SubscriptionDetailType:
             accessor:
                 getter: getCreateTimeStampUTC
                 setter: setCreateTimeStampUTC
-            type: Goetas\Xsd\XsdToPhp\XMLSchema\DateTime
+            type: GoetasWebservices\Xsd\XsdToPhp\XMLSchema\DateTime
         firstName:
             expose: true
             access_type: public_method

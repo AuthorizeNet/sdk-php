@@ -4,8 +4,8 @@ namespace net\authorize\api\controller\base;
 use InvalidArgumentException;
 use JMS\Serializer\SerializerBuilder;
 use JMS\Serializer\handler\HandlerRegistryInterface;
-use Goetas\Xsd\XsdToPhp\Jms\Handler\BaseTypesHandler;
-use Goetas\Xsd\XsdToPhp\Jms\Handler\XmlSchemaDateHandler;
+use GoetasWebservices\Xsd\XsdToPhpRuntime\Jms\Handler\BaseTypesHandler;
+use GoetasWebservices\Xsd\XsdToPhpRuntime\Jms\Handler\XmlSchemaDateHandler;
 
 use \net\authorize\util\HttpClient;
 use \net\authorize\util\Helpers;

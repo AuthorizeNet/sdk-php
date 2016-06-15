@@ -5,6 +5,7 @@ class AuthorizeNetCIM_Test extends PHPUnit_Framework_TestCase
 
   public function testDeleteAllCustomerProfiles()
   {
+    $this->markTestSkipped('This test was taking much too long, need to revisit BM 20160615'); //TODO
     $request = new AuthorizeNetCIM;
     $response = $request->getCustomerProfileIds();
     $customers = $response->getCustomerProfileIds();

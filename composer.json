@@ -11,9 +11,9 @@
         "ext-json": "*",
         "ext-simplexml": "*",
         "ext-xmlwriter": "*",
-        "goetas/xsd2php":"2.*@dev",
-        "goetas/xsd-reader":"2.*@dev",
-        "jms/serializer": "xsd2php-dev as 0.18.0"
+        "goetas-webservices/xsd2php-runtime":"^0.2",
+        "goetas-webservices/xsd-reader": "^0.1",
+        "jms/serializer": "serializer-master-dev as 1.0"
     },
     "require-dev": {
         "phpunit/phpunit": "~4.0",
