@@ -21,7 +21,7 @@ Proprietary, see the provided `license.md`.
 
 ## Autoloading
 
-We recommend using [`Composer`](http://getcomposer.org), don't forget to require its autoloader in
+We recommend using [`Composer`](http://getcomposer.org) *(note we never recommend you override the new secure-http default setting)*, don't forget to require its autoloader in
 your script or bootstrap file:
 ```php
 require 'vendor/autoload.php';
