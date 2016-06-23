@@ -19,6 +19,7 @@ script:
     - cd sample-code-php
     - composer install --prefer-dist --ignore-platform-reqs
     - vendor/phpunit/phpunit/phpunit test-runner.php .
+    - cd ../
 
 after_script:
     - wget https://scrutinizer-ci.com/ocular.phar
