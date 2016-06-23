@@ -10,10 +10,12 @@ sudo: false
 before_script:
     - pecl install xmldiff
     - composer install --prefer-dist --ignore-platform-reqs
+    - composer require satooshi/php-coveralls:~0.6@stable
+    - mkdir -p build/logs
     - git submodule update --remote --recursive
 
 script:
-    - vendor/phpunit/phpunit/phpunit --coverage-clover=coverage.clover
+    - vendor/phpunit/phpunit/phpunit --coverage-clover build/logs/clover.xml
     - cd sample-code-php
     - composer install --prefer-dist --ignore-platform-reqs
     - vendor/phpunit/phpunit/phpunit test-runner.php .
@@ -21,3 +23,6 @@ script:
 after_script:
     - wget https://scrutinizer-ci.com/ocular.phar
 #    - php ocular.phar code-coverage:upload --format=php-clover coverage.clover
+
+after_success:
+  - sh -c 'if [ "$TRAVIS_PHP_VERSION" != "hhvm" ]; then php vendor/bin/coveralls -v; fi;'
