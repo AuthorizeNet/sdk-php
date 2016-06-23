@@ -5,7 +5,7 @@ Authorize.Net PHP SDK
 [![Coverage Status](https://coveralls.io/repos/github/sunnyrajrathod/sdk-php/badge.svg?branch=master)](https://coveralls.io/github/sunnyrajrathod/sdk-php?branch=master)
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/AuthorizeNet/sdk-php/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/AuthorizeNet/sdk-php/?branch=master)
 [![Packagist](https://img.shields.io/packagist/v/authorizenet/authorizenet.svg)](https://packagist.org/packages/authorizenet/authorizenet)
-[![Packagist](https://img.shields.io/packagist/dt/doctrine/orm.svg?maxAge=2592000)]()
+[![Packagist](https://img.shields.io/packagist/v/authorizenet/authorizenet.svg?maxAge=2592000)](https://packagist.org/packages/authorizenet/authorizenet)
 
 ## License
 Proprietary, see the provided `license.md`.
