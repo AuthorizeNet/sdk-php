@@ -30,6 +30,7 @@ class Log
 {
     private $sensitiveXmlTags = NULL;
     private $logFile = '';
+    private $logLevel = ANET_LOG_LEVEL;
 	
 	/**
 	* Takes a regex pattern (string) as argument and adds the forward slash delimiter.
@@ -270,25 +271,25 @@ class Log
 	
     public function debug($logMessage, $flags=FILE_APPEND)
     {
-        if(ANET_LOG_DEBUG >= ANET_LOG_LEVEL){
+        if(ANET_LOG_DEBUG >= $this->logLevel){
             $this->log(ANET_LOG_DEBUG_PREFIX, $logMessage,$flags);
         }
     }
 	
     public function info($logMessage, $flags=FILE_APPEND){
-        if(ANET_LOG_INFO >= ANET_LOG_LEVEL) {
+        if(ANET_LOG_INFO >= $this->logLevel) {
             $this->log(ANET_LOG_INFO_PREFIX, $logMessage,$flags);
         }
     }
 	
 	public function warn($logMessage, $flags=FILE_APPEND){
-        if(ANET_LOG_WARN >= ANET_LOG_LEVEL) {
+        if(ANET_LOG_WARN >= $this->logLevel) {
             $this->log(ANET_LOG_WARN_PREFIX, $logMessage,$flags);
         }
     }
 	
     public function error($logMessage, $flags=FILE_APPEND){
-        if(ANET_LOG_ERROR >= ANET_LOG_LEVEL) {
+        if(ANET_LOG_ERROR >= $this->logLevel) {
             $this->log(ANET_LOG_ERROR_PREFIX, $logMessage,$flags);
         }
     }
@@ -308,27 +309,42 @@ class Log
 	
 	public function debugFormat($format, $args=array(),  $flags=FILE_APPEND)
     {
-        if(ANET_LOG_DEBUG >= ANET_LOG_LEVEL){
+        if(ANET_LOG_DEBUG >= $this->logLevel){
             $this->logFormat(ANET_LOG_DEBUG_PREFIX, $format, $args , $flags);
         }
     }
 	
 	public function infoFormat($format, $args=array(),  $flags=FILE_APPEND){
-        if(ANET_LOG_INFO >= ANET_LOG_LEVEL) {
+        if(ANET_LOG_INFO >= $this->logLevel) {
             $this->logFormat(ANET_LOG_INFO_PREFIX, $format, $args , $flags);
         }
     }
 	
 	public function warnFormat($format, $args=array(),  $flags=FILE_APPEND){
-        if(ANET_LOG_WARN >= ANET_LOG_LEVEL) {
+        if(ANET_LOG_WARN >= $this->logLevel) {
             $this->logFormat(ANET_LOG_WARN_PREFIX, $format, $args , $flags);
         }
     }
 	
     public function errorFormat($format, $args=array(),  $flags=FILE_APPEND){
-        if(ANET_LOG_ERROR >= ANET_LOG_LEVEL) {
+        if(ANET_LOG_ERROR >= $this->logLevel) {
 			$this->logFormat(ANET_LOG_ERROR_PREFIX, $format, $args , $flags);
         }
+    }
+
+    /**
+     * @param string $logLevel
+       possible values = ANET_LOG_DEBUG, ANET_LOG_INFO, ANET_LOG_WARN, ANET_LOG_ERROR
+     */
+    public function setLogLevel($logLevel){
+        $this->logLevel = $logLevel;
+    }
+
+    /**
+     * @return string
+     */
+    public function getLogLevel(){
+        return $this->logLevel;
     }
 
     /**
