@@ -334,7 +334,7 @@ class Log
 
     /**
      * @param string $logLevel
-       possible values = ANET_LOG_DEBUG, ANET_LOG_INFO, ANET_LOG_WARN, ANET_LOG_ERROR
+     * possible values = ANET_LOG_DEBUG, ANET_LOG_INFO, ANET_LOG_WARN, ANET_LOG_ERROR
      */
     public function setLogLevel($logLevel){
         $this->logLevel = $logLevel;
