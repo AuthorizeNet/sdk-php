@@ -2,7 +2,6 @@
 
 namespace net\authorize\api\contract\v1;
 
-use \net\authorize\api\contract\v1\Extensions\TypeHelper;
 
 /**
  * Class representing SubscriptionDetailType
@@ -10,8 +9,10 @@ use \net\authorize\api\contract\v1\Extensions\TypeHelper;
  *
  * XSD Type: SubscriptionDetail
  */
-class SubscriptionDetailType extends TypeHelper
+class SubscriptionDetailType
 {
+
+    use net\authorize\api\contract\v1\Traits\TypeTraits;
 
     /**
      * @property integer $id
