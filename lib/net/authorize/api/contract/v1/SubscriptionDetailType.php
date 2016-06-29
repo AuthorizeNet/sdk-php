@@ -2,13 +2,15 @@
 
 namespace net\authorize\api\contract\v1;
 
+use \net\authorize\api\contract\v1\Extensions\TypeHelper;
+
 /**
  * Class representing SubscriptionDetailType
  *
  *
  * XSD Type: SubscriptionDetail
  */
-class SubscriptionDetailType
+class SubscriptionDetailType extends TypeHelper
 {
 
     /**
