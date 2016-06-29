@@ -22,7 +22,9 @@ abstract class TypeHelper
 
         foreach(get_object_vars($this) as $key => $value) {
 
-            $result[$key] = $value;
+            if(substr($key, 0, 1) != "_") {
+                $result[$key] = $value;
+            }
         }
 
         return $result;
@@ -33,9 +35,9 @@ abstract class TypeHelper
      * @param  array  $attributes The attributes input array
      * @return void
      */
-    public function fromArray(array $attributes)
+    public function fromArray($attributes)
     {
-        foreach ($attributes as $name => $value) {
+        foreach ((array) $attributes as $name => $value) {
             if (property_exists($this, $name)) {
                 $value = is_array($value) ? serialize($value) : $value;
 
@@ -47,6 +49,26 @@ abstract class TypeHelper
                 }
             }
         }
+    }
+
+    /**
+     * _getSetterName
+     * @param  [type] $propertyName [description]
+     * @return [type]               [description]
+     */
+    protected function _getSetterName($propertyName)
+    {
+        $prefixes = array('add', 'set');
+
+        foreach ($prefixes as $prefix) {
+            $methodName = sprintf('%s%s', $prefix, ucfirst(strtolower($propertyName)));
+
+            if (method_exists($this, $methodName)) {
+                return $methodName;
+            }
+        }
+
+        return false;
     }
 
 }
