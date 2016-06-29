@@ -12,7 +12,7 @@ namespace net\authorize\api\contract\v1;
 class SubscriptionDetailType
 {
 
-    use net\authorize\api\contract\v1\Traits\TypeTraits;
+    use \net\authorize\api\contract\v1\Traits\TypeTraits;
 
     /**
      * @property integer $id
