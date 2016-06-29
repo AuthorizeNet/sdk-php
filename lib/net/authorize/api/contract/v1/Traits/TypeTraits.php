@@ -1,6 +1,6 @@
 <?php
 
-namespace net\authorize\api\contract\v1\Extensions;
+namespace net\authorize\api\contract\v1\Traits;
 
 
 /**
@@ -9,7 +9,7 @@ namespace net\authorize\api\contract\v1\Extensions;
  * Helpers for some common tasks in working with the objects
  */
 
-abstract class TypeHelper
+trait TypeTraits
 {
 
     /**
