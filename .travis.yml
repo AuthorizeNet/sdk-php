@@ -18,7 +18,7 @@ script:
     - vendor/phpunit/phpunit/phpunit --coverage-clover build/logs/clover.xml
     - cd sample-code-php
     - composer install --prefer-dist --ignore-platform-reqs
-    - vendor/phpunit/phpunit/phpunit test-runner.php .
+    - vendor/phpunit/phpunit/phpunit test-runner.php . --coverage-clover ../build/logs/clover.xml
     - cd ../
 
 after_script:
