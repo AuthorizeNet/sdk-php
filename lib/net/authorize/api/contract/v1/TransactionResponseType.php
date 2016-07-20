@@ -10,6 +10,7 @@ namespace net\authorize\api\contract\v1;
  */
 class TransactionResponseType
 {
+    use \net\authorize\api\contract\v1\Traits\TypeTraits;
 
     /**
      * @property string $responseCode
