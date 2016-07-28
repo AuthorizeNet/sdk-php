@@ -17,36 +17,30 @@ Proprietary, see the provided `license.md`.
 - JSON PHP Extension
 - SimpleXML PHP Extension
 - An Authorize.Net Merchant Account or Sandbox Account. You can get a 
-	free sandbox account at http://developer.authorize.net/sandbox/
+	free sandbox account at http://developer.authorize.net/hello_world/sandbox/
 
 ## Autoloading
 
-[`Composer`](http://getcomposer.org) currently has a [MITM](https://github.com/composer/composer/issues/1074)
-security vulnerability.  However, if you wish to use it, require its autoloader in
+We recommend using [`Composer`](http://getcomposer.org) *(note we never recommend you override the new secure-http default setting)*, don't forget to require its autoloader in
 your script or bootstrap file:
 ```php
 require 'vendor/autoload.php';
 ```
-*Note: you'll need a composer.json file with the following require section and to run
+*Update your composer.json file as per the example below and then run
 `composer update`.*
 
 ```json
 {
   "require": {
-  "php": ">=5.2.0",
+  "php": ">=5.5",
   "ext-curl": "*",
-  "authorizenet/authorizenet": "1.8.8",
-  "jms/serializer": "xsd2php-dev as 0.18.0"
-},
-"require-dev": {
-  "goetas/xsd2php": "2.*@dev",
-  "goetas/xsd-reader": "2.*@dev"
-},
-"repositories": [{
-    "type": "vcs",
-    "url": "https://github.com/goetas/serializer.git"
-    }]
-
+  "authorizenet/authorizenet": "1.8.9",
+  "jms/serializer": "serializer-master-dev as 1.0"
+  },
+  "repositories": [{
+       "type": "vcs",
+       "url": "https://github.com/goetas/serializer.git"
+  }]
 }
 ```
 
