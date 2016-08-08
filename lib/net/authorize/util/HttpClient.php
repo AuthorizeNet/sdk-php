@@ -72,6 +72,12 @@ class HttpClient
         curl_setopt($curl_request, CURLOPT_RETURNTRANSFER, 1);
         curl_setopt($curl_request, CURLOPT_SSL_VERIFYHOST, 2);
 
+        //disable checking for ssl cert if it's running on localhost
+        if ($_SERVER['SERVER_NAME'] == 'localhost')
+        	curl_setopt($curl_request, CURLOPT_SSL_VERIFYPEER, false);
+        elseif ($_SERVER['SERVER_NAME'] !== 'localhost')
+            curl_setopt($curl_request, CURLOPT_SSL_VERIFYPEER, true);
+    
         $this->logger->info(sprintf(" Url: %s", $post_url));
         // Do not log requests that could contain CC info.
         $this->logger->info(sprintf("Request to AnetApi: \n%s", $xmlRequest));
