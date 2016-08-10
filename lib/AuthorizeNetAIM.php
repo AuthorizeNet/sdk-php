@@ -475,7 +475,7 @@ class AuthorizeNetAIM_Response extends AuthorizeNetResponse
             
             // Set custom fields
             if ($count = count($custom_fields)) {
-                $custom_fields_response = array_slice($this->_response_array, -$count, $count);
+                $custom_fields_response = array_slice($this->_response_array, -$count-1, $count);
                 $i = 0;
                 foreach ($custom_fields as $key => $value) {
                     $this->$key = $custom_fields_response[$i];
