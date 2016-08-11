@@ -32,7 +32,7 @@
         
         <!-- Enter your test account credentials to run tests against sandbox. -->
         <const name="AUTHORIZENET_API_LOGIN_ID" value="5KP3u95bQpv" />
-        <const name="AUTHORIZENET_TRANSACTION_KEY" value="4Ktq966gC55GAX7S" />
+        <const name="AUTHORIZENET_TRANSACTION_KEY" value="346HZ32z3fP4hTG2" />
         <const name="AUTHORIZENET_MD5_SETTING" value="" />
         
         <!-- Enter your live account credentials to run tests against production gateway. -->
