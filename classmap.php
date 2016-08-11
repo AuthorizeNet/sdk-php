@@ -35,6 +35,8 @@ return array(
     'Doctrine\Common\Annotations\SimpleAnnotationReader' => $vendorDir . '/doctrine/annotations/lib/Doctrine/Common/Annotations/SimpleAnnotationReader.php',
     'Doctrine\Common\Annotations\TokenParser' => $vendorDir . '/doctrine/annotations/lib/Doctrine/Common/Annotations/TokenParser.php',
     'Doctrine\Common\Lexer\AbstractLexer' => $vendorDir . '/doctrine/lexer/lib/Doctrine/Common/Lexer/AbstractLexer.php',
+    'Doctrine\Instantiator\Instantiator' => $vendorDir . '/doctrine/instantiator/src/Doctrine/Instantiator/Instantiator.php',
+    'Doctrine\Instantiator\InstantiatorInterface' => $vendorDir . '/doctrine/instantiator/src/Doctrine/Instantiator/InstantiatorInterface.php',
     'GoetasWebservices\Xsd\XsdToPhpRuntime\Jms\Handler\BaseTypesHandler' => $vendorDir . '/goetas-webservices/xsd2php-runtime/src/Jms/Handler/BaseTypesHandler.php',
     'GoetasWebservices\Xsd\XsdToPhpRuntime\Jms\Handler\XmlSchemaDateHandler' => $vendorDir . '/goetas-webservices/xsd2php-runtime/src/Jms/Handler/XmlSchemaDateHandler.php',
     'JMS\Parser\AbstractLexer' => $vendorDir . '/jms/parser-lib/src/JMS/Parser/AbstractLexer.php',
