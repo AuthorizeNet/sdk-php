@@ -109,7 +109,7 @@ abstract class ApiOperationBase implements IApiOperation
     {
         $this->beforeExecute();
 
-	$this->apiRequest->clientId = "sdk-php-" . \net\authorize\api\constants\ANetEnvironment::VERSION;
+	$this->apiRequest->setClientId("sdk-php-" . \net\authorize\api\constants\ANetEnvironment::VERSION);
 
         $this->logger->info("Request Serialization Begin");
         $this->logger->debug($this->apiRequest);
