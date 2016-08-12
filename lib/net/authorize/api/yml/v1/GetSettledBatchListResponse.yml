@@ -14,5 +14,6 @@ net\authorize\api\contract\v1\GetSettledBatchListResponse:
             type: array<net\authorize\api\contract\v1\BatchDetailsType>
             xml_list:
                 inline: false
+                skip_when_empty: true
                 entry_name: batch
                 namespace: AnetApi/xml/v1/schema/AnetApiSchema.xsd

@@ -109,9 +109,12 @@ abstract class ApiOperationBase implements IApiOperation
     {
         $this->beforeExecute();
 
+	$this->apiRequest->setClientId("sdk-php-" . \net\authorize\api\constants\ANetEnvironment::VERSION);
+
         $this->logger->info("Request Serialization Begin");
         $this->logger->debug($this->apiRequest);
         $xmlRequest = $this->serializer->serialize($this->apiRequest, 'xml');
+	
         $this->logger->info("Request  Serialization End");
         /*
                 //$xmlRequest = '<?xml version="1.0" encoding="UTF-8"?>  <ARBGetSubscriptionListRequest xmlns="AnetApi/xml/v1/schema/AnetApiSchema.xsd">  <merchantAuthentication>  <name>4YJmeW7V77us</name>  <transactionKey>4qHK9u63F753be4Z</transactionKey>  </merchantAuthentication>  <refId><![CDATA[ref1416999093]]></refId>  <searchType><![CDATA[subscriptionActive]]></searchType>  <sorting>  <orderBy><![CDATA[firstName]]></orderBy>  <orderDescending>false</orderDescending>  </sorting>  <paging>  <limit>10</limit>  <offset>1</offset>  </paging>  </ARBGetSubscriptionListRequest>  ';

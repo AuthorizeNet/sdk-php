@@ -10,6 +10,16 @@ net\authorize\api\contract\v1\ANetApiRequestType:
                 getter: getMerchantAuthentication
                 setter: setMerchantAuthentication
             type: net\authorize\api\contract\v1\MerchantAuthenticationType
+        clientId:
+            expose: true
+            access_type: public_method
+            serialized_name: clientId
+            xml_element:
+                namespace: AnetApi/xml/v1/schema/AnetApiSchema.xsd
+            accessor:
+                getter: getClientId
+                setter: setClientId
+            type: string
         refId:
             expose: true
             access_type: public_method

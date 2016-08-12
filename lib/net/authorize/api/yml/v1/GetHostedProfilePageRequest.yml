@@ -24,5 +24,6 @@ net\authorize\api\contract\v1\GetHostedProfilePageRequest:
             type: array<net\authorize\api\contract\v1\SettingType>
             xml_list:
                 inline: false
+                skip_when_empty: true
                 entry_name: setting
                 namespace: AnetApi/xml/v1/schema/AnetApiSchema.xsd
