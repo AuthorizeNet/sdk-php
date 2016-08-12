@@ -70,6 +70,16 @@ net\authorize\api\contract\v1\TransactionRequestType:
                 getter: getCallId
                 setter: setCallId
             type: string
+        terminalNumber:
+            expose: true
+            access_type: public_method
+            serialized_name: terminalNumber
+            xml_element:
+                namespace: AnetApi/xml/v1/schema/AnetApiSchema.xsd
+            accessor:
+                getter: getTerminalNumber
+                setter: setTerminalNumber
+            type: string
         authCode:
             expose: true
             access_type: public_method
@@ -122,6 +132,7 @@ net\authorize\api\contract\v1\TransactionRequestType:
             type: array<net\authorize\api\contract\v1\LineItemType>
             xml_list:
                 inline: false
+                skip_when_empty: true
                 entry_name: lineItem
                 namespace: AnetApi/xml/v1/schema/AnetApiSchema.xsd
         tax:
@@ -256,6 +267,7 @@ net\authorize\api\contract\v1\TransactionRequestType:
             type: array<net\authorize\api\contract\v1\SettingType>
             xml_list:
                 inline: false
+                skip_when_empty: true
                 entry_name: setting
                 namespace: AnetApi/xml/v1/schema/AnetApiSchema.xsd
         userFields:
@@ -270,5 +282,6 @@ net\authorize\api\contract\v1\TransactionRequestType:
             type: array<net\authorize\api\contract\v1\UserFieldType>
             xml_list:
                 inline: false
+                skip_when_empty: true
                 entry_name: userField
                 namespace: AnetApi/xml/v1/schema/AnetApiSchema.xsd

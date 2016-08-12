@@ -67,6 +67,11 @@ class TransactionResponseType
     private $accountNumber = null;
 
     /**
+     * @property string $entryMode
+     */
+    private $entryMode = null;
+
+    /**
      * @property string $accountType
      */
     private $accountType = null;
@@ -120,6 +125,18 @@ class TransactionResponseType
      * $secureAcceptance
      */
     private $secureAcceptance = null;
+
+    /**
+     * @property
+     * \net\authorize\api\contract\v1\TransactionResponseType\EmvResponseAType
+     * $emvResponse
+     */
+    private $emvResponse = null;
+
+    /**
+     * @property string $transHashSha2
+     */
+    private $transHashSha2 = null;
 
     /**
      * Gets as responseCode
@@ -360,6 +377,28 @@ class TransactionResponseType
     public function setAccountNumber($accountNumber)
     {
         $this->accountNumber = $accountNumber;
+        return $this;
+    }
+
+    /**
+     * Gets as entryMode
+     *
+     * @return string
+     */
+    public function getEntryMode()
+    {
+        return $this->entryMode;
+    }
+
+    /**
+     * Sets a new entryMode
+     *
+     * @param string $entryMode
+     * @return self
+     */
+    public function setEntryMode($entryMode)
+    {
+        $this->entryMode = $entryMode;
         return $this;
     }
 
@@ -713,6 +752,51 @@ class TransactionResponseType
     public function setSecureAcceptance(\net\authorize\api\contract\v1\TransactionResponseType\SecureAcceptanceAType $secureAcceptance)
     {
         $this->secureAcceptance = $secureAcceptance;
+        return $this;
+    }
+
+    /**
+     * Gets as emvResponse
+     *
+     * @return \net\authorize\api\contract\v1\TransactionResponseType\EmvResponseAType
+     */
+    public function getEmvResponse()
+    {
+        return $this->emvResponse;
+    }
+
+    /**
+     * Sets a new emvResponse
+     *
+     * @param \net\authorize\api\contract\v1\TransactionResponseType\EmvResponseAType
+     * $emvResponse
+     * @return self
+     */
+    public function setEmvResponse(\net\authorize\api\contract\v1\TransactionResponseType\EmvResponseAType $emvResponse)
+    {
+        $this->emvResponse = $emvResponse;
+        return $this;
+    }
+
+    /**
+     * Gets as transHashSha2
+     *
+     * @return string
+     */
+    public function getTransHashSha2()
+    {
+        return $this->transHashSha2;
+    }
+
+    /**
+     * Sets a new transHashSha2
+     *
+     * @param string $transHashSha2
+     * @return self
+     */
+    public function setTransHashSha2($transHashSha2)
+    {
+        $this->transHashSha2 = $transHashSha2;
         return $this;
     }
 

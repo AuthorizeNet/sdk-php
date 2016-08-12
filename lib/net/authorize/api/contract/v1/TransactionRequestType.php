@@ -47,6 +47,11 @@ class TransactionRequestType
     private $callId = null;
 
     /**
+     * @property string $terminalNumber
+     */
+    private $terminalNumber = null;
+
+    /**
      * @property string $authCode
      */
     private $authCode = null;
@@ -297,6 +302,28 @@ class TransactionRequestType
     public function setCallId($callId)
     {
         $this->callId = $callId;
+        return $this;
+    }
+
+    /**
+     * Gets as terminalNumber
+     *
+     * @return string
+     */
+    public function getTerminalNumber()
+    {
+        return $this->terminalNumber;
+    }
+
+    /**
+     * Sets a new terminalNumber
+     *
+     * @param string $terminalNumber
+     * @return self
+     */
+    public function setTerminalNumber($terminalNumber)
+    {
+        $this->terminalNumber = $terminalNumber;
         return $this;
     }
 

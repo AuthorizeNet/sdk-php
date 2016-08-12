@@ -35,6 +35,8 @@ return array(
     'Doctrine\Common\Annotations\SimpleAnnotationReader' => $vendorDir . '/doctrine/annotations/lib/Doctrine/Common/Annotations/SimpleAnnotationReader.php',
     'Doctrine\Common\Annotations\TokenParser' => $vendorDir . '/doctrine/annotations/lib/Doctrine/Common/Annotations/TokenParser.php',
     'Doctrine\Common\Lexer\AbstractLexer' => $vendorDir . '/doctrine/lexer/lib/Doctrine/Common/Lexer/AbstractLexer.php',
+    'Doctrine\Instantiator\Instantiator' => $vendorDir . '/doctrine/instantiator/src/Doctrine/Instantiator/Instantiator.php',
+    'Doctrine\Instantiator\InstantiatorInterface' => $vendorDir . '/doctrine/instantiator/src/Doctrine/Instantiator/InstantiatorInterface.php',
     'GoetasWebservices\Xsd\XsdToPhpRuntime\Jms\Handler\BaseTypesHandler' => $vendorDir . '/goetas-webservices/xsd2php-runtime/src/Jms/Handler/BaseTypesHandler.php',
     'GoetasWebservices\Xsd\XsdToPhpRuntime\Jms\Handler\XmlSchemaDateHandler' => $vendorDir . '/goetas-webservices/xsd2php-runtime/src/Jms/Handler/XmlSchemaDateHandler.php',
     'JMS\Parser\AbstractLexer' => $vendorDir . '/jms/parser-lib/src/JMS/Parser/AbstractLexer.php',
@@ -415,6 +417,20 @@ return array(
     'net\authorize\api\contract\v1\TransactionResponseType\ErrorsAType\ErrorAType' => $libDir . 'net/authorize/api/contract/v1/TransactionResponseType/ErrorsAType/ErrorAType.php',
     'net\authorize\api\contract\v1\TransactionResponseType\MessagesAType\MessageAType' => $libDir . 'net/authorize/api/contract/v1/TransactionResponseType/MessagesAType/MessageAType.php',
     'net\authorize\api\contract\v1\TransactionResponseType\SplitTenderPaymentsAType\SplitTenderPaymentAType' => $libDir . 'net/authorize/api/contract/v1/TransactionResponseType/SplitTenderPaymentsAType/SplitTenderPaymentAType.php',
+	
+    'net\authorize\api\contract\v1\GetAUJobSummaryRequest' => $libDir . 'net/authorize/api/contract/v1/getAUJobSummaryRequest.php',
+    'net\authorize\api\contract\v1\GetAUJobSummaryResponse' => $libDir . 'net/authorize/api/contract/v1/GetAUJobSummaryResponse.php',
+    'net\authorize\api\contract\v1\GetAUJobDetailsRequest' => $libDir . 'net/authorize/api/contract/v1/GetAUJobDetailsRequest.php',
+    'net\authorize\api\contract\v1\GetAUJobDetailsResponse' => $libDir . 'net/authorize/api/contract/v1/GetAUJobDetailsResponse.php',
+
+    'net\authorize\api\contract\v1\AuDeleteType' => $libDir . 'net/authorize/api/contract/v1/AuDeleteType.php',
+    'net\authorize\api\contract\v1\AuDetailsType' => $libDir . 'net/authorize/api/contract/v1/AuDetailsType.php',
+    'net\authorize\api\contract\v1\AuResponseType' => $libDir . 'net/authorize/api/contract/v1/AuResponseType.php',
+    'net\authorize\api\contract\v1\AuUpdateType' => $libDir . 'net/authorize/api/contract/v1/AuUpdateType.php',
+
+    'net\authorize\api\contract\v1\ListOfAUDetailsType' => $libDir . 'net/authorize/api/contract/v1/ListOfAUDetailsType.php',
+    'net\authorize\api\contract\v1\EmvTagType' => $libDir . 'net/authorize/api/contract/v1/EmvTagType.php',
+    'net\authorize\api\contract\v1\PaymentEmvType' => $libDir . 'net/authorize/api/contract/v1/PaymentEmvType.php',
 
 
     //Controllers
@@ -456,5 +472,8 @@ return array(
     'net\authorize\api\controller\UpdateCustomerShippingAddressController' => $libDir . 'net/authorize/api/controller/UpdateCustomerShippingAddressController.php',
     'net\authorize\api\controller\UpdateSplitTenderGroupController' => $libDir . 'net/authorize/api/controller/UpdateSplitTenderGroupController.php',
     'net\authorize\api\controller\ValidateCustomerPaymentProfileController' => $libDir . 'net/authorize/api/controller/ValidateCustomerPaymentProfileController.php',
+
+    'net\authorize\api\controller\GetAUJobDetailsController' => $libDir . 'net/authorize/api/controller/GetAUJobDetailsController.php',
+    'net\authorize\api\controller\GetAUJobSummaryController' => $libDir . 'net/authorize/api/controller/GetAUJobSummaryController.php',
 
 );

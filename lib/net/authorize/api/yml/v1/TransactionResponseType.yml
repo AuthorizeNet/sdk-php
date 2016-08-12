@@ -110,6 +110,16 @@ net\authorize\api\contract\v1\TransactionResponseType:
                 getter: getAccountNumber
                 setter: setAccountNumber
             type: string
+        entryMode:
+            expose: true
+            access_type: public_method
+            serialized_name: entryMode
+            xml_element:
+                namespace: AnetApi/xml/v1/schema/AnetApiSchema.xsd
+            accessor:
+                getter: getEntryMode
+                setter: setEntryMode
+            type: string
         accountType:
             expose: true
             access_type: public_method
@@ -152,6 +162,7 @@ net\authorize\api\contract\v1\TransactionResponseType:
             type: array<net\authorize\api\contract\v1\TransactionResponseType\MessagesAType\MessageAType>
             xml_list:
                 inline: false
+                skip_when_empty: true
                 entry_name: message
                 namespace: AnetApi/xml/v1/schema/AnetApiSchema.xsd
         errors:
@@ -166,6 +177,7 @@ net\authorize\api\contract\v1\TransactionResponseType:
             type: array<net\authorize\api\contract\v1\TransactionResponseType\ErrorsAType\ErrorAType>
             xml_list:
                 inline: false
+                skip_when_empty: true
                 entry_name: error
                 namespace: AnetApi/xml/v1/schema/AnetApiSchema.xsd
         splitTenderPayments:
@@ -180,6 +192,7 @@ net\authorize\api\contract\v1\TransactionResponseType:
             type: array<net\authorize\api\contract\v1\TransactionResponseType\SplitTenderPaymentsAType\SplitTenderPaymentAType>
             xml_list:
                 inline: false
+                skip_when_empty: true
                 entry_name: splitTenderPayment
                 namespace: AnetApi/xml/v1/schema/AnetApiSchema.xsd
         userFields:
@@ -194,6 +207,7 @@ net\authorize\api\contract\v1\TransactionResponseType:
             type: array<net\authorize\api\contract\v1\UserFieldType>
             xml_list:
                 inline: false
+                skip_when_empty: true
                 entry_name: userField
                 namespace: AnetApi/xml/v1/schema/AnetApiSchema.xsd
         shipTo:
@@ -216,3 +230,23 @@ net\authorize\api\contract\v1\TransactionResponseType:
                 getter: getSecureAcceptance
                 setter: setSecureAcceptance
             type: net\authorize\api\contract\v1\TransactionResponseType\SecureAcceptanceAType
+        emvResponse:
+            expose: true
+            access_type: public_method
+            serialized_name: emvResponse
+            xml_element:
+                namespace: AnetApi/xml/v1/schema/AnetApiSchema.xsd
+            accessor:
+                getter: getEmvResponse
+                setter: setEmvResponse
+            type: net\authorize\api\contract\v1\TransactionResponseType\EmvResponseAType
+        transHashSha2:
+            expose: true
+            access_type: public_method
+            serialized_name: transHashSha2
+            xml_element:
+                namespace: AnetApi/xml/v1/schema/AnetApiSchema.xsd
+            accessor:
+                getter: getTransHashSha2
+                setter: setTransHashSha2
+            type: string

@@ -82,5 +82,6 @@ net\authorize\api\contract\v1\BatchDetailsType:
             type: array<net\authorize\api\contract\v1\BatchStatisticType>
             xml_list:
                 inline: false
+                skip_when_empty: true
                 entry_name: statistic
                 namespace: AnetApi/xml/v1/schema/AnetApiSchema.xsd
