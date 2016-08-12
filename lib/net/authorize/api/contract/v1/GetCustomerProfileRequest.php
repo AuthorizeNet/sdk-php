@@ -14,6 +14,11 @@ class GetCustomerProfileRequest extends ANetApiRequestType
     private $customerProfileId = null;
 
     /**
+     * @property boolean $unmaskExpirationDate
+     */
+    private $unmaskExpirationDate = null;
+
+    /**
      * Gets as customerProfileId
      *
      * @return string
@@ -32,6 +37,28 @@ class GetCustomerProfileRequest extends ANetApiRequestType
     public function setCustomerProfileId($customerProfileId)
     {
         $this->customerProfileId = $customerProfileId;
+        return $this;
+    }
+
+    /**
+     * Gets as unmaskExpirationDate
+     *
+     * @return boolean
+     */
+    public function getUnmaskExpirationDate()
+    {
+        return $this->unmaskExpirationDate;
+    }
+
+    /**
+     * Sets a new unmaskExpirationDate
+     *
+     * @param boolean $unmaskExpirationDate
+     * @return self
+     */
+    public function setUnmaskExpirationDate($unmaskExpirationDate)
+    {
+        $this->unmaskExpirationDate = $unmaskExpirationDate;
         return $this;
     }
 

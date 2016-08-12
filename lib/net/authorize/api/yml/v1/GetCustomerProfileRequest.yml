@@ -12,3 +12,13 @@ net\authorize\api\contract\v1\GetCustomerProfileRequest:
                 getter: getCustomerProfileId
                 setter: setCustomerProfileId
             type: string
+        unmaskExpirationDate:
+            expose: true
+            access_type: public_method
+            serialized_name: unmaskExpirationDate
+            xml_element:
+                namespace: AnetApi/xml/v1/schema/AnetApiSchema.xsd
+            accessor:
+                getter: getUnmaskExpirationDate
+                setter: setUnmaskExpirationDate
+            type: boolean

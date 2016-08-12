@@ -32,6 +32,7 @@ net\authorize\api\contract\v1\CreateProfileResponseType:
             type: array<string>
             xml_list:
                 inline: false
+                skip_when_empty: true
                 entry_name: numericString
                 namespace: AnetApi/xml/v1/schema/AnetApiSchema.xsd
         customerShippingAddressIdList:
@@ -46,5 +47,6 @@ net\authorize\api\contract\v1\CreateProfileResponseType:
             type: array<string>
             xml_list:
                 inline: false
+                skip_when_empty: true
                 entry_name: numericString
                 namespace: AnetApi/xml/v1/schema/AnetApiSchema.xsd

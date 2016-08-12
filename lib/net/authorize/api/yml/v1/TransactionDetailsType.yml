@@ -172,6 +172,7 @@ net\authorize\api\contract\v1\TransactionDetailsType:
             type: array<net\authorize\api\contract\v1\FDSFilterType>
             xml_list:
                 inline: false
+                skip_when_empty: true
                 entry_name: FDSFilter
                 namespace: AnetApi/xml/v1/schema/AnetApiSchema.xsd
         batch:
@@ -266,6 +267,7 @@ net\authorize\api\contract\v1\TransactionDetailsType:
             type: array<net\authorize\api\contract\v1\LineItemType>
             xml_list:
                 inline: false
+                skip_when_empty: true
                 entry_name: lineItem
                 namespace: AnetApi/xml/v1/schema/AnetApiSchema.xsd
         prepaidBalanceRemaining:
@@ -358,6 +360,16 @@ net\authorize\api\contract\v1\TransactionDetailsType:
                 getter: getProduct
                 setter: setProduct
             type: string
+        entryMode:
+            expose: true
+            access_type: public_method
+            serialized_name: entryMode
+            xml_element:
+                namespace: AnetApi/xml/v1/schema/AnetApiSchema.xsd
+            accessor:
+                getter: getEntryMode
+                setter: setEntryMode
+            type: string
         marketType:
             expose: true
             access_type: public_method
@@ -378,6 +390,16 @@ net\authorize\api\contract\v1\TransactionDetailsType:
                 getter: getMobileDeviceId
                 setter: setMobileDeviceId
             type: string
+        customerSignature:
+            expose: true
+            access_type: public_method
+            serialized_name: customerSignature
+            xml_element:
+                namespace: AnetApi/xml/v1/schema/AnetApiSchema.xsd
+            accessor:
+                getter: getCustomerSignature
+                setter: setCustomerSignature
+            type: string
         returnedItems:
             expose: true
             access_type: public_method
@@ -390,6 +412,7 @@ net\authorize\api\contract\v1\TransactionDetailsType:
             type: array<net\authorize\api\contract\v1\ReturnedItemType>
             xml_list:
                 inline: false
+                skip_when_empty: true
                 entry_name: returnedItem
                 namespace: AnetApi/xml/v1/schema/AnetApiSchema.xsd
         solution:
@@ -402,3 +425,18 @@ net\authorize\api\contract\v1\TransactionDetailsType:
                 getter: getSolution
                 setter: setSolution
             type: net\authorize\api\contract\v1\SolutionType
+        emvDetails:
+            expose: true
+            access_type: public_method
+            serialized_name: emvDetails
+            xml_element:
+                namespace: AnetApi/xml/v1/schema/AnetApiSchema.xsd
+            accessor:
+                getter: getEmvDetails
+                setter: setEmvDetails
+            type: array<net\authorize\api\contract\v1\TransactionDetailsType\EmvDetailsAType\TagAType>
+            xml_list:
+                inline: false
+                skip_when_empty: true
+                entry_name: tag
+                namespace: AnetApi/xml/v1/schema/AnetApiSchema.xsd

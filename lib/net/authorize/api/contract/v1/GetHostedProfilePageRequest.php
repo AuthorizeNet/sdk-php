@@ -17,7 +17,8 @@ class GetHostedProfilePageRequest extends ANetApiRequestType
      * Allowed values for settingName are: hostedProfileReturnUrl,
      * hostedProfileReturnUrlText, hostedProfilePageBorderVisible,
      * hostedProfileIFrameCommunicatorUrl, hostedProfileHeadingBgColor,
-     * hostedProfileBillingAddressRequired, hostedProfileCardCodeRequired.
+     * hostedProfileBillingAddressRequired, hostedProfileCardCodeRequired,
+     * hostedProfileBillingAddressOptions, hostedProfileManageOptions.
      *
      * @property \net\authorize\api\contract\v1\SettingType[] $hostedProfileSettings
      */
@@ -51,7 +52,8 @@ class GetHostedProfilePageRequest extends ANetApiRequestType
      * Allowed values for settingName are: hostedProfileReturnUrl,
      * hostedProfileReturnUrlText, hostedProfilePageBorderVisible,
      * hostedProfileIFrameCommunicatorUrl, hostedProfileHeadingBgColor,
-     * hostedProfileBillingAddressRequired, hostedProfileCardCodeRequired.
+     * hostedProfileBillingAddressRequired, hostedProfileCardCodeRequired,
+     * hostedProfileBillingAddressOptions, hostedProfileManageOptions.
      *
      * @return self
      * @param \net\authorize\api\contract\v1\SettingType $setting
@@ -68,7 +70,8 @@ class GetHostedProfilePageRequest extends ANetApiRequestType
      * Allowed values for settingName are: hostedProfileReturnUrl,
      * hostedProfileReturnUrlText, hostedProfilePageBorderVisible,
      * hostedProfileIFrameCommunicatorUrl, hostedProfileHeadingBgColor,
-     * hostedProfileBillingAddressRequired, hostedProfileCardCodeRequired.
+     * hostedProfileBillingAddressRequired, hostedProfileCardCodeRequired,
+     * hostedProfileBillingAddressOptions, hostedProfileManageOptions.
      *
      * @param scalar $index
      * @return boolean
@@ -84,7 +87,8 @@ class GetHostedProfilePageRequest extends ANetApiRequestType
      * Allowed values for settingName are: hostedProfileReturnUrl,
      * hostedProfileReturnUrlText, hostedProfilePageBorderVisible,
      * hostedProfileIFrameCommunicatorUrl, hostedProfileHeadingBgColor,
-     * hostedProfileBillingAddressRequired, hostedProfileCardCodeRequired.
+     * hostedProfileBillingAddressRequired, hostedProfileCardCodeRequired,
+     * hostedProfileBillingAddressOptions, hostedProfileManageOptions.
      *
      * @param scalar $index
      * @return void
@@ -100,7 +104,8 @@ class GetHostedProfilePageRequest extends ANetApiRequestType
      * Allowed values for settingName are: hostedProfileReturnUrl,
      * hostedProfileReturnUrlText, hostedProfilePageBorderVisible,
      * hostedProfileIFrameCommunicatorUrl, hostedProfileHeadingBgColor,
-     * hostedProfileBillingAddressRequired, hostedProfileCardCodeRequired.
+     * hostedProfileBillingAddressRequired, hostedProfileCardCodeRequired,
+     * hostedProfileBillingAddressOptions, hostedProfileManageOptions.
      *
      * @return \net\authorize\api\contract\v1\SettingType[]
      */
@@ -115,7 +120,8 @@ class GetHostedProfilePageRequest extends ANetApiRequestType
      * Allowed values for settingName are: hostedProfileReturnUrl,
      * hostedProfileReturnUrlText, hostedProfilePageBorderVisible,
      * hostedProfileIFrameCommunicatorUrl, hostedProfileHeadingBgColor,
-     * hostedProfileBillingAddressRequired, hostedProfileCardCodeRequired.
+     * hostedProfileBillingAddressRequired, hostedProfileCardCodeRequired,
+     * hostedProfileBillingAddressOptions, hostedProfileManageOptions.
      *
      * @param \net\authorize\api\contract\v1\SettingType[] $hostedProfileSettings
      * @return self

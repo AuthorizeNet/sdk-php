@@ -19,6 +19,11 @@ class SecureAcceptanceAType
     private $payerID = null;
 
     /**
+     * @property string $payerEmail
+     */
+    private $payerEmail = null;
+
+    /**
      * Gets as secureAcceptanceUrl
      *
      * @return string
@@ -59,6 +64,28 @@ class SecureAcceptanceAType
     public function setPayerID($payerID)
     {
         $this->payerID = $payerID;
+        return $this;
+    }
+
+    /**
+     * Gets as payerEmail
+     *
+     * @return string
+     */
+    public function getPayerEmail()
+    {
+        return $this->payerEmail;
+    }
+
+    /**
+     * Sets a new payerEmail
+     *
+     * @param string $payerEmail
+     * @return self
+     */
+    public function setPayerEmail($payerEmail)
+    {
+        $this->payerEmail = $payerEmail;
         return $this;
     }
 
