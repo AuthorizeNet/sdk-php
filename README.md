@@ -1,10 +1,11 @@
 Authorize.Net PHP SDK
 ======================
 
-[![Travis](https://img.shields.io/travis/AuthorizeNet/sdk-php/master.svg)](https://travis-ci.org/AuthorizeNet/sdk-php)
-[![Coverage Status](https://coveralls.io/repos/github/AuthorizeNet/sdk-php/badge.svg?branch=master)](https://coveralls.io/github/AuthorizeNet/sdk-php?branch=master)
+[![Travis](https://img.shields.io/travis/AuthorizeNet/sdk-php/master.svg)]
+(https://travis-ci.org/AuthorizeNet/sdk-php)
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/AuthorizeNet/sdk-php/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/AuthorizeNet/sdk-php/?branch=master)
 [![Packagist](https://img.shields.io/packagist/v/authorizenet/authorizenet.svg)](https://packagist.org/packages/authorizenet/authorizenet)
+
 
 ## License
 Proprietary, see the provided `license.md`.
