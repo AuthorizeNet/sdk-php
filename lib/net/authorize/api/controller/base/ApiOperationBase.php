@@ -38,7 +38,12 @@ abstract class ApiOperationBase implements IApiOperation
      * @var \net\authorize\util\HttpClient;
      */
     public $httpClient = null;
-    private $logger = null;
+
+    /**
+     * @var \net\authorize\util\Log
+     */
+    private $logger;
+
     /**
      * Constructor.
      *
@@ -130,6 +135,14 @@ abstract class ApiOperationBase implements IApiOperation
         $this->logger->info("Response De-Serialization End");
 
         $this->afterExecute();
+    }
+
+    /**
+     * @return \net\authorize\util\Log
+     */
+    public function getLogger()
+    {
+        return $this->logger;
     }
 
     private function validate()

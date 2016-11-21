@@ -3,22 +3,6 @@ namespace net\authorize\util;
 
 use net\authorize\util\ANetSensitiveFields;
 
-define ("ANET_LOG_FILES_APPEND",true);
-
-define("ANET_LOG_DEBUG_PREFIX","DEBUG");
-define("ANET_LOG_INFO_PREFIX","INFO");
-define("ANET_LOG_WARN_PREFIX","WARN");
-define("ANET_LOG_ERROR_PREFIX","ERROR");
-
-//log levels
-define('ANET_LOG_DEBUG',1);
-define("ANET_LOG_INFO",2);
-define("ANET_LOG_WARN",3);
-define("ANET_LOG_ERROR",4);
-
-//set level
-define("ANET_LOG_LEVEL",ANET_LOG_DEBUG);
-
 /**
  * A class to implement logging.
  *
@@ -28,9 +12,29 @@ define("ANET_LOG_LEVEL",ANET_LOG_DEBUG);
 
 class Log
 {
-    private $sensitiveXmlTags = NULL;
+    const ANET_LOG_FILES_APPEND = true;
+
+    const ANET_LOG_DEBUG_PREFIX = "DEBUG";
+
+    const ANET_LOG_INFO_PREFIX  = "INFO";
+
+    const ANET_LOG_WARN_PREFIX  = "WARN";
+
+    const ANET_LOG_ERROR_PREFIX = "ERROR";
+
+    const ANET_LOG_DEBUG        = 1;
+
+    const ANET_LOG_INFO         = 2;
+
+    const ANET_LOG_WARN         = 3;
+
+    const ANET_LOG_ERROR        = 4;
+
+    private $sensitiveXmlTags = null;
+
     private $logFile = '';
-    private $logLevel = ANET_LOG_LEVEL;
+
+    private $logLevel = self::ANET_LOG_DEBUG;
 	
 	/**
 	* Takes a regex pattern (string) as argument and adds the forward slash delimiter.
@@ -271,26 +275,26 @@ class Log
 	
     public function debug($logMessage, $flags=FILE_APPEND)
     {
-        if(ANET_LOG_DEBUG >= $this->logLevel){
-            $this->log(ANET_LOG_DEBUG_PREFIX, $logMessage,$flags);
+        if(self::ANET_LOG_DEBUG >= $this->logLevel){
+            $this->log(self::ANET_LOG_DEBUG_PREFIX, $logMessage,$flags);
         }
     }
 	
     public function info($logMessage, $flags=FILE_APPEND){
-        if(ANET_LOG_INFO >= $this->logLevel) {
-            $this->log(ANET_LOG_INFO_PREFIX, $logMessage,$flags);
+        if(self::ANET_LOG_INFO >= $this->logLevel) {
+            $this->log(self::ANET_LOG_INFO_PREFIX, $logMessage,$flags);
         }
     }
 	
 	public function warn($logMessage, $flags=FILE_APPEND){
-        if(ANET_LOG_WARN >= $this->logLevel) {
-            $this->log(ANET_LOG_WARN_PREFIX, $logMessage,$flags);
+        if(self::ANET_LOG_WARN >= $this->logLevel) {
+            $this->log(self::ANET_LOG_WARN_PREFIX, $logMessage,$flags);
         }
     }
 	
     public function error($logMessage, $flags=FILE_APPEND){
-        if(ANET_LOG_ERROR >= $this->logLevel) {
-            $this->log(ANET_LOG_ERROR_PREFIX, $logMessage,$flags);
+        if(self::ANET_LOG_ERROR >= $this->logLevel) {
+            $this->log(self::ANET_LOG_ERROR_PREFIX, $logMessage,$flags);
         }
     }
 	
@@ -309,26 +313,26 @@ class Log
 	
 	public function debugFormat($format, $args=array(),  $flags=FILE_APPEND)
     {
-        if(ANET_LOG_DEBUG >= $this->logLevel){
-            $this->logFormat(ANET_LOG_DEBUG_PREFIX, $format, $args , $flags);
+        if(self::ANET_LOG_DEBUG >= $this->logLevel){
+            $this->logFormat( self::ANET_LOG_DEBUG_PREFIX, $format, $args , $flags);
         }
     }
 	
 	public function infoFormat($format, $args=array(),  $flags=FILE_APPEND){
-        if(ANET_LOG_INFO >= $this->logLevel) {
-            $this->logFormat(ANET_LOG_INFO_PREFIX, $format, $args , $flags);
+        if(self::ANET_LOG_INFO >= $this->logLevel) {
+            $this->logFormat( self::ANET_LOG_INFO_PREFIX, $format, $args , $flags);
         }
     }
 	
 	public function warnFormat($format, $args=array(),  $flags=FILE_APPEND){
-        if(ANET_LOG_WARN >= $this->logLevel) {
-            $this->logFormat(ANET_LOG_WARN_PREFIX, $format, $args , $flags);
+        if(self::ANET_LOG_WARN >= $this->logLevel) {
+            $this->logFormat(self::ANET_LOG_WARN_PREFIX, $format, $args , $flags);
         }
     }
 	
     public function errorFormat($format, $args=array(),  $flags=FILE_APPEND){
-        if(ANET_LOG_ERROR >= $this->logLevel) {
-			$this->logFormat(ANET_LOG_ERROR_PREFIX, $format, $args , $flags);
+        if(self::ANET_LOG_ERROR >= $this->logLevel) {
+			$this->logFormat(self::ANET_LOG_ERROR_PREFIX, $format, $args , $flags);
         }
     }
 

@@ -180,4 +180,25 @@ class Controller_Test extends PHPUnit_Framework_TestCase
             $this->assertEquals("Successful.", $response->getText());
         }
     }
+
+    public function testGetLogger()
+    {
+        $name           = ( defined( 'AUTHORIZENET_API_LOGIN_ID' ) && '' != AUTHORIZENET_API_LOGIN_ID ) ? AUTHORIZENET_API_LOGIN_ID : getenv( "api_login_id" );
+        $transactionKey = ( defined( 'AUTHORIZENET_TRANSACTION_KEY' ) && '' != AUTHORIZENET_TRANSACTION_KEY ) ? AUTHORIZENET_TRANSACTION_KEY : getenv( "transaction_key" );
+
+        $merchantAuthentication = new net\authorize\api\contract\v1\MerchantAuthenticationType();
+        $merchantAuthentication->setName( $name );
+        $merchantAuthentication->setTransactionKey( $transactionKey );
+
+        $refId  = 'ref' . time();
+
+        $request = new \net\authorize\api\contract\v1\ANetApiRequestType();
+        $request->setRefId( $refId );
+        $request->setMerchantAuthentication( $merchantAuthentication );
+
+        $controller = new net\authorize\api\controller\IsAliveController( $request );
+        $logger = $controller->getLogger();
+
+        $this->assertInstanceOf(\net\authorize\util\Log::class, $logger);
+    }
 }
