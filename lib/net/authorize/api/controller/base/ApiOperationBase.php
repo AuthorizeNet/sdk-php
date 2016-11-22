@@ -9,6 +9,7 @@ use GoetasWebservices\Xsd\XsdToPhpRuntime\Jms\Handler\XmlSchemaDateHandler;
 
 use \net\authorize\util\HttpClient;
 use \net\authorize\util\Helpers;
+use net\authorize\util\Log;
 use \net\authorize\util\LogFactory as LogFactory;
 
 
@@ -38,17 +39,22 @@ abstract class ApiOperationBase implements IApiOperation
      * @var \net\authorize\util\HttpClient;
      */
     public $httpClient = null;
-    private $logger = null;
+
+    /**
+     * @var \net\authorize\util\Log
+     */
+    private $logger;
+
     /**
      * Constructor.
      *
-     * @param \net\authorize\api\contract\v1\AnetApiRequestType $request ApiRequest to send
-     * @param string $responseType response type expected
-     * @throws InvalidArgumentException if invalid request
+     * @param \net\authorize\api\contract\v1\AnetApiRequestType $request      ApiRequest to send
+     * @param string                                            $responseType response type expected
+     * @param Log                                               $logger
      */
-    public function __construct(\net\authorize\api\contract\v1\AnetApiRequestType $request, $responseType)
+    public function __construct(\net\authorize\api\contract\v1\AnetApiRequestType $request, $responseType, Log $logger = null)
     {
-        $this->logger = LogFactory::getLog(get_class($this));
+        $this->logger = $logger ?: LogFactory::getLog( get_class( $this ) );
 
         if ( null == $request)
         {

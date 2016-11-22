@@ -6,10 +6,10 @@ use net\authorize\api\controller\base\ApiOperationBase;
 
 class GetUnsettledTransactionListController extends ApiOperationBase
 {
-    public function __construct(AnetApiRequestType $request)
+    public function __construct(AnetApiRequestType $request, \net\authorize\util\Log $logger = null)
     {
         $responseType = 'net\authorize\api\contract\v1\GetUnsettledTransactionListResponse';
-        parent::__construct($request, $responseType);
+        parent::__construct($request, $responseType, $logger);
     }
 
     protected function validateRequest()

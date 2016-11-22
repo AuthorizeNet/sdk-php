@@ -6,10 +6,10 @@ use net\authorize\api\controller\base\ApiOperationBase;
 
 class CreateCustomerShippingAddressController extends ApiOperationBase
 {
-    public function __construct(AnetApiRequestType $request)
+    public function __construct(AnetApiRequestType $request, Log $logger = null)
     {
         $responseType = 'net\authorize\api\contract\v1\CreateCustomerShippingAddressResponse';
-        parent::__construct($request, $responseType);
+        parent::__construct($request, $responseType, $logger);
     }
 
     protected function validateRequest()

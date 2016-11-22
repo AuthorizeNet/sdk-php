@@ -6,10 +6,10 @@ use net\authorize\api\controller\base\ApiOperationBase;
 
 class UpdateCustomerProfileController extends ApiOperationBase
 {
-    public function __construct(AnetApiRequestType $request)
+    public function __construct(AnetApiRequestType $request, \net\authorize\util\Log $logger = null)
     {
         $responseType = 'net\authorize\api\contract\v1\UpdateCustomerProfileResponse';
-        parent::__construct($request, $responseType);
+        parent::__construct($request, $responseType, $logger);
     }
 
     protected function validateRequest()
