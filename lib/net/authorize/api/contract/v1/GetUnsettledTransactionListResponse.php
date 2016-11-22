@@ -14,6 +14,11 @@ class GetUnsettledTransactionListResponse extends ANetApiResponseType
     private $transactions = null;
 
     /**
+     * @property integer $totalNumInResultSet
+     */
+    private $totalNumInResultSet = null;
+
+    /**
      * Adds as transaction
      *
      * @return self
@@ -66,6 +71,28 @@ class GetUnsettledTransactionListResponse extends ANetApiResponseType
     public function setTransactions(array $transactions)
     {
         $this->transactions = $transactions;
+        return $this;
+    }
+
+    /**
+     * Gets as totalNumInResultSet
+     *
+     * @return integer
+     */
+    public function getTotalNumInResultSet()
+    {
+        return $this->totalNumInResultSet;
+    }
+
+    /**
+     * Sets a new totalNumInResultSet
+     *
+     * @param integer $totalNumInResultSet
+     * @return self
+     */
+    public function setTotalNumInResultSet($totalNumInResultSet)
+    {
+        $this->totalNumInResultSet = $totalNumInResultSet;
         return $this;
     }
 
