@@ -11,6 +11,8 @@ namespace net\authorize\api\contract\v1;
 class ProfileTransAuthOnlyType extends ProfileTransOrderType
 {
 
+    use \net\authorize\api\contract\v1\Traits\TypeTraits;
+
 
 }
 

@@ -2,6 +2,7 @@
 
 namespace net\authorize\api\contract\v1;
 
+
 /**
  * Class representing NameAndAddressType
  *
@@ -10,6 +11,8 @@ namespace net\authorize\api\contract\v1;
  */
 class NameAndAddressType
 {
+
+    use \net\authorize\api\contract\v1\Traits\TypeTraits;
 
     /**
      * @property string $firstName

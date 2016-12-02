@@ -11,6 +11,8 @@ namespace net\authorize\api\contract\v1;
 class SubscriptionCustomerProfileType extends CustomerProfileExType
 {
 
+    use \net\authorize\api\contract\v1\Traits\TypeTraits;
+    
     /**
      * @property \net\authorize\api\contract\v1\CustomerPaymentProfileMaskedType
      * $paymentProfile

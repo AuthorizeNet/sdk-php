@@ -11,6 +11,8 @@ namespace net\authorize\api\contract\v1;
 class ProfileTransRefundType extends ProfileTransAmountType
 {
 
+    use \net\authorize\api\contract\v1\Traits\TypeTraits;
+
     /**
      * @property string $customerProfileId
      */
