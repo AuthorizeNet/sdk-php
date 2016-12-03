@@ -44,7 +44,15 @@ return array(
     'JMS\Parser\SimpleLexer' => $vendorDir . '/jms/parser-lib/src/JMS/Parser/SimpleLexer.php',
     'JMS\Parser\SyntaxErrorException' => $vendorDir . '/jms/parser-lib/src/JMS/Parser/SyntaxErrorException.php',
     'JMS\Serializer\AbstractVisitor' => $vendorDir . '/jms/serializer/src/JMS/Serializer/AbstractVisitor.php',
+    'JMS\Serializer\ArrayTransformerInterface' => $vendorDir . '/jms/serializer/src/JMS/Serializer/ArrayTransformerInterface.php', 
     'JMS\Serializer\Context' => $vendorDir . '/jms/serializer/src/JMS/Serializer/Context.php',
+    'JMS\Serializer\ContextFactory\CallableContextFactory' => $vendorDir . '/jms/serializer/src/JMS/Serializer/ContextFactory/CallableContextFactory.php',
+    'JMS\Serializer\ContextFactory\CallableDeserializationContextFactory' => $vendorDir . '/jms/serializer/src/JMS/Serializer/ContextFactory/CallableDeserializationContextFactory.php',
+    'JMS\Serializer\ContextFactory\CallableSerializationContextFactory' => $vendorDir . '/jms/serializer/src/JMS/Serializer/ContextFactory/CallableSerializationContextFactory.php',
+    'JMS\Serializer\ContextFactory\DefaultDeserializationContextFactory' => $vendorDir . '/jms/serializer/src/JMS/Serializer/ContextFactory/DefaultDeserializationContextFactory.php',
+    'JMS\Serializer\ContextFactory\DefaultSerializationContextFactory' => $vendorDir . '/jms/serializer/src/JMS/Serializer/ContextFactory/DefaultSerializationContextFactory.php',
+    'JMS\Serializer\ContextFactory\DeserializationContextFactoryInterface' => $vendorDir . '/jms/serializer/src/JMS/Serializer/ContextFactory/DeserializationContextFactoryInterface.php',
+'JMS\Serializer\ContextFactory\SerializationContextFactoryInterface' => $vendorDir . '/jms/serializer/src/JMS/Serializer/ContextFactory/SerializationContextFactoryInterface.php',
     'JMS\Serializer\DeserializationContext' => $vendorDir . '/jms/serializer/src/JMS/Serializer/DeserializationContext.php',
     'JMS\Serializer\GenericDeserializationVisitor' => $vendorDir . '/jms/serializer/src/JMS/Serializer/GenericDeserializationVisitor.php',
     'JMS\Serializer\GenericSerializationVisitor' => $vendorDir . '/jms/serializer/src/JMS/Serializer/GenericSerializationVisitor.php',
@@ -487,6 +495,6 @@ return array(
     'net\authorize\api\controller\ValidateCustomerPaymentProfileController' => $libDir . 'net/authorize/api/controller/ValidateCustomerPaymentProfileController.php',
 
     'net\authorize\api\controller\GetAUJobDetailsController' => $libDir . 'net/authorize/api/controller/GetAUJobDetailsController.php',
-    'net\authorize\api\controller\GetAUJobSummaryController' => $libDir . 'net/authorize/api/controller/GetAUJobSummaryController.php',
+    'net\authorize\api\controller\GetAUJobSummaryController' => $libDir . 'net/authorize/api/controller/GetAUJobSummaryController.php'
 
 );
