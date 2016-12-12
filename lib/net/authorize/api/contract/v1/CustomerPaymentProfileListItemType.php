@@ -12,6 +12,11 @@ class CustomerPaymentProfileListItemType
 {
 
     /**
+     * @property boolean $defaultPaymentProfile
+     */
+    private $defaultPaymentProfile = null;
+
+    /**
      * @property integer $customerPaymentProfileId
      */
     private $customerPaymentProfileId = null;
@@ -30,6 +35,28 @@ class CustomerPaymentProfileListItemType
      * @property \net\authorize\api\contract\v1\PaymentMaskedType $payment
      */
     private $payment = null;
+
+    /**
+     * Gets as defaultPaymentProfile
+     *
+     * @return boolean
+     */
+    public function getDefaultPaymentProfile()
+    {
+        return $this->defaultPaymentProfile;
+    }
+
+    /**
+     * Sets a new defaultPaymentProfile
+     *
+     * @param boolean $defaultPaymentProfile
+     * @return self
+     */
+    public function setDefaultPaymentProfile($defaultPaymentProfile)
+    {
+        $this->defaultPaymentProfile = $defaultPaymentProfile;
+        return $this;
+    }
 
     /**
      * Gets as customerPaymentProfileId

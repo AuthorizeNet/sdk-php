@@ -22,6 +22,11 @@ class CustomerPaymentProfileMaskedType extends CustomerPaymentProfileBaseType
     private $customerPaymentProfileId = null;
 
     /**
+     * @property boolean $defaultPaymentProfile
+     */
+    private $defaultPaymentProfile = null;
+
+    /**
      * @property \net\authorize\api\contract\v1\PaymentMaskedType $payment
      */
     private $payment = null;
@@ -83,6 +88,28 @@ class CustomerPaymentProfileMaskedType extends CustomerPaymentProfileBaseType
     public function setCustomerPaymentProfileId($customerPaymentProfileId)
     {
         $this->customerPaymentProfileId = $customerPaymentProfileId;
+        return $this;
+    }
+
+    /**
+     * Gets as defaultPaymentProfile
+     *
+     * @return boolean
+     */
+    public function getDefaultPaymentProfile()
+    {
+        return $this->defaultPaymentProfile;
+    }
+
+    /**
+     * Sets a new defaultPaymentProfile
+     *
+     * @param boolean $defaultPaymentProfile
+     * @return self
+     */
+    public function setDefaultPaymentProfile($defaultPaymentProfile)
+    {
+        $this->defaultPaymentProfile = $defaultPaymentProfile;
         return $this;
     }
 

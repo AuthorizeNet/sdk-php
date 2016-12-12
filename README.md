@@ -34,13 +34,8 @@ require 'vendor/autoload.php';
   "require": {
   "php": ">=5.5",
   "ext-curl": "*",
-  "authorizenet/authorizenet": "1.8.9",
-  "jms/serializer": "serializer-master-dev as 1.0"
-  },
-  "repositories": [{
-       "type": "vcs",
-       "url": "https://github.com/goetas/serializer.git"
-  }]
+  "authorizenet/authorizenet": "1.9.2"
+  }
 }
 ```
 

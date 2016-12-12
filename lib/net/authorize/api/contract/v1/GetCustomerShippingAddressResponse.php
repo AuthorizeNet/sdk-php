@@ -9,6 +9,11 @@ class GetCustomerShippingAddressResponse extends ANetApiResponseType
 {
 
     /**
+     * @property boolean $defaultShippingAddress
+     */
+    private $defaultShippingAddress = null;
+
+    /**
      * @property \net\authorize\api\contract\v1\CustomerAddressExType $address
      */
     private $address = null;
@@ -17,6 +22,28 @@ class GetCustomerShippingAddressResponse extends ANetApiResponseType
      * @property string[] $subscriptionIds
      */
     private $subscriptionIds = null;
+
+    /**
+     * Gets as defaultShippingAddress
+     *
+     * @return boolean
+     */
+    public function getDefaultShippingAddress()
+    {
+        return $this->defaultShippingAddress;
+    }
+
+    /**
+     * Sets a new defaultShippingAddress
+     *
+     * @param boolean $defaultShippingAddress
+     * @return self
+     */
+    public function setDefaultShippingAddress($defaultShippingAddress)
+    {
+        $this->defaultShippingAddress = $defaultShippingAddress;
+        return $this;
+    }
 
     /**
      * Gets as address
