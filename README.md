@@ -12,7 +12,7 @@ Proprietary, see the provided `license.md`.
 
 ## Requirements
 
-- PHP 5.3+ *(>=5.3.10 recommended)*
+- PHP 5.5+
 - cURL PHP Extension
 - JSON PHP Extension
 - SimpleXML PHP Extension
