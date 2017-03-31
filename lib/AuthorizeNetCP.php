@@ -119,7 +119,7 @@ class AuthorizeNetCP_Response extends AuthorizeNetResponse
             // If it's an XML response
             if (substr($response, 0, 5) == "<?xml") {
                 
-                $this->xml = @simplexml_load_string($response);
+                $this->xml = @simplexml_load_string($response, 'SimpleXMLElement', LIBXML_NOWARNING);
                 // Set all fields
                 $this->version              = array_pop(array_slice(explode('"', $response), 1,1));
                 $this->response_code        = (string)$this->xml->ResponseCode;
