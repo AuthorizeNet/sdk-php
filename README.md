@@ -77,7 +77,7 @@ Apart from this README, you can find details and examples of using the SDK in th
 ### Quick Usage Example (with Charge Credit Card - Authorize and Capture)
 Note: The following is a php console application. Ensure that you can invoke the php command from command line.
 - Save the below code to a php file named, say, `charge-credit-card.php`
-- Open command prompt and navigate to your sdk folder ( if want to run from a different folder, modify the `require` statement to have the full path to the sdk e.g. `require 'c:/anet-sdk-php/vendor/autoload.php'` in place of `require 'vendor/autoload.php'` )
+- Open command prompt and navigate to your SDK folder ( if want to run from a different folder, modify the `require` statement to have the full path to the SDK e.g. `require 'c:/anet-sdk-php/vendor/autoload.php'` in place of `require 'vendor/autoload.php'` )
 - Update dependecies - e.g., With composer, type `composer update`
 - Type `php [<path to folder containing the php file>\]charge-credit-card.php`
 
@@ -138,7 +138,7 @@ $response = $controller->executeWithApiResponse( \net\authorize\api\constants\AN
 
 ## Logging
 
-SDK generates log with masking for sensitive data like credit card, expiration dates. The provided levels for logging are 
+The SDK generates a log with masking for sensitive data like credit card, expiration dates. The provided levels for logging are 
  `debug`, `info`, `warn`, `error`. Add ````use \net\authorize\util\LogFactory;````. Logger can be initialized using `$logger = LogFactory::getLog(get_class($this));`
 The default log file `phplog` gets generated in the current folder. The subsequent logs are appended to the same file, unless the execution folder is changed, and a new log file is generated.
 
@@ -148,7 +148,7 @@ The default log file `phplog` gets generated in the current folder. The subseque
 - Logging using formatting `$logger->debugFormat("Integer: %d, Float: %f, Xml-Request: %s\n", array(100, 1.29f, $xmlRequest));`
 
 ### Customizing Sensitive Tags
-A local copy of [AuthorizedNetSensitiveTagsConfig.json](/lib/net/authorize/util/ANetSensitiveFields.php) gets generated when code invoking the logger first gets executed. The local file can later be edited by developer to re-configure what is masked and what is visible. (*Do not edit the json in sdk*). 
+A local copy of [AuthorizedNetSensitiveTagsConfig.json](/lib/net/authorize/util/ANetSensitiveFields.php) gets generated when code invoking the logger first gets executed. The local file can later be edited by developer to re-configure what is masked and what is visible. (*Do not edit the JSON in the SDK*). 
 - For each element of the `sensitiveTags` array, 
   - `tagName` field corresponds to the name of the property in object, or xml-tag that should be hidden entirely ( *XXXX* shown if no replacement specified ) or masked (e.g. showing the last 4 digits of credit card number).
   - `pattern`[<sup>[Note]</sup>](#regex-note) and `replacement`[<sup>[Note]</sup>](#regex-note) can be left `""`, if the default is to be used (as defined in [Log.php](/lib/net/authorize/util/Log.php)). `pattern` gives the regex to identify, while `replacement` defines the visible part.
