@@ -1,8 +1,7 @@
 Authorize.Net PHP SDK
 ======================
 
-[![Travis](https://img.shields.io/travis/AuthorizeNet/sdk-php/master.svg)]
-(https://travis-ci.org/AuthorizeNet/sdk-php)
+[![Travis](https://img.shields.io/travis/AuthorizeNet/sdk-php/master.svg)](https://travis-ci.org/AuthorizeNet/sdk-php)
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/AuthorizeNet/sdk-php/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/AuthorizeNet/sdk-php/?branch=master)
 [![Packagist](https://img.shields.io/packagist/v/authorizenet/authorizenet.svg)](https://packagist.org/packages/authorizenet/authorizenet)
 
@@ -44,15 +43,6 @@ Alternatively, we provide a custom `SPL` autoloader:
 require 'path/to/anet_php_sdk/autoload.php';
 ```
 
-**Issue with PHP 7:** *You may get below error when run the composer update with PHP 7. To get rid of this error, use `composer update --ignore-platform-reqs`*
-```php
-Problem 1
-    - Installation request for authorizenet/authorizenet 1.8.6.2 -> satisfiable
-by authorizenet/authorizenet[1.8.6.2].
-    - authorizenet/authorizenet 1.8.6.2 requires php ~5.3 -> your PHP version (7
-.0.3RC1) or value of "config.platform.php" in composer.json does not satisfy that requirement.
-```
-
 ## Authentication
 To authenticate with the Authorize.Net API you will need to retrieve your API Login ID and Transaction Key from the [`Merchant Interface`](https://account.authorize.net/).  You can find these details in the Settings section.
 If you need a sandbox account you can sign up for one really easily [`here`](https://developer.authorize.net/sandbox/).
@@ -60,21 +50,21 @@ If you need a sandbox account you can sign up for one really easily [`here`](htt
 Once you have your keys simply plug them into the appropriate variables, as per the below code dealing with the authentication part of the flow.
 
 ...
-````php
+```php
 use net\authorize\api\contract\v1 as AnetAPI;
-````
+```
 ...
-````php
+```php
 $merchantAuthentication = new AnetAPI\MerchantAuthenticationType();
 $merchantAuthentication->setName("YOURLOGIN");
 $merchantAuthentication->setTransactionKey("YOURKEY");
-````
+```
 ...
 
-````php
+```php
 $request = new AnetAPI\CreateTransactionRequest();
 $request->setMerchantAuthentication($merchantAuthentication);
-````
+```
 ...
 
 ## Usage Examples
@@ -158,7 +148,7 @@ The default log file `phplog` gets generated in the current folder. The subseque
 - Logging using formatting `$logger->debugFormat("Integer: %d, Float: %f, Xml-Request: %s\n", array(100, 1.29f, $xmlRequest));`
 
 ### Customizing Sensitive Tags
-A local copy of [AuthorizedNetSensitiveTagsConfig.json](/lib/net/authorize/util/ANetSensitiveFields.php) gets generated when code invoking the logger first gets executed. The local file can later be edited by developer to re-configure what is masked and what is visible (*Do not edit the json in sdk*). 
+A local copy of [AuthorizedNetSensitiveTagsConfig.json](/lib/net/authorize/util/ANetSensitiveFields.php) gets generated when code invoking the logger first gets executed. The local file can later be edited by developer to re-configure what is masked and what is visible. (*Do not edit the json in sdk*). 
 - For each element of the `sensitiveTags` array, 
   - `tagName` field corresponds to the name of the property in object, or xml-tag that should be hidden entirely ( *XXXX* shown if no replacement specified ) or masked (e.g. showing the last 4 digits of credit card number).
   - `pattern`[<sup>[Note]</sup>](#regex-note) and `replacement`[<sup>[Note]</sup>](#regex-note) can be left `""`, if the default is to be used (as defined in [Log.php](/lib/net/authorize/util/Log.php)). `pattern` gives the regex to identify, while `replacement` defines the visible part.
