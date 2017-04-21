@@ -440,3 +440,13 @@ net\authorize\api\contract\v1\TransactionDetailsType:
                 skip_when_empty: true
                 entry_name: tag
                 namespace: AnetApi/xml/v1/schema/AnetApiSchema.xsd
+        profile:
+            expose: true
+            access_type: public_method
+            serialized_name: profile
+            xml_element:
+                namespace: AnetApi/xml/v1/schema/AnetApiSchema.xsd
+            accessor:
+                getter: getProfile
+                setter: setProfile
+            type: net\authorize\api\contract\v1\CustomerProfileIdType

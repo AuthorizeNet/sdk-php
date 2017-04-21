@@ -5,7 +5,7 @@ namespace net\authorize\api\contract\v1;
 /**
  * Class representing TransactionDetailsType
  *
- *
+ * 
  * XSD Type: transactionDetailsType
  */
 class TransactionDetailsType
@@ -222,6 +222,11 @@ class TransactionDetailsType
      * $emvDetails
      */
     private $emvDetails = null;
+
+    /**
+     * @property \net\authorize\api\contract\v1\CustomerProfileIdType $profile
+     */
+    private $profile = null;
 
     /**
      * Gets as transId
@@ -1285,6 +1290,28 @@ class TransactionDetailsType
     public function setEmvDetails(array $emvDetails)
     {
         $this->emvDetails = $emvDetails;
+        return $this;
+    }
+
+    /**
+     * Gets as profile
+     *
+     * @return \net\authorize\api\contract\v1\CustomerProfileIdType
+     */
+    public function getProfile()
+    {
+        return $this->profile;
+    }
+
+    /**
+     * Sets a new profile
+     *
+     * @param \net\authorize\api\contract\v1\CustomerProfileIdType $profile
+     * @return self
+     */
+    public function setProfile(\net\authorize\api\contract\v1\CustomerProfileIdType $profile)
+    {
+        $this->profile = $profile;
         return $this;
     }
 
