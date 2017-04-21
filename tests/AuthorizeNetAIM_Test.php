@@ -470,13 +470,12 @@ class AuthorizeNetAIM_Sandbox_Test extends PHPUnit_Framework_TestCase
             $auth_code = $response->transaction_id;
 
             // Now capture:
-            $capture = new AuthorizeNetAIM("22Pav9kBpn", "35vB2T6kkZZW582q");
+            $capture = new AuthorizeNetAIM($this->alternateApiLoginId, $this->alternateTransactionKey);
             $capture_response = $capture->priorAuthCapture($auth_code);
-		print_r($capture_response);
             $this->assertTrue($capture_response->approved);
 
             // Now void:
-            $void = new AuthorizeNetAIM("22Pav9kBpn", "35vB2T6kkZZW582q");
+            $void = new AuthorizeNetAIM($this->alternateApiLoginId, $this->alternateTransactionKey);
             $void_response = $void->void($capture_response->transaction_id);
             $this->assertTrue($void_response->approved);
         }
