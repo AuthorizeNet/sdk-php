@@ -5,7 +5,7 @@ namespace net\authorize\api\contract\v1;
 /**
  * Class representing TransactionSummaryType
  *
- *
+ * 
  * XSD Type: transactionSummaryType
  */
 class TransactionSummaryType
@@ -90,6 +90,11 @@ class TransactionSummaryType
      * @property \net\authorize\api\contract\v1\FraudInformationType $fraudInformation
      */
     private $fraudInformation = null;
+
+    /**
+     * @property \net\authorize\api\contract\v1\CustomerProfileIdType $profile
+     */
+    private $profile = null;
 
     /**
      * Gets as transId
@@ -440,6 +445,28 @@ class TransactionSummaryType
     public function setFraudInformation(\net\authorize\api\contract\v1\FraudInformationType $fraudInformation)
     {
         $this->fraudInformation = $fraudInformation;
+        return $this;
+    }
+
+    /**
+     * Gets as profile
+     *
+     * @return \net\authorize\api\contract\v1\CustomerProfileIdType
+     */
+    public function getProfile()
+    {
+        return $this->profile;
+    }
+
+    /**
+     * Sets a new profile
+     *
+     * @param \net\authorize\api\contract\v1\CustomerProfileIdType $profile
+     * @return self
+     */
+    public function setProfile(\net\authorize\api\contract\v1\CustomerProfileIdType $profile)
+    {
+        $this->profile = $profile;
         return $this;
     }
 

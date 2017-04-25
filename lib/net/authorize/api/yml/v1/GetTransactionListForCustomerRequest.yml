@@ -1,5 +1,5 @@
-net\authorize\api\contract\v1\GetCustomerProfileRequest:
-    xml_root_name: getCustomerProfileRequest
+net\authorize\api\contract\v1\GetTransactionListForCustomerRequest:
+    xml_root_name: getTransactionListForCustomerRequest
     xml_root_namespace: AnetApi/xml/v1/schema/AnetApiSchema.xsd
     properties:
         customerProfileId:
@@ -12,33 +12,33 @@ net\authorize\api\contract\v1\GetCustomerProfileRequest:
                 getter: getCustomerProfileId
                 setter: setCustomerProfileId
             type: string
-        merchantCustomerId:
+        customerPaymentProfileId:
             expose: true
             access_type: public_method
-            serialized_name: merchantCustomerId
+            serialized_name: customerPaymentProfileId
             xml_element:
                 namespace: AnetApi/xml/v1/schema/AnetApiSchema.xsd
             accessor:
-                getter: getMerchantCustomerId
-                setter: setMerchantCustomerId
+                getter: getCustomerPaymentProfileId
+                setter: setCustomerPaymentProfileId
             type: string
-        email:
+        sorting:
             expose: true
             access_type: public_method
-            serialized_name: email
+            serialized_name: sorting
             xml_element:
                 namespace: AnetApi/xml/v1/schema/AnetApiSchema.xsd
             accessor:
-                getter: getEmail
-                setter: setEmail
-            type: string
-        unmaskExpirationDate:
+                getter: getSorting
+                setter: setSorting
+            type: net\authorize\api\contract\v1\TransactionListSortingType
+        paging:
             expose: true
             access_type: public_method
-            serialized_name: unmaskExpirationDate
+            serialized_name: paging
             xml_element:
                 namespace: AnetApi/xml/v1/schema/AnetApiSchema.xsd
             accessor:
-                getter: getUnmaskExpirationDate
-                setter: setUnmaskExpirationDate
-            type: boolean
+                getter: getPaging
+                setter: setPaging
+            type: net\authorize\api\contract\v1\PagingType
