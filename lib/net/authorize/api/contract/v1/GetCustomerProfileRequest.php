@@ -14,6 +14,16 @@ class GetCustomerProfileRequest extends ANetApiRequestType
     private $customerProfileId = null;
 
     /**
+     * @property string $merchantCustomerId
+     */
+    private $merchantCustomerId = null;
+
+    /**
+     * @property string $email
+     */
+    private $email = null;
+
+    /**
      * @property boolean $unmaskExpirationDate
      */
     private $unmaskExpirationDate = null;
@@ -37,6 +47,50 @@ class GetCustomerProfileRequest extends ANetApiRequestType
     public function setCustomerProfileId($customerProfileId)
     {
         $this->customerProfileId = $customerProfileId;
+        return $this;
+    }
+
+    /**
+     * Gets as merchantCustomerId
+     *
+     * @return string
+     */
+    public function getMerchantCustomerId()
+    {
+        return $this->merchantCustomerId;
+    }
+
+    /**
+     * Sets a new merchantCustomerId
+     *
+     * @param string $merchantCustomerId
+     * @return self
+     */
+    public function setMerchantCustomerId($merchantCustomerId)
+    {
+        $this->merchantCustomerId = $merchantCustomerId;
+        return $this;
+    }
+
+    /**
+     * Gets as email
+     *
+     * @return string
+     */
+    public function getEmail()
+    {
+        return $this->email;
+    }
+
+    /**
+     * Sets a new email
+     *
+     * @param string $email
+     * @return self
+     */
+    public function setEmail($email)
+    {
+        $this->email = $email;
         return $this;
     }
 
