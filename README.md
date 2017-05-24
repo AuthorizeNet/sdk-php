@@ -33,7 +33,7 @@ require 'vendor/autoload.php';
   "require": {
   "php": ">=5.5",
   "ext-curl": "*",
-  "authorizenet/authorizenet": "1.9.2"
+  "authorizenet/authorizenet": "1.9.3"
   }
 }
 ```
