@@ -198,3 +198,12 @@ To autogenerate PHPDocs run:
 ```shell
 vendor/bin/phpdoc -t doc/api/ -d lib
 ```
+### Running from Localhost
+The code will generate an invalid security error if running from localhost.
+Add this to lib/net/authorize/util/HttpClient.php
+The following code tests disables checking for ssl cert if it's running on localhost
+
+ if ($_SERVER['SERVER_NAME'] == 'localhost')
+	curl_setopt($curl_request, CURLOPT_SSL_VERIFYPEER, false);
+elseif ($_SERVER['SERVER_NAME'] !== 'localhost')
+    curl_setopt($curl_request, CURLOPT_SSL_VERIFYPEER, true);
