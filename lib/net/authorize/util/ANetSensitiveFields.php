@@ -1,7 +1,7 @@
 <?php
 namespace net\authorize\util;
 
-use JMS\Serializer\SerializerBuilder;
+
 
 define("ANET_SENSITIVE_XMLTAGS_JSON_FILE","AuthorizedNetSensitiveTagsConfig.json");
 define("ANET_SENSITIVE_DATE_CONFIG_CLASS",'net\authorize\util\SensitiveDataConfigType');
@@ -15,7 +15,6 @@ class ANetSensitiveFields
         if(!class_exists(ANET_SENSITIVE_DATE_CONFIG_CLASS))
             exit("Class (".ANET_SENSITIVE_DATE_CONFIG_CLASS.") doesn't exist; can't deserialize json; can't log. Exiting.");
         
-        $serializer = SerializerBuilder::create()->build();
 
         $userConfigFilePath = ANET_SENSITIVE_XMLTAGS_JSON_FILE;
         $presentUserConfigFile = file_exists($userConfigFilePath);
@@ -27,7 +26,7 @@ class ANetSensitiveFields
             //read list of tags (and associated regex-patterns and replacements) from .json file
             try{
                 $jsonFileData=file_get_contents($userConfigFilePath);
-                $sensitiveDataConfig = $serializer->deserialize($jsonFileData, ANET_SENSITIVE_DATE_CONFIG_CLASS, 'json');
+                $sensitiveDataConfig = json_decode($jsonFileData);
                 
                 $sensitiveTags = $sensitiveDataConfig->sensitiveTags;
                 self::$sensitiveStringRegexes = $sensitiveDataConfig->sensitiveStringRegexes;
@@ -47,7 +46,7 @@ class ANetSensitiveFields
             //read list of tags (and associated regex-patterns and replacements) from .json file
             try{
             $jsonFileData=file_get_contents($configFilePath);
-            $sensitiveDataConfig = $serializer->deserialize($jsonFileData, ANET_SENSITIVE_DATE_CONFIG_CLASS, 'json');
+            $sensitiveDataConfig = json_decode($jsonFileData);
             
             $sensitiveTags = $sensitiveDataConfig->sensitiveTags;
             self::$sensitiveStringRegexes = $sensitiveDataConfig->sensitiveStringRegexes;
