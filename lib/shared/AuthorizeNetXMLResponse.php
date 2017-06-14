@@ -26,7 +26,7 @@ class AuthorizeNetXMLResponse
     {
         $this->response = $response;
         if ($response) {
-            $this->xml = @simplexml_load_string($response, LIBXML_NOWARNING);
+            $this->xml = @simplexml_load_string($response, 'SimpleXMLElement', LIBXML_NOWARNING);
             
             // Remove namespaces for use with XPath.
             $this->xpath_xml = @simplexml_load_string(preg_replace('/ xmlns:xsi[^>]+/','',$response));
