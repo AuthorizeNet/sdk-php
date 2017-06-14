@@ -15,8 +15,22 @@ Proprietary, see the provided `license.md`.
 - cURL PHP Extension
 - JSON PHP Extension
 - SimpleXML PHP Extension
-- An Authorize.Net Merchant Account or Sandbox Account. You can get a 
-	free sandbox account at http://developer.authorize.net/hello_world/sandbox/
+- An Authorize.Net Merchant account or Sandbox account (You can get a 
+	free sandbox account at http://developer.authorize.net/hello_world/sandbox/).
+- TLS 1.2 capable versions of libcurl and OpenSSL (or its equivalent)
+
+### TLS 1.2
+The Authorize.Net APIs only support connections using TLS 1.2. This PHP SDK communicates with the Authorize.Net API using `libcurl` and `OpenSSL` (or equivalent crypto library). It's important to make sure you have new enough versions of these components to support TLS 1.2. Additionally, it's very important to keep these components up to date going forward to mitigate the risk of any security flaws that may be discovered in these libraries.
+
+To test whether your current installation is capable of communicating to our servers using TLS 1.2, run the following PHP code and examine the output for the TLS version:
+```php
+<?php
+    $ch = curl_init('https://apitest.authorize.net/xml/v1/request.api');
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    curl_setopt($ch, CURLOPT_VERBOSE, true);
+    $data = curl_exec($ch);
+    curl_close($ch);
+```
 
 	
 ## Autoloading
@@ -50,8 +64,8 @@ You can run composer locally or on another system to build the directory, then c
 
 
 ## Authentication
-To authenticate with the Authorize.Net API you will need to retrieve your API Login ID and Transaction Key from the [`Merchant Interface`](https://account.authorize.net/).  You can find these details in the Settings section.
-If you don't currently have a production Authorize.Net account and need a sandbox account for testing, you can easily sign up for one [`here`](https://developer.authorize.net/sandbox/).
+To authenticate with the Authorize.Net API you will need to retrieve your API Login ID and Transaction Key from the [Merchant Interface](https://account.authorize.net/).  You can find these details in the Settings section.
+If you don't currently have a production Authorize.Net account and need a sandbox account for testing, you can easily sign up for one [here](https://developer.authorize.net/sandbox/).
 
 Once you have your keys simply load them into the appropriate variables in your code, as per the below sample code dealing with the authentication part of the flow.
 
@@ -73,6 +87,7 @@ $request = new AnetAPI\CreateTransactionRequest();
 $request->setMerchantAuthentication($merchantAuthentication);
 ```
 ...
+
 You should never include your Login ID and Transaction Key directly in a PHP file that's in a publically accessible portion of your website. A better practice would be to define these in a constants file, and then reference those constants in the appropriate place in your code.
 
 
