@@ -20,7 +20,7 @@ Proprietary, see the provided `license.md`.
 - TLS 1.2 capable versions of libcurl and OpenSSL (or its equivalent)
 
 ### TLS 1.2
-The Authorize.Net APIs only support connections using TLS 1.2. This PHP SDK communicates with the Authorize.Net API using `libcurl` and `OpenSSL` (or equivalent crypto library). It's important to make sure you have new enough versions of these components to support TLS 1.2. Additionally, it's very important to keep these components up to date going forward to mitigate the risk of any security flaws that may be discovered in these libraries.
+The Authorize.Net APIs only support connections using the TLS 1.2 security protocol. This PHP SDK communicates with the Authorize.Net API using `libcurl` and `OpenSSL` (or equivalent crypto library). It's important to make sure you have new enough versions of these components to support TLS 1.2. Additionally, it's very important to keep these components up to date going forward to mitigate the risk of any security flaws that may be discovered in these libraries.
 
 To test whether your current installation is capable of communicating to our servers using TLS 1.2, run the following PHP code and examine the output for the TLS version:
 ```php
@@ -30,6 +30,18 @@ To test whether your current installation is capable of communicating to our ser
     curl_setopt($ch, CURLOPT_VERBOSE, true);
     $data = curl_exec($ch);
     curl_close($ch);
+```
+
+If curl is unable to connect to our URL (as given in the previous sample), it's likely that your system is not able to connect using TLS 1.2, or does not have a supported cipher installed. To verify what TLS version your connection does support, run the following PHP code: 
+```php
+<?php 
+$ch = curl_init('https://www.howsmyssl.com/a/check');
+curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+$data = curl_exec($ch);
+curl_close($ch);
+
+$json = json_decode($data);
+echo "Connection uses " . $json->tls_version ."\n";
 ```
 
 	
