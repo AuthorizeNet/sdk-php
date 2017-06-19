@@ -9,19 +9,46 @@ Authorize.Net PHP SDK
 ## License
 Proprietary, see the provided `license.md`.
 
-## Requirements
 
-- PHP 5.5+
+## Requirements
+- PHP 5.6+
 - cURL PHP Extension
 - JSON PHP Extension
 - SimpleXML PHP Extension
-- An Authorize.Net Merchant Account or Sandbox Account. You can get a 
-	free sandbox account at http://developer.authorize.net/hello_world/sandbox/
+- An Authorize.Net Merchant account or Sandbox account (You can get a 
+	free sandbox account at http://developer.authorize.net/hello_world/sandbox/).
+- TLS 1.2 capable versions of libcurl and OpenSSL (or its equivalent)
 
+### TLS 1.2
+The Authorize.Net APIs only support connections using the TLS 1.2 security protocol. This PHP SDK communicates with the Authorize.Net API using `libcurl` and `OpenSSL` (or equivalent crypto library). It's important to make sure you have new enough versions of these components to support TLS 1.2. Additionally, it's very important to keep these components up to date going forward to mitigate the risk of any security flaws that may be discovered in these libraries.
+
+To test whether your current installation is capable of communicating to our servers using TLS 1.2, run the following PHP code and examine the output for the TLS version:
+```php
+<?php
+    $ch = curl_init('https://apitest.authorize.net/xml/v1/request.api');
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    curl_setopt($ch, CURLOPT_VERBOSE, true);
+    $data = curl_exec($ch);
+    curl_close($ch);
+```
+
+If curl is unable to connect to our URL (as given in the previous sample), it's likely that your system is not able to connect using TLS 1.2, or does not have a supported cipher installed. To verify what TLS version your connection does support, run the following PHP code: 
+```php
+<?php 
+$ch = curl_init('https://www.howsmyssl.com/a/check');
+curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+$data = curl_exec($ch);
+curl_close($ch);
+
+$json = json_decode($data);
+echo "Connection uses " . $json->tls_version ."\n";
+```
+
+	
 ## Autoloading
-
-We recommend using [`Composer`](http://getcomposer.org) *(note we never recommend you override the new secure-http default setting)*, don't forget to require its autoloader in
-your script or bootstrap file:
+We recommend using [`Composer`](http://getcomposer.org) *(note we never recommend you
+override the new secure-http default setting)*. Don't forget to require its autoloader
+in your script or bootstrap file:
 ```php
 require 'vendor/autoload.php';
 ```
@@ -31,29 +58,35 @@ require 'vendor/autoload.php';
 ```json
 {
   "require": {
-  "php": ">=5.5",
+  "php": ">=5.6",
   "ext-curl": "*",
-  "authorizenet/authorizenet": "1.9.3"
+  "authorizenet/authorizenet": "~1.9"
   }
 }
 ```
 
-Alternatively, we provide a custom `SPL` autoloader:
+Alternatively, we provide a custom `SPL` autoloader for you to reference from within your PHP file:
 ```php
 require 'path/to/anet_php_sdk/autoload.php';
 ```
+This autoloader still requires the `vendor` directory and all of its dependencies to exist.
+However, this is a possible solution for cases where composer can't be run on a given system.
+You can run composer locally or on another system to build the directory, then copy the
+`vendor` directory to the desired system.
+
 
 ## Authentication
-To authenticate with the Authorize.Net API you will need to retrieve your API Login ID and Transaction Key from the [`Merchant Interface`](https://account.authorize.net/).  You can find these details in the Settings section.
-If you need a sandbox account you can sign up for one really easily [`here`](https://developer.authorize.net/sandbox/).
+To authenticate with the Authorize.Net API you will need to retrieve your API Login ID and Transaction Key from the [Merchant Interface](https://account.authorize.net/).  You can find these details in the Settings section.
+If you don't currently have a production Authorize.Net account and need a sandbox account for testing, you can easily sign up for one [here](https://developer.authorize.net/sandbox/).
 
-Once you have your keys simply plug them into the appropriate variables, as per the below code dealing with the authentication part of the flow.
+Once you have your keys simply load them into the appropriate variables in your code, as per the below sample code dealing with the authentication part of the flow.
 
 ...
 ```php
 use net\authorize\api\contract\v1 as AnetAPI;
 ```
 ...
+
 ```php
 $merchantAuthentication = new AnetAPI\MerchantAuthenticationType();
 $merchantAuthentication->setName("YOURLOGIN");
@@ -67,85 +100,35 @@ $request->setMerchantAuthentication($merchantAuthentication);
 ```
 ...
 
-## Usage Examples
+You should never include your Login ID and Transaction Key directly in a PHP file that's in a publically accessible portion of your website. A better practice would be to define these in a constants file, and then reference those constants in the appropriate place in your code.
 
-Apart from this README, you can find details and examples of using the SDK in the following places:
-- [Developer Center Reference](http://developer.authorize.net/api/reference/index.html)
+
+## SDK Usage Examples and Sample Code
+Apart from this README, we have comprehensive sample code for all common uses of our API:
 - [Github Sample Code Repositories](https://github.com/AuthorizeNet/sample-code-php)
-      
-      
-### Quick Usage Example (with Charge Credit Card - Authorize and Capture)
-Note: The following is a php console application. Ensure that you can invoke the php command from command line.
-- Save the below code to a php file named, say, `charge-credit-card.php`
-- Open command prompt and navigate to your SDK folder ( if want to run from a different folder, modify the `require` statement to have the full path to the SDK e.g. `require 'c:/anet-sdk-php/vendor/autoload.php'` in place of `require 'vendor/autoload.php'` )
-- Update dependecies - e.g., With composer, type `composer update`
-- Type `php [<path to folder containing the php file>\]charge-credit-card.php`
 
-```php
-require 'vendor/autoload.php';
-use net\authorize\api\contract\v1 as AnetAPI;
-use net\authorize\api\controller as AnetController;
-define("AUTHORIZENET_LOG_FILE", "phplog");
+Additionally, you can find details and examples of using the SDK in our API Reference Guide:
+- [Developer Center API Reference](http://developer.authorize.net/api/reference/index.html)
 
-// Common setup for API credentials
-$merchantAuthentication = new AnetAPI\MerchantAuthenticationType();
-$merchantAuthentication->setName("556KThWQ6vf2");
-$merchantAuthentication->setTransactionKey("9ac2932kQ7kN2Wzq");
 
-// Create the payment data for a credit card
-$creditCard = new AnetAPI\CreditCardType();
-$creditCard->setCardNumber("4111111111111111");
-$creditCard->setExpirationDate("2038-12");
-$paymentOne = new AnetAPI\PaymentType();
-$paymentOne->setCreditCard($creditCard);
-
-// Create a transaction
-$transactionRequestType = new AnetAPI\TransactionRequestType();
-$transactionRequestType->setTransactionType( "authCaptureTransaction"); 
-$transactionRequestType->setAmount(151.51);
-$transactionRequestType->setPayment($paymentOne);
-
-$request = new AnetAPI\CreateTransactionRequest();
-$request->setMerchantAuthentication($merchantAuthentication);
-$request->setTransactionRequest( $transactionRequestType);
-$controller = new AnetController\CreateTransactionController($request);
-$response = $controller->executeWithApiResponse( \net\authorize\api\constants\ANetEnvironment::SANDBOX);
-
-if ($response != null)
-{
-	$tresponse = $response->getTransactionResponse();
-
-	if (($tresponse != null) && ($tresponse->getResponseCode()=="1") )   
-	{
-		echo "Charge Credit Card AUTH CODE : " . $tresponse->getAuthCode() . "\n";
-		echo "Charge Credit Card TRANS ID  : " . $tresponse->getTransId() . "\n";
-	}
-	else
-	{
-		echo  "Charge Credit Card ERROR :  Invalid response\n";
-	}
-}
-else
-{
-	echo  "Charge Credit card Null response returned";
-}
-```
 ### Setting Production Environment  
-Replace the environment constant in the execute method.  For example, in the method above:
+To change from the sandbox environment to the production environment, replace the environment constant in the execute method.  For example, in the method above:
 ```php
 $response = $controller->executeWithApiResponse( \net\authorize\api\constants\ANetEnvironment::PRODUCTION);
 ```  
 
-## Logging
 
+## Logging
 The SDK generates a log with masking for sensitive data like credit card, expiration dates. The provided levels for logging are 
  `debug`, `info`, `warn`, `error`. Add ````use \net\authorize\util\LogFactory;````. Logger can be initialized using `$logger = LogFactory::getLog(get_class($this));`
 The default log file `phplog` gets generated in the current folder. The subsequent logs are appended to the same file, unless the execution folder is changed, and a new log file is generated.
+
 
 ### Usage Examples
 - Logging a string message `$logger->debug("Sending 'XML' Request type");`
 - Logging xml strings `$logger->debug($xmlRequest);`
 - Logging using formatting `$logger->debugFormat("Integer: %d, Float: %f, Xml-Request: %s\n", array(100, 1.29f, $xmlRequest));`
+
 
 ### Customizing Sensitive Tags
 A local copy of [AuthorizedNetSensitiveTagsConfig.json](/lib/net/authorize/util/ANetSensitiveFields.php) gets generated when code invoking the logger first gets executed. The local file can later be edited by developer to re-configure what is masked and what is visible. (*Do not edit the JSON in the SDK*). 
@@ -160,8 +143,8 @@ A local copy of [AuthorizedNetSensitiveTagsConfig.json](/lib/net/authorize/util/
 **<a name="regex-note">Note</a>:**
 **For any regex, no starting or ending '/' or any other delimiter should be defined. The '/' delimiter and unicode flag is added in the code.**
 
-## Testing
 
+## Testing
 Integration tests for the AuthorizeNet SDK are in the `tests` directory. These tests
 are mainly for SDK development. However, you can also browse through them to find
 more usage examples for the various APIs.
@@ -172,7 +155,8 @@ more usage examples for the various APIs.
 - Run `vendor/bin/phpunit` to run the test suite.
 
 *You'll probably want to disable emails on your sandbox account.*
-    
+
+
 ### Test Credit Card Numbers
 
 | Card Type                  | Card Number      |
@@ -185,6 +169,7 @@ more usage examples for the various APIs.
 | Diners Club/ Carte Blanche | 38000000000006   |
 
 *Set the expiration date to anytime in the future.*
+
 
 ## PHPDoc
 
