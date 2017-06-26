@@ -2,10 +2,10 @@
 namespace net\authorize\api\controller\base;
 
 use InvalidArgumentException;
-use JMS\Serializer\SerializerBuilder;
-use JMS\Serializer\handler\HandlerRegistryInterface;
-use GoetasWebservices\Xsd\XsdToPhpRuntime\Jms\Handler\BaseTypesHandler;
-use GoetasWebservices\Xsd\XsdToPhpRuntime\Jms\Handler\XmlSchemaDateHandler;
+// use JMS\Serializer\SerializerBuilder;
+// use JMS\Serializer\handler\HandlerRegistryInterface;
+// use GoetasWebservices\Xsd\XsdToPhpRuntime\Jms\Handler\BaseTypesHandler;
+// use GoetasWebservices\Xsd\XsdToPhpRuntime\Jms\Handler\XmlSchemaDateHandler;
 
 use \net\authorize\util\HttpClient;
 use \net\authorize\util\Helpers;
@@ -71,7 +71,7 @@ abstract class ApiOperationBase implements IApiOperation
         $this->apiResponseType = $responseType;
         $this->httpClient = new HttpClient;
 
-        $serializerBuilder = SerializerBuilder::create();
+/*        $serializerBuilder = SerializerBuilder::create();
         $serializerBuilder->addMetadataDir( __DIR__ . '/../../yml/v1', 'net\authorize\api\contract\v1');//..\..\yml\v1\ //'/../lib/net/authorize/api/yml/v1'
         $serializerBuilder->configureHandlers(
             function (HandlerRegistryInterface $h)
@@ -83,7 +83,7 @@ abstract class ApiOperationBase implements IApiOperation
                 $h->registerSubscribingHandler(new XmlSchemaDateHandler()); // XMLSchema date handling
             }
         );
-        $this->serializer = $serializerBuilder->build();
+        $this->serializer = $serializerBuilder->build();*/
     }
 
     /**
@@ -113,21 +113,28 @@ abstract class ApiOperationBase implements IApiOperation
 
         $this->logger->info("Request Serialization Begin");
         $this->logger->debug($this->apiRequest);
-        $xmlRequest = $this->serializer->serialize($this->apiRequest, 'xml');
+        // $xmlRequest = $this->serializer->serialize($this->apiRequest, 'xml');
+        $requestArray = [lcfirst((new \ReflectionClass($this->apiRequest))->getShortName()) => $this->apiRequest];
 	
         $this->logger->info("Request  Serialization End");
         /*
                 //$xmlRequest = '<?xml version="1.0" encoding="UTF-8"?>  <ARBGetSubscriptionListRequest xmlns="AnetApi/xml/v1/schema/AnetApiSchema.xsd">  <merchantAuthentication>  <name>4YJmeW7V77us</name>  <transactionKey>4qHK9u63F753be4Z</transactionKey>  </merchantAuthentication>  <refId><![CDATA[ref1416999093]]></refId>  <searchType><![CDATA[subscriptionActive]]></searchType>  <sorting>  <orderBy><![CDATA[firstName]]></orderBy>  <orderDescending>false</orderDescending>  </sorting>  <paging>  <limit>10</limit>  <offset>1</offset>  </paging>  </ARBGetSubscriptionListRequest>  ';
         */
         $this->httpClient->setPostUrl( $endPoint);
-        $xmlResponse = $this->httpClient->_sendRequest($xmlRequest);
+        /*$xmlResponse = $this->httpClient->_sendRequest($xmlRequest);
         if ( null == $xmlResponse)
         {
             throw new \Exception( "Error getting valid response from api. Check log file for error details");
         }
         $this->logger->info("Response De-Serialization Begin");
         $this->apiResponse = $this->serializer->deserialize( $xmlResponse, $this->apiResponseType , 'xml');
-        $this->logger->info("Response De-Serialization End");
+        $this->logger->info("Response De-Serialization End");*/
+
+        $jsonResponse = $this->httpClient->_sendRequest(json_encode($requestArray));
+        //decoding json and removing bom
+        $response = json_decode( substr($jsonResponse,3), true);
+        $this->apiResponse = new $this->apiResponseType();
+        $this->apiResponse->set($response);  
 
         $this->afterExecute();
     }
