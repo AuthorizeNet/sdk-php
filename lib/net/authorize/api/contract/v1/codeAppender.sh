@@ -5,7 +5,7 @@ echo "Starting appending seralization code `date`"
 ls *.php  | grep -i -e "request\.php"> requestList.txt
 ls *.php  | grep -i -e "response\.php" > responseList.txt
 # ls *.php  | grep -i -e "type\.php" | grep -i -v "ANetApi" > typeList.txt
-ls *.php  | grep -i -e "type\.php" > typeList.txt
+ls -R  | grep -i -e "type\.php" > typeList.txt
 appendJsonSeralizeCode=`cat appendJsonSeralizeCode.txt`
 appendSetCode=`cat appendSetCode.txt`
 
