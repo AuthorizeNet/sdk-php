@@ -19,14 +19,14 @@ do
 	classname=$(echo "$filename" | sed 's:.*/::')
 	classname=$(echo "$classname" | sed 's/\.[^.]*$//')
 
-    sed -i '/^class/ s/$/ implements \\JsonSerializable/' "$filename"
-    sed -i "/$classname/,/^}/s%^}%\t//JsonSerialize code appended\n}%" "$filename"
+	echo "Appending code to - $classname"
+
+	sed -i '/^class/ s/$/ implements \\JsonSerializable/' "$filename"
+	sed -i "/$classname/,/^}/s%^}%\t//JsonSerialize code appended\n}%" "$filename"
 	sed -i "/$classname/,/^}/s%^}%\t$appendJsonSeralizeCode\n}%" "$filename"
 
 	sed -i "/$classname/,/^}/s%^}%\t//Set code appended\n}%" "$filename"
 	sed -i "/$classname/,/^}/s%^}%\t$appendSetCode\n}%" "$filename"
-
-	echo "$classname Done"
 
 done < "$list"
 
@@ -35,14 +35,13 @@ while read -r filename
 do
 	classname=$(echo "$filename" | sed 's/\.[^.]*$//')
 
-    # sed -i '/^class/ s/$/ implements \\JsonSerializable/' "$filename"
+	echo "Appending code to - $classname"
+	# sed -i '/^class/ s/$/ implements \\JsonSerializable/' "$filename"
 	sed -i "/$classname/,/^}/s%^}%\t//JsonSerialize code appended\n}%" "$filename"
 	sed -i "/$classname/,/^}/s%^}%\t$appendJsonSeralizeCode\n}%" "$filename"
 
 	# sed -i "/$classname/,/^}/s%^}%\t//Set code appended\n}%" "$filename"
 	# sed -i "/$classname/,/^}/s%^}%\t$appendSetCode\n}%" "$filename"
-
-	echo "$classname Done"
 	
 done < "$list"
 
@@ -51,13 +50,13 @@ while read -r filename
 do
 	classname=$(echo "$filename" | sed 's/\.[^.]*$//')
 
+	echo "Appending code to - $classname"
+
 	# sed -i '/^class/ s/$/ implements \\JsonSerializable/' "$filename"
 	# sed -i "/$classname/,/^}/s%^}%\t//JsonSerialize code appended\n}%" "$filename"
 	# sed -i "/$classname/,/^}/s%^}%\t$appendJsonSeralizeCode\n}%" "$filename"
 
 	sed -i "/$classname/,/^}/s%^}%\t//Set code appended\n}%" "$filename"
 	sed -i "/$classname/,/^}/s%^}%\t$appendSetCode\n}%" "$filename"
-
-	echo "$classname Done"
 	
 done < "$list"
