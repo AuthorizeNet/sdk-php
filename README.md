@@ -14,7 +14,6 @@ Proprietary, see the provided `license.md`.
 - PHP 5.6+
 - cURL PHP Extension
 - JSON PHP Extension
-- SimpleXML PHP Extension
 - An Authorize.Net Merchant account or Sandbox account (You can get a 
 	free sandbox account at http://developer.authorize.net/hello_world/sandbox/).
 - TLS 1.2 capable versions of libcurl and OpenSSL (or its equivalent)
