@@ -41,13 +41,9 @@ echo "Connection uses " . $json->tls_version ."\n";
 
 ## Installation
 	
-### Autoloading
-We recommend using [`Composer`](http://getcomposer.org) *(note we never recommend you
-override the new secure-http default setting)*. Don't forget to require its autoloader
-in your script or bootstrap file:
-```php
-require 'vendor/autoload.php';
-```
+### Composer
+We recommend using [`Composer`](http://getcomposer.org). *(Note: we never recommend you
+override the new secure-http default setting)*. 
 *Update your composer.json file as per the example below and then run
 `composer update`.*
 
@@ -60,6 +56,13 @@ require 'vendor/autoload.php';
 }
 ```
 
+After installation through Composer,
+don't forget to require its autoloader in your script or bootstrap file:
+```php
+require 'vendor/autoload.php';
+```
+
+### Custom SPL Autoloader
 Alternatively, we provide a custom `SPL` autoloader for you to reference from within your PHP file:
 ```php
 require 'path/to/anet_php_sdk/autoload.php';
@@ -82,7 +85,6 @@ To authenticate with the Authorize.Net API you will need to use your account's A
 Once you have your keys simply load them into the appropriate variables in your code, as per the below sample code dealing with the authentication part of the API request. 
 
 #### To set your API credentials for an API request: 
-
 ...
 ```php
 use net\authorize\api\contract\v1 as AnetAPI;
@@ -203,15 +205,15 @@ Add PhpDocumentor to your composer.json and run `composer update --dev`:
     "phpdocumentor/phpdocumentor": "*"
 }
 ```
-To autogenerate PHPDocs run:
+To autogenerate PHPDocs run the following at the command line (from the same directory as your composer.json):
 ```shell
-vendor/bin/phpdoc -t doc/api/ -d lib
+vendor/bin/phpdoc -t vendor/authorizenet/authorizenet/doc/api/ -d vendor/authorizenet/authorizenet/lib
 ```
 
 
 ## License
 
-This repository is destributed under a proprietary license. See the provided [`LICENSE.txt`](/license.txt) file.
+This repository is distributed under a proprietary license. See the provided [`LICENSE.txt`](/license.txt) file.
 
 
 
