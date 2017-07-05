@@ -6,17 +6,12 @@ Authorize.Net PHP SDK
 [![Packagist](https://img.shields.io/packagist/v/authorizenet/authorizenet.svg)](https://packagist.org/packages/authorizenet/authorizenet)
 
 
-## License
-Proprietary, see the provided `license.md`.
-
-
 ## Requirements
-- PHP 5.6+
-- cURL PHP Extension
-- JSON PHP Extension
-- An Authorize.Net Merchant account or Sandbox account (You can get a 
-	free sandbox account at http://developer.authorize.net/hello_world/sandbox/).
-- TLS 1.2 capable versions of libcurl and OpenSSL (or its equivalent)
+* PHP 5.6+
+* cURL PHP Extension
+* JSON PHP Extension
+* An Authorize.Net account (see _Registration & Configuration_ section below)
+* TLS 1.2 capable versions of libcurl and OpenSSL (or its equivalent)
 
 ### TLS 1.2
 The Authorize.Net APIs only support connections using the TLS 1.2 security protocol. This PHP SDK communicates with the Authorize.Net API using `libcurl` and `OpenSSL` (or equivalent crypto library). It's important to make sure you have new enough versions of these components to support TLS 1.2. Additionally, it's very important to keep these components up to date going forward to mitigate the risk of any security flaws that may be discovered in these libraries.
@@ -182,3 +177,8 @@ To autogenerate PHPDocs run:
 ```shell
 vendor/bin/phpdoc -t doc/api/ -d lib
 ```
+
+
+## License
+
+This repository is destributed under a proprietary license. See the provided [`LICENSE.txt`](/license.txt) file.
