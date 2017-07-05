@@ -14,7 +14,7 @@ Authorize.Net PHP SDK
 * TLS 1.2 capable versions of libcurl and OpenSSL (or its equivalent)
 
 ### TLS 1.2
-The Authorize.Net APIs only support connections using the TLS 1.2 security protocol. This PHP SDK communicates with the Authorize.Net API using `libcurl` and `OpenSSL` (or equivalent crypto library). It's important to make sure you have new enough versions of these components to support TLS 1.2. Additionally, it's very important to keep these components up to date going forward to mitigate the risk of any security flaws that may be discovered in these libraries.
+The Authorize.Net APIs only support connections using the TLS 1.2 security protocol. This SDK communicates with the Authorize.Net API using `libcurl` and `OpenSSL` (or equivalent crypto library). It's important to make sure you have new enough versions of these components to support TLS 1.2. Additionally, it's very important to keep these components up to date going forward to mitigate the risk of any security flaws that may be discovered in these libraries.
 
 To test whether your current installation is capable of communicating to our servers using TLS 1.2, run the following PHP code and examine the output for the TLS version:
 ```php
@@ -38,8 +38,10 @@ $json = json_decode($data);
 echo "Connection uses " . $json->tls_version ."\n";
 ```
 
+
+## Installation
 	
-## Autoloading
+### Autoloading
 We recommend using [`Composer`](http://getcomposer.org) *(note we never recommend you
 override the new secure-http default setting)*. Don't forget to require its autoloader
 in your script or bootstrap file:
@@ -53,7 +55,6 @@ require 'vendor/autoload.php';
 {
   "require": {
   "php": ">=5.6",
-  "ext-curl": "*",
   "authorizenet/authorizenet": "~1.9"
   }
 }
@@ -69,11 +70,18 @@ You can run composer locally or on another system to build the directory, then c
 `vendor` directory to the desired system.
 
 
-## Authentication
-To authenticate with the Authorize.Net API you will need to retrieve your API Login ID and Transaction Key from the [Merchant Interface](https://account.authorize.net/).  You can find these details in the Settings section.
+## Registration & Configuration
+
+Use of this SDK and the Authorize.Net APIs requires having an account on our system. You can find these details in the Settings section.
 If you don't currently have a production Authorize.Net account and need a sandbox account for testing, you can easily sign up for one [here](https://developer.authorize.net/sandbox/).
 
-Once you have your keys simply load them into the appropriate variables in your code, as per the below sample code dealing with the authentication part of the flow.
+### Authentication
+
+To authenticate with the Authorize.Net API you will need to use your account's API Login ID and Transaction Key. If you don't have these values, you can obtain them from our Merchant Interface site. Access the Merchant Interface for production accounts at (https://account.authorize.net/) or sandbox accounts at (https://sandbox.authorize.net).
+
+Once you have your keys simply load them into the appropriate variables in your code, as per the below sample code dealing with the authentication part of the API request. 
+
+#### To set your API credentials for an API request: 
 
 ...
 ```php
@@ -96,20 +104,42 @@ $request->setMerchantAuthentication($merchantAuthentication);
 
 You should never include your Login ID and Transaction Key directly in a PHP file that's in a publically accessible portion of your website. A better practice would be to define these in a constants file, and then reference those constants in the appropriate place in your code.
 
+### Switching between the sandbox environment and the production environment
+
+Authorize.Net maintains a complete sandbox environment for testing and development purposes. This sandbox environment is an exact duplicate of our production environment with the transaction authorization and settlement process simulated. By default, this SDK is configured to communicate with the sandbox environment. To switch to the production environment, replace the environment constant in the execute method. For example:
+```php
+// For PRODUCTION use
+$response = $controller->executeWithApiResponse(\net\authorize\api\constants\ANetEnvironment::PRODUCTION);
+```
+
+API credentials are different for each environment, so be sure to switch to the appropriate credentials when switching environments.
+
 
 ## SDK Usage Examples and Sample Code
-Apart from this README, we have comprehensive sample code for all common uses of our API:
-- [Github Sample Code Repositories](https://github.com/AuthorizeNet/sample-code-php)
+To get started using this SDK, it's highly recommended to download our sample code repository:
+* [Authorize.Net PHP Sample Code Repository (on GitHub)](https://github.com/AuthorizeNet/sample-code-php)
 
-Additionally, you can find details and examples of using the SDK in our API Reference Guide:
-- [Developer Center API Reference](http://developer.authorize.net/api/reference/index.html)
+In that respository, we have comprehensive sample code for all common uses of our API:
+
+Additionally, you can find details and examples of how our API is structured in our API Reference Guide:
+* [Developer Center API Reference](http://developer.authorize.net/api/reference/index.html)
+
+The API Reference Guide provides examples of what information is needed for a particular request and how that information would be formatted. Using those examples, you can easily determine what methods would be necessary to include that information in a request using this SDK.
 
 
-### Setting Production Environment  
-To change from the sandbox environment to the production environment, replace the environment constant in the execute method.  For example, in the method above:
-```php
-$response = $controller->executeWithApiResponse( \net\authorize\api\constants\ANetEnvironment::PRODUCTION);
-```  
+
+
+
+
+
+
+ 
+
+
+
+
+
+
 
 
 ## Logging
@@ -182,3 +212,7 @@ vendor/bin/phpdoc -t doc/api/ -d lib
 ## License
 
 This repository is destributed under a proprietary license. See the provided [`LICENSE.txt`](/license.txt) file.
+
+
+
+## Testing Guide?
