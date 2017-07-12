@@ -368,7 +368,8 @@ class AuthorizeNetAIM extends AuthorizeNetRequest
             $this->_post_string .= "x_$key=" . urlencode($value) . "&";
         }
         // Add line items
-        foreach ($this->_additional_line_items as $key => $value) {
+        $additional_line_items = array_slice($this->_additional_line_items, 0, 30);
+        foreach ($additional_line_items as $key => $value) {
             $this->_post_string .= "x_line_item=" . urlencode($value) . "&";
         }
         // Add custom fields
