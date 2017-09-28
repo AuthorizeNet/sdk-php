@@ -22,6 +22,11 @@ class CreditCardMaskedType
     private $expirationDate = null;
 
     /**
+     * @property string $issuerNumber
+     */
+    private $issuerNumber = null;
+
+    /**
      * @property string $cardType
      */
     private $cardType = null;
@@ -72,6 +77,28 @@ class CreditCardMaskedType
     public function setExpirationDate($expirationDate)
     {
         $this->expirationDate = $expirationDate;
+        return $this;
+    }
+
+    /**
+     * Gets as issuerNumber
+     *
+     * @return string
+     */
+    public function getIssuerNumber()
+    {
+        return $this->issuerNumber;
+    }
+
+    /**
+     * Sets a new issuerNumber
+     *
+     * @param string $issuerNumber
+     * @return self
+     */
+    public function setIssuerNumber($issuerNumber)
+    {
+        $this->issuerNumber = $issuerNumber;
         return $this;
     }
 

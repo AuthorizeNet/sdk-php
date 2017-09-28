@@ -20,6 +20,16 @@ net\authorize\api\contract\v1\CreditCardMaskedType:
                 getter: getExpirationDate
                 setter: setExpirationDate
             type: string
+        issuerNumber:
+            expose: true
+            access_type: public_method
+            serialized_name: issuerNumber
+            xml_element:
+                namespace: AnetApi/xml/v1/schema/AnetApiSchema.xsd
+            accessor:
+                getter: getIssuerNumber
+                setter: setIssuerNumber
+            type: string
         cardType:
             expose: true
             access_type: public_method
