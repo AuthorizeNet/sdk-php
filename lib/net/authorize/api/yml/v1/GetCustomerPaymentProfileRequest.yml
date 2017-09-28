@@ -32,3 +32,13 @@ net\authorize\api\contract\v1\GetCustomerPaymentProfileRequest:
                 getter: getUnmaskExpirationDate
                 setter: setUnmaskExpirationDate
             type: boolean
+        includeIssuerInfo:
+            expose: true
+            access_type: public_method
+            serialized_name: includeIssuerInfo
+            xml_element:
+                namespace: AnetApi/xml/v1/schema/AnetApiSchema.xsd
+            accessor:
+                getter: getIncludeIssuerInfo
+                setter: setIncludeIssuerInfo
+            type: boolean
