@@ -1,6 +1,6 @@
-#Authorize.Net PHP SDK
+# Authorize.Net PHP SDK
 
-[![Travis](https://img.shields.io/travis/AuthorizeNet/sdk-php/master.svg)](https://travis-ci.org/AuthorizeNet/sdk-php)
+[![Travis CI Status](https://travis-ci.org/AuthorizeNet/sdk-python.svg?branch=master)](https://travis-ci.org/AuthorizeNet/sdk-php)
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/AuthorizeNet/sdk-php/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/AuthorizeNet/sdk-php/?branch=master)
 [![Packagist](https://img.shields.io/packagist/v/authorizenet/authorizenet.svg)](https://packagist.org/packages/authorizenet/authorizenet)
 
@@ -25,7 +25,7 @@ To test whether your current installation is capable of communicating to our ser
     curl_close($ch);
 ```
 
-If curl is unable to connect to our URL (as given in the previous sample), it's likely that your system is not able to connect using TLS 1.2, or does not have a supported cipher installed. To verify what TLS version your connection does support, run the following PHP code: 
+If curl is unable to connect to our URL (as given in the previous sample), it's likely that your system is not able to connect using TLS 1.2, or does not have a supported cipher installed. To verify what TLS version your connection _does_ support, run the following PHP code: 
 ```php
 <?php 
 $ch = curl_init('https://www.howsmyssl.com/a/check');
@@ -166,4 +166,4 @@ A local copy of [AuthorizedNetSensitiveTagsConfig.json](/lib/net/authorize/util/
 
 
 ## License
-This repository is distributed under a proprietary license. See the provided [`LICENSE.txt`](/license.txt) file.
+This repository is distributed under a proprietary license. See the provided [`LICENSE.txt`](/LICENSE.txt) file.
