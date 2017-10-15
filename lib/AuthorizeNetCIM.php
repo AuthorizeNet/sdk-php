@@ -181,10 +181,17 @@ class AuthorizeNetCIM extends AuthorizeNetRequest
      *
      * @return AuthorizeNetCIM_Response
      */
-    public function getCustomerProfile($customerProfileId)
+    public function getCustomerProfile($customerProfileId, $unmaskExpirationDate = false, $includeIssuerInfo = false)
     {
         $this->_constructXml("getCustomerProfileRequest");
         $this->_xml->addChild("customerProfileId", $customerProfileId);
+        if ( $unmaskExpirationDate ) {
+            $this->_xml->addChild("unmaskExpirationDate", true);
+        }
+        if ( $includeIssuerInfo ) {
+            $this->_xml->addChild("includeIssuerInfo", true);
+        }
+
         return $this->_sendRequest();
     }
     
@@ -197,13 +204,16 @@ class AuthorizeNetCIM extends AuthorizeNetRequest
      *
      * @return AuthorizeNetCIM_Response
      */
-    public function getCustomerPaymentProfile($customerProfileId, $customerPaymentProfileId, $unmaskExpirationDate = false)
+    public function getCustomerPaymentProfile($customerProfileId, $customerPaymentProfileId, $unmaskExpirationDate = false, $includeIssuerInfo = false)
     {
         $this->_constructXml("getCustomerPaymentProfileRequest");
         $this->_xml->addChild("customerProfileId", $customerProfileId);
         $this->_xml->addChild("customerPaymentProfileId", $customerPaymentProfileId);
         if ( $unmaskExpirationDate ) {
             $this->_xml->addChild("unmaskExpirationDate", true);
+        }
+        if ( $includeIssuerInfo ) {
+            $this->_xml->addChild("includeIssuerInfo", true);
         }
 
         return $this->_sendRequest();
