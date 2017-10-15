@@ -9,7 +9,7 @@ sudo: false
 
 before_script:
     - pecl install xmldiff
-    - composer install --prefer-dist --ignore-platform-reqs
+    - composer install --prefer-dist
     - git submodule update --remote --recursive
 
 script:
