@@ -1,6 +1,6 @@
 # Authorize.Net PHP SDK
 
-[![Travis CI Status](https://travis-ci.org/AuthorizeNet/sdk-python.svg?branch=master)](https://travis-ci.org/AuthorizeNet/sdk-php)
+[![Travis CI Status](https://travis-ci.org/AuthorizeNet/sdk-php.svg?branch=master)](https://travis-ci.org/AuthorizeNet/sdk-php)
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/AuthorizeNet/sdk-php/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/AuthorizeNet/sdk-php/?branch=master)
 [![Packagist](https://img.shields.io/packagist/v/authorizenet/authorizenet.svg)](https://packagist.org/packages/authorizenet/authorizenet)
 
