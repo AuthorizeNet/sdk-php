@@ -30,3 +30,13 @@ net\authorize\api\contract\v1\TransRetailInfoType:
                 getter: getCustomerSignature
                 setter: setCustomerSignature
             type: string
+        terminalNumber:
+            expose: true
+            access_type: public_method
+            serialized_name: terminalNumber
+            xml_element:
+                namespace: AnetApi/xml/v1/schema/AnetApiSchema.xsd
+            accessor:
+                getter: getTerminalNumber
+                setter: setTerminalNumber
+            type: string

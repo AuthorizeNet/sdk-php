@@ -107,3 +107,13 @@ net\authorize\api\contract\v1\GetMerchantDetailsResponse:
                 skip_when_empty: false
                 entry_name: currency
                 namespace: AnetApi/xml/v1/schema/AnetApiSchema.xsd
+        publicClientKey:
+            expose: true
+            access_type: public_method
+            serialized_name: publicClientKey
+            xml_element:
+                namespace: AnetApi/xml/v1/schema/AnetApiSchema.xsd
+            accessor:
+                getter: getPublicClientKey
+                setter: setPublicClientKey
+            type: string
