@@ -285,3 +285,43 @@ net\authorize\api\contract\v1\TransactionRequestType:
                 skip_when_empty: true
                 entry_name: userField
                 namespace: AnetApi/xml/v1/schema/AnetApiSchema.xsd
+        surcharge:
+            expose: true
+            access_type: public_method
+            serialized_name: surcharge
+            xml_element:
+                namespace: AnetApi/xml/v1/schema/AnetApiSchema.xsd
+            accessor:
+                getter: getSurcharge
+                setter: setSurcharge
+            type: net\authorize\api\contract\v1\ExtendedAmountType
+        merchantDescriptor:
+            expose: true
+            access_type: public_method
+            serialized_name: merchantDescriptor
+            xml_element:
+                namespace: AnetApi/xml/v1/schema/AnetApiSchema.xsd
+            accessor:
+                getter: getMerchantDescriptor
+                setter: setMerchantDescriptor
+            type: string
+        subMerchant:
+            expose: true
+            access_type: public_method
+            serialized_name: subMerchant
+            xml_element:
+                namespace: AnetApi/xml/v1/schema/AnetApiSchema.xsd
+            accessor:
+                getter: getSubMerchant
+                setter: setSubMerchant
+            type: net\authorize\api\contract\v1\SubMerchantType
+        tip:
+            expose: true
+            access_type: public_method
+            serialized_name: tip
+            xml_element:
+                namespace: AnetApi/xml/v1/schema/AnetApiSchema.xsd
+            accessor:
+                getter: getTip
+                setter: setTip
+            type: net\authorize\api\contract\v1\ExtendedAmountType

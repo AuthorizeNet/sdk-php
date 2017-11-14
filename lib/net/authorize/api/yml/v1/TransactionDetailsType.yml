@@ -450,3 +450,33 @@ net\authorize\api\contract\v1\TransactionDetailsType:
                 getter: getProfile
                 setter: setProfile
             type: net\authorize\api\contract\v1\CustomerProfileIdType
+        surcharge:
+            expose: true
+            access_type: public_method
+            serialized_name: surcharge
+            xml_element:
+                namespace: AnetApi/xml/v1/schema/AnetApiSchema.xsd
+            accessor:
+                getter: getSurcharge
+                setter: setSurcharge
+            type: net\authorize\api\contract\v1\ExtendedAmountType
+        employeeId:
+            expose: true
+            access_type: public_method
+            serialized_name: employeeId
+            xml_element:
+                namespace: AnetApi/xml/v1/schema/AnetApiSchema.xsd
+            accessor:
+                getter: getEmployeeId
+                setter: setEmployeeId
+            type: string
+        tip:
+            expose: true
+            access_type: public_method
+            serialized_name: tip
+            xml_element:
+                namespace: AnetApi/xml/v1/schema/AnetApiSchema.xsd
+            accessor:
+                getter: getTip
+                setter: setTip
+            type: net\authorize\api\contract\v1\ExtendedAmountType

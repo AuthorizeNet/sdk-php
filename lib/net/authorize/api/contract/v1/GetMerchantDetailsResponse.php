@@ -49,6 +49,11 @@ class GetMerchantDetailsResponse extends ANetApiResponseType
     private $currencies = null;
 
     /**
+     * @property string $publicClientKey
+     */
+    private $publicClientKey = null;
+
+    /**
      * Gets as isTestMode
      *
      * @return boolean
@@ -391,6 +396,28 @@ class GetMerchantDetailsResponse extends ANetApiResponseType
     public function setCurrencies(array $currencies)
     {
         $this->currencies = $currencies;
+        return $this;
+    }
+
+    /**
+     * Gets as publicClientKey
+     *
+     * @return string
+     */
+    public function getPublicClientKey()
+    {
+        return $this->publicClientKey;
+    }
+
+    /**
+     * Sets a new publicClientKey
+     *
+     * @param string $publicClientKey
+     * @return self
+     */
+    public function setPublicClientKey($publicClientKey)
+    {
+        $this->publicClientKey = $publicClientKey;
         return $this;
     }
 

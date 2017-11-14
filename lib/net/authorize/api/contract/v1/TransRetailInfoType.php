@@ -5,7 +5,7 @@ namespace net\authorize\api\contract\v1;
 /**
  * Class representing TransRetailInfoType
  *
- *
+ * 
  * XSD Type: transRetailInfoType
  */
 class TransRetailInfoType
@@ -25,6 +25,11 @@ class TransRetailInfoType
      * @property string $customerSignature
      */
     private $customerSignature = null;
+
+    /**
+     * @property string $terminalNumber
+     */
+    private $terminalNumber = null;
 
     /**
      * Gets as marketType
@@ -89,6 +94,28 @@ class TransRetailInfoType
     public function setCustomerSignature($customerSignature)
     {
         $this->customerSignature = $customerSignature;
+        return $this;
+    }
+
+    /**
+     * Gets as terminalNumber
+     *
+     * @return string
+     */
+    public function getTerminalNumber()
+    {
+        return $this->terminalNumber;
+    }
+
+    /**
+     * Sets a new terminalNumber
+     *
+     * @param string $terminalNumber
+     * @return self
+     */
+    public function setTerminalNumber($terminalNumber)
+    {
+        $this->terminalNumber = $terminalNumber;
         return $this;
     }
 

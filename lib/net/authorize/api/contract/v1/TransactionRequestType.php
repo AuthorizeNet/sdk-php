@@ -5,7 +5,7 @@ namespace net\authorize\api\contract\v1;
 /**
  * Class representing TransactionRequestType
  *
- *
+ * 
  * XSD Type: transactionRequestType
  */
 class TransactionRequestType
@@ -150,6 +150,26 @@ class TransactionRequestType
      * @property \net\authorize\api\contract\v1\UserFieldType[] $userFields
      */
     private $userFields = null;
+
+    /**
+     * @property \net\authorize\api\contract\v1\ExtendedAmountType $surcharge
+     */
+    private $surcharge = null;
+
+    /**
+     * @property string $merchantDescriptor
+     */
+    private $merchantDescriptor = null;
+
+    /**
+     * @property \net\authorize\api\contract\v1\SubMerchantType $subMerchant
+     */
+    private $subMerchant = null;
+
+    /**
+     * @property \net\authorize\api\contract\v1\ExtendedAmountType $tip
+     */
+    private $tip = null;
 
     /**
      * Gets as transactionType
@@ -865,6 +885,94 @@ class TransactionRequestType
     public function setUserFields(array $userFields)
     {
         $this->userFields = $userFields;
+        return $this;
+    }
+
+    /**
+     * Gets as surcharge
+     *
+     * @return \net\authorize\api\contract\v1\ExtendedAmountType
+     */
+    public function getSurcharge()
+    {
+        return $this->surcharge;
+    }
+
+    /**
+     * Sets a new surcharge
+     *
+     * @param \net\authorize\api\contract\v1\ExtendedAmountType $surcharge
+     * @return self
+     */
+    public function setSurcharge(\net\authorize\api\contract\v1\ExtendedAmountType $surcharge)
+    {
+        $this->surcharge = $surcharge;
+        return $this;
+    }
+
+    /**
+     * Gets as merchantDescriptor
+     *
+     * @return string
+     */
+    public function getMerchantDescriptor()
+    {
+        return $this->merchantDescriptor;
+    }
+
+    /**
+     * Sets a new merchantDescriptor
+     *
+     * @param string $merchantDescriptor
+     * @return self
+     */
+    public function setMerchantDescriptor($merchantDescriptor)
+    {
+        $this->merchantDescriptor = $merchantDescriptor;
+        return $this;
+    }
+
+    /**
+     * Gets as subMerchant
+     *
+     * @return \net\authorize\api\contract\v1\SubMerchantType
+     */
+    public function getSubMerchant()
+    {
+        return $this->subMerchant;
+    }
+
+    /**
+     * Sets a new subMerchant
+     *
+     * @param \net\authorize\api\contract\v1\SubMerchantType $subMerchant
+     * @return self
+     */
+    public function setSubMerchant(\net\authorize\api\contract\v1\SubMerchantType $subMerchant)
+    {
+        $this->subMerchant = $subMerchant;
+        return $this;
+    }
+
+    /**
+     * Gets as tip
+     *
+     * @return \net\authorize\api\contract\v1\ExtendedAmountType
+     */
+    public function getTip()
+    {
+        return $this->tip;
+    }
+
+    /**
+     * Sets a new tip
+     *
+     * @param \net\authorize\api\contract\v1\ExtendedAmountType $tip
+     * @return self
+     */
+    public function setTip(\net\authorize\api\contract\v1\ExtendedAmountType $tip)
+    {
+        $this->tip = $tip;
         return $this;
     }
 

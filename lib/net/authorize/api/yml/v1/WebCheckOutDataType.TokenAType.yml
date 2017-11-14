@@ -1,4 +1,4 @@
-net\authorize\api\contract\v1\CreditCardMaskedType:
+net\authorize\api\contract\v1\WebCheckOutDataType\TokenAType:
     properties:
         cardNumber:
             expose: true
@@ -20,33 +20,33 @@ net\authorize\api\contract\v1\CreditCardMaskedType:
                 getter: getExpirationDate
                 setter: setExpirationDate
             type: string
-        cardType:
+        cardCode:
             expose: true
             access_type: public_method
-            serialized_name: cardType
+            serialized_name: cardCode
             xml_element:
                 namespace: AnetApi/xml/v1/schema/AnetApiSchema.xsd
             accessor:
-                getter: getCardType
-                setter: setCardType
+                getter: getCardCode
+                setter: setCardCode
             type: string
-        cardArt:
+        zip:
             expose: true
             access_type: public_method
-            serialized_name: cardArt
+            serialized_name: zip
             xml_element:
                 namespace: AnetApi/xml/v1/schema/AnetApiSchema.xsd
             accessor:
-                getter: getCardArt
-                setter: setCardArt
-            type: net\authorize\api\contract\v1\CardArtType
-        issuerNumber:
+                getter: getZip
+                setter: setZip
+            type: string
+        fullName:
             expose: true
             access_type: public_method
-            serialized_name: issuerNumber
+            serialized_name: fullName
             xml_element:
                 namespace: AnetApi/xml/v1/schema/AnetApiSchema.xsd
             accessor:
-                getter: getIssuerNumber
-                setter: setIssuerNumber
+                getter: getFullName
+                setter: setFullName
             type: string
