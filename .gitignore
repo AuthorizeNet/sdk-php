@@ -4,6 +4,7 @@ vendor
 phpunit.xml
 tests/log
 build
+phplog
 
 # Ignore eclipse project files
 .buildpath

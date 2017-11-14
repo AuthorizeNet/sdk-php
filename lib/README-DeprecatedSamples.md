@@ -1,7 +1,11 @@
 Old Usage Examples (Of Deprecated SDK Functionality)
 =======================================
 
-**PLEASE NOTE: These examples are for deprecated functionality. Refer to the [README](/README.md) in root folder of the SDK for the new examples.**
+# This documentation in this directoary and the objects it documents have been deprecated
+
+**For the README for this repository, see `[README.md]`(/README.md) in the root level of the repository. For examples of how to interact with the current Authorize.Net API, see our new sample code GitHub repository at https://github.com/AuthorizeNet/sample-code-php.**
+
+**What follows is the old README pertaining to this deprecated functionality:**
 
 ## Requirements
 
