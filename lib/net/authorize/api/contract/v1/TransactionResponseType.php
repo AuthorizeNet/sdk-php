@@ -5,7 +5,7 @@ namespace net\authorize\api\contract\v1;
 /**
  * Class representing TransactionResponseType
  *
- *
+ * 
  * XSD Type: transactionResponse
  */
 class TransactionResponseType
@@ -137,6 +137,11 @@ class TransactionResponseType
      * @property string $transHashSha2
      */
     private $transHashSha2 = null;
+
+    /**
+     * @property \net\authorize\api\contract\v1\CustomerProfileIdType $profile
+     */
+    private $profile = null;
 
     /**
      * Gets as responseCode
@@ -797,6 +802,28 @@ class TransactionResponseType
     public function setTransHashSha2($transHashSha2)
     {
         $this->transHashSha2 = $transHashSha2;
+        return $this;
+    }
+
+    /**
+     * Gets as profile
+     *
+     * @return \net\authorize\api\contract\v1\CustomerProfileIdType
+     */
+    public function getProfile()
+    {
+        return $this->profile;
+    }
+
+    /**
+     * Sets a new profile
+     *
+     * @param \net\authorize\api\contract\v1\CustomerProfileIdType $profile
+     * @return self
+     */
+    public function setProfile(\net\authorize\api\contract\v1\CustomerProfileIdType $profile)
+    {
+        $this->profile = $profile;
         return $this;
     }
 
