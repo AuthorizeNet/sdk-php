@@ -53,6 +53,18 @@ class CustomerProfileMaskedType extends CustomerProfileExType
     }
 
     /**
+     * Sets a new customerProfileId
+     *
+     * @param string $customerProfileId
+     * @return self
+     */
+    public function setCustomerProfileId($customerProfileId)
+    {
+        $this->customerProfileId = $customerProfileId;
+        return $this;
+    }
+
+    /**
      * Gets as merchantCustomerId
      *
      * @return string
@@ -60,6 +72,18 @@ class CustomerProfileMaskedType extends CustomerProfileExType
     public function getMerchantCustomerId()
     {
         return $this->merchantCustomerId;
+    }
+
+    /**
+     * Sets a new merchantCustomerId
+     *
+     * @param string $merchantCustomerId
+     * @return self
+     */
+    public function setMerchantCustomerId($merchantCustomerId)
+    {
+        $this->merchantCustomerId = $merchantCustomerId;
+        return $this;
     }
 
     /**
@@ -73,6 +97,18 @@ class CustomerProfileMaskedType extends CustomerProfileExType
     }
 
     /**
+     * Sets a new description
+     *
+     * @param string $description
+     * @return self
+     */
+    public function setDescription($description)
+    {
+        $this->description = $description;
+        return $this;
+    }    
+
+    /**
      * Gets as email
      *
      * @return string
@@ -81,6 +117,18 @@ class CustomerProfileMaskedType extends CustomerProfileExType
     {
         return $this->email;
     }
+
+    /**
+     * Sets a new email
+     *
+     * @param string $email
+     * @return self
+     */
+    public function setEmail($email)
+    {
+        $this->email = $email;
+        return $this;
+    }    
 
     /**
      * Adds as paymentProfiles
