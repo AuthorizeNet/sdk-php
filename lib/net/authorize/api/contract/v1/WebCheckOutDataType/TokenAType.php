@@ -1,14 +1,11 @@
 <?php
 
-namespace net\authorize\api\contract\v1;
+namespace net\authorize\api\contract\v1\WebCheckOutDataType;
 
 /**
- * Class representing CreditCardMaskedType
- *
- * 
- * XSD Type: creditCardMaskedType
+ * Class representing TokenAType
  */
-class CreditCardMaskedType
+class TokenAType
 {
 
     /**
@@ -22,19 +19,19 @@ class CreditCardMaskedType
     private $expirationDate = null;
 
     /**
-     * @property string $cardType
+     * @property string $cardCode
      */
-    private $cardType = null;
+    private $cardCode = null;
 
     /**
-     * @property \net\authorize\api\contract\v1\CardArtType $cardArt
+     * @property string $zip
      */
-    private $cardArt = null;
+    private $zip = null;
 
     /**
-     * @property string $issuerNumber
+     * @property string $fullName
      */
-    private $issuerNumber = null;
+    private $fullName = null;
 
     /**
      * Gets as cardNumber
@@ -81,68 +78,68 @@ class CreditCardMaskedType
     }
 
     /**
-     * Gets as cardType
+     * Gets as cardCode
      *
      * @return string
      */
-    public function getCardType()
+    public function getCardCode()
     {
-        return $this->cardType;
+        return $this->cardCode;
     }
 
     /**
-     * Sets a new cardType
+     * Sets a new cardCode
      *
-     * @param string $cardType
+     * @param string $cardCode
      * @return self
      */
-    public function setCardType($cardType)
+    public function setCardCode($cardCode)
     {
-        $this->cardType = $cardType;
+        $this->cardCode = $cardCode;
         return $this;
     }
 
     /**
-     * Gets as cardArt
+     * Gets as zip
      *
-     * @return \net\authorize\api\contract\v1\CardArtType
+     * @return string
      */
-    public function getCardArt()
+    public function getZip()
     {
-        return $this->cardArt;
+        return $this->zip;
     }
 
     /**
-     * Sets a new cardArt
+     * Sets a new zip
      *
-     * @param \net\authorize\api\contract\v1\CardArtType $cardArt
+     * @param string $zip
      * @return self
      */
-    public function setCardArt(\net\authorize\api\contract\v1\CardArtType $cardArt)
+    public function setZip($zip)
     {
-        $this->cardArt = $cardArt;
+        $this->zip = $zip;
         return $this;
     }
 
     /**
-     * Gets as issuerNumber
+     * Gets as fullName
      *
      * @return string
      */
-    public function getIssuerNumber()
+    public function getFullName()
     {
-        return $this->issuerNumber;
+        return $this->fullName;
     }
 
     /**
-     * Sets a new issuerNumber
+     * Sets a new fullName
      *
-     * @param string $issuerNumber
+     * @param string $fullName
      * @return self
      */
-    public function setIssuerNumber($issuerNumber)
+    public function setFullName($fullName)
     {
-        $this->issuerNumber = $issuerNumber;
+        $this->fullName = $fullName;
         return $this;
     }
 

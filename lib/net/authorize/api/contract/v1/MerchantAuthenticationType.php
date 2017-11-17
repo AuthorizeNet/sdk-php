@@ -5,7 +5,7 @@ namespace net\authorize\api\contract\v1;
 /**
  * Class representing MerchantAuthenticationType
  *
- *
+ * 
  * XSD Type: merchantAuthenticationType
  */
 class MerchantAuthenticationType
@@ -46,6 +46,11 @@ class MerchantAuthenticationType
      * @property string $clientKey
      */
     private $clientKey = null;
+
+    /**
+     * @property string $accessToken
+     */
+    private $accessToken = null;
 
     /**
      * @property string $mobileDeviceId
@@ -204,6 +209,28 @@ class MerchantAuthenticationType
     public function setClientKey($clientKey)
     {
         $this->clientKey = $clientKey;
+        return $this;
+    }
+
+    /**
+     * Gets as accessToken
+     *
+     * @return string
+     */
+    public function getAccessToken()
+    {
+        return $this->accessToken;
+    }
+
+    /**
+     * Sets a new accessToken
+     *
+     * @param string $accessToken
+     * @return self
+     */
+    public function setAccessToken($accessToken)
+    {
+        $this->accessToken = $accessToken;
         return $this;
     }
 

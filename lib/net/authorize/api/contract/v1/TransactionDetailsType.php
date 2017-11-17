@@ -229,6 +229,21 @@ class TransactionDetailsType
     private $profile = null;
 
     /**
+     * @property \net\authorize\api\contract\v1\ExtendedAmountType $surcharge
+     */
+    private $surcharge = null;
+
+    /**
+     * @property string $employeeId
+     */
+    private $employeeId = null;
+
+    /**
+     * @property \net\authorize\api\contract\v1\ExtendedAmountType $tip
+     */
+    private $tip = null;
+
+    /**
      * Gets as transId
      *
      * @return string
@@ -1312,6 +1327,72 @@ class TransactionDetailsType
     public function setProfile(\net\authorize\api\contract\v1\CustomerProfileIdType $profile)
     {
         $this->profile = $profile;
+        return $this;
+    }
+
+    /**
+     * Gets as surcharge
+     *
+     * @return \net\authorize\api\contract\v1\ExtendedAmountType
+     */
+    public function getSurcharge()
+    {
+        return $this->surcharge;
+    }
+
+    /**
+     * Sets a new surcharge
+     *
+     * @param \net\authorize\api\contract\v1\ExtendedAmountType $surcharge
+     * @return self
+     */
+    public function setSurcharge(\net\authorize\api\contract\v1\ExtendedAmountType $surcharge)
+    {
+        $this->surcharge = $surcharge;
+        return $this;
+    }
+
+    /**
+     * Gets as employeeId
+     *
+     * @return string
+     */
+    public function getEmployeeId()
+    {
+        return $this->employeeId;
+    }
+
+    /**
+     * Sets a new employeeId
+     *
+     * @param string $employeeId
+     * @return self
+     */
+    public function setEmployeeId($employeeId)
+    {
+        $this->employeeId = $employeeId;
+        return $this;
+    }
+
+    /**
+     * Gets as tip
+     *
+     * @return \net\authorize\api\contract\v1\ExtendedAmountType
+     */
+    public function getTip()
+    {
+        return $this->tip;
+    }
+
+    /**
+     * Sets a new tip
+     *
+     * @param \net\authorize\api\contract\v1\ExtendedAmountType $tip
+     * @return self
+     */
+    public function setTip(\net\authorize\api\contract\v1\ExtendedAmountType $tip)
+    {
+        $this->tip = $tip;
         return $this;
     }
 
