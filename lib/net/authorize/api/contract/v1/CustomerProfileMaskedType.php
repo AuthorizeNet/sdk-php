@@ -12,6 +12,26 @@ class CustomerProfileMaskedType extends CustomerProfileExType
 {
 
     /**
+     * @property string $customerProfileId
+     */
+    private $customerProfileId = null;
+    
+    /**
+     * @property string $merchantCustomerId
+     */
+    private $merchantCustomerId = null;
+
+    /**
+     * @property string $description
+     */
+    private $description = null;
+
+    /**
+     * @property string $email
+     */
+    private $email = null;
+
+    /**
      * @property \net\authorize\api\contract\v1\CustomerPaymentProfileMaskedType[]
      * $paymentProfiles
      */
@@ -21,6 +41,46 @@ class CustomerProfileMaskedType extends CustomerProfileExType
      * @property \net\authorize\api\contract\v1\CustomerAddressExType[] $shipToList
      */
     private $shipToList = null;
+
+    /**
+     * Gets as customerProfileId
+     *
+     * @return string
+     */
+    public function getCustomerProfileId()
+    {
+        return $this->customerProfileId;
+    }
+
+    /**
+     * Gets as merchantCustomerId
+     *
+     * @return string
+     */
+    public function getMerchantCustomerId()
+    {
+        return $this->merchantCustomerId;
+    }
+
+    /**
+     * Gets as description
+     *
+     * @return string
+     */
+    public function getDescription()
+    {
+        return $this->description;
+    }
+
+    /**
+     * Gets as email
+     *
+     * @return string
+     */
+    public function getEmail()
+    {
+        return $this->email;
+    }
 
     /**
      * Adds as paymentProfiles
