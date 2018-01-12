@@ -3,7 +3,7 @@ language: php
 sudo: false
 
 env:
-    - TEST_SUITE=samples
+    - TEST_SUITE=samples PHPUNIT=4.8.*
     - TEST_SUITE=coverage
 
 php:
@@ -11,15 +11,31 @@ php:
     - 7.0
     - 7.1
 
+matrix:
+    include:
+        - php: 7.0
+          env: TEST_SUITE=samples PHPUNIT=5.7.*
+        - php: 7.1
+          env: TEST_SUITE=samples PHPUNIT=5.7.*
+        - php: 7.0
+          env: TEST_SUITE=samples PHPUNIT=6.5.*
+        - php: 7.1
+          env: TEST_SUITE=samples PHPUNIT=6.5.*
+        
 before_install:
     # execute all of the commands which need to be executed 
     # before installing dependencies
+    - composer self-update
     - composer validate # make sure that our composer.json file is valid for packaging
 
 install:
     # install all of the dependencies we need here
     - pecl install xmldiff
     - composer install --prefer-dist
+    - |
+        if [[ "$PHPUNIT" ]]; then 
+            composer require "phpunit/phpunit:${PHPUNIT}";
+        fi
 
 before_script:
     # execute all of the commands which need to be executed 
@@ -29,8 +45,18 @@ before_script:
 script:
     # execute all of the tests or other commands to determine
     # whether the build will pass or fail
-    - if [[ "$TEST_SUITE" == "coverage" ]]; then vendor/phpunit/phpunit/phpunit --coverage-clover=coverage.clover; fi
-    - if [[ "$TEST_SUITE" == "samples" ]]; then phpenv config-rm xdebug.ini; cd sample-code-php; composer install --prefer-dist; vendor/phpunit/phpunit/phpunit test-runner.php .; fi
+    - |
+        if [[ "$TEST_SUITE" == "coverage" ]]; then 
+            vendor/phpunit/phpunit/phpunit --coverage-clover=coverage.clover;
+        fi
+
+    - |
+        if [[ "$TEST_SUITE" == "samples" ]]; then
+            phpenv config-rm xdebug.ini;
+            cd sample-code-php;
+            composer install --prefer-dist;
+            vendor/phpunit/phpunit/phpunit test-runner.php .;
+        fi
 
 after_script:
 #    - if [[ "$TEST_SUITE" == "coverage" ]]; then wget https://scrutinizer-ci.com/ocular.phar; fi
