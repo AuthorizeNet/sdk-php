@@ -6,6 +6,10 @@ env:
     - TEST_SUITE=samples
     - TEST_SUITE=coverage
 
+    - PHPUNIT=4.8.*
+    - PHPUNIT=5.7.*
+    - PHPUNIT=6.5.*
+
 php:
     - 5.6
     - 7.0
@@ -27,10 +31,20 @@ before_script:
     - git submodule update --remote --recursive
 
 script:
+    - |
     # execute all of the tests or other commands to determine
     # whether the build will pass or fail
-    - if [[ "$TEST_SUITE" == "coverage" ]]; then vendor/phpunit/phpunit/phpunit --coverage-clover=coverage.clover; fi
-    - if [[ "$TEST_SUITE" == "samples" ]]; then phpenv config-rm xdebug.ini; cd sample-code-php; composer install --prefer-dist; vendor/phpunit/phpunit/phpunit test-runner.php .; fi
+        if [[ "$TEST_SUITE" == "coverage" ]]; then 
+            vendor/phpunit/phpunit/phpunit --coverage-clover=coverage.clover;
+        fi
+    - |
+        if [[ "$TEST_SUITE" == "samples" ]]; then
+            phpenv config-rm xdebug.ini;
+            cd sample-code-php;
+            composer install --prefer-dist;
+            composer require phpunit/phpunit:${PHPUNIT};
+            vendor/phpunit/phpunit/phpunit test-runner.php .;
+        fi
 
 after_script:
 #    - if [[ "$TEST_SUITE" == "coverage" ]]; then wget https://scrutinizer-ci.com/ocular.phar; fi
