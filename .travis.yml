@@ -3,12 +3,10 @@ language: php
 sudo: false
 
 env:
-    - TEST_SUITE=samples
+    - TEST_SUITE=samples PHPUNIT=4.8.*
+    - TEST_SUITE=samples PHPUNIT=5.7.*
+    - TEST_SUITE=samples PHPUNIT=6.5.*
     - TEST_SUITE=coverage
-
-    - PHPUNIT=4.8.*
-    - PHPUNIT=5.7.*
-    - PHPUNIT=6.5.*
 
 php:
     - 5.6
