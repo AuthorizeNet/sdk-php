@@ -31,12 +31,13 @@ before_script:
     - git submodule update --remote --recursive
 
 script:
-    - |
     # execute all of the tests or other commands to determine
     # whether the build will pass or fail
+    - |
         if [[ "$TEST_SUITE" == "coverage" ]]; then 
             vendor/phpunit/phpunit/phpunit --coverage-clover=coverage.clover;
         fi
+
     - |
         if [[ "$TEST_SUITE" == "samples" ]]; then
             phpenv config-rm xdebug.ini;
