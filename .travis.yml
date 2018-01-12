@@ -4,8 +4,6 @@ sudo: false
 
 env:
     - TEST_SUITE=samples PHPUNIT=4.8.*
-    - TEST_SUITE=samples PHPUNIT=5.7.*
-    - TEST_SUITE=samples PHPUNIT=6.5.*
     - TEST_SUITE=coverage
 
 php:
@@ -13,6 +11,17 @@ php:
     - 7.0
     - 7.1
 
+matrix:
+    include:
+        - php: 7.0
+          env: TEST_SUITE=samples PHPUNIT=5.7.*
+        - php: 7.1
+          env: TEST_SUITE=samples PHPUNIT=5.7.*
+        - php: 7.0
+          env: TEST_SUITE=samples PHPUNIT=6.5.*
+        - php: 7.1
+          env: TEST_SUITE=samples PHPUNIT=6.5.*
+        
 before_install:
     # execute all of the commands which need to be executed 
     # before installing dependencies
@@ -25,7 +34,7 @@ install:
     - composer install --prefer-dist
     - |
         if [[ "$PHPUNIT" ]]; then 
-            composer require phpunit/phpunit:${PHPUNIT};
+            composer require "phpunit/phpunit:${PHPUNIT}";
         fi
 
 before_script:
