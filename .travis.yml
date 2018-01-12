@@ -16,12 +16,17 @@ php:
 before_install:
     # execute all of the commands which need to be executed 
     # before installing dependencies
+    - composer self-update
     - composer validate # make sure that our composer.json file is valid for packaging
 
 install:
     # install all of the dependencies we need here
     - pecl install xmldiff
     - composer install --prefer-dist
+    - |
+        if [[ "$PHPUNIT" ]]; then 
+            composer require phpunit/phpunit:${PHPUNIT};
+        fi
 
 before_script:
     # execute all of the commands which need to be executed 
@@ -41,7 +46,6 @@ script:
             phpenv config-rm xdebug.ini;
             cd sample-code-php;
             composer install --prefer-dist;
-            composer require phpunit/phpunit:${PHPUNIT};
             vendor/phpunit/phpunit/phpunit test-runner.php .;
         fi
 
