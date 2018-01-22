@@ -2,6 +2,7 @@
 /**
  * Easily interact with the Authorize.Net AIM API.
  *
+ * 
  * Example Authorize and Capture Transaction against the Sandbox:
  * <code>
  * <?php require_once 'AuthorizeNet.php'
@@ -42,7 +43,7 @@
 class AuthorizeNetAIM extends AuthorizeNetRequest
 {
 
-    const LIVE_URL = 'https://secure.authorize.net/gateway/transact.dll';
+    const LIVE_URL = 'https://secure2.authorize.net/gateway/transact.dll';
     const SANDBOX_URL = 'https://test.authorize.net/gateway/transact.dll';
     
     /**
@@ -286,7 +287,7 @@ class AuthorizeNetAIM extends AuthorizeNetRequest
             'bank_acct_num' => $bank_acct_num,
             'bank_acct_type' => $bank_acct_type,
             'bank_name' => $bank_name,
-            'bank_acct_name' => $bank_acct_type,
+            'bank_acct_name' => $bank_acct_name,
             'echeck_type' => $echeck_type,
             )
         );
@@ -474,7 +475,7 @@ class AuthorizeNetAIM_Response extends AuthorizeNetResponse
             
             // Set custom fields
             if ($count = count($custom_fields)) {
-                $custom_fields_response = array_slice($this->_response_array, -$count, $count);
+                $custom_fields_response = array_slice($this->_response_array, -$count-1, $count);
                 $i = 0;
                 foreach ($custom_fields as $key => $value) {
                     $this->$key = $custom_fields_response[$i];

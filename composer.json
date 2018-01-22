@@ -6,30 +6,21 @@
     "license": "proprietary",
     "homepage": "http://developer.authorize.net",
     "require": {
-        "php": "~5.3",
+        "php": ">=5.5",
         "ext-curl": "*",
         "ext-json": "*",
         "ext-simplexml": "*",
         "ext-xmlwriter": "*",
-        "jms/serializer": "*"
+        "goetas-webservices/xsd2php-runtime":"^0.2.2"
     },
     "require-dev": {
         "phpunit/phpunit": "~4.0",
-        "phpmd/phpmd": "~2.0",
-        "goetas/xsd2php":"2.*@dev",
-        "goetas/xsd-reader":"2.*@dev"
-    },
-    "suggest": {
-        "phpdocumentor/phpdocumentor": "For generating API documentation"
+        "phpmd/phpmd": "~2.0"
     },
     "autoload": {
         "classmap": ["lib"]
     },
     "autoload-dev": {
         "classmap": ["tests"]
-    },
-    "repositories": [{
-        "type": "vcs",
-        "url": "https://github.com/goetas/serializer.git"
-    }]    
+    }   
 }

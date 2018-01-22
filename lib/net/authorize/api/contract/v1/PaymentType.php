@@ -5,7 +5,7 @@ namespace net\authorize\api\contract\v1;
 /**
  * Class representing PaymentType
  *
- * 
+ *
  * XSD Type: paymentType
  */
 class PaymentType
@@ -41,6 +41,11 @@ class PaymentType
      * @property \net\authorize\api\contract\v1\OpaqueDataType $opaqueData
      */
     private $opaqueData = null;
+
+    /**
+     * @property \net\authorize\api\contract\v1\PaymentEmvType $emv
+     */
+    private $emv = null;
 
     /**
      * Gets as creditCard
@@ -171,6 +176,28 @@ class PaymentType
     public function setOpaqueData(\net\authorize\api\contract\v1\OpaqueDataType $opaqueData)
     {
         $this->opaqueData = $opaqueData;
+        return $this;
+    }
+
+    /**
+     * Gets as emv
+     *
+     * @return \net\authorize\api\contract\v1\PaymentEmvType
+     */
+    public function getEmv()
+    {
+        return $this->emv;
+    }
+
+    /**
+     * Sets a new emv
+     *
+     * @param \net\authorize\api\contract\v1\PaymentEmvType $emv
+     * @return self
+     */
+    public function setEmv(\net\authorize\api\contract\v1\PaymentEmvType $emv)
+    {
+        $this->emv = $emv;
         return $this;
     }
 

@@ -19,7 +19,7 @@ class UserFieldsAType
      * @return self
      * @param \net\authorize\api\contract\v1\UserFieldType $userField
      */
-    public function addUserFieldToUserField(\net\authorize\api\contract\v1\UserFieldType $userField)
+    public function addToUserField(\net\authorize\api\contract\v1\UserFieldType $userField)
     {
         $this->userField[] = $userField;
         return $this;

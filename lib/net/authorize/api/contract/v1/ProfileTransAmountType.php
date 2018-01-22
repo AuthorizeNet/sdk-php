@@ -5,7 +5,7 @@ namespace net\authorize\api\contract\v1;
 /**
  * Class representing ProfileTransAmountType
  *
- * 
+ *
  * XSD Type: profileTransAmountType
  */
 class ProfileTransAmountType
@@ -130,7 +130,7 @@ class ProfileTransAmountType
      * @return self
      * @param \net\authorize\api\contract\v1\LineItemType $lineItems
      */
-    public function addLineItemsToLineItems(\net\authorize\api\contract\v1\LineItemType $lineItems)
+    public function addToLineItems(\net\authorize\api\contract\v1\LineItemType $lineItems)
     {
         $this->lineItems[] = $lineItems;
         return $this;

@@ -19,7 +19,7 @@ net\authorize\api\contract\v1\TransactionSummaryType:
             accessor:
                 getter: getSubmitTimeUTC
                 setter: setSubmitTimeUTC
-            type: Goetas\Xsd\XsdToPhp\XMLSchema\DateTime
+            type: GoetasWebservices\Xsd\XsdToPhp\XMLSchema\DateTime
         submitTimeLocal:
             expose: true
             access_type: public_method
@@ -29,7 +29,7 @@ net\authorize\api\contract\v1\TransactionSummaryType:
             accessor:
                 getter: getSubmitTimeLocal
                 setter: setSubmitTimeLocal
-            type: Goetas\Xsd\XsdToPhp\XMLSchema\DateTime
+            type: GoetasWebservices\Xsd\XsdToPhp\XMLSchema\DateTime
         transactionStatus:
             expose: true
             access_type: public_method
@@ -150,3 +150,13 @@ net\authorize\api\contract\v1\TransactionSummaryType:
                 getter: getHasReturnedItems
                 setter: setHasReturnedItems
             type: boolean
+        fraudInformation:
+            expose: true
+            access_type: public_method
+            serialized_name: fraudInformation
+            xml_element:
+                namespace: AnetApi/xml/v1/schema/AnetApiSchema.xsd
+            accessor:
+                getter: getFraudInformation
+                setter: setFraudInformation
+            type: net\authorize\api\contract\v1\FraudInformationType

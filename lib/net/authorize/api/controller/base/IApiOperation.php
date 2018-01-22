@@ -3,9 +3,18 @@ namespace net\authorize\api\controller\base;
 
 interface IApiOperation
 {
+    /**
+     * @return \net\authorize\api\contract\v1\ANetApiResponseType
+     */
     public function getApiResponse();
-    public function executeWithApiResponse( $endPoint = null);
-    public function execute( $endPoint = null);
+    /**
+ * @return \net\authorize\api\contract\v1\ANetApiResponseType
+ */
+public function executeWithApiResponse( $endPoint = null);
+    /**
+ * @return void
+ */
+public function execute( $endPoint = null);
     /*
         //TS GetApiResponse();
         AuthorizeNet.Api.Contracts.V1.ANetApiResponse GetErrorResponse();

@@ -19,6 +19,11 @@ class UpdateCustomerShippingAddressRequest extends ANetApiRequestType
     private $address = null;
 
     /**
+     * @property boolean $defaultShippingAddress
+     */
+    private $defaultShippingAddress = null;
+
+    /**
      * Gets as customerProfileId
      *
      * @return string
@@ -59,6 +64,28 @@ class UpdateCustomerShippingAddressRequest extends ANetApiRequestType
     public function setAddress(\net\authorize\api\contract\v1\CustomerAddressExType $address)
     {
         $this->address = $address;
+        return $this;
+    }
+
+    /**
+     * Gets as defaultShippingAddress
+     *
+     * @return boolean
+     */
+    public function getDefaultShippingAddress()
+    {
+        return $this->defaultShippingAddress;
+    }
+
+    /**
+     * Sets a new defaultShippingAddress
+     *
+     * @param boolean $defaultShippingAddress
+     * @return self
+     */
+    public function setDefaultShippingAddress($defaultShippingAddress)
+    {
+        $this->defaultShippingAddress = $defaultShippingAddress;
         return $this;
     }
 

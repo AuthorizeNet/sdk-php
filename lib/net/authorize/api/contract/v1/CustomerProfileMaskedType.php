@@ -5,7 +5,7 @@ namespace net\authorize\api\contract\v1;
 /**
  * Class representing CustomerProfileMaskedType
  *
- * 
+ *
  * XSD Type: customerProfileMaskedType
  */
 class CustomerProfileMaskedType extends CustomerProfileExType
@@ -29,7 +29,7 @@ class CustomerProfileMaskedType extends CustomerProfileExType
      * @param \net\authorize\api\contract\v1\CustomerPaymentProfileMaskedType
      * $paymentProfiles
      */
-    public function addPaymentProfilesToPaymentProfiles(\net\authorize\api\contract\v1\CustomerPaymentProfileMaskedType $paymentProfiles)
+    public function addToPaymentProfiles(\net\authorize\api\contract\v1\CustomerPaymentProfileMaskedType $paymentProfiles)
     {
         $this->paymentProfiles[] = $paymentProfiles;
         return $this;
@@ -86,7 +86,7 @@ class CustomerProfileMaskedType extends CustomerProfileExType
      * @return self
      * @param \net\authorize\api\contract\v1\CustomerAddressExType $shipToList
      */
-    public function addShipToListToShipToList(\net\authorize\api\contract\v1\CustomerAddressExType $shipToList)
+    public function addToShipToList(\net\authorize\api\contract\v1\CustomerAddressExType $shipToList)
     {
         $this->shipToList[] = $shipToList;
         return $this;

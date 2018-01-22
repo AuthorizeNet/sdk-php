@@ -39,7 +39,7 @@ net\authorize\api\contract\v1\SubscriptionDetailType:
             accessor:
                 getter: getCreateTimeStampUTC
                 setter: setCreateTimeStampUTC
-            type: Goetas\Xsd\XsdToPhp\XMLSchema\DateTime
+            type: GoetasWebservices\Xsd\XsdToPhp\XMLSchema\DateTime
         firstName:
             expose: true
             access_type: public_method
@@ -130,3 +130,33 @@ net\authorize\api\contract\v1\SubscriptionDetailType:
                 getter: getCurrencyCode
                 setter: setCurrencyCode
             type: string
+        customerProfileId:
+            expose: true
+            access_type: public_method
+            serialized_name: customerProfileId
+            xml_element:
+                namespace: AnetApi/xml/v1/schema/AnetApiSchema.xsd
+            accessor:
+                getter: getCustomerProfileId
+                setter: setCustomerProfileId
+            type: integer
+        customerPaymentProfileId:
+            expose: true
+            access_type: public_method
+            serialized_name: customerPaymentProfileId
+            xml_element:
+                namespace: AnetApi/xml/v1/schema/AnetApiSchema.xsd
+            accessor:
+                getter: getCustomerPaymentProfileId
+                setter: setCustomerPaymentProfileId
+            type: integer
+        customerShippingProfileId:
+            expose: true
+            access_type: public_method
+            serialized_name: customerShippingProfileId
+            xml_element:
+                namespace: AnetApi/xml/v1/schema/AnetApiSchema.xsd
+            accessor:
+                getter: getCustomerShippingProfileId
+                setter: setCustomerShippingProfileId
+            type: integer

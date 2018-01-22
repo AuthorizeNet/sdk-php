@@ -21,7 +21,7 @@ net\authorize\api\contract\v1\GetSettledBatchListRequest:
             accessor:
                 getter: getFirstSettlementDate
                 setter: setFirstSettlementDate
-            type: Goetas\Xsd\XsdToPhp\XMLSchema\DateTime
+            type: GoetasWebservices\Xsd\XsdToPhp\XMLSchema\DateTime
         lastSettlementDate:
             expose: true
             access_type: public_method
@@ -31,4 +31,4 @@ net\authorize\api\contract\v1\GetSettledBatchListRequest:
             accessor:
                 getter: getLastSettlementDate
                 setter: setLastSettlementDate
-            type: Goetas\Xsd\XsdToPhp\XMLSchema\DateTime
+            type: GoetasWebservices\Xsd\XsdToPhp\XMLSchema\DateTime

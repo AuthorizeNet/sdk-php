@@ -22,3 +22,13 @@ net\authorize\api\contract\v1\CreateCustomerShippingAddressRequest:
                 getter: getAddress
                 setter: setAddress
             type: net\authorize\api\contract\v1\CustomerAddressType
+        defaultShippingAddress:
+            expose: true
+            access_type: public_method
+            serialized_name: defaultShippingAddress
+            xml_element:
+                namespace: AnetApi/xml/v1/schema/AnetApiSchema.xsd
+            accessor:
+                getter: getDefaultShippingAddress
+                setter: setDefaultShippingAddress
+            type: boolean

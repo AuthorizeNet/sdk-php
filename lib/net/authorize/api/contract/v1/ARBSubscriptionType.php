@@ -5,7 +5,7 @@ namespace net\authorize\api\contract\v1;
 /**
  * Class representing ARBSubscriptionType
  *
- * 
+ *
  * XSD Type: ARBSubscriptionType
  */
 class ARBSubscriptionType
@@ -55,6 +55,11 @@ class ARBSubscriptionType
      * @property \net\authorize\api\contract\v1\NameAndAddressType $shipTo
      */
     private $shipTo = null;
+
+    /**
+     * @property \net\authorize\api\contract\v1\CustomerProfileIdType $profile
+     */
+    private $profile = null;
 
     /**
      * Gets as name
@@ -251,6 +256,28 @@ class ARBSubscriptionType
     public function setShipTo(\net\authorize\api\contract\v1\NameAndAddressType $shipTo)
     {
         $this->shipTo = $shipTo;
+        return $this;
+    }
+
+    /**
+     * Gets as profile
+     *
+     * @return \net\authorize\api\contract\v1\CustomerProfileIdType
+     */
+    public function getProfile()
+    {
+        return $this->profile;
+    }
+
+    /**
+     * Sets a new profile
+     *
+     * @param \net\authorize\api\contract\v1\CustomerProfileIdType $profile
+     * @return self
+     */
+    public function setProfile(\net\authorize\api\contract\v1\CustomerProfileIdType $profile)
+    {
+        $this->profile = $profile;
         return $this;
     }
 

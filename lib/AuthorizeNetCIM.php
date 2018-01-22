@@ -18,7 +18,7 @@
 class AuthorizeNetCIM extends AuthorizeNetRequest
 {
 
-    const LIVE_URL = "https://api.authorize.net/xml/v1/request.api";
+    const LIVE_URL = "https://api2.authorize.net/xml/v1/request.api";
     const SANDBOX_URL = "https://apitest.authorize.net/xml/v1/request.api";
 
     
@@ -193,14 +193,19 @@ class AuthorizeNetCIM extends AuthorizeNetRequest
      *
      * @param int $customerProfileId
      * @param int $customerPaymentProfileId
+     * @param boolean $unmaskExpirationDate
      *
      * @return AuthorizeNetCIM_Response
      */
-    public function getCustomerPaymentProfile($customerProfileId, $customerPaymentProfileId)
+    public function getCustomerPaymentProfile($customerProfileId, $customerPaymentProfileId, $unmaskExpirationDate = false)
     {
         $this->_constructXml("getCustomerPaymentProfileRequest");
         $this->_xml->addChild("customerProfileId", $customerProfileId);
         $this->_xml->addChild("customerPaymentProfileId", $customerPaymentProfileId);
+        if ( $unmaskExpirationDate ) {
+            $this->_xml->addChild("unmaskExpirationDate", true);
+        }
+
         return $this->_sendRequest();
     }
     
@@ -488,7 +493,10 @@ class AuthorizeNetCIM_Response extends AuthorizeNetXMLResponse
     public function getCustomerProfileIds()
     {
         $ids = (array)$this->xml->ids;
-        return $ids["numericString"];
+        if(!empty($ids))
+            return $ids["numericString"];
+        else
+            return $ids;
     }
     
     /**
@@ -497,7 +505,10 @@ class AuthorizeNetCIM_Response extends AuthorizeNetXMLResponse
     public function getCustomerPaymentProfileIds()
     {
         $ids = (array)$this->xml->customerPaymentProfileIdList;
-        return $ids["numericString"];
+        if(!empty($ids))
+            return $ids["numericString"];
+        else
+            return $ids;
     }
     
     /**
@@ -506,7 +517,10 @@ class AuthorizeNetCIM_Response extends AuthorizeNetXMLResponse
     public function getCustomerShippingAddressIds()
     {
         $ids = (array)$this->xml->customerShippingAddressIdList;
-        return $ids["numericString"];
+        if(!empty($ids))
+            return $ids["numericString"];
+        else
+            return $ids;
     }
     
     /**

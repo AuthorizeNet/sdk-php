@@ -4,11 +4,11 @@ namespace net\authorize\api\controller;
 use net\authorize\api\contract\v1\AnetApiRequestType;
 use net\authorize\api\controller\base\ApiOperationBase;
 
-class CreateFingerPrintController extends ApiOperationBase
+class UpdateHeldTransactionController extends ApiOperationBase
 {
     public function __construct(AnetApiRequestType $request)
     {
-        $responseType = 'net\authorize\api\contract\v1\CreateFingerPrintResponse';
+        $responseType = 'net\authorize\api\contract\v1\UpdateHeldTransactionResponse';
         parent::__construct($request, $responseType);
     }
 

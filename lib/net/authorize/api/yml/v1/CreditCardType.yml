@@ -10,3 +10,23 @@ net\authorize\api\contract\v1\CreditCardType:
                 getter: getCardCode
                 setter: setCardCode
             type: string
+        isPaymentToken:
+            expose: true
+            access_type: public_method
+            serialized_name: isPaymentToken
+            xml_element:
+                namespace: AnetApi/xml/v1/schema/AnetApiSchema.xsd
+            accessor:
+                getter: getIsPaymentToken
+                setter: setIsPaymentToken
+            type: boolean
+        cryptogram:
+            expose: true
+            access_type: public_method
+            serialized_name: cryptogram
+            xml_element:
+                namespace: AnetApi/xml/v1/schema/AnetApiSchema.xsd
+            accessor:
+                getter: getCryptogram
+                setter: setCryptogram
+            type: string

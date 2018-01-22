@@ -17,7 +17,7 @@
 class AuthorizeNetTD extends AuthorizeNetRequest
 {
 
-    const LIVE_URL = "https://api.authorize.net/xml/v1/request.api";
+    const LIVE_URL = "https://api2.authorize.net/xml/v1/request.api";
     const SANDBOX_URL = "https://apitest.authorize.net/xml/v1/request.api";
     
     private $_xml;

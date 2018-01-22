@@ -1,17 +1,23 @@
 language: php
 
 php:
-  - 5.5
-  - 5.6
+    - 5.5
+    - 5.6
+    - 7.0
+
+sudo: false
 
 before_script:
-  - pecl install xmldiff
-#  - echo "xdebug.max_nesting_level=1000" >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini
-  - composer install --prefer-dist --dev
+    - pecl install xmldiff
+    - composer install --prefer-dist --ignore-platform-reqs
+    - git submodule update --remote --recursive
 
-# script: vendor/phpunit/phpunit/phpunit --coverage-clover=coverage.clover
+script:
+    - vendor/phpunit/phpunit/phpunit --coverage-clover=coverage.clover
+    - cd sample-code-php
+    - composer install --prefer-dist
+    - vendor/phpunit/phpunit/phpunit test-runner.php .
 
-# after_script:
-#  - wget https://scrutinizer-ci.com/ocular.phar
-#  - php ocular.phar code-coverage:upload --format=php-clover coverage.clover
-
+after_script:
+    - wget https://scrutinizer-ci.com/ocular.phar
+#    - php ocular.phar code-coverage:upload --format=php-clover coverage.clover

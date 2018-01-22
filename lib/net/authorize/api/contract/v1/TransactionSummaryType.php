@@ -5,7 +5,7 @@ namespace net\authorize\api\contract\v1;
 /**
  * Class representing TransactionSummaryType
  *
- * 
+ *
  * XSD Type: transactionSummaryType
  */
 class TransactionSummaryType
@@ -85,6 +85,11 @@ class TransactionSummaryType
      * @property boolean $hasReturnedItems
      */
     private $hasReturnedItems = null;
+
+    /**
+     * @property \net\authorize\api\contract\v1\FraudInformationType $fraudInformation
+     */
+    private $fraudInformation = null;
 
     /**
      * Gets as transId
@@ -413,6 +418,28 @@ class TransactionSummaryType
     public function setHasReturnedItems($hasReturnedItems)
     {
         $this->hasReturnedItems = $hasReturnedItems;
+        return $this;
+    }
+
+    /**
+     * Gets as fraudInformation
+     *
+     * @return \net\authorize\api\contract\v1\FraudInformationType
+     */
+    public function getFraudInformation()
+    {
+        return $this->fraudInformation;
+    }
+
+    /**
+     * Sets a new fraudInformation
+     *
+     * @param \net\authorize\api\contract\v1\FraudInformationType $fraudInformation
+     * @return self
+     */
+    public function setFraudInformation(\net\authorize\api\contract\v1\FraudInformationType $fraudInformation)
+    {
+        $this->fraudInformation = $fraudInformation;
         return $this;
     }
 

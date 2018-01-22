@@ -5,7 +5,7 @@ namespace net\authorize\api\contract\v1;
 /**
  * Class representing TransactionDetailsType
  *
- * 
+ *
  * XSD Type: transactionDetailsType
  */
 class TransactionDetailsType
@@ -187,6 +187,11 @@ class TransactionDetailsType
     private $product = null;
 
     /**
+     * @property string $entryMode
+     */
+    private $entryMode = null;
+
+    /**
      * @property string $marketType
      */
     private $marketType = null;
@@ -197,6 +202,11 @@ class TransactionDetailsType
     private $mobileDeviceId = null;
 
     /**
+     * @property string $customerSignature
+     */
+    private $customerSignature = null;
+
+    /**
      * @property \net\authorize\api\contract\v1\ReturnedItemType[] $returnedItems
      */
     private $returnedItems = null;
@@ -205,6 +215,13 @@ class TransactionDetailsType
      * @property \net\authorize\api\contract\v1\SolutionType $solution
      */
     private $solution = null;
+
+    /**
+     * @property
+     * \net\authorize\api\contract\v1\TransactionDetailsType\EmvDetailsAType\TagAType[]
+     * $emvDetails
+     */
+    private $emvDetails = null;
 
     /**
      * Gets as transId
@@ -564,7 +581,7 @@ class TransactionDetailsType
      * @return self
      * @param \net\authorize\api\contract\v1\FDSFilterType $fDSFilter
      */
-    public function addFDSFilterToFDSFilters(\net\authorize\api\contract\v1\FDSFilterType $fDSFilter)
+    public function addToFDSFilters(\net\authorize\api\contract\v1\FDSFilterType $fDSFilter)
     {
         $this->fDSFilters[] = $fDSFilter;
         return $this;
@@ -796,7 +813,7 @@ class TransactionDetailsType
      * @return self
      * @param \net\authorize\api\contract\v1\LineItemType $lineItem
      */
-    public function addLineItemToLineItems(\net\authorize\api\contract\v1\LineItemType $lineItem)
+    public function addToLineItems(\net\authorize\api\contract\v1\LineItemType $lineItem)
     {
         $this->lineItems[] = $lineItem;
         return $this;
@@ -1045,6 +1062,28 @@ class TransactionDetailsType
     }
 
     /**
+     * Gets as entryMode
+     *
+     * @return string
+     */
+    public function getEntryMode()
+    {
+        return $this->entryMode;
+    }
+
+    /**
+     * Sets a new entryMode
+     *
+     * @param string $entryMode
+     * @return self
+     */
+    public function setEntryMode($entryMode)
+    {
+        $this->entryMode = $entryMode;
+        return $this;
+    }
+
+    /**
      * Gets as marketType
      *
      * @return string
@@ -1089,12 +1128,34 @@ class TransactionDetailsType
     }
 
     /**
+     * Gets as customerSignature
+     *
+     * @return string
+     */
+    public function getCustomerSignature()
+    {
+        return $this->customerSignature;
+    }
+
+    /**
+     * Sets a new customerSignature
+     *
+     * @param string $customerSignature
+     * @return self
+     */
+    public function setCustomerSignature($customerSignature)
+    {
+        $this->customerSignature = $customerSignature;
+        return $this;
+    }
+
+    /**
      * Adds as returnedItem
      *
      * @return self
      * @param \net\authorize\api\contract\v1\ReturnedItemType $returnedItem
      */
-    public function addReturnedItemToReturnedItems(\net\authorize\api\contract\v1\ReturnedItemType $returnedItem)
+    public function addToReturnedItems(\net\authorize\api\contract\v1\ReturnedItemType $returnedItem)
     {
         $this->returnedItems[] = $returnedItem;
         return $this;
@@ -1163,6 +1224,67 @@ class TransactionDetailsType
     public function setSolution(\net\authorize\api\contract\v1\SolutionType $solution)
     {
         $this->solution = $solution;
+        return $this;
+    }
+
+    /**
+     * Adds as tag
+     *
+     * @return self
+     * @param
+     * \net\authorize\api\contract\v1\TransactionDetailsType\EmvDetailsAType\TagAType
+     * $tag
+     */
+    public function addToEmvDetails(\net\authorize\api\contract\v1\TransactionDetailsType\EmvDetailsAType\TagAType $tag)
+    {
+        $this->emvDetails[] = $tag;
+        return $this;
+    }
+
+    /**
+     * isset emvDetails
+     *
+     * @param scalar $index
+     * @return boolean
+     */
+    public function issetEmvDetails($index)
+    {
+        return isset($this->emvDetails[$index]);
+    }
+
+    /**
+     * unset emvDetails
+     *
+     * @param scalar $index
+     * @return void
+     */
+    public function unsetEmvDetails($index)
+    {
+        unset($this->emvDetails[$index]);
+    }
+
+    /**
+     * Gets as emvDetails
+     *
+     * @return
+     * \net\authorize\api\contract\v1\TransactionDetailsType\EmvDetailsAType\TagAType[]
+     */
+    public function getEmvDetails()
+    {
+        return $this->emvDetails;
+    }
+
+    /**
+     * Sets a new emvDetails
+     *
+     * @param
+     * \net\authorize\api\contract\v1\TransactionDetailsType\EmvDetailsAType\TagAType[]
+     * $emvDetails
+     * @return self
+     */
+    public function setEmvDetails(array $emvDetails)
+    {
+        $this->emvDetails = $emvDetails;
         return $this;
     }
 

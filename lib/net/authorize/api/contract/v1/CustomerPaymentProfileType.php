@@ -5,7 +5,7 @@ namespace net\authorize\api\contract\v1;
 /**
  * Class representing CustomerPaymentProfileType
  *
- * 
+ *
  * XSD Type: customerPaymentProfileType
  */
 class CustomerPaymentProfileType extends CustomerPaymentProfileBaseType
@@ -25,6 +25,11 @@ class CustomerPaymentProfileType extends CustomerPaymentProfileBaseType
      * @property string $taxId
      */
     private $taxId = null;
+
+    /**
+     * @property boolean $defaultPaymentProfile
+     */
+    private $defaultPaymentProfile = null;
 
     /**
      * Gets as payment
@@ -89,6 +94,28 @@ class CustomerPaymentProfileType extends CustomerPaymentProfileBaseType
     public function setTaxId($taxId)
     {
         $this->taxId = $taxId;
+        return $this;
+    }
+
+    /**
+     * Gets as defaultPaymentProfile
+     *
+     * @return boolean
+     */
+    public function getDefaultPaymentProfile()
+    {
+        return $this->defaultPaymentProfile;
+    }
+
+    /**
+     * Sets a new defaultPaymentProfile
+     *
+     * @param boolean $defaultPaymentProfile
+     * @return self
+     */
+    public function setDefaultPaymentProfile($defaultPaymentProfile)
+    {
+        $this->defaultPaymentProfile = $defaultPaymentProfile;
         return $this;
     }
 

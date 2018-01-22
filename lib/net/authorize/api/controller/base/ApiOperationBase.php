@@ -4,10 +4,13 @@ namespace net\authorize\api\controller\base;
 use InvalidArgumentException;
 use JMS\Serializer\SerializerBuilder;
 use JMS\Serializer\handler\HandlerRegistryInterface;
-use Goetas\Xsd\XsdToPhp\Jms\Handler\BaseTypesHandler;
-use Goetas\Xsd\XsdToPhp\Jms\Handler\XmlSchemaDateHandler;
+use GoetasWebservices\Xsd\XsdToPhpRuntime\Jms\Handler\BaseTypesHandler;
+use GoetasWebservices\Xsd\XsdToPhpRuntime\Jms\Handler\XmlSchemaDateHandler;
 
 use \net\authorize\util\HttpClient;
+use \net\authorize\util\Helpers;
+use \net\authorize\util\LogFactory as LogFactory;
+
 
 abstract class ApiOperationBase implements IApiOperation
 {
@@ -15,7 +18,7 @@ abstract class ApiOperationBase implements IApiOperation
      * @var \net\authorize\api\contract\v1\AnetApiRequestType
      */
     private $apiRequest = null;
-    
+
     /**
      * @var \net\authorize\api\contract\v1\AnetApiResponseType
      */
@@ -35,8 +38,7 @@ abstract class ApiOperationBase implements IApiOperation
      * @var \net\authorize\util\HttpClient;
      */
     public $httpClient = null;
-
-
+    private $logger = null;
     /**
      * Constructor.
      *
@@ -46,6 +48,8 @@ abstract class ApiOperationBase implements IApiOperation
      */
     public function __construct(\net\authorize\api\contract\v1\AnetApiRequestType $request, $responseType)
     {
+        $this->logger = LogFactory::getLog(get_class($this));
+
         if ( null == $request)
         {
             throw new InvalidArgumentException( "request cannot be null");
@@ -62,8 +66,7 @@ abstract class ApiOperationBase implements IApiOperation
         }
 
         $this->apiRequest = $request;
-
-        self::validate();
+        $this->validate();
 
         $this->apiResponseType = $responseType;
         $this->httpClient = new HttpClient;
@@ -106,17 +109,25 @@ abstract class ApiOperationBase implements IApiOperation
     {
         $this->beforeExecute();
 
+	$this->apiRequest->setClientId("sdk-php-" . \net\authorize\api\constants\ANetEnvironment::VERSION);
+
+        $this->logger->info("Request Serialization Begin");
+        $this->logger->debug($this->apiRequest);
         $xmlRequest = $this->serializer->serialize($this->apiRequest, 'xml');
-/*
-        //$xmlRequest = '<?xml version="1.0" encoding="UTF-8"?>  <ARBGetSubscriptionListRequest xmlns="AnetApi/xml/v1/schema/AnetApiSchema.xsd">  <merchantAuthentication>  <name>4YJmeW7V77us</name>  <transactionKey>4qHK9u63F753be4Z</transactionKey>  </merchantAuthentication>  <refId><![CDATA[ref1416999093]]></refId>  <searchType><![CDATA[subscriptionActive]]></searchType>  <sorting>  <orderBy><![CDATA[firstName]]></orderBy>  <orderDescending>false</orderDescending>  </sorting>  <paging>  <limit>10</limit>  <offset>1</offset>  </paging>  </ARBGetSubscriptionListRequest>  ';
-*/
+	
+        $this->logger->info("Request  Serialization End");
+        /*
+                //$xmlRequest = '<?xml version="1.0" encoding="UTF-8"?>  <ARBGetSubscriptionListRequest xmlns="AnetApi/xml/v1/schema/AnetApiSchema.xsd">  <merchantAuthentication>  <name>4YJmeW7V77us</name>  <transactionKey>4qHK9u63F753be4Z</transactionKey>  </merchantAuthentication>  <refId><![CDATA[ref1416999093]]></refId>  <searchType><![CDATA[subscriptionActive]]></searchType>  <sorting>  <orderBy><![CDATA[firstName]]></orderBy>  <orderDescending>false</orderDescending>  </sorting>  <paging>  <limit>10</limit>  <offset>1</offset>  </paging>  </ARBGetSubscriptionListRequest>  ';
+        */
         $this->httpClient->setPostUrl( $endPoint);
         $xmlResponse = $this->httpClient->_sendRequest($xmlRequest);
         if ( null == $xmlResponse)
         {
             throw new \Exception( "Error getting valid response from api. Check log file for error details");
         }
+        $this->logger->info("Response De-Serialization Begin");
         $this->apiResponse = $this->serializer->deserialize( $xmlResponse, $this->apiResponseType , 'xml');
+        $this->logger->info("Response De-Serialization End");
 
         $this->afterExecute();
     }
@@ -135,4 +146,9 @@ abstract class ApiOperationBase implements IApiOperation
     protected function beforeExecute() {}
     protected function afterExecute()  {}
     protected function validateRequest() {} //need to make this abstract
+
+    protected function now()
+    {
+        return date( DATE_RFC2822);
+    }
 }

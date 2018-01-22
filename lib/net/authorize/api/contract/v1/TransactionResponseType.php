@@ -5,7 +5,7 @@ namespace net\authorize\api\contract\v1;
 /**
  * Class representing TransactionResponseType
  *
- * 
+ *
  * XSD Type: transactionResponse
  */
 class TransactionResponseType
@@ -67,6 +67,11 @@ class TransactionResponseType
     private $accountNumber = null;
 
     /**
+     * @property string $entryMode
+     */
+    private $entryMode = null;
+
+    /**
      * @property string $accountType
      */
     private $accountType = null;
@@ -120,6 +125,18 @@ class TransactionResponseType
      * $secureAcceptance
      */
     private $secureAcceptance = null;
+
+    /**
+     * @property
+     * \net\authorize\api\contract\v1\TransactionResponseType\EmvResponseAType
+     * $emvResponse
+     */
+    private $emvResponse = null;
+
+    /**
+     * @property string $transHashSha2
+     */
+    private $transHashSha2 = null;
 
     /**
      * Gets as responseCode
@@ -364,6 +381,28 @@ class TransactionResponseType
     }
 
     /**
+     * Gets as entryMode
+     *
+     * @return string
+     */
+    public function getEntryMode()
+    {
+        return $this->entryMode;
+    }
+
+    /**
+     * Sets a new entryMode
+     *
+     * @param string $entryMode
+     * @return self
+     */
+    public function setEntryMode($entryMode)
+    {
+        $this->entryMode = $entryMode;
+        return $this;
+    }
+
+    /**
      * Gets as accountType
      *
      * @return string
@@ -438,7 +477,7 @@ class TransactionResponseType
      * \net\authorize\api\contract\v1\TransactionResponseType\MessagesAType\MessageAType
      * $message
      */
-    public function addMessageToMessages(\net\authorize\api\contract\v1\TransactionResponseType\MessagesAType\MessageAType $message)
+    public function addToMessages(\net\authorize\api\contract\v1\TransactionResponseType\MessagesAType\MessageAType $message)
     {
         $this->messages[] = $message;
         return $this;
@@ -499,7 +538,7 @@ class TransactionResponseType
      * \net\authorize\api\contract\v1\TransactionResponseType\ErrorsAType\ErrorAType
      * $error
      */
-    public function addErrorToErrors(\net\authorize\api\contract\v1\TransactionResponseType\ErrorsAType\ErrorAType $error)
+    public function addToErrors(\net\authorize\api\contract\v1\TransactionResponseType\ErrorsAType\ErrorAType $error)
     {
         $this->errors[] = $error;
         return $this;
@@ -560,7 +599,7 @@ class TransactionResponseType
      * \net\authorize\api\contract\v1\TransactionResponseType\SplitTenderPaymentsAType\SplitTenderPaymentAType
      * $splitTenderPayment
      */
-    public function addSplitTenderPaymentToSplitTenderPayments(\net\authorize\api\contract\v1\TransactionResponseType\SplitTenderPaymentsAType\SplitTenderPaymentAType $splitTenderPayment)
+    public function addToSplitTenderPayments(\net\authorize\api\contract\v1\TransactionResponseType\SplitTenderPaymentsAType\SplitTenderPaymentAType $splitTenderPayment)
     {
         $this->splitTenderPayments[] = $splitTenderPayment;
         return $this;
@@ -619,7 +658,7 @@ class TransactionResponseType
      * @return self
      * @param \net\authorize\api\contract\v1\UserFieldType $userField
      */
-    public function addUserFieldToUserFields(\net\authorize\api\contract\v1\UserFieldType $userField)
+    public function addToUserFields(\net\authorize\api\contract\v1\UserFieldType $userField)
     {
         $this->userFields[] = $userField;
         return $this;
@@ -713,6 +752,51 @@ class TransactionResponseType
     public function setSecureAcceptance(\net\authorize\api\contract\v1\TransactionResponseType\SecureAcceptanceAType $secureAcceptance)
     {
         $this->secureAcceptance = $secureAcceptance;
+        return $this;
+    }
+
+    /**
+     * Gets as emvResponse
+     *
+     * @return \net\authorize\api\contract\v1\TransactionResponseType\EmvResponseAType
+     */
+    public function getEmvResponse()
+    {
+        return $this->emvResponse;
+    }
+
+    /**
+     * Sets a new emvResponse
+     *
+     * @param \net\authorize\api\contract\v1\TransactionResponseType\EmvResponseAType
+     * $emvResponse
+     * @return self
+     */
+    public function setEmvResponse(\net\authorize\api\contract\v1\TransactionResponseType\EmvResponseAType $emvResponse)
+    {
+        $this->emvResponse = $emvResponse;
+        return $this;
+    }
+
+    /**
+     * Gets as transHashSha2
+     *
+     * @return string
+     */
+    public function getTransHashSha2()
+    {
+        return $this->transHashSha2;
+    }
+
+    /**
+     * Sets a new transHashSha2
+     *
+     * @param string $transHashSha2
+     * @return self
+     */
+    public function setTransHashSha2($transHashSha2)
+    {
+        $this->transHashSha2 = $transHashSha2;
         return $this;
     }
 
