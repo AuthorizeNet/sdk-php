@@ -74,7 +74,7 @@ net\authorize\api\contract\v1\ARBSubscriptionMaskedType:
             expose: true
             access_type: public_method
             serialized_name: arbTransactions
-            type: net\authorize\api\contract\v1\ARBSubscriptionMaskedType
+            type: array<net\authorize\api\contract\v1\ARBSubscriptionMaskedType>
             xml_element:
                 namespace: AnetApi/xml/v1/schema/AnetApiSchema.xsd
             accessor:
