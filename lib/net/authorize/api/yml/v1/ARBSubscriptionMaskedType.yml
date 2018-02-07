@@ -83,4 +83,5 @@ net\authorize\api\contract\v1\ARBSubscriptionMaskedType:
                 inline: false
                 skip_when_empty: true
                 entry_name: arbTransaction
+                type: net\authorize\api\contract\v1\ARBSubscriptionMaskedType
                 namespace: AnetApi/xml/v1/schema/AnetApiSchema.xsd
