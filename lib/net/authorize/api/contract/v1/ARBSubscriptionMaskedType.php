@@ -48,6 +48,12 @@ class ARBSubscriptionMaskedType
     private $order = null;
 
     /**
+     * @property \net\authorize\api\contract\v1\TransactionDetailsType[]
+     */
+    private $arbTransactions = null;
+
+
+    /**
      * Gets as name
      *
      * @return string
@@ -198,6 +204,28 @@ class ARBSubscriptionMaskedType
     public function setOrder(\net\authorize\api\contract\v1\OrderType $order)
     {
         $this->order = $order;
+        return $this;
+    }
+
+    /**
+     * Gets the list of subscriptions associated with the transaction
+     *
+     * @return mixed
+     */
+    public function getArbTransactions()
+    {
+        return $this->arbTransactions;
+    }
+
+    /**
+     * Sets the list of transactions associated with the subscription
+     *
+     * @param mixed $arbTransactions
+     * @return ARBSubscriptionMaskedType
+     */
+    public function setArbTransactions($arbTransactions)
+    {
+        $this->arbTransactions = $arbTransactions;
         return $this;
     }
 
