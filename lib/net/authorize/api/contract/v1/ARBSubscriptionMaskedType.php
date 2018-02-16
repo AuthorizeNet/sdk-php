@@ -48,6 +48,11 @@ class ARBSubscriptionMaskedType
     private $order = null;
 
     /**
+     * @property \net\authorize\api\contract\v1\ArbTransactionType[] $arbTransactions
+     */
+    private $arbTransactions = null;
+
+    /**
      * Gets as name
      *
      * @return string
@@ -198,6 +203,62 @@ class ARBSubscriptionMaskedType
     public function setOrder(\net\authorize\api\contract\v1\OrderType $order)
     {
         $this->order = $order;
+        return $this;
+    }
+
+    /**
+     * Adds as arbTransaction
+     *
+     * @return self
+     * @param \net\authorize\api\contract\v1\ArbTransactionType $arbTransaction
+     */
+    public function addToArbTransactions(\net\authorize\api\contract\v1\ArbTransactionType $arbTransaction)
+    {
+        $this->arbTransactions[] = $arbTransaction;
+        return $this;
+    }
+
+    /**
+     * isset arbTransactions
+     *
+     * @param scalar $index
+     * @return boolean
+     */
+    public function issetArbTransactions($index)
+    {
+        return isset($this->arbTransactions[$index]);
+    }
+
+    /**
+     * unset arbTransactions
+     *
+     * @param scalar $index
+     * @return void
+     */
+    public function unsetArbTransactions($index)
+    {
+        unset($this->arbTransactions[$index]);
+    }
+
+    /**
+     * Gets as arbTransactions
+     *
+     * @return \net\authorize\api\contract\v1\ArbTransactionType[]
+     */
+    public function getArbTransactions()
+    {
+        return $this->arbTransactions;
+    }
+
+    /**
+     * Sets a new arbTransactions
+     *
+     * @param \net\authorize\api\contract\v1\ArbTransactionType[] $arbTransactions
+     * @return self
+     */
+    public function setArbTransactions(array $arbTransactions)
+    {
+        $this->arbTransactions = $arbTransactions;
         return $this;
     }
 
