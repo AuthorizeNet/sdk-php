@@ -261,6 +261,7 @@ return array(
     'net\authorize\api\contract\v1\ARBGetSubscriptionStatusResponse' => $libDir . 'net/authorize/api/contract/v1/ARBGetSubscriptionStatusResponse.php',
     'net\authorize\api\contract\v1\ARBSubscriptionMaskedType' => $libDir . 'net/authorize/api/contract/v1/ARBSubscriptionMaskedType.php',
     'net\authorize\api\contract\v1\ARBSubscriptionType' => $libDir . 'net/authorize/api/contract/v1/ARBSubscriptionType.php',
+    'net\authorize\api\contract\v1\ArbTransactionType' => $libDir . 'net/authorize/api/contract/v1/ArbTransactionType.php',
     'net\authorize\api\contract\v1\ARBUpdateSubscriptionRequest' => $libDir . 'net/authorize/api/contract/v1/ARBUpdateSubscriptionRequest.php',
     'net\authorize\api\contract\v1\ARBUpdateSubscriptionResponse' => $libDir . 'net/authorize/api/contract/v1/ARBUpdateSubscriptionResponse.php',
     'net\authorize\api\contract\v1\ArrayOfSettingType' => $libDir . 'net/authorize/api/contract/v1/ArrayOfSettingType.php',
