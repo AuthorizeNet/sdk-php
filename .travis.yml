@@ -31,6 +31,6 @@ script:
     - if [[ "$TEST_SUITE" == "samples" ]]; then phpenv config-rm xdebug.ini; cd sample-code-php; composer install --prefer-dist; vendor/phpunit/phpunit/phpunit test-runner.php .; fi
 
 after_script:
-    - cat testslog
+    - cd sample-code-php; cat testslog
 #    - if [[ "$TEST_SUITE" == "coverage" ]]; then wget https://scrutinizer-ci.com/ocular.phar; fi
 #    - if [[ "$TEST_SUITE" == "coverage" ]]; then php ocular.phar code-coverage:upload --format=php-clover coverage.clover; fi
