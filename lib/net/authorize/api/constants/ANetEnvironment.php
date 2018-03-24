@@ -7,5 +7,5 @@ class ANetEnvironment
     const SANDBOX = "https://apitest.authorize.net";
     const PRODUCTION = "https://api2.authorize.net";
 
-    const VERSION = "1.9.5";
+    const VERSION = "1.9.6";
 }
