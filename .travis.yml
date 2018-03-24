@@ -28,8 +28,8 @@ before_script:
 script:
     # execute all of the tests or other commands to determine
     # whether the build will pass or fail
-    - if [[ "$TEST_SUITE" == "samples" ]]; then phpenv config-rm xdebug.ini; cd sample-code-php; composer install --prefer-dist; vendor/phpunit/phpunit/phpunit test-runner.php .; fi
-
+    - if [[ "$TEST_SUITE" == "samples" ]]; then phpenv config-rm xdebug.ini; cp -R lib sample-code-php/; cp -R vendor sample-code-php/; cd sample-code-php; vendor/phpunit/phpunit/phpunit test-runner.php .; cat testslog;  fi
+ 
 after_script:
 #    - if [[ "$TEST_SUITE" == "coverage" ]]; then wget https://scrutinizer-ci.com/ocular.phar; fi
 #    - if [[ "$TEST_SUITE" == "coverage" ]]; then php ocular.phar code-coverage:upload --format=php-clover coverage.clover; fi
