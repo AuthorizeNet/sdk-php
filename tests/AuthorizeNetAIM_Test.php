@@ -2,8 +2,8 @@
 
 class AuthorizeNetAIM_Sandbox_Test extends PHPUnit_Framework_TestCase
 {
-    private $alternateApiLoginId = "22Pav9kBpn";
-    private $alternateTransactionKey = "35vB2T6kkZZW582q";
+    private $testApiLoginId = "22Pav9kBpn";
+    private $testTransactionKey = "35vB2T6kkZZW582q";
 
     public function testAuthCapture()
     {
