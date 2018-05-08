@@ -10,7 +10,7 @@ class AuthorizeNetCIM_Test extends PHPUnit_Framework_TestCase
     $response = $request->getCustomerProfileIds();
     $customers = $response->getCustomerProfileIds();
 
-    
+
     foreach ($customers as $customer) {
       $response = $request->deleteCustomerProfile($customer);
       // Not all profiles can be deleted, they could be linked to subscriptions
@@ -196,7 +196,7 @@ class AuthorizeNetCIM_Test extends PHPUnit_Framework_TestCase
       $cardNumber = "4111111111111111";
       $expectedCardNumber = 'XXXX' . substr($cardNumber, -4);
       $expectedExpiration = 'XXXX';
-  
+
       // Create new customer profile
       $request = new AuthorizeNetCIM;
       $customerProfile = new AuthorizeNetCustomer;
@@ -219,7 +219,7 @@ class AuthorizeNetCIM_Test extends PHPUnit_Framework_TestCase
       $request = new AuthorizeNetCIM;
       $response = $request->getCustomerPaymentProfile($customerProfileId, $paymentProfileId);
       if ($response->isOk()) {
-          $recdCardNumber = (string)$response->xml->paymentProfile->payment->creditCard->cardNumber; 
+          $recdCardNumber = (string)$response->xml->paymentProfile->payment->creditCard->cardNumber;
           $recdExpiration = (string)$response->xml->paymentProfile->payment->creditCard->expirationDate;
           $this->assertEquals($expectedCardNumber, $recdCardNumber);
           $this->assertEquals($expectedExpiration, $recdExpiration);
@@ -231,7 +231,7 @@ class AuthorizeNetCIM_Test extends PHPUnit_Framework_TestCase
       $expirationDate = "2015-10";
       $cardNumber = "4111111111111111";
       $expectedCardNumber = 'XXXX' . substr($cardNumber, -4);
-  
+
       // Create new customer profile
       $request = new AuthorizeNetCIM;
       $customerProfile = new AuthorizeNetCustomer;
@@ -254,13 +254,13 @@ class AuthorizeNetCIM_Test extends PHPUnit_Framework_TestCase
       $request = new AuthorizeNetCIM;
       $response = $request->getCustomerPaymentProfile($customerProfileId, $paymentProfileId, true);
       if ($response->isOk()) {
-          $recdCardNumber = (string)$response->xml->paymentProfile->payment->creditCard->cardNumber; 
+          $recdCardNumber = (string)$response->xml->paymentProfile->payment->creditCard->cardNumber;
           $recdExpiration = (string)$response->xml->paymentProfile->payment->creditCard->expirationDate;
           $this->assertEquals($expectedCardNumber, $recdCardNumber);
           $this->assertEquals($expirationDate, $recdExpiration);
       }
   }
-    
+
   public function testCreateCustomerProfileWithValidationMode()
   {
         $this->markTestSkipped('Ignoring for Travis. Will fix after release.'); //TODO
@@ -353,14 +353,14 @@ class AuthorizeNetCIM_Test extends PHPUnit_Framework_TestCase
     $paymentProfile = new AuthorizeNetPaymentProfile;
     $paymentProfile->customerType = "individual";
     $paymentProfile->payment->creditCard->cardNumber = "4111111111111111";
-    $paymentProfile->payment->creditCard->expirationDate = "2015-10";
+    $paymentProfile->payment->creditCard->expirationDate = (date("Y") + 5) ."-10";
     $response = $request->createCustomerPaymentProfile($customerProfileId, $paymentProfile);
     $this->assertTrue($response->isOk());
     $paymentProfileId = $response->getPaymentProfileId();
 
     // Update payment profile.
     $paymentProfile->payment->creditCard->cardNumber = "4111111111111111";
-    $paymentProfile->payment->creditCard->expirationDate = "2017-11";
+    $paymentProfile->payment->creditCard->expirationDate = (date("Y") + 7) ."-11";
     $response = $request->updateCustomerPaymentProfile($customerProfileId,$paymentProfileId, $paymentProfile);
     $this->assertTrue($response->isOk());
 
@@ -447,11 +447,11 @@ class AuthorizeNetCIM_Test extends PHPUnit_Framework_TestCase
   public function testGetCustomerProfileIds()
   {
     // A valid response should be received when a merchant has zero customer profiles...
-    // Hence, first testing using specific credentials for a merchant which has zero customer profiles...  
+    // Hence, first testing using specific credentials for a merchant which has zero customer profiles...
     $request = new AuthorizeNetCIM('5KP3u95bQpv','346HZ32z3fP4hTG2');
     $response = $request->getCustomerProfileIds();
 
-	  
+
     // Create new customer profile
     $request = new AuthorizeNetCIM;
     $customerProfile = new AuthorizeNetCustomer;
