@@ -353,7 +353,9 @@ class AuthorizeNetCIM_Test extends PHPUnit_Framework_TestCase
     $paymentProfile = new AuthorizeNetPaymentProfile;
     $paymentProfile->customerType = "individual";
     $paymentProfile->payment->creditCard->cardNumber = "4111111111111111";
+
     $paymentProfile->payment->creditCard->expirationDate = (date("Y") + 5) ."-10";
+
     $response = $request->createCustomerPaymentProfile($customerProfileId, $paymentProfile);
     $this->assertTrue($response->isOk());
     $paymentProfileId = $response->getPaymentProfileId();
