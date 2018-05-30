@@ -80,7 +80,23 @@ class AuthorizeNetCIM extends AuthorizeNetRequest
         $this->_addObject($profile, $paymentProfile);
         return $this->_sendRequest();
     }
-    
+
+    /**
+     * Create a customer profile from a transaction ID.
+     *
+     * @param int                  $transaction ID
+     * @param string               $validationMode
+     *
+     * @return AuthorizeNetCIM_Response
+     */
+    public function createCustomerProfileFromTransactionId($transactionId, $validationMode = "none") 
+    {
+        $this->validationMode = $validationMode;
+        $this->_constructXml("createCustomerProfileFromTransactionRequest");
+        $this->_xml->addChild("transId", $transactionId);
+        return $this->_sendRequest();
+    }
+
     /**
      * Create a shipping address.
      *
