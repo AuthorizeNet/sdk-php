@@ -105,6 +105,13 @@ class AuthorizeNetXMLResponse
     {
         return $this->_getElementContents("text");
     }
+	
+	/**
+     * @return dynamic
+     */
+	 public function data(){
+		return json_decode(json_encode($this->xml));
+	 }
     
     /**
      * Grabs the contents of a unique element.
