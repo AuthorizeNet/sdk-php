@@ -33,6 +33,20 @@ class AuthorizeNetARB extends AuthorizeNetRequest
     }
     
     /**
+     * Get an ARB subscription
+     *
+     * @param int $subscriptionId
+     *
+     * @return AuthorizeNetARB_Response
+     */
+    public function getSubscription($subscriptionId)
+    {
+        $this->_request_type = "GetSubscriptionRequest";
+        $this->_request_payload .= "<subscriptionId>$subscriptionId</subscriptionId>";
+        return $this->_sendRequest();
+    }
+    
+    /**
      * Create an ARB subscription
      *
      * @param AuthorizeNet_Subscription $subscription
