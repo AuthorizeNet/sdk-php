@@ -5,7 +5,7 @@ namespace net\authorize\api\contract\v1;
 /**
  * Class representing CustomerProfileMaskedType
  *
- *
+ * 
  * XSD Type: customerProfileMaskedType
  */
 class CustomerProfileMaskedType extends CustomerProfileExType
@@ -21,6 +21,11 @@ class CustomerProfileMaskedType extends CustomerProfileExType
      * @property \net\authorize\api\contract\v1\CustomerAddressExType[] $shipToList
      */
     private $shipToList = null;
+
+    /**
+     * @property string $profileType
+     */
+    private $profileType = null;
 
     /**
      * Adds as paymentProfiles
@@ -133,6 +138,28 @@ class CustomerProfileMaskedType extends CustomerProfileExType
     public function setShipToList(array $shipToList)
     {
         $this->shipToList = $shipToList;
+        return $this;
+    }
+
+    /**
+     * Gets as profileType
+     *
+     * @return string
+     */
+    public function getProfileType()
+    {
+        return $this->profileType;
+    }
+
+    /**
+     * Sets a new profileType
+     *
+     * @param string $profileType
+     * @return self
+     */
+    public function setProfileType($profileType)
+    {
+        $this->profileType = $profileType;
         return $this;
     }
 

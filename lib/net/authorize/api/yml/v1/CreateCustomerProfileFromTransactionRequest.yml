@@ -52,3 +52,13 @@ net\authorize\api\contract\v1\CreateCustomerProfileFromTransactionRequest:
                 getter: getDefaultShippingAddress
                 setter: setDefaultShippingAddress
             type: boolean
+        profileType:
+            expose: true
+            access_type: public_method
+            serialized_name: profileType
+            xml_element:
+                namespace: AnetApi/xml/v1/schema/AnetApiSchema.xsd
+            accessor:
+                getter: getProfileType
+                setter: setProfileType
+            type: string

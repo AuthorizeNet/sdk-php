@@ -9,14 +9,14 @@ class UpdateCustomerProfileRequest extends ANetApiRequestType
 {
 
     /**
-     * @property \net\authorize\api\contract\v1\CustomerProfileExType $profile
+     * @property \net\authorize\api\contract\v1\CustomerProfileInfoExType $profile
      */
     private $profile = null;
 
     /**
      * Gets as profile
      *
-     * @return \net\authorize\api\contract\v1\CustomerProfileExType
+     * @return \net\authorize\api\contract\v1\CustomerProfileInfoExType
      */
     public function getProfile()
     {
@@ -26,10 +26,10 @@ class UpdateCustomerProfileRequest extends ANetApiRequestType
     /**
      * Sets a new profile
      *
-     * @param \net\authorize\api\contract\v1\CustomerProfileExType $profile
+     * @param \net\authorize\api\contract\v1\CustomerProfileInfoExType $profile
      * @return self
      */
-    public function setProfile(\net\authorize\api\contract\v1\CustomerProfileExType $profile)
+    public function setProfile(\net\authorize\api\contract\v1\CustomerProfileInfoExType $profile)
     {
         $this->profile = $profile;
         return $this;
