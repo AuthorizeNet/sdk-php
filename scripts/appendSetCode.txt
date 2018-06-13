@@ -2,17 +2,18 @@
     public function set($data)
     {
         foreach($data AS $key => $value) {
-            $isarray = false;
-            $classname = (new netauthorizeapicontractv1Mapper)->getClass(get_class() , $key);
-            if (substr($classname, 0, 5) === "array") {
-                $classname = ltrim($classname, 'array<');
-                $classname = rtrim($classname, '>');
-                $isarray = true;
-            }
-            if ($isarray) {
-                if ($classname != "string") {
+            //$isarray = false;
+            //$classname = (new net\authorize\api\contract\v1\Mapper)->getClass(get_class() , $key);
+            $classDetails = (new net\authorize\api\contract\v1\Mapper)->getClass(get_class() , $key);
+            //if (substr($classname, 0, 5) === "array") {
+            //  $classname = ltrim($classname, 'array<');
+            //    $classname = rtrim($classname, '>');
+            //    $isarray = true;
+            //}
+            if ($classDetails->isArray) {
+                if ($classDetails->isCustomDefined) {
                     foreach($value AS $keyChild => $valueChild) {
-                        $type = new $classname;
+                        $type = new $classDetails->classname;
                         $type->set($valueChild);
                         $this->{'addTo' . $key}($type);
                     }
@@ -24,8 +25,8 @@
                 }
             }
             else {
-                if ($classname != "string") {
-                    $type = new $classname;
+                if ($classDetails->isCustomDefined){
+                    $type = new $classDetails->classname;
                     $type->set($value);
                     $this->{'set' . $key}($type);
                 }
