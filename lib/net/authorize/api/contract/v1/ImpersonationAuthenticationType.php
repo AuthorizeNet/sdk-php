@@ -5,7 +5,7 @@ namespace net\authorize\api\contract\v1;
 /**
  * Class representing ImpersonationAuthenticationType
  *
- *
+ * 
  * XSD Type: impersonationAuthenticationType
  */
 class ImpersonationAuthenticationType

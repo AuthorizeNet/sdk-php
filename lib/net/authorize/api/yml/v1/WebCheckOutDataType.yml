@@ -29,4 +29,14 @@ net\authorize\api\contract\v1\WebCheckOutDataType:
             accessor:
                 getter: getToken
                 setter: setToken
-            type: net\authorize\api\contract\v1\WebCheckOutDataType\TokenAType
+            type: net\authorize\api\contract\v1\WebCheckOutDataTypeTokenType
+        bankToken:
+            expose: true
+            access_type: public_method
+            serialized_name: bankToken
+            xml_element:
+                namespace: AnetApi/xml/v1/schema/AnetApiSchema.xsd
+            accessor:
+                getter: getBankToken
+                setter: setBankToken
+            type: net\authorize\api\contract\v1\BankAccountType

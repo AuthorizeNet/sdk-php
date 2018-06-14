@@ -37,6 +37,11 @@ class CreditCardMaskedType
     private $issuerNumber = null;
 
     /**
+     * @property boolean $isPaymentToken
+     */
+    private $isPaymentToken = null;
+
+    /**
      * Gets as cardNumber
      *
      * @return string
@@ -143,6 +148,28 @@ class CreditCardMaskedType
     public function setIssuerNumber($issuerNumber)
     {
         $this->issuerNumber = $issuerNumber;
+        return $this;
+    }
+
+    /**
+     * Gets as isPaymentToken
+     *
+     * @return boolean
+     */
+    public function getIsPaymentToken()
+    {
+        return $this->isPaymentToken;
+    }
+
+    /**
+     * Sets a new isPaymentToken
+     *
+     * @param boolean $isPaymentToken
+     * @return self
+     */
+    public function setIsPaymentToken($isPaymentToken)
+    {
+        $this->isPaymentToken = $isPaymentToken;
         return $this;
     }
 

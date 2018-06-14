@@ -5,7 +5,7 @@ namespace net\authorize\api\contract\v1;
 /**
  * Class representing PaymentEmvType
  *
- *
+ * 
  * XSD Type: paymentEmvType
  */
 class PaymentEmvType
