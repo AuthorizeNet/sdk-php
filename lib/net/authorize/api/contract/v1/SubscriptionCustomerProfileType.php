@@ -5,7 +5,7 @@ namespace net\authorize\api\contract\v1;
 /**
  * Class representing SubscriptionCustomerProfileType
  *
- *
+ * 
  * XSD Type: subscriptionCustomerProfileType
  */
 class SubscriptionCustomerProfileType extends CustomerProfileExType

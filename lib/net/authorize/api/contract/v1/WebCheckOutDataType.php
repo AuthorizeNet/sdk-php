@@ -22,9 +22,14 @@ class WebCheckOutDataType
     private $id = null;
 
     /**
-     * @property \net\authorize\api\contract\v1\WebCheckOutDataType\TokenAType $token
+     * @property \net\authorize\api\contract\v1\WebCheckOutDataTypeTokenType $token
      */
     private $token = null;
+
+    /**
+     * @property \net\authorize\api\contract\v1\BankAccountType $bankToken
+     */
+    private $bankToken = null;
 
     /**
      * Gets as type
@@ -73,7 +78,7 @@ class WebCheckOutDataType
     /**
      * Gets as token
      *
-     * @return \net\authorize\api\contract\v1\WebCheckOutDataType\TokenAType
+     * @return \net\authorize\api\contract\v1\WebCheckOutDataTypeTokenType
      */
     public function getToken()
     {
@@ -83,12 +88,34 @@ class WebCheckOutDataType
     /**
      * Sets a new token
      *
-     * @param \net\authorize\api\contract\v1\WebCheckOutDataType\TokenAType $token
+     * @param \net\authorize\api\contract\v1\WebCheckOutDataTypeTokenType $token
      * @return self
      */
-    public function setToken(\net\authorize\api\contract\v1\WebCheckOutDataType\TokenAType $token)
+    public function setToken(\net\authorize\api\contract\v1\WebCheckOutDataTypeTokenType $token)
     {
         $this->token = $token;
+        return $this;
+    }
+
+    /**
+     * Gets as bankToken
+     *
+     * @return \net\authorize\api\contract\v1\BankAccountType
+     */
+    public function getBankToken()
+    {
+        return $this->bankToken;
+    }
+
+    /**
+     * Sets a new bankToken
+     *
+     * @param \net\authorize\api\contract\v1\BankAccountType $bankToken
+     * @return self
+     */
+    public function setBankToken(\net\authorize\api\contract\v1\BankAccountType $bankToken)
+    {
+        $this->bankToken = $bankToken;
         return $this;
     }
 
