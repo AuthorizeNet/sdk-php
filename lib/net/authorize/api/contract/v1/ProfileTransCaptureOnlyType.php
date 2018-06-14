@@ -5,7 +5,7 @@ namespace net\authorize\api\contract\v1;
 /**
  * Class representing ProfileTransCaptureOnlyType
  *
- *
+ * 
  * XSD Type: profileTransCaptureOnlyType
  */
 class ProfileTransCaptureOnlyType extends ProfileTransOrderType

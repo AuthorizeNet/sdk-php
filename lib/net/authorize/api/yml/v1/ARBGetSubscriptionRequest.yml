@@ -12,3 +12,13 @@ net\authorize\api\contract\v1\ARBGetSubscriptionRequest:
                 getter: getSubscriptionId
                 setter: setSubscriptionId
             type: string
+        includeTransactions:
+            expose: true
+            access_type: public_method
+            serialized_name: includeTransactions
+            xml_element:
+                namespace: AnetApi/xml/v1/schema/AnetApiSchema.xsd
+            accessor:
+                getter: getIncludeTransactions
+                setter: setIncludeTransactions
+            type: boolean

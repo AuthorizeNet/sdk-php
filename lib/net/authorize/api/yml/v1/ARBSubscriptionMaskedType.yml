@@ -70,3 +70,18 @@ net\authorize\api\contract\v1\ARBSubscriptionMaskedType:
                 getter: getOrder
                 setter: setOrder
             type: net\authorize\api\contract\v1\OrderType
+        arbTransactions:
+            expose: true
+            access_type: public_method
+            serialized_name: arbTransactions
+            xml_element:
+                namespace: AnetApi/xml/v1/schema/AnetApiSchema.xsd
+            accessor:
+                getter: getArbTransactions
+                setter: setArbTransactions
+            type: array<net\authorize\api\contract\v1\ArbTransactionType>
+            xml_list:
+                inline: false
+                skip_when_empty: true
+                entry_name: arbTransaction
+                namespace: AnetApi/xml/v1/schema/AnetApiSchema.xsd

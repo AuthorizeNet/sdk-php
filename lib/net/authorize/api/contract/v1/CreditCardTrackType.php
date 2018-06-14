@@ -5,7 +5,7 @@ namespace net\authorize\api\contract\v1;
 /**
  * Class representing CreditCardTrackType
  *
- *
+ * 
  * XSD Type: creditCardTrackType
  */
 class CreditCardTrackType

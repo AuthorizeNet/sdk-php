@@ -5,7 +5,7 @@ namespace net\authorize\api\contract\v1;
 /**
  * Class representing ProfileTransactionType
  *
- *
+ * 
  * XSD Type: profileTransactionType
  */
 class ProfileTransactionType

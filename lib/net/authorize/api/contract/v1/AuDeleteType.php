@@ -5,7 +5,7 @@ namespace net\authorize\api\contract\v1;
 /**
  * Class representing AuDeleteType
  *
- *
+ * 
  * XSD Type: auDeleteType
  */
 class AuDeleteType extends AuDetailsType

@@ -5,7 +5,7 @@ namespace net\authorize\api\contract\v1;
 /**
  * Class representing MerchantContactType
  *
- *
+ * 
  * XSD Type: merchantContactType
  */
 class MerchantContactType

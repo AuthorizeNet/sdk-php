@@ -5,7 +5,7 @@ namespace net\authorize\api\contract\v1;
 /**
  * Class representing CreditCardType
  *
- *
+ * 
  * XSD Type: creditCardType
  */
 class CreditCardType extends CreditCardSimpleType

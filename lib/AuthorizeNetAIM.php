@@ -269,7 +269,7 @@ class AuthorizeNetAIM extends AuthorizeNetRequest
         $line_item = "";
         $delimiter = "";
         foreach (func_get_args() as $key => $value) {
-            $line_item .= $delimiter . $value;
+            $line_item .= $delimiter . preg_replace('/\|/', '_', $value);
             $delimiter = "<|>";
         }
         $this->_additional_line_items[] = $line_item;

@@ -5,7 +5,7 @@ namespace net\authorize\api\contract\v1;
 /**
  * Class representing KeyValueType
  *
- *
+ * 
  * XSD Type: KeyValue
  */
 class KeyValueType
