@@ -5,7 +5,7 @@ namespace net\authorize\api\contract\v1;
 /**
  * Class representing AuUpdateType
  *
- *
+ * 
  * XSD Type: auUpdateType
  */
 class AuUpdateType extends AuDetailsType

@@ -5,7 +5,7 @@ namespace net\authorize\api\contract\v1;
 /**
  * Class representing CustomerPaymentProfileType
  *
- *
+ * 
  * XSD Type: customerPaymentProfileType
  */
 class CustomerPaymentProfileType extends CustomerPaymentProfileBaseType

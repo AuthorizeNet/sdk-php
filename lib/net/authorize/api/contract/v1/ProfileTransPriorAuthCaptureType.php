@@ -5,7 +5,7 @@ namespace net\authorize\api\contract\v1;
 /**
  * Class representing ProfileTransPriorAuthCaptureType
  *
- *
+ * 
  * XSD Type: profileTransPriorAuthCaptureType
  */
 class ProfileTransPriorAuthCaptureType extends ProfileTransAmountType

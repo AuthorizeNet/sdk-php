@@ -5,7 +5,7 @@ namespace net\authorize\api\contract\v1;
 /**
  * Class representing SubscriptionDetailType
  *
- *
+ * 
  * XSD Type: SubscriptionDetail
  */
 class SubscriptionDetailType

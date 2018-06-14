@@ -5,7 +5,7 @@ namespace net\authorize\api\contract\v1;
 /**
  * Class representing CustomerPaymentProfileListItemType
  *
- *
+ * 
  * XSD Type: customerPaymentProfileListItemType
  */
 class CustomerPaymentProfileListItemType
