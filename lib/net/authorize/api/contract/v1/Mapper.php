@@ -4,12 +4,12 @@ use Symfony\Component\Yaml\Yaml;
 
 class Mapper{
 	private $classes = array();
-	private $dir = "../../yml/v1/";
+	private $dir = __DIR__ . "/../../yml/v1/";
 
 	function __construct() {
 		$files = scandir($this->dir);
 		foreach ($files as $file) {
-			//echo "filename:" . $file . "\n";
+			// echo "filename:" . $file . "\n";
 			// Elementing the ..
 			if($file != "." && $file != ".." ){
 				$value = Yaml::parseFile($this->dir.$file);
@@ -44,22 +44,23 @@ class Mapper{
 
 	public function getClass(string $class, string $property){
 
+        echo "getClass calling : class - " . $class . " property - " . $property . "\n";
 		$obj = new MapperObj;
 
 
-		if(isset($this->classes[$classname]['properties'][$property]['type'])){
+		if(isset($this->classes[$class]['properties'][$property]['type'])){
 			$className = $this->classes[$class]['properties'][$property]['type'];
-            if(substr( $classname, 0, 5 ) === "array"){
-                $classname = ltrim($classname, 'array<');
-                $classname = rtrim($classname, '>');
+            if(substr( $className, 0, 5 ) === "array"){
+                $className = ltrim($className, 'array<');
+                $className = rtrim($className, '>');
                 $obj->isArray = true;
 
-                if(isset($this->classes[$classname]['properties'][$property]['xml_list']['entry_name'])){
+                if(isset($this->classes[$class]['properties'][$property]['xml_list']['entry_name'])){
 					// echo $file."\t\t\t\t\t\t\t\t\t";
 					// echo $propKey." :: ".$prop['serialized_name']." - ".$prop['xml_list']['entry_name']." - ".$prop['xml_list']['inline'];
 					// echo "\n";
-					$obj->isInlineArray = $this->classes[$classname]['properties'][$property]['xml_list']['inline'];
-					$obj->arrayEntryname = $this->classes[$classname]['properties'][$property]['xml_list']['entry_name'];
+					$obj->isInlineArray = $this->classes[$class]['properties'][$property]['xml_list']['inline'];
+					$obj->arrayEntryname = $this->classes[$class]['properties'][$property]['xml_list']['entry_name'];
 				}
             }
             $obj->className = $className;
@@ -67,17 +68,23 @@ class Mapper{
 
 			return $obj;
 		}
-		else if(get_parent_class($classname)){
-			return getClass(get_parent_class($classname), $property)
+		else if(get_parent_class($class)){
+            echo "Checking parent class in YAML - ".get_parent_class($class)." -".$class." - ".$property."\n";
+			return (new Mapper)->getClass(get_parent_class($class), $property);
 		}
-		// else if ($property == "refId" || $property == "sessionToken" ){
-		// 		return 'string';
-		// }
-		// else if ($property == "messages" ){
-		// 		return 'net\authorize\api\contract\v1\MessagesType';
-		// }
+//		 else if ($property == "refId" || $property == "sessionToken" ){
+//		 		return 'string';
+//		 }
+//		 else if ($property == "messages" ){
+//             
+//		 		$className = 'net\authorize\api\contract\v1\MessagesType';
+//             $obj->className = $className;
+//            $obj->isCustomDefined = stripos($className, '\\') !== false;
+//
+//			return $obj;
+//		 }
 		else{
-			echo "Error finding in YAML - ".$classname." ".$property."\n";
+			echo "Error finding in YAML - ".$classname." - ".$property."\n";
 			$obj->className = 'string';
 			return $obj;
 		}
