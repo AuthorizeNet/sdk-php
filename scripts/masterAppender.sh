@@ -39,6 +39,7 @@ echo "Starting appending seralization code `date`"
 find ../lib/net/authorize/api/contract/v1 -print | grep -i -e "request\.php"   | cut -c 38-  > requestList.txt
 find ../lib/net/authorize/api/contract/v1 -print | grep -i -e "response\.php"  | cut -c 38-  > responseList.txt
 find ../lib/net/authorize/api/contract/v1 -print | grep -i -e "type\.php"      | cut -c 38-  > typeList.txt
+find ../lib/net/authorize/api/contract/v1 -print | grep -i -e "type\.php"    > typeList2.txt
 
 #mkdir -p ../lib/net/authorize/api/contract/v1/backup
 
@@ -69,13 +70,13 @@ perl appendSetCode.pl responseList.txt
 
 echo "Done Phase 1"
 
-#list="typeList.txt"
-#while read -r filename
-#do
-#	filename=$(echo "$filename" | sed -e "s/^\.\///g")
-#	echo "Appending implements JsonSerializable to - $filename"
-#	sed -i '/^class/ s/$/ implements \\JsonSerializable/' "$filename"
-#
-#done < "$list"
+list="typeList2.txt"
+while read -r filename
+do
+    filename=$(echo "$filename" | sed -e "s/^\.\///g")
+    echo "Appending implements JsonSerializable to - $filename"
+    sed -i.bak '/^class/ s/$/ implements \\JsonSerializable/' "$filename"
+
+done < "$list"
 
 

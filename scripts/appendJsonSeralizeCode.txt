@@ -6,7 +6,7 @@
         });
         foreach($values as $key => $value){
             if (isset($value) && is_array($value)){
-                $subKey = str_replace("Type", "", lcfirst((new ReflectionClass($value[0]))->getShortName()));
+                $subKey = str_replace("Type", "", lcfirst((new \ReflectionClass($value[0]))->getShortName()));
                 $subArray = [$subKey => $value];
                 $values[$key] = $subArray;
             }
