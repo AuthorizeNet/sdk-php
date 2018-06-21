@@ -44,9 +44,8 @@ class Mapper{
 
 	public function getClass(string $class, string $property){
 
-        echo "getClass calling : class - " . $class . " property - " . $property . "\n";
+        //echo "getClass calling : class - " . $class . " property - " . $property . "\n";
 		$obj = new MapperObj;
-
 
 		if(isset($this->classes[$class]['properties'][$property]['type'])){
 			$className = $this->classes[$class]['properties'][$property]['type'];
@@ -69,7 +68,7 @@ class Mapper{
 			return $obj;
 		}
 		else if(get_parent_class($class)){
-            echo "Checking parent class in YAML - ".get_parent_class($class)." -".$class." - ".$property."\n";
+            //echo "Checking parent class in YAML - ".get_parent_class($class)." -".$class." - ".$property."\n";
 			return (new Mapper)->getClass(get_parent_class($class), $property);
 		}
 //		 else if ($property == "refId" || $property == "sessionToken" ){
@@ -85,7 +84,7 @@ class Mapper{
 //		 }
 		else{
 			echo "Error finding in YAML - ".$classname." - ".$property."\n";
-			$obj->className = 'string';
+			$obj = NULL;
 			return $obj;
 		}
 		// return $this->classes[$classname]['properties'][$property]['type'];

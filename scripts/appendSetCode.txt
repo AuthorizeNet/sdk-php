@@ -10,28 +10,30 @@
             //    $classname = rtrim($classname, '>');
             //    $isarray = true;
             //}
-            if ($classDetails->isArray) {
-                if ($classDetails->isCustomDefined) {
-                    foreach($value AS $keyChild => $valueChild) {
+            if($classDetails !== NULL ) {
+                if ($classDetails->isArray) {
+                    if ($classDetails->isCustomDefined) {
+                        foreach($value AS $keyChild => $valueChild) {
+                            $type = new $classDetails->className;
+                            $type->set($valueChild);
+                            $this->{'addTo' . $key}($type);
+                        }
+                    }
+                    else {
+                        foreach($value AS $keyChild => $valueChild) {
+                            $this->{'addTo' . $key}($valueChild);
+                        }
+                    }
+                }
+                else {
+                    if ($classDetails->isCustomDefined){
                         $type = new $classDetails->className;
-                        $type->set($valueChild);
-                        $this->{'addTo' . $key}($type);
+                        $type->set($value);
+                        $this->{'set' . $key}($type);
                     }
-                }
-                else {
-                    foreach($value AS $keyChild => $valueChild) {
-                        $this->{'addTo' . $key}($valueChild);
+                    else {
+                        $this->{'set' . $key}($value);
                     }
-                }
-            }
-            else {
-                if ($classDetails->isCustomDefined){
-                    $type = new $classDetails->className;
-                    $type->set($value);
-                    $this->{'set' . $key}($type);
-                }
-                else {
-                    $this->{'set' . $key}($value);
                 }
             }
         }
