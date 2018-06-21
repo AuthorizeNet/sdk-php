@@ -4,18 +4,31 @@
         function ($val){
             return !is_null($val);
         });
+        // echo __CLASS__ . "\n";
         foreach($values as $key => $value){
             if (isset($value) && is_array($value)){
-                $subKey = str_replace("Type", "", lcfirst((new \ReflectionClass($value[0]))->getShortName()));
-                $subArray = [$subKey => $value];
-                $values[$key] = $subArray;
+            
+                echo "key - $key \n";
+                echo "value - $value \n";
+                
+                $classDetails = (new \net\authorize\api\contract\v1\Mapper)->getClass(get_class() , $key);
+                if (!$classDetails->isInlineArray){
+            
+                    // $subKey = str_replace("Type", "", lcfirst((new \ReflectionClass($value[0]))->getShortName()));
+                    $subKey = $classDetails->arrayEntryname;
+                    $subArray = [$subKey => $value];
+                    $values[$key] = $subArray;
+                echo "subkey - $subKey \n";
+                }
+                
+                var_dump($value);
             }
         }
         if (get_parent_class() == ""){
             return $values;
         }
         else{
-            return array_merge(parent::jsonSerialize() , $values);
+            return array_merge(parent::jsonSerialize(), $values);
         }
     }
     
