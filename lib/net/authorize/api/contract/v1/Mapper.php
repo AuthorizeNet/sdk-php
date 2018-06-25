@@ -89,6 +89,12 @@ class Mapper{
 		}
 		// return $this->classes[$classname]['properties'][$property]['type'];
 	}
+    
+    public function getXmlName(string $class){
+        if(isset($this->classes[$class]['xml_root_name'])){
+            return $this->classes[$class]['xml_root_name'];
+        }        
+    }
 }
 //echo $classes['net\authorize\api\contract\v1\ANetApiRequestType']['properties']['merchantAuthentication']['type']."\n";
 
