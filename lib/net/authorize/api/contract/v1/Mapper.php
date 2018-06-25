@@ -49,7 +49,11 @@ class Mapper{
 
 		if(isset($this->classes[$class]['properties'][$property]['type'])){
 			$className = $this->classes[$class]['properties'][$property]['type'];
-            if(substr( $className, 0, 5 ) === "array"){
+            if (stripos($className, 'Date') !== false) {
+                $obj->className = 'DateTime';
+                $obj->isCustomDefined = false;
+            }
+            if(substr( $className, 0, 5 ) === "array") {
                 $className = ltrim($className, 'array<');
                 $className = rtrim($className, '>');
                 $obj->isArray = true;
@@ -61,10 +65,10 @@ class Mapper{
 					$obj->isInlineArray = $this->classes[$class]['properties'][$property]['xml_list']['inline'];
 					$obj->arrayEntryname = $this->classes[$class]['properties'][$property]['xml_list']['entry_name'];
 				}
+                $obj->className = $className;
+                $obj->isCustomDefined = stripos($className, '\\') !== false;
             }
-            $obj->className = $className;
-            $obj->isCustomDefined = stripos($className, '\\') !== false;
-
+            
 			return $obj;
 		}
 		else if(get_parent_class($class)){
