@@ -1,5 +1,13 @@
 <?php
 /**
+* @deprecated since version 1.9.8
+* @deprecated The Authorize.Net API has been reorganized to simplify & ease integration and to be more merchant focused
+* @deprecated AIM, ARB, CIM, Reporting and SIM have all been deprecated in favor of AuthorizeNet::API.
+* @deprecated CP and CNP both use similar request structure (with differences in payment fields). For CP, refer examples in https://github.com/AuthorizeNet/sample-code-php/tree/master/PaymentTransactions
+*/
+trigger_error('AuthorizeNetCP is deprecated, use AuthorizeNet::API instead. For CP, see examples in https://github.com/AuthorizeNet/sample-code-php/tree/master/PaymentTransactions .', E_USER_DEPRECATED);
+
+/**
  * Easily interact with the Authorize.Net Card Present API.
  *
  *

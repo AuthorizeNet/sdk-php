@@ -1,5 +1,12 @@
 <?php
 /**
+* @deprecated since version 1.9.8
+* @deprecated AuthorizeNet SOAP is replaced by XMP APIs https://developer.authorize.net/api/reference/index.html#payment-transactions
+* @deprecated Refer sample codes : https://github.com/AuthorizeNet/sample-code-php/tree/master/PaymentTransactions
+*/
+trigger_error('AuthorizeNetSOAP is deprecated, use XML APIs instead. Refer sample codes : https://github.com/AuthorizeNet/sample-code-php/tree/master/PaymentTransactions .', E_USER_DEPRECATED);
+
+/**
  * A simple wrapper for the SOAP API as well as a helper function
  * to generate a documentation file from the WSDL.
  *

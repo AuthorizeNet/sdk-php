@@ -1,5 +1,13 @@
 <?php
 /**
+* @deprecated since version 1.9.8
+* @deprecated The Authorize.Net API has been reorganized to simplify & ease integration and to be more merchant focused
+* @deprecated AIM, ARB, CIM, Reporting and SIM have all been deprecated in favor of AuthorizeNet::API.
+* @deprecated For AIM, refer examples in https://github.com/AuthorizeNet/sample-code-php/tree/master/PaymentTransactions
+*/
+trigger_error('AuthorizeNetAIM is deprecated, use AuthorizeNet::API instead. For AIM, see examples in https://github.com/AuthorizeNet/sample-code-php/tree/master/PaymentTransactions .', E_USER_DEPRECATED);
+
+/**
  * Easily interact with the Authorize.Net AIM API.
  *
  * 

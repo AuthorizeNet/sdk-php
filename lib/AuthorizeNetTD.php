@@ -1,5 +1,13 @@
 <?php
 /**
+* @deprecated since version 1.9.8
+* @deprecated The Authorize.Net API has been reorganized to simplify & ease integration and to be more merchant focused
+* @deprecated AIM, ARB, CIM, Reporting and SIM have all been deprecated in favor of AuthorizeNet::API.
+* @deprecated For Transaction Reporting, refer examples in https://github.com/AuthorizeNet/sample-code-php/tree/master/TransactionReporting
+*/
+trigger_error('AuthorizeNetTD is deprecated, use AuthorizeNet::API instead. For TD, see examples in https://github.com/AuthorizeNet/sample-code-php/tree/master/TransactionReporting .', E_USER_DEPRECATED);
+
+/**
  * Easily interact with the Authorize.Net Transaction Details XML API.
  *
  * @package    AuthorizeNet
