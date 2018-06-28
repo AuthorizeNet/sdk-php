@@ -1,5 +1,9 @@
 <?php
 /**
+* @deprecated since version 1.9.8
+* @deprecated Use request/response classes in net\authorize\api\contract\v1 instead. Refer examples in https://github.com/AuthorizeNet/sample-code-php
+*/
+/**
  * Base class for the AuthorizeNet ARB & CIM Responses.
  *
  * @package    AuthorizeNet

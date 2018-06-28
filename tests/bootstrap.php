@@ -48,7 +48,7 @@ if (null == $global_transaction_key || "" == $global_transaction_key)
 }
 
 ini_set('error_reporting', E_ALL);
-
+PHPUnit_Framework_Error_Deprecated::$enabled = false;
 /*
 $loader = require '../vendor/autoload.php';
 if (!isset($loader))

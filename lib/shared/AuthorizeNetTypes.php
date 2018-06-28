@@ -1,5 +1,10 @@
 <?php
 /**
+* @deprecated since version 1.9.8
+* @deprecated All the classes in AuthorizeNetTypes are deprecated.
+* @deprecated Use request/response classes in net\authorize\api\contract\v1 instead. Refer examples in https://github.com/AuthorizeNet/sample-code-php
+*/
+/**
  * Classes for the various AuthorizeNet data types.
  *
  * @package    AuthorizeNet
