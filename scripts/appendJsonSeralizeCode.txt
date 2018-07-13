@@ -6,22 +6,34 @@
         });
         // echo __CLASS__ . "\n";
         foreach($values as $key => $value){
-            if (isset($value) && is_array($value)){
-            
-                echo "key - $key \n";
-                echo "value - $value \n";
-                
+            $classDetails = (new \net\authorize\api\contract\v1\Mapper)->getClass(get_class() , $key);
+            if (isset($value)){
                 $classDetails = (new \net\authorize\api\contract\v1\Mapper)->getClass(get_class() , $key);
-                if (!$classDetails->isInlineArray){
-            
-                    // $subKey = str_replace("Type", "", lcfirst((new \ReflectionClass($value[0]))->getShortName()));
-                    $subKey = $classDetails->arrayEntryname;
-                    $subArray = [$subKey => $value];
-                    $values[$key] = $subArray;
-                echo "subkey - $subKey \n";
+                if ($classDetails->className === 'Date'){
+                    // echo($value->format('Y-m-d H:i:s')."\n");
+                    $dateTime = $value->format('Y-m-d');
+                    $values[$key] = $dateTime;
+                    //echo($dateTime."\n");
                 }
-                
-                var_dump($value);
+                else if ($classDetails->className === 'DateTime'){
+                    // echo($value->format('Y-m-d H:i:s')."\n");
+                    $dateTime = $value->format('Y-m-d\TH-i-s.\0\0\0\Z');
+                    $values[$key] = $dateTime;
+                    //echo($dateTime."\n");
+                }
+                if (is_array($value)){
+
+                    //echo "key - $key \n";
+                    //echo "value - $value \n"; 
+                    if (!$classDetails->isInlineArray){
+
+                        // $subKey = str_replace("Type", "", lcfirst((new \ReflectionClass($value[0]))->getShortName()));
+                        $subKey = $classDetails->arrayEntryname;
+                        $subArray = [$subKey => $value];
+                        $values[$key] = $subArray;
+                    //echo "subkey - $subKey \n";
+                    }
+                }
             }
         }
         if (get_parent_class() == ""){

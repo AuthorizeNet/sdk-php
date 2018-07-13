@@ -49,7 +49,10 @@ class Mapper{
 
 		if(isset($this->classes[$class]['properties'][$property]['type'])){
 			$className = $this->classes[$class]['properties'][$property]['type'];
-            if (stripos($className, 'DateTime') !== false) {
+            if (stripos($className, "DateTime<'Y-m-d'>") !== false) {
+                $className = 'Date';
+            }
+            else if (stripos($className, "DateTime") !== false) {
                 $className = 'DateTime';
             }
             if(substr( $className, 0, 5 ) === "array") {
