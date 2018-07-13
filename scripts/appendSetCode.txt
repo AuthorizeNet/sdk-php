@@ -19,9 +19,10 @@
                             $this->{'addTo' . $key}($type);
                         }
                     }
-                    else ($classDetails->className === 'DateTime') {
+                    else if ($classDetails->className === 'DateTime') {
                         foreach($value AS $keyChild => $valueChild) {
-                            $this->{'addTo' . $key}($valueChild);
+                            $type = new \DateTime($valueChild);
+                            $this->{'addTo' . $key}($type);
                         }
                     }
                     else {
@@ -37,7 +38,8 @@
                         $this->{'set' . $key}($type);
                     }
                     else if ($classDetails->className === 'DateTime') {
-                        $this->{'set' . $key}($value);
+                        $type = new \DateTime($value);
+                        $this->{'set' . $key}($type);
                     }
                     else {
                         $this->{'set' . $key}($value);
