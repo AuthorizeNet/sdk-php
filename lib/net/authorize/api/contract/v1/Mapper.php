@@ -6,7 +6,7 @@ class Mapper{
 	private $classes = array();
 	private $dir = __DIR__ . "/../../yml/v1/";
 
-	function __construct() {
+	private function __construct() {
 		$files = scandir($this->dir);
 		foreach ($files as $file) {
 			// echo "filename:" . $file . "\n";
@@ -23,6 +23,15 @@ class Mapper{
 			}
 		}
 	}
+    
+    public static function Instance()
+    {
+        static $inst = null;
+        if ($inst === null) {
+            $inst = new Mapper();
+        }
+        return $inst;
+    }
 
 	// public function getClass(string $classname, string $property){
 
@@ -75,7 +84,7 @@ class Mapper{
 		}
 		else if(get_parent_class($class)){
             //echo "Checking parent class in YAML - ".get_parent_class($class)." -".$class." - ".$property."\n";
-			return (new Mapper)->getClass(get_parent_class($class), $property);
+			return getClass(get_parent_class($class), $property);
 		}
 //		 else if ($property == "refId" || $property == "sessionToken" ){
 //		 		return 'string';
