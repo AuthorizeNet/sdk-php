@@ -17,7 +17,7 @@
                 }
                 else if ($classDetails->className === 'DateTime'){
                     // echo($value->format('Y-m-d H:i:s')."\n");
-                    $dateTime = $value->format('Y-m-d\TH-i-s\Z');
+                    $dateTime = $value->format('Y-m-d\TH:i:s\Z');
                     $values[$key] = $dateTime;
                     //echo($dateTime."\n");
                 }
