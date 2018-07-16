@@ -84,7 +84,7 @@ class Mapper{
 		}
 		else if(get_parent_class($class)){
             //echo "Checking parent class in YAML - ".get_parent_class($class)." -".$class." - ".$property."\n";
-			return getClass(get_parent_class($class), $property);
+			return $this->getClass(get_parent_class($class), $property);
 		}
 //		 else if ($property == "refId" || $property == "sessionToken" ){
 //		 		return 'string';
