@@ -1,5 +1,5 @@
 <?php
-namespace net\authorize\api\contract\v1;
+namespace net\authorize\util;
 
 class MapperObj{
 

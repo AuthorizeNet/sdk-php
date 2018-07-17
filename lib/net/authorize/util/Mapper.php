@@ -1,29 +1,31 @@
 <?php
-namespace net\authorize\api\contract\v1;
-use Symfony\Component\Yaml\Yaml;
+namespace net\authorize\util;
 
 class Mapper{
 	private $classes = array();
-	private $dir = __DIR__ . "/../../yml/v1/";
+	// private $dir = __DIR__ . "/../../yml/v1/";
 
+	// private function __construct() {
+	// 	$files = scandir($this->dir);
+	// 	foreach ($files as $file) {
+	// 		// echo "filename:" . $file . "\n";
+	// 		// Elementing the ..
+	// 		if($file != "." && $file != ".." ){
+	// 			$value = Yaml::parseFile($this->dir.$file);
+	// 			//var_dump($value);
+	// 			//array_push($classes, $value);
+	// 			//var_dump($classes);
+	// 			//echo $value['net\authorize\api\contract\v1\ANetApiRequestType']['properties']['merchantAuthentication']['type']."\n";
+	// 			$key = key($value);
+	// 			$this->classes[$key] = $value[$key];
+	// 			//break;
+	// 		}
+	// 	}
+	// }
 	private function __construct() {
-		$files = scandir($this->dir);
-		foreach ($files as $file) {
-			// echo "filename:" . $file . "\n";
-			// Elementing the ..
-			if($file != "." && $file != ".." ){
-				$value = Yaml::parseFile($this->dir.$file);
-				//var_dump($value);
-				//array_push($classes, $value);
-				//var_dump($classes);
-				//echo $value['net\authorize\api\contract\v1\ANetApiRequestType']['properties']['merchantAuthentication']['type']."\n";
-				$key = key($value);
-				$this->classes[$key] = $value[$key];
-				//break;
-			}
-		}
+		$this->classes = json_decode(file_get_contents(__DIR__ ."/classes.json"), true);
 	}
-    
+
     public static function Instance()
     {
         static $inst = null;
@@ -79,7 +81,7 @@ class Mapper{
             }
             $obj->className = $className;
             $obj->isCustomDefined = stripos($className, '\\') !== false;
-            
+
 			return $obj;
 		}
 		else if(get_parent_class($class)){
@@ -90,7 +92,7 @@ class Mapper{
 //		 		return 'string';
 //		 }
 //		 else if ($property == "messages" ){
-//             
+//
 //		 		$className = 'net\authorize\api\contract\v1\MessagesType';
 //             $obj->className = $className;
 //            $obj->isCustomDefined = stripos($className, '\\') !== false;
@@ -104,11 +106,11 @@ class Mapper{
 		}
 		// return $this->classes[$classname]['properties'][$property]['type'];
 	}
-    
+
     public function getXmlName(string $class){
         if(isset($this->classes[$class]['xml_root_name'])){
             return $this->classes[$class]['xml_root_name'];
-        }        
+        }
     }
 }
 //echo $classes['net\authorize\api\contract\v1\ANetApiRequestType']['properties']['merchantAuthentication']['type']."\n";
