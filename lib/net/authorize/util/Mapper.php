@@ -100,7 +100,7 @@ class Mapper{
 //			return $obj;
 //		 }
 		else{
-			echo "Error finding in YAML - ".$classname." - ".$property."\n";
+			echo "Error finding in YAML - ".$class." - ".$property."\n";
 			$obj = NULL;
 			return $obj;
 		}
