@@ -118,7 +118,8 @@ abstract class ApiOperationBase implements IApiOperation
         
         // $requestRoot = (new \net\authorize\api\contract\v1\Mapper)->getXmlName((new \ReflectionClass($this->apiRequest))->getName());
         // $requestRoot = (\net\authorize\api\contract\v1\Mapper::Instance())->getXmlName((new \ReflectionClass($this->apiRequest))->getName());
-        $requestRoot = (\net\authorize\util\Mapper::Instance())->getXmlName((new \ReflectionClass($this->apiRequest))->getName());
+        $mapper = \net\authorize\util\Mapper::Instance();
+        $requestRoot = $mapper->getXmlName((new \ReflectionClass($this->apiRequest))->getName());
 
         $requestArray = [$requestRoot => $this->apiRequest];
 	
