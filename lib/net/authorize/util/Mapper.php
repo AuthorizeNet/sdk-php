@@ -54,6 +54,8 @@ class Mapper{
 	// }
 
 	public function getClass($class, $property){
+        // make the first letter of property as lowercase as all properties are lowercase
+		$property = lcfirst($property);
 
         //echo "getClass calling : class - " . $class . " property - " . $property . "\n";
 		$obj = new MapperObj;
