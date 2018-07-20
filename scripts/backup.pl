@@ -11,7 +11,7 @@ use File::Path;
 #mkdir 'backup';
 while (<>) {
     chomp;
-    my $filepath = "../lib/net/authorize/api/contract/";
+    my $filepath = "lib/net/authorize/api/contract/";
     my $filename = $filepath."v1/".$_;
     my $text = `cat $filename`;
 #    print $filename;

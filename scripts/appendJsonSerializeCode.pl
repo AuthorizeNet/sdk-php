@@ -10,10 +10,10 @@ use warnings;
 
 while (<>) {
     chomp;
-    my $filepath = "../lib/net/authorize/api/contract/v1/";
+    my $filepath = "lib/net/authorize/api/contract/v1/";
     my $filename = "$filepath"."$_";
     my $text = `cat $filename`;
-    my $sub = `cat appendJsonSeralizeCode.txt`;
+    my $sub = `cat scripts/appendJsonSeralizeCode.txt`;
 
     $text =~ s|(.+)}|$1$sub|xms;
 
