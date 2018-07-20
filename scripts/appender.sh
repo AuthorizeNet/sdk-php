@@ -16,7 +16,7 @@ find lib/net/authorize/api/contract/v1 -print | grep -i -e "type\.php"    > scri
 echo "Taking backup of Types"
 perl scripts/backup.pl scripts/typeList.txt
 echo "Appending JsonSerialize code to Types"
-perl scripts/appendJsonSeralizeCode.pl scripts/typeList.txt
+perl scripts/appendJsonSerializeCode.pl scripts/typeList.txt
 echo "Appending Set code to Types"
 perl scripts/appendSetCode.pl scripts/typeList.txt
 
@@ -24,7 +24,7 @@ perl scripts/appendSetCode.pl scripts/typeList.txt
 echo "Taking backup of Requests"
 perl scripts/backup.pl scripts/requestList.txt
 echo "Appending JsonSerialize code to Requests"
-perl scripts/appendJsonSeralizeCode.pl scripts/requestList.txt
+perl scripts/appendJsonSerializeCode.pl scripts/requestList.txt
 #echo "Appending Set code to Requests"
 #perl appendSetCode.pl requestList.txt
 

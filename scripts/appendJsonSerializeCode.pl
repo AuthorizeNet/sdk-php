@@ -13,7 +13,7 @@ while (<>) {
     my $filepath = "lib/net/authorize/api/contract/v1/";
     my $filename = "$filepath"."$_";
     my $text = `cat $filename`;
-    my $sub = `cat scripts/appendJsonSeralizeCode.txt`;
+    my $sub = `cat scripts/appendJsonSerializeCode.txt`;
 
     $text =~ s|(.+)}|$1$sub|xms;
 

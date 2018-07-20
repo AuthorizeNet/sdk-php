@@ -5,7 +5,7 @@ echo This script will update the generated code
 echo
 
 currdir=`pwd`
-cmdlist="generateObjectsFromXsd.sh generateControllersFromTemplate.sh appender.sh"
+cmdlist="prepare.sh generateObjectsFromXsd.sh generateControllersFromTemplate.sh appender.sh"
 for cmd in $cmdlist ; do 
     echo Executing Script "$cmd"
     if [ ! -f $currdir/scripts/$cmd ];then
@@ -23,6 +23,7 @@ for cmd in $cmdlist ; do
         exit $ERRORCODE
     fi
 done
+
 echo Exiting, Update completed successfully.
 echo Compile, run tests and commit to git-hub.
 echo Completed at `date`
