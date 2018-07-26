@@ -47,7 +47,7 @@ done < "$list"
 
 php lib/net/authorize/util/MapperGen.php
 
-git clean -fdq lib/net/authorize/api/contract/v1 -e .bak
+git clean -fdq lib/net/authorize/api/contract/v1 -e "*.php"
 
 echo "Completed!"
 
