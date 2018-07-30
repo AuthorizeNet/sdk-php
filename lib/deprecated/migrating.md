@@ -39,8 +39,8 @@ if ($response->approved) {
 
   define("AUTHORIZENET_LOG_FILE", "phplog");
   $merchantAuthentication = new AnetAPI\MerchantAuthenticationType();
-  $merchantAuthentication->setName("5KP3u95bQpv");
-  $merchantAuthentication->setTransactionKey("346HZ32z3fP4hTG2");
+  $merchantAuthentication->setName("YOURLOGIN");
+  $merchantAuthentication->setTransactionKey("YOURKEY");
   // Create the payment data for a credit card
   $creditCard = new AnetAPI\CreditCardType();
   $creditCard->setCardNumber("4111111111111111");
