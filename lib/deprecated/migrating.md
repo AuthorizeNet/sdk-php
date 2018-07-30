@@ -33,52 +33,52 @@ if ($response->approved) {
 ```
 ### Corresponding new model code (charge-credit-card):
 ```
-  require 'vendor/autoload.php';
-  use net\authorize\api\contract\v1 as AnetAPI;
-  use net\authorize\api\controller as AnetController;
+require 'vendor/autoload.php';
+use net\authorize\api\contract\v1 as AnetAPI;
+use net\authorize\api\controller as AnetController;
 
-  define("AUTHORIZENET_LOG_FILE", "phplog");
-  $merchantAuthentication = new AnetAPI\MerchantAuthenticationType();
-  $merchantAuthentication->setName("YOURLOGIN");
-  $merchantAuthentication->setTransactionKey("YOURKEY");
-  // Create the payment data for a credit card
-  $creditCard = new AnetAPI\CreditCardType();
-  $creditCard->setCardNumber("4111111111111111");
-  $creditCard->setExpirationDate("2038-12");
-  $creditCard->setCardCode("123");
+define("AUTHORIZENET_LOG_FILE", "phplog");
+$merchantAuthentication = new AnetAPI\MerchantAuthenticationType();
+$merchantAuthentication->setName("YOURLOGIN");
+$merchantAuthentication->setTransactionKey("YOURKEY");
+// Create the payment data for a credit card
+$creditCard = new AnetAPI\CreditCardType();
+$creditCard->setCardNumber("6011000000000012");
+$creditCard->setExpirationDate("2015-04");
+$creditCard->setCardCode("123");
 
-  // Add the payment data to a paymentType object
-  $paymentOne = new AnetAPI\PaymentType();
-  $paymentOne->setCreditCard($creditCard);
-  
-  $transactionRequestType = new AnetAPI\TransactionRequestType();
-  $transactionRequestType->setTransactionType("authCaptureTransaction");
-  $transactionRequestType->setAmount("4.05");
-  $transactionRequestType->setPayment($paymentOne);
-  
-  // Assemble the complete transaction request
-  $request = new AnetAPI\CreateTransactionRequest();
-  $request->setMerchantAuthentication($merchantAuthentication);
-  $request->setTransactionRequest($transactionRequestType);
+// Add the payment data to a paymentType object
+$paymentOne = new AnetAPI\PaymentType();
+$paymentOne->setCreditCard($creditCard);
 
-  // Create the controller and get the response
-  $controller = new AnetController\CreateTransactionController($request);
-  $response = $controller->executeWithApiResponse(\net\authorize\api\constants\ANetEnvironment::SANDBOX);
-  
-  if ($response != null) {
-    // Check to see if the API request was successfully received and acted upon
-    if ($response->getMessages()->getResultCode() == "Ok") {
-        // Since the API request was successful, look for a transaction response
-        // and parse it to display the results of authorizing the card
-        $tresponse = $response->getTransactionResponse();
+$transactionRequestType = new AnetAPI\TransactionRequestType();
+$transactionRequestType->setTransactionType("authCaptureTransaction");
+$transactionRequestType->setAmount("5.99");
+$transactionRequestType->setPayment($paymentOne);
+
+// Assemble the complete transaction request
+$request = new AnetAPI\CreateTransactionRequest();
+$request->setMerchantAuthentication($merchantAuthentication);
+$request->setTransactionRequest($transactionRequestType);
+
+// Create the controller and get the response
+$controller = new AnetController\CreateTransactionController($request);
+$response = $controller->executeWithApiResponse(\net\authorize\api\constants\ANetEnvironment::SANDBOX);
+
+if ($response != null) {
+// Check to see if the API request was successfully received and acted upon
+if ($response->getMessages()->getResultCode() == "Ok") {
+      // Since the API request was successful, look for a transaction response
+      // and parse it to display the results of authorizing the card
+      $tresponse = $response->getTransactionResponse();
         
-        if ($tresponse != null && $tresponse->getMessages() != null) {
-        echo " Successfully created transaction with Transaction ID: " . $tresponse->getTransId() . "\n";
-        echo " Transaction Response Code: " . $tresponse->getResponseCode() . "\n";
-        echo " Message Code: " . $tresponse->getMessages()[0]->getCode() . "\n";
-        echo " Auth Code: " . $tresponse->getAuthCode() . "\n";
-        echo " Description: " . $tresponse->getMessages()[0]->getDescription() . "\n";
-        }
-    }
-  } 
+      if ($tresponse != null && $tresponse->getMessages() != null) {
+      echo " Successfully created transaction with Transaction ID: " . $tresponse->getTransId() . "\n";
+      echo " Transaction Response Code: " . $tresponse->getResponseCode() . "\n";
+      echo " Message Code: " . $tresponse->getMessages()[0]->getCode() . "\n";
+      echo " Auth Code: " . $tresponse->getAuthCode() . "\n";
+      echo " Description: " . $tresponse->getMessages()[0]->getDescription() . "\n";
+      }
+  }
+} 
 ```
