@@ -1,3 +1,4 @@
+Starting Release 1.8.6 November 2015 the Authorize.Net API has been reorganized to be more merchant focused. AIM, ARB, CIM, Reporting and SIM have all been deprecated in favor of AuthorizeNet::API. To see the full list of mapping of new features corresponding to the deprecated features, you can see [migrating.md](migrating.md)
 # Authorize.Net PHP SDK
 
 [![Travis CI Status](https://travis-ci.org/AuthorizeNet/sdk-php.svg?branch=master)](https://travis-ci.org/AuthorizeNet/sdk-php)
