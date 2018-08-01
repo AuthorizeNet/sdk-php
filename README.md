@@ -1,4 +1,3 @@
-Starting Release 1.8.6 November 2015 the Authorize.Net API has been reorganized to be more merchant focused. AIM, ARB, CIM, Reporting and SIM have all been deprecated in favor of AuthorizeNet::API. To see the full list of mapping of new features corresponding to the deprecated features, you can see [migrating.md](lib/deprecated/migrating.md)
 # Authorize.Net PHP SDK
 
 [![Travis CI Status](https://travis-ci.org/AuthorizeNet/sdk-php.svg?branch=master)](https://travis-ci.org/AuthorizeNet/sdk-php)
@@ -12,6 +11,13 @@ Starting Release 1.8.6 November 2015 the Authorize.Net API has been reorganized 
 * JSON PHP Extension
 * An Authorize.Net account (see _Registration & Configuration_ section below)
 * TLS 1.2 capable versions of libcurl and OpenSSL (or its equivalent)
+
+## Migrating from older versions
+Since August 2018, the Authorize.Net API has been reorganized to be more merchant focused. AIM, ARB, CIM, Reporting and SIM have all been deprecated in favor of `net\authorize\api` . To see the full list of mapping of new features corresponding to the deprecated features, you can see [MIGRATING.md](MIGRATING.md).
+
+## Contribution
+ - If you are confused about any Authorize.Net features, please create an issue for it. Also you can search for it in the [Authorize.Net developer community](https://community.developer.authorize.net/).
+ - Before creating pull requests, please read [CONTRIBUTING.md](CONTRIBUTING.md)
 
 ### TLS 1.2
 The Authorize.Net APIs only support connections using the TLS 1.2 security protocol. This SDK communicates with the Authorize.Net API using `libcurl` and `OpenSSL` (or equivalent crypto library). It's important to make sure you have new enough versions of these components to support TLS 1.2. Additionally, it's very important to keep these components up to date going forward to mitigate the risk of any security flaws that may be discovered in these libraries.
