@@ -1,6 +1,6 @@
 #!/bin/bash
 
-echo "Starting `date`"
+echo "Starting Controller Generation `date`"
 CDIR=`pwd`
 SRCDIR=lib
 GENFOLDER=net/authorize/api/contract/v1
