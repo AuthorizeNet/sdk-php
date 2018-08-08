@@ -1,6 +1,7 @@
-Thanks for contributing to Authorize.Net PHP SDK.
+Thanks for contributing to the Authorize.Net PHP SDK.
 
-- Part of the SDK is auto-generated based on [XML schema](https://api.authorize.net/xml/v1/schema/AnetApiSchema.xsd). As such we cannot merge contributions for request/response classes. You are welcome to open an issue pointing the problem or any improvement suggestions.
-*Auto-generated classes include all files inside the folders  [contract/v1](https://github.com/AuthorizeNet/sdk-php/tree/master/lib/net/authorize/api/contract/v1)  and [controller](https://github.com/AuthorizeNet/sdk-php/tree/master/lib/net/authorize/api/controller) except [controller/base](https://github.com/AuthorizeNet/sdk-php/tree/master/lib/net/authorize/api/controller/base).*
-- Files marked as deprecated are no longer supported. And changes to them will not be reviewed. These issues will be closed.
-- **Before creating pull requests**, please submit an issue stating the problem it solves, or the feature/funtionality to be added. This will allow us to reply if there are any other solutions present, and/or the feasiblity of using the pull request.
+Before you submit a pull request, we ask that you consider the following:
+
+- Submit an issue to state the problem your pull request solves or the funtionality that it adds. We can then advise on the feasability of the pull request, and let you know if there are other possible solutions.
+- Part of the SDK is auto-generated based on the XML schema. Due to this auto-generation, we cannot merge contributions for request or response classes. You are welcome to open an issue to report problems or suggest improvements. Auto-generated classes include all files inside [contract/v1](https://github.com/AuthorizeNet/sdk-php/tree/master/lib/net/authorize/api/contract/v1)  and [controller](https://github.com/AuthorizeNet/sdk-php/tree/master/lib/net/authorize/api/controller) except for [controller/base](https://github.com/AuthorizeNet/sdk-php/tree/master/lib/net/authorize/api/controller/base).
+- Files marked as deprecated are no longer supported. Issues and pull requests for changes to these deprecated files will be closed.

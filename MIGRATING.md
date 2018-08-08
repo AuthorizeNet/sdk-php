@@ -1,21 +1,21 @@
 # Migrating from Legacy Authorize.Net APIs
 
-If you are using AuthorizeNetAIM.php, AuthorizenetSIM.php, and other classes in the list below, they are no longer supported as part of PHP-SDK. Instead, it is recommended to use the new classes for AuthorizetNET APIs.
+Authorize.Net no longer supports several legacy classes, including AuthorizeNetAIM.php, AuthorizenetSIM.php, and others listed below, as part of PHP-SDK. If you are using any of the classes in the list below, we recommend that you update your code to use the new Authorize.Net API classes.
 
 **For details on the deprecation and replacement of legacy Authorize.Net APIs, visit https://developer.authorize.net/api/upgrade_guide/.**
 
 ## Full list of classes that are no longer supported
-(Format: class - new category in the [API reference](https://developer.authorize.net/api/reference/index.html); [sample codes](https://github.com/AuthorizeNet/sample-code-php) directory)
-- AuthorizeNetAIM.php - [PaymentTransactions](https://developer.authorize.net/api/reference/index.html#payment-transactions) ; sample code [directory](https://github.com/AuthorizeNet/sample-code-php/tree/master/PaymentTransactions)
- - AuthorizeNetARB.php - [RecurringBilling](https://developer.authorize.net/api/reference/index.html#recurring-billing) ; sample code [directory](https://github.com/AuthorizeNet/sample-code-php/tree/master/RecurringBilling)
- - AuthorizeNetCIM.php - [CustomerProfiles](https://developer.authorize.net/api/reference/index.html#customer-profiles) ; sample code [directory](https://github.com/AuthorizeNet/sample-code-php/tree/master/CustomerProfiles)
- - Hosted CIM - Replaced by [Accept Customer](https://developer.authorize.net/content/developer/en_us/api/reference/features/customer_profiles.html#Using_the_Accept_Customer_Hosted_Form)
- - AuthorizeNetCP.php - [PaymentTransactions](https://developer.authorize.net/api/reference/index.html#payment-transactions) ; sample code [directory](https://github.com/AuthorizeNet/sample-code-php/tree/master/PaymentTransactions)
- - AuthorizeNetDPM.php - Replaced by [Accept.JS](https://developer.authorize.net/api/reference/features/acceptjs.html); [sample accept application](https://github.com/AuthorizeNet/accept-sample-app)
- - AuthorizeNetSIM.php - Replaced by [Accept Hosted](https://developer.authorize.net/content/developer/en_us/api/reference/features/accept_hosted.html)
- - AuthorizeNetSOAP.php - [PaymentTransactions](https://developer.authorize.net/api/reference/index.html#payment-transactions)(Soap is deprecated in favor of XML APIs) ; sample code [directory](https://github.com/AuthorizeNet/sample-code-php/tree/master/PaymentTransactions)
- - AuthorizeNetTD.php - [Transaction Reporting](https://developer.authorize.net/api/reference/index.html#transaction-reporting) ; sample code [directory](https://github.com/AuthorizeNet/sample-code-php/tree/master/TransactionReporting)
-
+| Class                | New Feature in the [API reference](https://developer.authorize.net/api/reference/index.html)                                                                   | [Sample Codes](https://github.com/AuthorizeNet/sample-code-php) directory                                                 |
+|----------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------|
+| AuthorizeNetAIM.php  | [PaymentTransactions](https://developer.authorize.net/api/reference/index.html#payment-transactions)                                                           | [sample-code-php/PaymentTransactions](https://github.com/AuthorizeNet/sample-code-php/tree/master/PaymentTransactions)    |
+| AuthorizeNetARB.php  | [RecurringBilling](https://developer.authorize.net/api/reference/index.html#recurring-billing)                                                                 | [sample-code-php/RecurringBilling](https://github.com/AuthorizeNet/sample-code-php/tree/master/RecurringBilling)          | 
+| AuthorizeNetCIM.php  | [CustomerProfiles](https://developer.authorize.net/api/reference/index.html#customer-profiles)                                                                 | [sample-code-php/CustomerProfiles](https://github.com/AuthorizeNet/sample-code-php/tree/master/CustomerProfiles)          |
+| Hosted CIM           | [Accept Customer](https://developer.authorize.net/content/developer/en_us/api/reference/features/customer_profiles.html#Using_the_Accept_Customer_Hosted_Form) | -                                                                                                                         |
+| AuthorizeNetCP.php   | [PaymentTransactions](https://developer.authorize.net/api/reference/index.html#payment-transactions)                                                           | [sample-code-php/PaymentTransactions](https://github.com/AuthorizeNet/sample-code-php/tree/master/PaymentTransactions)    |
+| AuthorizeNetDPM.php  | [Accept.JS](https://developer.authorize.net/api/reference/features/acceptjs.html)                                                                              | [sample accept application](https://github.com/AuthorizeNet/accept-sample-app)                                            |
+| AuthorizeNetSIM.php  | [Accept Hosted](https://developer.authorize.net/content/developer/en_us/api/reference/features/accept_hosted.html)                                             | -                                                                                                                         |
+| AuthorizeNetSOAP.php | [PaymentTransactions](https://developer.authorize.net/api/reference/index.html#payment-transactions)(Soap is deprecated in favor of XML APIs)                  | [sample-code-php/PaymentTransactions](https://github.com/AuthorizeNet/sample-code-php/tree/master/PaymentTransactions)    |
+| AuthorizeNetTD.php   | [TransactionReporting](https://developer.authorize.net/api/reference/index.html#transaction-reporting)                                                         | [sample-code-php/TransactionReporting/](https://github.com/AuthorizeNet/sample-code-php/tree/master/TransactionReporting) |
 
 ## Example 
 #### Old AuthorizeNetAIM example: 
