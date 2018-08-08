@@ -1,6 +1,6 @@
 # Migrating from Legacy Authorize.Net APIs
 
-Authorize.Net no longer supports several legacy classes, including AuthorizeNetAIM.php, AuthorizenetSIM.php, and others listed below, as part of PHP-SDK. If you are using any of the classes in the list below, we recommend that you update your code to use the new Authorize.Net API classes.
+Authorize.Net no longer supports several legacy classes, including AuthorizeNetAIM.php, AuthorizenetSIM.php, and others listed below, as part of PHP-SDK. If you are using any of these, we recommend that you update your code to use the new Authorize.Net API classes.
 
 **For details on the deprecation and replacement of legacy Authorize.Net APIs, visit https://developer.authorize.net/api/upgrade_guide/.**
 
