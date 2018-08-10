@@ -1,5 +1,12 @@
 <?php
 /**
+* @deprecated since version 1.9.8
+* @deprecated Direct Post Method is replaced by Accept.JS https://developer.authorize.net/api/reference/features/acceptjs.html
+* @deprecated Refer sample accept application: https://github.com/AuthorizeNet/accept-sample-app
+*/
+trigger_error('AuthorizeNetDPM is deprecated, use Accept.JS instead. Refer sample accept application: https://github.com/AuthorizeNet/accept-sample-app .', E_USER_DEPRECATED);
+
+/**
  * Demonstrates the Direct Post Method.
  *
  * To implement the Direct Post Method you need to implement 3 steps:
