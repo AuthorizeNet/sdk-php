@@ -16,7 +16,7 @@
 Since August 2018, the Authorize.Net API has been reorganized to be more merchant focused. AuthorizeNetAIM, AuthorizeNetARB, AuthorizeNetCIM, Reporting and AuthorizeNetSIM classes have all been deprecated in favor of `net\authorize\api` . To see the full list of mapping of new features corresponding to the deprecated features, you can see [MIGRATING.md](MIGRATING.md).
 
 ### Contribution
- - If you are confused about any Authorize.Net features, please create an issue for it. Also you can search for it in the [Authorize.Net developer community](https://community.developer.authorize.net/).
+ - If you need information or clarification about any Authorize.Net features, please create an issue for it. Also you can search in the [Authorize.Net developer community](https://community.developer.authorize.net/).
  - Before creating pull requests, please read [CONTRIBUTING.md](CONTRIBUTING.md)
 
 ### TLS 1.2
