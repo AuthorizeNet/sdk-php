@@ -84,7 +84,7 @@ class HttpClient
         }
 
         if (preg_match('/xml/',$post_url)) {
-            curl_setopt($curl_request, CURLOPT_HTTPHEADER, Array("Content-Type: text/xml"));
+            curl_setopt($curl_request, CURLOPT_HTTPHEADER, Array("Content-Type: text/json"));
 //            file_put_contents($this->_log_file, "\nSending 'XML' Request type", FILE_APPEND);
             $this->logger->info("Sending 'XML' Request type");
         }
