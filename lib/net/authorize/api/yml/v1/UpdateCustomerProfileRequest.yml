@@ -11,4 +11,4 @@ net\authorize\api\contract\v1\UpdateCustomerProfileRequest:
             accessor:
                 getter: getProfile
                 setter: setProfile
-            type: net\authorize\api\contract\v1\CustomerProfileExType
+            type: net\authorize\api\contract\v1\CustomerProfileInfoExType

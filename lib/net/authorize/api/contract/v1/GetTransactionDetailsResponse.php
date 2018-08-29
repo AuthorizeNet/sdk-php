@@ -96,7 +96,7 @@ class GetTransactionDetailsResponse extends ANetApiResponseType
         $mapper = \net\authorize\util\Mapper::Instance();
         foreach($data AS $key => $value) {
             $classDetails = $mapper->getClass(get_class() , $key);
-
+ 
             if($classDetails !== NULL ) {
                 if ($classDetails->isArray) {
                     if ($classDetails->isCustomDefined) {
@@ -135,6 +135,6 @@ class GetTransactionDetailsResponse extends ANetApiResponseType
             }
         }
     }
-
+    
 }
 

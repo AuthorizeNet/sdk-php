@@ -3,65 +3,119 @@
 namespace net\authorize\api\contract\v1;
 
 /**
- * Class representing PaymentSimpleType
+ * Class representing ProcessingOptionsType
  *
  *
- * XSD Type: paymentSimpleType
+ * XSD Type: processingOptions
  */
-class PaymentSimpleType implements \JsonSerializable
+class ProcessingOptionsType implements \JsonSerializable
 {
 
     /**
-     * @property \net\authorize\api\contract\v1\CreditCardSimpleType $creditCard
+     * @property boolean $isFirstRecurringPayment
      */
-    private $creditCard = null;
+    private $isFirstRecurringPayment = null;
 
     /**
-     * @property \net\authorize\api\contract\v1\BankAccountType $bankAccount
+     * @property boolean $isFirstSubsequentAuth
      */
-    private $bankAccount = null;
+    private $isFirstSubsequentAuth = null;
 
     /**
-     * Gets as creditCard
+     * @property boolean $isSubsequentAuth
+     */
+    private $isSubsequentAuth = null;
+
+    /**
+     * @property boolean $isStoredCredentials
+     */
+    private $isStoredCredentials = null;
+
+    /**
+     * Gets as isFirstRecurringPayment
      *
-     * @return \net\authorize\api\contract\v1\CreditCardSimpleType
+     * @return boolean
      */
-    public function getCreditCard()
+    public function getIsFirstRecurringPayment()
     {
-        return $this->creditCard;
+        return $this->isFirstRecurringPayment;
     }
 
     /**
-     * Sets a new creditCard
+     * Sets a new isFirstRecurringPayment
      *
-     * @param \net\authorize\api\contract\v1\CreditCardSimpleType $creditCard
+     * @param boolean $isFirstRecurringPayment
      * @return self
      */
-    public function setCreditCard(\net\authorize\api\contract\v1\CreditCardSimpleType $creditCard)
+    public function setIsFirstRecurringPayment($isFirstRecurringPayment)
     {
-        $this->creditCard = $creditCard;
+        $this->isFirstRecurringPayment = $isFirstRecurringPayment;
         return $this;
     }
 
     /**
-     * Gets as bankAccount
+     * Gets as isFirstSubsequentAuth
      *
-     * @return \net\authorize\api\contract\v1\BankAccountType
+     * @return boolean
      */
-    public function getBankAccount()
+    public function getIsFirstSubsequentAuth()
     {
-        return $this->bankAccount;
+        return $this->isFirstSubsequentAuth;
     }
 
     /**
-     * Sets a new bankAccount
+     * Sets a new isFirstSubsequentAuth
      *
-     * @param \net\authorize\api\contract\v1\BankAccountType $bankAccount
+     * @param boolean $isFirstSubsequentAuth
      * @return self
      */
-    public function setBankAccount(\net\authorize\api\contract\v1\BankAccountType $bankAccount)
+    public function setIsFirstSubsequentAuth($isFirstSubsequentAuth)
     {
-        $this->bankAccount = $bankAccount;
+        $this->isFirstSubsequentAuth = $isFirstSubsequentAuth;
+        return $this;
+    }
+
+    /**
+     * Gets as isSubsequentAuth
+     *
+     * @return boolean
+     */
+    public function getIsSubsequentAuth()
+    {
+        return $this->isSubsequentAuth;
+    }
+
+    /**
+     * Sets a new isSubsequentAuth
+     *
+     * @param boolean $isSubsequentAuth
+     * @return self
+     */
+    public function setIsSubsequentAuth($isSubsequentAuth)
+    {
+        $this->isSubsequentAuth = $isSubsequentAuth;
+        return $this;
+    }
+
+    /**
+     * Gets as isStoredCredentials
+     *
+     * @return boolean
+     */
+    public function getIsStoredCredentials()
+    {
+        return $this->isStoredCredentials;
+    }
+
+    /**
+     * Sets a new isStoredCredentials
+     *
+     * @param boolean $isStoredCredentials
+     * @return self
+     */
+    public function setIsStoredCredentials($isStoredCredentials)
+    {
+        $this->isStoredCredentials = $isStoredCredentials;
         return $this;
     }
 
