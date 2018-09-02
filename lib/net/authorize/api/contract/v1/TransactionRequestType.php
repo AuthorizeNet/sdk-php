@@ -5,7 +5,7 @@ namespace net\authorize\api\contract\v1;
 /**
  * Class representing TransactionRequestType
  *
- * 
+ *
  * XSD Type: transactionRequestType
  */
 class TransactionRequestType implements \JsonSerializable
@@ -170,6 +170,18 @@ class TransactionRequestType implements \JsonSerializable
      * @property \net\authorize\api\contract\v1\ExtendedAmountType $tip
      */
     private $tip = null;
+
+    /**
+     * @property \net\authorize\api\contract\v1\ProcessingOptionsType
+     * $processingOptions
+     */
+    private $processingOptions = null;
+
+    /**
+     * @property \net\authorize\api\contract\v1\SubsequentAuthInformationType
+     * $subsequentAuthInformation
+     */
+    private $subsequentAuthInformation = null;
 
     /**
      * Gets as transactionType
@@ -976,6 +988,51 @@ class TransactionRequestType implements \JsonSerializable
         return $this;
     }
 
+    /**
+     * Gets as processingOptions
+     *
+     * @return \net\authorize\api\contract\v1\ProcessingOptionsType
+     */
+    public function getProcessingOptions()
+    {
+        return $this->processingOptions;
+    }
+
+    /**
+     * Sets a new processingOptions
+     *
+     * @param \net\authorize\api\contract\v1\ProcessingOptionsType $processingOptions
+     * @return self
+     */
+    public function setProcessingOptions(\net\authorize\api\contract\v1\ProcessingOptionsType $processingOptions)
+    {
+        $this->processingOptions = $processingOptions;
+        return $this;
+    }
+
+    /**
+     * Gets as subsequentAuthInformation
+     *
+     * @return \net\authorize\api\contract\v1\SubsequentAuthInformationType
+     */
+    public function getSubsequentAuthInformation()
+    {
+        return $this->subsequentAuthInformation;
+    }
+
+    /**
+     * Sets a new subsequentAuthInformation
+     *
+     * @param \net\authorize\api\contract\v1\SubsequentAuthInformationType
+     * $subsequentAuthInformation
+     * @return self
+     */
+    public function setSubsequentAuthInformation(\net\authorize\api\contract\v1\SubsequentAuthInformationType $subsequentAuthInformation)
+    {
+        $this->subsequentAuthInformation = $subsequentAuthInformation;
+        return $this;
+    }
+
 
     // Json Serialize Code
     public function jsonSerialize(){
@@ -984,30 +1041,22 @@ class TransactionRequestType implements \JsonSerializable
             return !is_null($val);
         });
         $mapper = \net\authorize\util\Mapper::Instance();
-        // echo __CLASS__ . "\n";
         foreach($values as $key => $value){
             $classDetails = $mapper->getClass(get_class() , $key);
             if (isset($value)){
-                //$classDetails = (new \net\authorize\api\contract\v1\Mapper)->getClass(get_class() , $key);
                 if ($classDetails->className === 'Date'){
                     $dateTime = $value->format('Y-m-d');
                     $values[$key] = $dateTime;
-                    //echo($dateTime."\n");
                 }
                 else if ($classDetails->className === 'DateTime'){
                     $dateTime = $value->format('Y-m-d\TH:i:s\Z');
                     $values[$key] = $dateTime;
-                    //echo($dateTime."\n");
                 }
                 if (is_array($value)){
-
-                    //echo "key - $key \n";
-                    //echo "value - $value \n";
                     if (!$classDetails->isInlineArray){
                         $subKey = $classDetails->arrayEntryname;
                         $subArray = [$subKey => $value];
                         $values[$key] = $subArray;
-                        //echo "subkey - $subKey \n";
                     }
                 }
             }
@@ -1019,14 +1068,14 @@ class TransactionRequestType implements \JsonSerializable
             return array_merge(parent::jsonSerialize(), $values);
         }
     }
-
+    
     // Json Set Code
     public function set($data)
     {
         $mapper = \net\authorize\util\Mapper::Instance();
         foreach($data AS $key => $value) {
             $classDetails = $mapper->getClass(get_class() , $key);
-
+ 
             if($classDetails !== NULL ) {
                 if ($classDetails->isArray) {
                     if ($classDetails->isCustomDefined) {
@@ -1065,6 +1114,6 @@ class TransactionRequestType implements \JsonSerializable
             }
         }
     }
-
+    
 }
 

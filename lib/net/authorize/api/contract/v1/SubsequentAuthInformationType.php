@@ -3,65 +3,65 @@
 namespace net\authorize\api\contract\v1;
 
 /**
- * Class representing PaymentSimpleType
+ * Class representing SubsequentAuthInformationType
  *
  *
- * XSD Type: paymentSimpleType
+ * XSD Type: subsequentAuthInformation
  */
-class PaymentSimpleType implements \JsonSerializable
+class SubsequentAuthInformationType implements \JsonSerializable
 {
 
     /**
-     * @property \net\authorize\api\contract\v1\CreditCardSimpleType $creditCard
+     * @property string $originalNetworkTransId
      */
-    private $creditCard = null;
+    private $originalNetworkTransId = null;
 
     /**
-     * @property \net\authorize\api\contract\v1\BankAccountType $bankAccount
+     * @property string $reason
      */
-    private $bankAccount = null;
+    private $reason = null;
 
     /**
-     * Gets as creditCard
+     * Gets as originalNetworkTransId
      *
-     * @return \net\authorize\api\contract\v1\CreditCardSimpleType
+     * @return string
      */
-    public function getCreditCard()
+    public function getOriginalNetworkTransId()
     {
-        return $this->creditCard;
+        return $this->originalNetworkTransId;
     }
 
     /**
-     * Sets a new creditCard
+     * Sets a new originalNetworkTransId
      *
-     * @param \net\authorize\api\contract\v1\CreditCardSimpleType $creditCard
+     * @param string $originalNetworkTransId
      * @return self
      */
-    public function setCreditCard(\net\authorize\api\contract\v1\CreditCardSimpleType $creditCard)
+    public function setOriginalNetworkTransId($originalNetworkTransId)
     {
-        $this->creditCard = $creditCard;
+        $this->originalNetworkTransId = $originalNetworkTransId;
         return $this;
     }
 
     /**
-     * Gets as bankAccount
+     * Gets as reason
      *
-     * @return \net\authorize\api\contract\v1\BankAccountType
+     * @return string
      */
-    public function getBankAccount()
+    public function getReason()
     {
-        return $this->bankAccount;
+        return $this->reason;
     }
 
     /**
-     * Sets a new bankAccount
+     * Sets a new reason
      *
-     * @param \net\authorize\api\contract\v1\BankAccountType $bankAccount
+     * @param string $reason
      * @return self
      */
-    public function setBankAccount(\net\authorize\api\contract\v1\BankAccountType $bankAccount)
+    public function setReason($reason)
     {
-        $this->bankAccount = $bankAccount;
+        $this->reason = $reason;
         return $this;
     }
 
