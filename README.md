@@ -1,6 +1,6 @@
 # Authorize.Net PHP SDK
 
-[![Travis CI Status](https://travis-ci.org/AuthorizeNet/sdk-php.svg?branch=master)](https://travis-ci.org/AuthorizeNet/sdk-php)
+[![Travis CI Status](https://travis-ci.org/AuthorizeNet/sdk-php.svg?branch=nodependency-rc)](https://travis-ci.org/AuthorizeNet/sdk-php)
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/AuthorizeNet/sdk-php/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/AuthorizeNet/sdk-php/?branch=master)
 [![Packagist](https://img.shields.io/packagist/v/authorizenet/authorizenet.svg)](https://packagist.org/packages/authorizenet/authorizenet)
 
@@ -43,14 +43,14 @@ echo "Connection uses " . $json->tls_version ."\n";
 ### Composer
 We recommend using [`Composer`](http://getcomposer.org). *(Note: we never recommend you
 override the new secure-http default setting)*. 
-*Update your composer.json file as per the example below and then run
+*Update your composer.json file as per the example below and then run for this specific ALPHA release
 `composer update`.*
 
 ```json
 {
   "require": {
   "php": ">=5.6",
-  "authorizenet/authorizenet": "~1.9.7"
+  "authorizenet/authorizenet": "2.0.0-ALPHA"
   }
 }
 ```
