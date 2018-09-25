@@ -27,6 +27,21 @@ class CreditCardType extends CreditCardSimpleType
     private $cryptogram = null;
 
     /**
+     * @property string $tokenRequestorName
+     */
+    private $tokenRequestorName = null;
+
+    /**
+     * @property string $tokenRequestorId
+     */
+    private $tokenRequestorId = null;
+
+    /**
+     * @property string $tokenRequestorEci
+     */
+    private $tokenRequestorEci = null;
+
+    /**
      * Gets as cardCode
      *
      * @return string
@@ -89,6 +104,72 @@ class CreditCardType extends CreditCardSimpleType
     public function setCryptogram($cryptogram)
     {
         $this->cryptogram = $cryptogram;
+        return $this;
+    }
+
+    /**
+     * Gets as tokenRequestorName
+     *
+     * @return string
+     */
+    public function getTokenRequestorName()
+    {
+        return $this->tokenRequestorName;
+    }
+
+    /**
+     * Sets a new tokenRequestorName
+     *
+     * @param string $tokenRequestorName
+     * @return self
+     */
+    public function setTokenRequestorName($tokenRequestorName)
+    {
+        $this->tokenRequestorName = $tokenRequestorName;
+        return $this;
+    }
+
+    /**
+     * Gets as tokenRequestorId
+     *
+     * @return string
+     */
+    public function getTokenRequestorId()
+    {
+        return $this->tokenRequestorId;
+    }
+
+    /**
+     * Sets a new tokenRequestorId
+     *
+     * @param string $tokenRequestorId
+     * @return self
+     */
+    public function setTokenRequestorId($tokenRequestorId)
+    {
+        $this->tokenRequestorId = $tokenRequestorId;
+        return $this;
+    }
+
+    /**
+     * Gets as tokenRequestorEci
+     *
+     * @return string
+     */
+    public function getTokenRequestorEci()
+    {
+        return $this->tokenRequestorEci;
+    }
+
+    /**
+     * Sets a new tokenRequestorEci
+     *
+     * @param string $tokenRequestorEci
+     * @return self
+     */
+    public function setTokenRequestorEci($tokenRequestorEci)
+    {
+        $this->tokenRequestorEci = $tokenRequestorEci;
         return $this;
     }
 

@@ -30,3 +30,33 @@ net\authorize\api\contract\v1\CreditCardType:
                 getter: getCryptogram
                 setter: setCryptogram
             type: string
+        tokenRequestorName:
+            expose: true
+            access_type: public_method
+            serialized_name: tokenRequestorName
+            xml_element:
+                namespace: AnetApi/xml/v1/schema/AnetApiSchema.xsd
+            accessor:
+                getter: getTokenRequestorName
+                setter: setTokenRequestorName
+            type: string
+        tokenRequestorId:
+            expose: true
+            access_type: public_method
+            serialized_name: tokenRequestorId
+            xml_element:
+                namespace: AnetApi/xml/v1/schema/AnetApiSchema.xsd
+            accessor:
+                getter: getTokenRequestorId
+                setter: setTokenRequestorId
+            type: string
+        tokenRequestorEci:
+            expose: true
+            access_type: public_method
+            serialized_name: tokenRequestorEci
+            xml_element:
+                namespace: AnetApi/xml/v1/schema/AnetApiSchema.xsd
+            accessor:
+                getter: getTokenRequestorEci
+                setter: setTokenRequestorEci
+            type: string
