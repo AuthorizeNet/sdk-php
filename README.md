@@ -57,7 +57,7 @@ override the new secure-http default setting)*.
 {
   "require": {
   "php": ">=5.6",
-  "authorizenet/authorizenet": "~1.9.7"
+  "authorizenet/authorizenet": "~1.9.8"
   }
 }
 ```
