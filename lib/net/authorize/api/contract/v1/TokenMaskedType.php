@@ -27,6 +27,11 @@ class TokenMaskedType
     private $expirationDate = null;
 
     /**
+     * @property string $tokenRequestorId
+     */
+    private $tokenRequestorId = null;
+
+    /**
      * Gets as tokenSource
      *
      * @return string
@@ -89,6 +94,28 @@ class TokenMaskedType
     public function setExpirationDate($expirationDate)
     {
         $this->expirationDate = $expirationDate;
+        return $this;
+    }
+
+    /**
+     * Gets as tokenRequestorId
+     *
+     * @return string
+     */
+    public function getTokenRequestorId()
+    {
+        return $this->tokenRequestorId;
+    }
+
+    /**
+     * Sets a new tokenRequestorId
+     *
+     * @param string $tokenRequestorId
+     * @return self
+     */
+    public function setTokenRequestorId($tokenRequestorId)
+    {
+        $this->tokenRequestorId = $tokenRequestorId;
         return $this;
     }
 
