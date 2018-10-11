@@ -12,6 +12,13 @@
 * An Authorize.Net account (see _Registration & Configuration_ section below)
 * TLS 1.2 capable versions of libcurl and OpenSSL (or its equivalent)
 
+### Migrating from older versions
+Since August 2018, the Authorize.Net API has been reorganized to be more merchant focused. AuthorizeNetAIM, AuthorizeNetARB, AuthorizeNetCIM, Reporting and AuthorizeNetSIM classes have all been deprecated in favor of `net\authorize\api` . To see the full list of mapping of new features corresponding to the deprecated features, you can see [MIGRATING.md](MIGRATING.md).
+
+### Contribution
+ - If you need information or clarification about any Authorize.Net features, please create an issue for it. Also you can search in the [Authorize.Net developer community](https://community.developer.authorize.net/).
+ - Before creating pull requests, please read [CONTRIBUTING.md](CONTRIBUTING.md)
+
 ### TLS 1.2
 The Authorize.Net APIs only support connections using the TLS 1.2 security protocol. This SDK communicates with the Authorize.Net API using `libcurl` and `OpenSSL` (or equivalent crypto library). It's important to make sure you have new enough versions of these components to support TLS 1.2. Additionally, it's very important to keep these components up to date going forward to mitigate the risk of any security flaws that may be discovered in these libraries.
 
@@ -50,7 +57,7 @@ override the new secure-http default setting)*.
 {
   "require": {
   "php": ">=5.6",
-  "authorizenet/authorizenet": "~1.9.7"
+  "authorizenet/authorizenet": "~1.9.8"
   }
 }
 ```

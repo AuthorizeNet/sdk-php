@@ -1,5 +1,11 @@
 <?php
 /**
+* @deprecated since version 1.9.8
+* @deprecated SIM is replaced by Accept Hosted https://developer.authorize.net/content/developer/en_us/api/reference/features/accept_hosted.html
+*/
+trigger_error('AuthorizeNetSIM is deprecated, use Accept Hosted instead: https://developer.authorize.net/content/developer/en_us/api/reference/features/accept_hosted.html. ', E_USER_DEPRECATED);
+
+/**
  * Easily use the Authorize.Net Server Integration Method(SIM).
  *
  * @package    AuthorizeNet

@@ -1,5 +1,13 @@
 <?php
 /**
+* @deprecated since version 1.9.8
+* @deprecated The Authorize.Net API has been reorganized to simplify & ease integration and to be more merchant focused
+* @deprecated AuthorizeNetRequest and it's derived classes are deprecated.
+* @deprecated Use request/response classes in net\authorize\api\contract\v1 instead. Refer examples in https://github.com/AuthorizeNet/sample-code-php
+*/
+trigger_error('AuthorizeNetResponse is deprecated, use request/response classes in net\authorize\api\contract\v1 instead. Refer examples in https://github.com/AuthorizeNet/sample-code-php .', E_USER_DEPRECATED);
+
+/**
  * Base class for the AuthorizeNet AIM & SIM Responses.
  *
  * @package    AuthorizeNet
