@@ -1,5 +1,9 @@
 <?php
 /**
+* @deprecated since version 1.9.8
+* @deprecated Use request/response classes in net\authorize\api\contract\v1 instead. Refer examples in https://github.com/AuthorizeNet/sample-code-php
+*/
+/**
  * Base class for the AuthorizeNet ARB & CIM Responses.
  *
  * @package    AuthorizeNet
@@ -26,10 +30,10 @@ class AuthorizeNetXMLResponse
     {
         $this->response = $response;
         if ($response) {
-            $this->xml = @simplexml_load_string($response);
+            $this->xml = @simplexml_load_string($response,'SimpleXMLElement', LIBXML_NOWARNING);
             
             // Remove namespaces for use with XPath.
-            $this->xpath_xml = @simplexml_load_string(preg_replace('/ xmlns:xsi[^>]+/','',$response));
+            $this->xpath_xml = @simplexml_load_string(preg_replace('/ xmlns:xsi[^>]+/','',$response),'SimpleXMLElement', LIBXML_NOWARNING);
         }
     }
     

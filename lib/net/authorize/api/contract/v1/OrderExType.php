@@ -5,7 +5,7 @@ namespace net\authorize\api\contract\v1;
 /**
  * Class representing OrderExType
  *
- *
+ * 
  * XSD Type: orderExType
  */
 class OrderExType extends OrderType

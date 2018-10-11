@@ -5,7 +5,7 @@ namespace net\authorize\api\contract\v1;
 /**
  * Class representing DriversLicenseMaskedType
  *
- *
+ * 
  * XSD Type: driversLicenseMaskedType
  */
 class DriversLicenseMaskedType

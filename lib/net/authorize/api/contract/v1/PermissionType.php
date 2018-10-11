@@ -5,7 +5,7 @@ namespace net\authorize\api\contract\v1;
 /**
  * Class representing PermissionType
  *
- *
+ * 
  * XSD Type: permissionType
  */
 class PermissionType

@@ -5,7 +5,7 @@ namespace net\authorize\api\contract\v1;
 /**
  * Class representing ReturnedItemType
  *
- *
+ * 
  * XSD Type: returnedItemType
  */
 class ReturnedItemType

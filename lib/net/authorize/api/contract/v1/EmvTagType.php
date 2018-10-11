@@ -5,7 +5,7 @@ namespace net\authorize\api\contract\v1;
 /**
  * Class representing EmvTagType
  *
- *
+ * 
  * XSD Type: emvTag
  */
 class EmvTagType

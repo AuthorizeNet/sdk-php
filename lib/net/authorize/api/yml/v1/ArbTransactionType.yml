@@ -1,52 +1,52 @@
-net\authorize\api\contract\v1\WebCheckOutDataType\TokenAType:
+net\authorize\api\contract\v1\ArbTransactionType:
     properties:
-        cardNumber:
+        transId:
             expose: true
             access_type: public_method
-            serialized_name: cardNumber
+            serialized_name: transId
             xml_element:
                 namespace: AnetApi/xml/v1/schema/AnetApiSchema.xsd
             accessor:
-                getter: getCardNumber
-                setter: setCardNumber
+                getter: getTransId
+                setter: setTransId
             type: string
-        expirationDate:
+        response:
             expose: true
             access_type: public_method
-            serialized_name: expirationDate
+            serialized_name: response
             xml_element:
                 namespace: AnetApi/xml/v1/schema/AnetApiSchema.xsd
             accessor:
-                getter: getExpirationDate
-                setter: setExpirationDate
+                getter: getResponse
+                setter: setResponse
             type: string
-        cardCode:
+        submitTimeUTC:
             expose: true
             access_type: public_method
-            serialized_name: cardCode
+            serialized_name: submitTimeUTC
             xml_element:
                 namespace: AnetApi/xml/v1/schema/AnetApiSchema.xsd
             accessor:
-                getter: getCardCode
-                setter: setCardCode
-            type: string
-        zip:
+                getter: getSubmitTimeUTC
+                setter: setSubmitTimeUTC
+            type: GoetasWebservices\Xsd\XsdToPhp\XMLSchema\DateTime
+        payNum:
             expose: true
             access_type: public_method
-            serialized_name: zip
+            serialized_name: payNum
             xml_element:
                 namespace: AnetApi/xml/v1/schema/AnetApiSchema.xsd
             accessor:
-                getter: getZip
-                setter: setZip
-            type: string
-        fullName:
+                getter: getPayNum
+                setter: setPayNum
+            type: integer
+        attemptNum:
             expose: true
             access_type: public_method
-            serialized_name: fullName
+            serialized_name: attemptNum
             xml_element:
                 namespace: AnetApi/xml/v1/schema/AnetApiSchema.xsd
             accessor:
-                getter: getFullName
-                setter: setFullName
-            type: string
+                getter: getAttemptNum
+                setter: setAttemptNum
+            type: integer

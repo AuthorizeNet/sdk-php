@@ -5,7 +5,7 @@ namespace net\authorize\api\contract\v1;
 /**
  * Class representing CustomerDataType
  *
- *
+ * 
  * XSD Type: customerDataType
  */
 class CustomerDataType

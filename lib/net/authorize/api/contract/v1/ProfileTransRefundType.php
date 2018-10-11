@@ -5,7 +5,7 @@ namespace net\authorize\api\contract\v1;
 /**
  * Class representing ProfileTransRefundType
  *
- *
+ * 
  * XSD Type: profileTransRefundType
  */
 class ProfileTransRefundType extends ProfileTransAmountType

@@ -91,3 +91,4 @@ class GetTransactionDetailsResponse extends ANetApiResponseType
 
 
 }
+

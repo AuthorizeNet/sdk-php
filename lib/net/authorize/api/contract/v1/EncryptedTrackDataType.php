@@ -5,7 +5,7 @@ namespace net\authorize\api\contract\v1;
 /**
  * Class representing EncryptedTrackDataType
  *
- *
+ * 
  * XSD Type: encryptedTrackDataType
  */
 class EncryptedTrackDataType

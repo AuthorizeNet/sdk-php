@@ -5,7 +5,7 @@ namespace net\authorize\api\contract\v1;
 /**
  * Class representing CardArtType
  *
- *
+ * 
  * XSD Type: cardArt
  */
 class CardArtType

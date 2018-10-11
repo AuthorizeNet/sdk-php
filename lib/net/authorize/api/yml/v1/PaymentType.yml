@@ -70,3 +70,13 @@ net\authorize\api\contract\v1\PaymentType:
                 getter: getEmv
                 setter: setEmv
             type: net\authorize\api\contract\v1\PaymentEmvType
+        dataSource:
+            expose: true
+            access_type: public_method
+            serialized_name: dataSource
+            xml_element:
+                namespace: AnetApi/xml/v1/schema/AnetApiSchema.xsd
+            accessor:
+                getter: getDataSource
+                setter: setDataSource
+            type: string

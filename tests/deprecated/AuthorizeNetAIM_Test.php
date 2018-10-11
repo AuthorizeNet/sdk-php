@@ -780,6 +780,58 @@ class AuthorizeNetAIM_Sandbox_Test extends PHPUnit_Framework_TestCase
         }
     }
 
+    /**
+     * Reproduces a bug introduced in
+     * https://github.com/AuthorizeNet/sdk-php/commit/272c21d904dcac0c8147a5bbddd68578b4dee9b1
+     */
+    public function testEscapeLineItem_doesNotMangleItems()
+    {
+        $qty = 1;
+        $unitPrice = 19.99;
+        $taxable = 'N';
+        $sale = new AuthorizeNetAIM;
+        $sale->setSandbox(true);
+        $sale->addLineItem(
+            'the-item-id',
+            'the item name',
+            'the item description',
+            $qty,
+            $unitPrice,
+            $taxable);
+
+        $cardNum = '4111111111111111';
+        $sale->authorizeOnly($qty * $unitPrice, $cardNum);
+        $postString = $sale->getPostString();
+
+        $this->assertContains('the-item-id', $postString);
+        $this->assertContains('the+item+name', $postString);
+    }
+
+    /**
+     * Reproduces a bug introduced in
+     * https://github.com/AuthorizeNet/sdk-php/commit/272c21d904dcac0c8147a5bbddd68578b4dee9b1
+     */
+    public function testEscapeLineItem_escapesPipeCharacterCorrectly()
+    {
+        $qty = 1;
+        $unitPrice = 19.99;
+        $taxable = 'N';
+        $sale = new AuthorizeNetAIM;
+        $sale->setSandbox(true);
+        $sale->addLineItem(
+            'the-item-id',
+            'the item name',
+            'the item description has a | pipe character',
+            $qty,
+            $unitPrice,
+            $taxable);
+
+        $cardNum = '4111111111111111';
+        $sale->authorizeOnly($qty * $unitPrice, $cardNum);
+        $postString = $sale->getPostString();
+
+        $this->assertContains('description+has+a+_+pipe', $postString);
+    }
 }
 
 

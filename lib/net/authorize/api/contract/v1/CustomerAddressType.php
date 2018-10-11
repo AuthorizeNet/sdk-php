@@ -5,7 +5,7 @@ namespace net\authorize\api\contract\v1;
 /**
  * Class representing CustomerAddressType
  *
- *
+ * 
  * XSD Type: customerAddressType
  */
 class CustomerAddressType extends NameAndAddressType
