@@ -24,6 +24,8 @@ return array(
     'net\authorize\util\ANetSensitiveFields' => $libDir . 'net/authorize/util/ANetSensitiveFields.php',
     'net\authorize\util\SensitiveTag' => $libDir . 'net/authorize/util/SensitiveTag.php',
 	'net\authorize\util\SensitiveDataConfigType' => $libDir . 'net/authorize/util/SensitiveDataConfigType.php',
+	'net\authorize\util\Mapper' => $libDir . 'net/authorize/util/Mapper.php',
+	'net\authorize\util\MapperObj' => $libDir . 'net/authorize/util/MapperObj.php',
 
     //constants
     'net\authorize\api\constants\ANetEnvironment' => $libDir . 'net/authorize/api/constants/ANetEnvironment.php',
