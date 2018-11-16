@@ -124,9 +124,7 @@ abstract class ApiOperationBase implements IApiOperation
         $requestArray = [$requestRoot => $this->apiRequest];
 	
         $this->logger->info("Request  Creation End");
-        /*
-                //$xmlRequest = '<?xml version="1.0" encoding="UTF-8"?>  <ARBGetSubscriptionListRequest xmlns="AnetApi/xml/v1/schema/AnetApiSchema.xsd">  <merchantAuthentication>  <name>4YJmeW7V77us</name>  <transactionKey>4qHK9u63F753be4Z</transactionKey>  </merchantAuthentication>  <refId><![CDATA[ref1416999093]]></refId>  <searchType><![CDATA[subscriptionActive]]></searchType>  <sorting>  <orderBy><![CDATA[firstName]]></orderBy>  <orderDescending>false</orderDescending>  </sorting>  <paging>  <limit>10</limit>  <offset>1</offset>  </paging>  </ARBGetSubscriptionListRequest>  ';
-        */
+
         $this->httpClient->setPostUrl( $endPoint);
         /*$xmlResponse = $this->httpClient->_sendRequest($xmlRequest);
         if ( null == $xmlResponse)
@@ -138,11 +136,17 @@ abstract class ApiOperationBase implements IApiOperation
         $this->logger->info("Response De-Serialization End");*/
 
         $jsonResponse = $this->httpClient->_sendRequest(json_encode($requestArray));
-        //decoding json and removing bom
-        $response = json_decode( substr($jsonResponse,3), true);
-        $this->apiResponse = new $this->apiResponseType();
-        $this->apiResponse->set($response);  
-
+        if($jsonResponse != null){
+            //decoding json and removing bom
+            $response = json_decode( substr($jsonResponse,3), true);
+            $this->apiResponse = new $this->apiResponseType();
+            $this->apiResponse->set($response);  
+        }
+        else {
+            $this->logger->error("Error getting response from API");
+            $this->apiResponse = null;
+        }
+        
         $this->afterExecute();
     }
 
