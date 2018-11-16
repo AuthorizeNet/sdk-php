@@ -20,7 +20,7 @@ class PaymentScheduleType
     /**
      * @property \DateTime $startDate
      */
-    private $startDate = null;
+    private $startDate = null; 
 
     /**
      * @property integer $totalOccurrences
