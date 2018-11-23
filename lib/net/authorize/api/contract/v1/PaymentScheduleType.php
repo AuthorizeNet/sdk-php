@@ -74,7 +74,7 @@ class PaymentScheduleType
     public function setStartDate(\DateTime $startDate)
     {
         $strDateOnly = $startDate->format('Y-m-d');
-        $this->startDate = \DateTime::createFromFormat('!Y-m-d', $strDateOnly);
+        $this->startDate = \DateTime::createFromFormat('!Y-m-d', $strDateOnly); 
         return $this;
     }
 
