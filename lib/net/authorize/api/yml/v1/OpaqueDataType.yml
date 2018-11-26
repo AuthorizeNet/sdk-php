@@ -30,3 +30,13 @@ net\authorize\api\contract\v1\OpaqueDataType:
                 getter: getDataKey
                 setter: setDataKey
             type: string
+        expirationTimeStamp:
+            expose: true
+            access_type: public_method
+            serialized_name: expirationTimeStamp
+            xml_element:
+                namespace: AnetApi/xml/v1/schema/AnetApiSchema.xsd
+            accessor:
+                getter: getExpirationTimeStamp
+                setter: setExpirationTimeStamp
+            type: GoetasWebservices\Xsd\XsdToPhp\XMLSchema\DateTime

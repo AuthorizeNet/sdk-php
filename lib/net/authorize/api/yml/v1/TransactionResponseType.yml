@@ -260,3 +260,13 @@ net\authorize\api\contract\v1\TransactionResponseType:
                 getter: getProfile
                 setter: setProfile
             type: net\authorize\api\contract\v1\CustomerProfileIdType
+        networkTransId:
+            expose: true
+            access_type: public_method
+            serialized_name: networkTransId
+            xml_element:
+                namespace: AnetApi/xml/v1/schema/AnetApiSchema.xsd
+            accessor:
+                getter: getNetworkTransId
+                setter: setNetworkTransId
+            type: string
