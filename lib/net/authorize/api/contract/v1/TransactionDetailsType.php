@@ -244,6 +244,16 @@ class TransactionDetailsType
     private $tip = null;
 
     /**
+     * @property \net\authorize\api\contract\v1\OtherTaxType $otherTax
+     */
+    private $otherTax = null;
+
+    /**
+     * @property \net\authorize\api\contract\v1\NameAndAddressType $shipFrom
+     */
+    private $shipFrom = null;
+
+    /**
      * Gets as transId
      *
      * @return string
@@ -1393,6 +1403,50 @@ class TransactionDetailsType
     public function setTip(\net\authorize\api\contract\v1\ExtendedAmountType $tip)
     {
         $this->tip = $tip;
+        return $this;
+    }
+
+    /**
+     * Gets as otherTax
+     *
+     * @return \net\authorize\api\contract\v1\OtherTaxType
+     */
+    public function getOtherTax()
+    {
+        return $this->otherTax;
+    }
+
+    /**
+     * Sets a new otherTax
+     *
+     * @param \net\authorize\api\contract\v1\OtherTaxType $otherTax
+     * @return self
+     */
+    public function setOtherTax(\net\authorize\api\contract\v1\OtherTaxType $otherTax)
+    {
+        $this->otherTax = $otherTax;
+        return $this;
+    }
+
+    /**
+     * Gets as shipFrom
+     *
+     * @return \net\authorize\api\contract\v1\NameAndAddressType
+     */
+    public function getShipFrom()
+    {
+        return $this->shipFrom;
+    }
+
+    /**
+     * Sets a new shipFrom
+     *
+     * @param \net\authorize\api\contract\v1\NameAndAddressType $shipFrom
+     * @return self
+     */
+    public function setShipFrom(\net\authorize\api\contract\v1\NameAndAddressType $shipFrom)
+    {
+        $this->shipFrom = $shipFrom;
         return $this;
     }
 
