@@ -172,6 +172,28 @@ class TransactionRequestType
     private $tip = null;
 
     /**
+     * @property \net\authorize\api\contract\v1\ProcessingOptionsType
+     * $processingOptions
+     */
+    private $processingOptions = null;
+
+    /**
+     * @property \net\authorize\api\contract\v1\SubsequentAuthInformationType
+     * $subsequentAuthInformation
+     */
+    private $subsequentAuthInformation = null;
+
+    /**
+     * @property \net\authorize\api\contract\v1\OtherTaxType $otherTax
+     */
+    private $otherTax = null;
+
+    /**
+     * @property \net\authorize\api\contract\v1\NameAndAddressType $shipFrom
+     */
+    private $shipFrom = null;
+
+    /**
      * Gets as transactionType
      *
      * @return string
@@ -973,6 +995,95 @@ class TransactionRequestType
     public function setTip(\net\authorize\api\contract\v1\ExtendedAmountType $tip)
     {
         $this->tip = $tip;
+        return $this;
+    }
+
+    /**
+     * Gets as processingOptions
+     *
+     * @return \net\authorize\api\contract\v1\ProcessingOptionsType
+     */
+    public function getProcessingOptions()
+    {
+        return $this->processingOptions;
+    }
+
+    /**
+     * Sets a new processingOptions
+     *
+     * @param \net\authorize\api\contract\v1\ProcessingOptionsType $processingOptions
+     * @return self
+     */
+    public function setProcessingOptions(\net\authorize\api\contract\v1\ProcessingOptionsType $processingOptions)
+    {
+        $this->processingOptions = $processingOptions;
+        return $this;
+    }
+
+    /**
+     * Gets as subsequentAuthInformation
+     *
+     * @return \net\authorize\api\contract\v1\SubsequentAuthInformationType
+     */
+    public function getSubsequentAuthInformation()
+    {
+        return $this->subsequentAuthInformation;
+    }
+
+    /**
+     * Sets a new subsequentAuthInformation
+     *
+     * @param \net\authorize\api\contract\v1\SubsequentAuthInformationType
+     * $subsequentAuthInformation
+     * @return self
+     */
+    public function setSubsequentAuthInformation(\net\authorize\api\contract\v1\SubsequentAuthInformationType $subsequentAuthInformation)
+    {
+        $this->subsequentAuthInformation = $subsequentAuthInformation;
+        return $this;
+    }
+
+    /**
+     * Gets as otherTax
+     *
+     * @return \net\authorize\api\contract\v1\OtherTaxType
+     */
+    public function getOtherTax()
+    {
+        return $this->otherTax;
+    }
+
+    /**
+     * Sets a new otherTax
+     *
+     * @param \net\authorize\api\contract\v1\OtherTaxType $otherTax
+     * @return self
+     */
+    public function setOtherTax(\net\authorize\api\contract\v1\OtherTaxType $otherTax)
+    {
+        $this->otherTax = $otherTax;
+        return $this;
+    }
+
+    /**
+     * Gets as shipFrom
+     *
+     * @return \net\authorize\api\contract\v1\NameAndAddressType
+     */
+    public function getShipFrom()
+    {
+        return $this->shipFrom;
+    }
+
+    /**
+     * Sets a new shipFrom
+     *
+     * @param \net\authorize\api\contract\v1\NameAndAddressType $shipFrom
+     * @return self
+     */
+    public function setShipFrom(\net\authorize\api\contract\v1\NameAndAddressType $shipFrom)
+    {
+        $this->shipFrom = $shipFrom;
         return $this;
     }
 

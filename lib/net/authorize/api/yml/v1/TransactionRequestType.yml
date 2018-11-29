@@ -325,3 +325,43 @@ net\authorize\api\contract\v1\TransactionRequestType:
                 getter: getTip
                 setter: setTip
             type: net\authorize\api\contract\v1\ExtendedAmountType
+        processingOptions:
+            expose: true
+            access_type: public_method
+            serialized_name: processingOptions
+            xml_element:
+                namespace: AnetApi/xml/v1/schema/AnetApiSchema.xsd
+            accessor:
+                getter: getProcessingOptions
+                setter: setProcessingOptions
+            type: net\authorize\api\contract\v1\ProcessingOptionsType
+        subsequentAuthInformation:
+            expose: true
+            access_type: public_method
+            serialized_name: subsequentAuthInformation
+            xml_element:
+                namespace: AnetApi/xml/v1/schema/AnetApiSchema.xsd
+            accessor:
+                getter: getSubsequentAuthInformation
+                setter: setSubsequentAuthInformation
+            type: net\authorize\api\contract\v1\SubsequentAuthInformationType
+        otherTax:
+            expose: true
+            access_type: public_method
+            serialized_name: otherTax
+            xml_element:
+                namespace: AnetApi/xml/v1/schema/AnetApiSchema.xsd
+            accessor:
+                getter: getOtherTax
+                setter: setOtherTax
+            type: net\authorize\api\contract\v1\OtherTaxType
+        shipFrom:
+            expose: true
+            access_type: public_method
+            serialized_name: shipFrom
+            xml_element:
+                namespace: AnetApi/xml/v1/schema/AnetApiSchema.xsd
+            accessor:
+                getter: getShipFrom
+                setter: setShipFrom
+            type: net\authorize\api\contract\v1\NameAndAddressType

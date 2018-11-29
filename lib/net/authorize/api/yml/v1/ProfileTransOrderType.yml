@@ -80,3 +80,23 @@ net\authorize\api\contract\v1\ProfileTransOrderType:
                 getter: getSplitTenderId
                 setter: setSplitTenderId
             type: string
+        processingOptions:
+            expose: true
+            access_type: public_method
+            serialized_name: processingOptions
+            xml_element:
+                namespace: AnetApi/xml/v1/schema/AnetApiSchema.xsd
+            accessor:
+                getter: getProcessingOptions
+                setter: setProcessingOptions
+            type: net\authorize\api\contract\v1\ProcessingOptionsType
+        subsequentAuthInformation:
+            expose: true
+            access_type: public_method
+            serialized_name: subsequentAuthInformation
+            xml_element:
+                namespace: AnetApi/xml/v1/schema/AnetApiSchema.xsd
+            accessor:
+                getter: getSubsequentAuthInformation
+                setter: setSubsequentAuthInformation
+            type: net\authorize\api\contract\v1\SubsequentAuthInformationType
