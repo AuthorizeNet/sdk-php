@@ -27,6 +27,11 @@ class OpaqueDataType
     private $dataKey = null;
 
     /**
+     * @property \DateTime $expirationTimeStamp
+     */
+    private $expirationTimeStamp = null;
+
+    /**
      * Gets as dataDescriptor
      *
      * @return string
@@ -89,6 +94,28 @@ class OpaqueDataType
     public function setDataKey($dataKey)
     {
         $this->dataKey = $dataKey;
+        return $this;
+    }
+
+    /**
+     * Gets as expirationTimeStamp
+     *
+     * @return \DateTime
+     */
+    public function getExpirationTimeStamp()
+    {
+        return $this->expirationTimeStamp;
+    }
+
+    /**
+     * Sets a new expirationTimeStamp
+     *
+     * @param \DateTime $expirationTimeStamp
+     * @return self
+     */
+    public function setExpirationTimeStamp(\DateTime $expirationTimeStamp)
+    {
+        $this->expirationTimeStamp = $expirationTimeStamp;
         return $this;
     }
 

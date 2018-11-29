@@ -117,3 +117,38 @@ net\authorize\api\contract\v1\GetMerchantDetailsResponse:
                 getter: getPublicClientKey
                 setter: setPublicClientKey
             type: string
+        businessInformation:
+            expose: true
+            access_type: public_method
+            serialized_name: businessInformation
+            xml_element:
+                namespace: AnetApi/xml/v1/schema/AnetApiSchema.xsd
+            accessor:
+                getter: getBusinessInformation
+                setter: setBusinessInformation
+            type: net\authorize\api\contract\v1\CustomerAddressType
+        merchantTimeZone:
+            expose: true
+            access_type: public_method
+            serialized_name: merchantTimeZone
+            xml_element:
+                namespace: AnetApi/xml/v1/schema/AnetApiSchema.xsd
+            accessor:
+                getter: getMerchantTimeZone
+                setter: setMerchantTimeZone
+            type: string
+        contactDetails:
+            expose: true
+            access_type: public_method
+            serialized_name: contactDetails
+            xml_element:
+                namespace: AnetApi/xml/v1/schema/AnetApiSchema.xsd
+            accessor:
+                getter: getContactDetails
+                setter: setContactDetails
+            type: array<net\authorize\api\contract\v1\ContactDetailType>
+            xml_list:
+                inline: false
+                skip_when_empty: true
+                entry_name: contactDetail
+                namespace: AnetApi/xml/v1/schema/AnetApiSchema.xsd
