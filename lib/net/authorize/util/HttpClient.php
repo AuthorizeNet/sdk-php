@@ -77,11 +77,7 @@ class HttpClient
         $this->logger->info(sprintf("Request to AnetApi: \n%s", $xmlRequest));
 
         if ($this->VERIFY_PEER) {
-            if (defined('AUTHORIZENET_CA_PEM_FILE')) {
-                curl_setopt($curl_request, CURLOPT_CAINFO, AUTHORIZENET_CA_PEM_FILE);
-            } else {
-                curl_setopt($curl_request, CURLOPT_CAINFO, dirname(dirname(__FILE__)) . '/../../ssl/cert.pem');
-            }
+            curl_setopt($curl_request, CURLOPT_CAINFO, dirname(dirname(__FILE__)) . '/../../ssl/cert.pem');
         } else {
             $this->logger->error("Invalid SSL option for the request");
             return false;
