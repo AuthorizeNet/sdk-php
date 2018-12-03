@@ -11,7 +11,7 @@
         "ext-json": "*",
         "ext-simplexml": "*",
         "ext-xmlwriter": "*",
-        "goetas-webservices/xsd2php-runtime": "master-dev"
+        "goetas-webservices/xsd2php-runtime":"^0.2.2"
     },
     "require-dev": {
         "phpunit/phpunit": "~4.0",
@@ -22,10 +22,5 @@
     },
     "autoload-dev": {
         "classmap": ["tests"]
-    }   ,
-    "config": {
-        "preferred-install": "dist",
-        "disable-tls": true,
-        "secure-http": false
-    }
+    }   
 }
