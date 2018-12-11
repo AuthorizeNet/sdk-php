@@ -73,8 +73,8 @@ class PaymentScheduleType implements \JsonSerializable
      */
     public function setStartDate(\DateTime $startDate)
     {
-        $strDateOnly = $startDate->format('Y-m-d');
-        $this->startDate = \DateTime::createFromFormat('!Y-m-d', $strDateOnly);
+        $strDateOnly = $startDate->format("Y-m-d");
+        $this->startDate = \DateTime::createFromFormat("!Y-m-d", $strDateOnly);
         return $this;
     }
 
