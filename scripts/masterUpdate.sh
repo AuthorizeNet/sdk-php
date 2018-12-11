@@ -5,7 +5,8 @@ echo This script will update the generated code
 echo
 
 currdir=`pwd`
-cmdlist="prepare.sh generateObjectsFromXsd.sh generateControllersFromTemplate.sh appender.sh finish.sh"
+# cmdlist="prepare.sh generateObjectsFromXsd.sh generateControllersFromTemplate.sh appender.sh post-patches.sh finish.sh"
+cmdlist="generateObjectsFromXsd.sh generateControllersFromTemplate.sh appender.sh finish.sh"
 for cmd in $cmdlist ; do 
     echo Executing Script "$cmd"
     if [ ! -f $currdir/scripts/$cmd ];then
