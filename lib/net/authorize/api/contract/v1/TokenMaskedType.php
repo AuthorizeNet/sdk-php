@@ -5,7 +5,7 @@ namespace net\authorize\api\contract\v1;
 /**
  * Class representing TokenMaskedType
  *
- *
+ * 
  * XSD Type: tokenMaskedType
  */
 class TokenMaskedType implements \JsonSerializable
@@ -25,6 +25,11 @@ class TokenMaskedType implements \JsonSerializable
      * @property string $expirationDate
      */
     private $expirationDate = null;
+
+    /**
+     * @property string $tokenRequestorId
+     */
+    private $tokenRequestorId = null;
 
     /**
      * Gets as tokenSource
@@ -92,6 +97,28 @@ class TokenMaskedType implements \JsonSerializable
         return $this;
     }
 
+    /**
+     * Gets as tokenRequestorId
+     *
+     * @return string
+     */
+    public function getTokenRequestorId()
+    {
+        return $this->tokenRequestorId;
+    }
+
+    /**
+     * Sets a new tokenRequestorId
+     *
+     * @param string $tokenRequestorId
+     * @return self
+     */
+    public function setTokenRequestorId($tokenRequestorId)
+    {
+        $this->tokenRequestorId = $tokenRequestorId;
+        return $this;
+    }
+
 
     // Json Serialize Code
     public function jsonSerialize(){
@@ -131,47 +158,49 @@ class TokenMaskedType implements \JsonSerializable
     // Json Set Code
     public function set($data)
     {
-        $mapper = \net\authorize\util\Mapper::Instance();
-        foreach($data AS $key => $value) {
-            $classDetails = $mapper->getClass(get_class() , $key);
- 
-            if($classDetails !== NULL ) {
-                if ($classDetails->isArray) {
-                    if ($classDetails->isCustomDefined) {
-                        foreach($value AS $keyChild => $valueChild) {
-                            $type = new $classDetails->className;
-                            $type->set($valueChild);
-                            $this->{'addTo' . $key}($type);
-                        }
-                    }
-                    else if ($classDetails->className === 'DateTime' || $classDetails->className === 'Date' ) {
-                        foreach($value AS $keyChild => $valueChild) {
-                            $type = new \DateTime($valueChild);
-                            $this->{'addTo' . $key}($type);
-                        }
-                    }
-                    else {
-                        foreach($value AS $keyChild => $valueChild) {
-                            $this->{'addTo' . $key}($valueChild);
-                        }
-                    }
-                }
-                else {
-                    if ($classDetails->isCustomDefined){
-                        $type = new $classDetails->className;
-                        $type->set($value);
-                        $this->{'set' . $key}($type);
-                    }
-                    else if ($classDetails->className === 'DateTime' || $classDetails->className === 'Date' ) {
-                        $type = new \DateTime($value);
-                        $this->{'set' . $key}($type);
-                    }
-                    else {
-                        $this->{'set' . $key}($value);
-                    }
-                }
-            }
-        }
+        if(is_array($data) || is_object($data)) {
+			$mapper = \net\authorize\util\Mapper::Instance();
+			foreach($data AS $key => $value) {
+				$classDetails = $mapper->getClass(get_class() , $key);
+	 
+				if($classDetails !== NULL ) {
+					if ($classDetails->isArray) {
+						if ($classDetails->isCustomDefined) {
+							foreach($value AS $keyChild => $valueChild) {
+								$type = new $classDetails->className;
+								$type->set($valueChild);
+								$this->{'addTo' . $key}($type);
+							}
+						}
+						else if ($classDetails->className === 'DateTime' || $classDetails->className === 'Date' ) {
+							foreach($value AS $keyChild => $valueChild) {
+								$type = new \DateTime($valueChild);
+								$this->{'addTo' . $key}($type);
+							}
+						}
+						else {
+							foreach($value AS $keyChild => $valueChild) {
+								$this->{'addTo' . $key}($valueChild);
+							}
+						}
+					}
+					else {
+						if ($classDetails->isCustomDefined){
+							$type = new $classDetails->className;
+							$type->set($value);
+							$this->{'set' . $key}($type);
+						}
+						else if ($classDetails->className === 'DateTime' || $classDetails->className === 'Date' ) {
+							$type = new \DateTime($value);
+							$this->{'set' . $key}($type);
+						}
+						else {
+							$this->{'set' . $key}($value);
+						}
+					}
+				}
+			}
+		}
     }
     
 }

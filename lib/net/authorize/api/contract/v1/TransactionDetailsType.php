@@ -5,7 +5,7 @@ namespace net\authorize\api\contract\v1;
 /**
  * Class representing TransactionDetailsType
  *
- *
+ * 
  * XSD Type: transactionDetailsType
  */
 class TransactionDetailsType implements \JsonSerializable
@@ -242,6 +242,16 @@ class TransactionDetailsType implements \JsonSerializable
      * @property \net\authorize\api\contract\v1\ExtendedAmountType $tip
      */
     private $tip = null;
+
+    /**
+     * @property \net\authorize\api\contract\v1\OtherTaxType $otherTax
+     */
+    private $otherTax = null;
+
+    /**
+     * @property \net\authorize\api\contract\v1\NameAndAddressType $shipFrom
+     */
+    private $shipFrom = null;
 
     /**
      * Gets as transId
@@ -1396,6 +1406,50 @@ class TransactionDetailsType implements \JsonSerializable
         return $this;
     }
 
+    /**
+     * Gets as otherTax
+     *
+     * @return \net\authorize\api\contract\v1\OtherTaxType
+     */
+    public function getOtherTax()
+    {
+        return $this->otherTax;
+    }
+
+    /**
+     * Sets a new otherTax
+     *
+     * @param \net\authorize\api\contract\v1\OtherTaxType $otherTax
+     * @return self
+     */
+    public function setOtherTax(\net\authorize\api\contract\v1\OtherTaxType $otherTax)
+    {
+        $this->otherTax = $otherTax;
+        return $this;
+    }
+
+    /**
+     * Gets as shipFrom
+     *
+     * @return \net\authorize\api\contract\v1\NameAndAddressType
+     */
+    public function getShipFrom()
+    {
+        return $this->shipFrom;
+    }
+
+    /**
+     * Sets a new shipFrom
+     *
+     * @param \net\authorize\api\contract\v1\NameAndAddressType $shipFrom
+     * @return self
+     */
+    public function setShipFrom(\net\authorize\api\contract\v1\NameAndAddressType $shipFrom)
+    {
+        $this->shipFrom = $shipFrom;
+        return $this;
+    }
+
 
     // Json Serialize Code
     public function jsonSerialize(){
@@ -1435,47 +1489,49 @@ class TransactionDetailsType implements \JsonSerializable
     // Json Set Code
     public function set($data)
     {
-        $mapper = \net\authorize\util\Mapper::Instance();
-        foreach($data AS $key => $value) {
-            $classDetails = $mapper->getClass(get_class() , $key);
- 
-            if($classDetails !== NULL ) {
-                if ($classDetails->isArray) {
-                    if ($classDetails->isCustomDefined) {
-                        foreach($value AS $keyChild => $valueChild) {
-                            $type = new $classDetails->className;
-                            $type->set($valueChild);
-                            $this->{'addTo' . $key}($type);
-                        }
-                    }
-                    else if ($classDetails->className === 'DateTime' || $classDetails->className === 'Date' ) {
-                        foreach($value AS $keyChild => $valueChild) {
-                            $type = new \DateTime($valueChild);
-                            $this->{'addTo' . $key}($type);
-                        }
-                    }
-                    else {
-                        foreach($value AS $keyChild => $valueChild) {
-                            $this->{'addTo' . $key}($valueChild);
-                        }
-                    }
-                }
-                else {
-                    if ($classDetails->isCustomDefined){
-                        $type = new $classDetails->className;
-                        $type->set($value);
-                        $this->{'set' . $key}($type);
-                    }
-                    else if ($classDetails->className === 'DateTime' || $classDetails->className === 'Date' ) {
-                        $type = new \DateTime($value);
-                        $this->{'set' . $key}($type);
-                    }
-                    else {
-                        $this->{'set' . $key}($value);
-                    }
-                }
-            }
-        }
+        if(is_array($data) || is_object($data)) {
+			$mapper = \net\authorize\util\Mapper::Instance();
+			foreach($data AS $key => $value) {
+				$classDetails = $mapper->getClass(get_class() , $key);
+	 
+				if($classDetails !== NULL ) {
+					if ($classDetails->isArray) {
+						if ($classDetails->isCustomDefined) {
+							foreach($value AS $keyChild => $valueChild) {
+								$type = new $classDetails->className;
+								$type->set($valueChild);
+								$this->{'addTo' . $key}($type);
+							}
+						}
+						else if ($classDetails->className === 'DateTime' || $classDetails->className === 'Date' ) {
+							foreach($value AS $keyChild => $valueChild) {
+								$type = new \DateTime($valueChild);
+								$this->{'addTo' . $key}($type);
+							}
+						}
+						else {
+							foreach($value AS $keyChild => $valueChild) {
+								$this->{'addTo' . $key}($valueChild);
+							}
+						}
+					}
+					else {
+						if ($classDetails->isCustomDefined){
+							$type = new $classDetails->className;
+							$type->set($value);
+							$this->{'set' . $key}($type);
+						}
+						else if ($classDetails->className === 'DateTime' || $classDetails->className === 'Date' ) {
+							$type = new \DateTime($value);
+							$this->{'set' . $key}($type);
+						}
+						else {
+							$this->{'set' . $key}($value);
+						}
+					}
+				}
+			}
+		}
     }
     
 }
