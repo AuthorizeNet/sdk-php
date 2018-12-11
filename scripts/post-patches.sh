@@ -7,7 +7,8 @@
 #WORKING --- Remember to escape $ with \$ and replace ' with " and \ with \\ in the replacement expression
 #Summary --- Replaces the setStartDate() method with the correct method. To be run in Git Bash or unix shell
 #File affected - lib/net/authorize/api/contract/v1/PaymentScheduleType.php
-#Run in Git Bash or unix shell
+#Run in Git Bash or unix shell like (file permission to be set to executable:
+### sh post-patches.sh
 #Assumption - No child code blocks (curly-brace pairs) within the setStartDate method
 #Test file - testfile.txt
 #Options used:
@@ -27,13 +28,16 @@ git diff -- lib/net/authorize/api/contract/v1/PaymentScheduleType.php
 		
 #WORKING --- Remember to escape $ with \$ and replace ' with " and \ with \\
 #Summary --- Replaces the CustomerProfileInfoExType with CustomerProfileExType
-#Files affected - UpdateCustomerProfileRequest.php
+#Files affected - UpdateCustomerProfileRequest.php and UpdateCustomerProfileRequest.yml
 #Run in Git Bash or unix shell
 #Assumption - CustomerProfileInfoExType present as a whole word or at starting of a word
 #perl -0777 -pe 's/\bCustomerProfileInfoExType/CustomerProfileExType/gs' lib/net/authorize/api/contract/v1/testfile.txt
 
 perl -0777 -i -pe 's/\bCustomerProfileInfoExType/CustomerProfileExType/gs' lib/net/authorize/api/contract/v1/UpdateCustomerProfileRequest.php
 git diff -- lib/net/authorize/api/contract/v1/UpdateCustomerProfileRequest.php
+
+perl -0777 -i -pe 's/\bCustomerProfileInfoExType/CustomerProfileExType/gs' lib/net/authorize/api/yml/v1/UpdateCustomerProfileRequest.yml
+git diff -- lib/net/authorize/api/yml/v1/UpdateCustomerProfileRequest.yml
 
 ##References
 # - http://www.rexegg.com/regex-perl-one-liners.html
