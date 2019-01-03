@@ -230,7 +230,8 @@ return array(
     'net\authorize\api\contract\v1\TransactionResponseType\ErrorsAType\ErrorAType' => $libDir . 'net/authorize/api/contract/v1/TransactionResponseType/ErrorsAType/ErrorAType.php',
     'net\authorize\api\contract\v1\TransactionResponseType\MessagesAType\MessageAType' => $libDir . 'net/authorize/api/contract/v1/TransactionResponseType/MessagesAType/MessageAType.php',
     'net\authorize\api\contract\v1\TransactionResponseType\SplitTenderPaymentsAType\SplitTenderPaymentAType' => $libDir . 'net/authorize/api/contract/v1/TransactionResponseType/SplitTenderPaymentsAType/SplitTenderPaymentAType.php',
-	'net\authorize\api\contract\v1\WebCheckOutDataType\TokenAType' => $libDir . 'net/authorize/api/contract/v1/WebCheckOutDataType/TokenAType.php',
+    'net\authorize\api\contract\v1\WebCheckOutDataType\TokenAType' => $libDir . 'net/authorize/api/contract/v1/WebCheckOutDataType/TokenAType.php',
+    'net\authorize\api\contract\v1\GetTransactionListForCustomerRequest' => $libDir . 'net/authorize/api/contract/v1/GetTransactionListForCustomerRequest.php',
 	
     'net\authorize\api\contract\v1\GetAUJobSummaryRequest' => $libDir . 'net/authorize/api/contract/v1/getAUJobSummaryRequest.php',
     'net\authorize\api\contract\v1\GetAUJobSummaryResponse' => $libDir . 'net/authorize/api/contract/v1/GetAUJobSummaryResponse.php',
@@ -245,7 +246,6 @@ return array(
     'net\authorize\api\contract\v1\ListOfAUDetailsType' => $libDir . 'net/authorize/api/contract/v1/ListOfAUDetailsType.php',
     'net\authorize\api\contract\v1\EmvTagType' => $libDir . 'net/authorize/api/contract/v1/EmvTagType.php',
     'net\authorize\api\contract\v1\PaymentEmvType' => $libDir . 'net/authorize/api/contract/v1/PaymentEmvType.php',
-
 
     //Controllers
     'net\authorize\api\controller\ARBCancelSubscriptionController' => $libDir . 'net/authorize/api/controller/ARBCancelSubscriptionController.php',
@@ -282,7 +282,7 @@ return array(
     'net\authorize\api\controller\LogoutController' => $libDir . 'net/authorize/api/controller/LogoutController.php',
     'net\authorize\api\controller\MobileDeviceLoginController' => $libDir . 'net/authorize/api/controller/MobileDeviceLoginController.php',
     'net\authorize\api\controller\MobileDeviceRegistrationController' => $libDir . 'net/authorize/api/controller/MobileDeviceRegistrationController.php',
-	'net\authorize\api\controller\SecurePaymentContainerController' => $libDir . 'net/authorize/api/controller/SecurePaymentContainerController.php',
+    'net\authorize\api\controller\SecurePaymentContainerController' => $libDir . 'net/authorize/api/controller/SecurePaymentContainerController.php',
     'net\authorize\api\controller\SendCustomerTransactionReceiptController' => $libDir . 'net/authorize/api/controller/SendCustomerTransactionReceiptController.php',
     'net\authorize\api\controller\UpdateCustomerPaymentProfileController' => $libDir . 'net/authorize/api/controller/UpdateCustomerPaymentProfileController.php',
     'net\authorize\api\controller\UpdateCustomerProfileController' => $libDir . 'net/authorize/api/controller/UpdateCustomerProfileController.php',
@@ -290,7 +290,7 @@ return array(
     'net\authorize\api\controller\UpdateHeldTransactionController' => $libDir . 'net/authorize/api/controller/UpdateHeldTransactionController.php',
     'net\authorize\api\controller\UpdateSplitTenderGroupController' => $libDir . 'net/authorize/api/controller/UpdateSplitTenderGroupController.php',
     'net\authorize\api\controller\ValidateCustomerPaymentProfileController' => $libDir . 'net/authorize/api/controller/ValidateCustomerPaymentProfileController.php',
-
+    'net\authorize\api\controller\GetTransactionListForCustomerController' => $libDir . 'net/authorize/api/controller/GetTransactionListForCustomerController.php',
     'net\authorize\api\controller\GetAUJobDetailsController' => $libDir . 'net/authorize/api/controller/GetAUJobDetailsController.php',
     'net\authorize\api\controller\GetAUJobSummaryController' => $libDir . 'net/authorize/api/controller/GetAUJobSummaryController.php'
 
