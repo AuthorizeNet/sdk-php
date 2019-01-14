@@ -50,14 +50,14 @@ echo "Connection uses " . $json->tls_version ."\n";
 ### Composer
 We recommend using [`Composer`](http://getcomposer.org). *(Note: we never recommend you
 override the new secure-http default setting)*. 
-*Update your composer.json file as per the example below and then run for this specific ALPHA release
+*Update your composer.json file as per the example below and then run for this specific release
 `composer update`.*
 
 ```json
 {
   "require": {
   "php": ">=5.6",
-  "authorizenet/authorizenet": "2.0.0-ALPHA"
+  "authorizenet/authorizenet": "2.0.0"
   }
 }
 ```
