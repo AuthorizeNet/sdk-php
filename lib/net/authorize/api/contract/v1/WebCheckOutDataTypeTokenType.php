@@ -3,122 +3,146 @@
 namespace net\authorize\api\contract\v1;
 
 /**
- * Class representing PaymentScheduleType
+ * Class representing WebCheckOutDataTypeTokenType
  *
  * 
- * XSD Type: paymentScheduleType
+ * XSD Type: webCheckOutDataTypeToken
  */
-class PaymentScheduleType implements \JsonSerializable
+class WebCheckOutDataTypeTokenType implements \JsonSerializable
 {
 
     /**
-     * @property \net\authorize\api\contract\v1\PaymentScheduleType\IntervalAType
-     * $interval
+     * @property string $cardNumber
      */
-    private $interval = null;
+    private $cardNumber = null;
 
     /**
-     * @property \DateTime $startDate
+     * @property string $expirationDate
      */
-    private $startDate = null;
+    private $expirationDate = null;
 
     /**
-     * @property integer $totalOccurrences
+     * @property string $cardCode
      */
-    private $totalOccurrences = null;
+    private $cardCode = null;
 
     /**
-     * @property integer $trialOccurrences
+     * @property string $zip
      */
-    private $trialOccurrences = null;
+    private $zip = null;
 
     /**
-     * Gets as interval
+     * @property string $fullName
+     */
+    private $fullName = null;
+
+    /**
+     * Gets as cardNumber
      *
-     * @return \net\authorize\api\contract\v1\PaymentScheduleType\IntervalAType
+     * @return string
      */
-    public function getInterval()
+    public function getCardNumber()
     {
-        return $this->interval;
+        return $this->cardNumber;
     }
 
     /**
-     * Sets a new interval
+     * Sets a new cardNumber
      *
-     * @param \net\authorize\api\contract\v1\PaymentScheduleType\IntervalAType
-     * $interval
+     * @param string $cardNumber
      * @return self
      */
-    public function setInterval(\net\authorize\api\contract\v1\PaymentScheduleType\IntervalAType $interval)
+    public function setCardNumber($cardNumber)
     {
-        $this->interval = $interval;
+        $this->cardNumber = $cardNumber;
         return $this;
     }
 
     /**
-     * Gets as startDate
+     * Gets as expirationDate
      *
-     * @return \DateTime
+     * @return string
      */
-    public function getStartDate()
+    public function getExpirationDate()
     {
-        return $this->startDate;
+        return $this->expirationDate;
     }
 
     /**
-     * Sets a new startDate
+     * Sets a new expirationDate
      *
-     * @param \DateTime $startDate
+     * @param string $expirationDate
      * @return self
      */
-    public function setStartDate(\DateTime $startDate)
+    public function setExpirationDate($expirationDate)
     {
-        $strDateOnly = $startDate->format("Y-m-d");
-        $this->startDate = \DateTime::createFromFormat("!Y-m-d", $strDateOnly);
+        $this->expirationDate = $expirationDate;
         return $this;
     }
 
     /**
-     * Gets as totalOccurrences
+     * Gets as cardCode
      *
-     * @return integer
+     * @return string
      */
-    public function getTotalOccurrences()
+    public function getCardCode()
     {
-        return $this->totalOccurrences;
+        return $this->cardCode;
     }
 
     /**
-     * Sets a new totalOccurrences
+     * Sets a new cardCode
      *
-     * @param integer $totalOccurrences
+     * @param string $cardCode
      * @return self
      */
-    public function setTotalOccurrences($totalOccurrences)
+    public function setCardCode($cardCode)
     {
-        $this->totalOccurrences = $totalOccurrences;
+        $this->cardCode = $cardCode;
         return $this;
     }
 
     /**
-     * Gets as trialOccurrences
+     * Gets as zip
      *
-     * @return integer
+     * @return string
      */
-    public function getTrialOccurrences()
+    public function getZip()
     {
-        return $this->trialOccurrences;
+        return $this->zip;
     }
 
     /**
-     * Sets a new trialOccurrences
+     * Sets a new zip
      *
-     * @param integer $trialOccurrences
+     * @param string $zip
      * @return self
      */
-    public function setTrialOccurrences($trialOccurrences)
+    public function setZip($zip)
     {
-        $this->trialOccurrences = $trialOccurrences;
+        $this->zip = $zip;
+        return $this;
+    }
+
+    /**
+     * Gets as fullName
+     *
+     * @return string
+     */
+    public function getFullName()
+    {
+        return $this->fullName;
+    }
+
+    /**
+     * Sets a new fullName
+     *
+     * @param string $fullName
+     * @return self
+     */
+    public function setFullName($fullName)
+    {
+        $this->fullName = $fullName;
         return $this;
     }
 

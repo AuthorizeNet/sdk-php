@@ -3,122 +3,173 @@
 namespace net\authorize\api\contract\v1;
 
 /**
- * Class representing PaymentScheduleType
+ * Class representing OtherTaxType
  *
  * 
- * XSD Type: paymentScheduleType
+ * XSD Type: otherTaxType
  */
-class PaymentScheduleType implements \JsonSerializable
+class OtherTaxType implements \JsonSerializable
 {
 
     /**
-     * @property \net\authorize\api\contract\v1\PaymentScheduleType\IntervalAType
-     * $interval
+     * @property float $nationalTaxAmount
      */
-    private $interval = null;
+    private $nationalTaxAmount = null;
 
     /**
-     * @property \DateTime $startDate
+     * @property float $localTaxAmount
      */
-    private $startDate = null;
+    private $localTaxAmount = null;
 
     /**
-     * @property integer $totalOccurrences
+     * @property float $alternateTaxAmount
      */
-    private $totalOccurrences = null;
+    private $alternateTaxAmount = null;
 
     /**
-     * @property integer $trialOccurrences
+     * @property string $alternateTaxId
      */
-    private $trialOccurrences = null;
+    private $alternateTaxId = null;
 
     /**
-     * Gets as interval
+     * @property float $vatTaxRate
+     */
+    private $vatTaxRate = null;
+
+    /**
+     * @property float $vatTaxAmount
+     */
+    private $vatTaxAmount = null;
+
+    /**
+     * Gets as nationalTaxAmount
      *
-     * @return \net\authorize\api\contract\v1\PaymentScheduleType\IntervalAType
+     * @return float
      */
-    public function getInterval()
+    public function getNationalTaxAmount()
     {
-        return $this->interval;
+        return $this->nationalTaxAmount;
     }
 
     /**
-     * Sets a new interval
+     * Sets a new nationalTaxAmount
      *
-     * @param \net\authorize\api\contract\v1\PaymentScheduleType\IntervalAType
-     * $interval
+     * @param float $nationalTaxAmount
      * @return self
      */
-    public function setInterval(\net\authorize\api\contract\v1\PaymentScheduleType\IntervalAType $interval)
+    public function setNationalTaxAmount($nationalTaxAmount)
     {
-        $this->interval = $interval;
+        $this->nationalTaxAmount = $nationalTaxAmount;
         return $this;
     }
 
     /**
-     * Gets as startDate
+     * Gets as localTaxAmount
      *
-     * @return \DateTime
+     * @return float
      */
-    public function getStartDate()
+    public function getLocalTaxAmount()
     {
-        return $this->startDate;
+        return $this->localTaxAmount;
     }
 
     /**
-     * Sets a new startDate
+     * Sets a new localTaxAmount
      *
-     * @param \DateTime $startDate
+     * @param float $localTaxAmount
      * @return self
      */
-    public function setStartDate(\DateTime $startDate)
+    public function setLocalTaxAmount($localTaxAmount)
     {
-        $strDateOnly = $startDate->format("Y-m-d");
-        $this->startDate = \DateTime::createFromFormat("!Y-m-d", $strDateOnly);
+        $this->localTaxAmount = $localTaxAmount;
         return $this;
     }
 
     /**
-     * Gets as totalOccurrences
+     * Gets as alternateTaxAmount
      *
-     * @return integer
+     * @return float
      */
-    public function getTotalOccurrences()
+    public function getAlternateTaxAmount()
     {
-        return $this->totalOccurrences;
+        return $this->alternateTaxAmount;
     }
 
     /**
-     * Sets a new totalOccurrences
+     * Sets a new alternateTaxAmount
      *
-     * @param integer $totalOccurrences
+     * @param float $alternateTaxAmount
      * @return self
      */
-    public function setTotalOccurrences($totalOccurrences)
+    public function setAlternateTaxAmount($alternateTaxAmount)
     {
-        $this->totalOccurrences = $totalOccurrences;
+        $this->alternateTaxAmount = $alternateTaxAmount;
         return $this;
     }
 
     /**
-     * Gets as trialOccurrences
+     * Gets as alternateTaxId
      *
-     * @return integer
+     * @return string
      */
-    public function getTrialOccurrences()
+    public function getAlternateTaxId()
     {
-        return $this->trialOccurrences;
+        return $this->alternateTaxId;
     }
 
     /**
-     * Sets a new trialOccurrences
+     * Sets a new alternateTaxId
      *
-     * @param integer $trialOccurrences
+     * @param string $alternateTaxId
      * @return self
      */
-    public function setTrialOccurrences($trialOccurrences)
+    public function setAlternateTaxId($alternateTaxId)
     {
-        $this->trialOccurrences = $trialOccurrences;
+        $this->alternateTaxId = $alternateTaxId;
+        return $this;
+    }
+
+    /**
+     * Gets as vatTaxRate
+     *
+     * @return float
+     */
+    public function getVatTaxRate()
+    {
+        return $this->vatTaxRate;
+    }
+
+    /**
+     * Sets a new vatTaxRate
+     *
+     * @param float $vatTaxRate
+     * @return self
+     */
+    public function setVatTaxRate($vatTaxRate)
+    {
+        $this->vatTaxRate = $vatTaxRate;
+        return $this;
+    }
+
+    /**
+     * Gets as vatTaxAmount
+     *
+     * @return float
+     */
+    public function getVatTaxAmount()
+    {
+        return $this->vatTaxAmount;
+    }
+
+    /**
+     * Sets a new vatTaxAmount
+     *
+     * @param float $vatTaxAmount
+     * @return self
+     */
+    public function setVatTaxAmount($vatTaxAmount)
+    {
+        $this->vatTaxAmount = $vatTaxAmount;
         return $this;
     }
 
