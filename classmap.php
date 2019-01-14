@@ -246,6 +246,10 @@ return array(
     'net\authorize\api\contract\v1\ListOfAUDetailsType' => $libDir . 'net/authorize/api/contract/v1/ListOfAUDetailsType.php',
     'net\authorize\api\contract\v1\EmvTagType' => $libDir . 'net/authorize/api/contract/v1/EmvTagType.php',
     'net\authorize\api\contract\v1\PaymentEmvType' => $libDir . 'net/authorize/api/contract/v1/PaymentEmvType.php',
+    'net\authorize\api\contract\v1\OtherTaxType' => $libDir . 'net/authorize/api/contract/v1/OtherTaxType.php',
+    'net\authorize\api\contract\v1\UpdateMerchantDetailsRequest' => $libDir . 'net/authorize/api/contract/v1/UpdateMerchantDetailsRequest.php',
+    'net\authorize\api\contract\v1\UpdateMerchantDetailsResponse' => $libDir . 'net/authorize/api/contract/v1/UpdateMerchantDetailsResponse.php',
+    'net\authorize\api\contract\v1\WebCheckOutDataTypeTokenType' => $libDir . 'net/authorize/api/contract/v1/WebCheckOutDataTypeTokenType.php',
 
     //Controllers
     'net\authorize\api\controller\ARBCancelSubscriptionController' => $libDir . 'net/authorize/api/controller/ARBCancelSubscriptionController.php',
@@ -265,6 +269,8 @@ return array(
     'net\authorize\api\controller\DeleteCustomerPaymentProfileController' => $libDir . 'net/authorize/api/controller/DeleteCustomerPaymentProfileController.php',
     'net\authorize\api\controller\DeleteCustomerProfileController' => $libDir . 'net/authorize/api/controller/DeleteCustomerProfileController.php',
     'net\authorize\api\controller\DeleteCustomerShippingAddressController' => $libDir . 'net/authorize/api/controller/DeleteCustomerShippingAddressController.php',
+    'net\authorize\api\controller\GetAUJobDetailsController' => $libDir . 'net/authorize/api/controller/GetAUJobDetailsController.php',
+    'net\authorize\api\controller\GetAUJobSummaryController' => $libDir . 'net/authorize/api/controller/GetAUJobSummaryController.php',
     'net\authorize\api\controller\GetBatchStatisticsController' => $libDir . 'net/authorize/api/controller/GetBatchStatisticsController.php',
     'net\authorize\api\controller\GetCustomerPaymentProfileController' => $libDir . 'net/authorize/api/controller/GetCustomerPaymentProfileController.php',
     'net\authorize\api\controller\GetCustomerPaymentProfileListController' => $libDir . 'net/authorize/api/controller/GetCustomerPaymentProfileListController.php',
@@ -277,6 +283,7 @@ return array(
     'net\authorize\api\controller\GetSettledBatchListController' => $libDir . 'net/authorize/api/controller/GetSettledBatchListController.php',
     'net\authorize\api\controller\GetTransactionDetailsController' => $libDir . 'net/authorize/api/controller/GetTransactionDetailsController.php',
     'net\authorize\api\controller\GetTransactionListController' => $libDir . 'net/authorize/api/controller/GetTransactionListController.php',
+    'net\authorize\api\controller\GetTransactionListForCustomerController' => $libDir . 'net/authorize/api/controller/GetTransactionListForCustomerController.php',
     'net\authorize\api\controller\GetUnsettledTransactionListController' => $libDir . 'net/authorize/api/controller/GetUnsettledTransactionListController.php',
     'net\authorize\api\controller\IsAliveController' => $libDir . 'net/authorize/api/controller/IsAliveController.php',
     'net\authorize\api\controller\LogoutController' => $libDir . 'net/authorize/api/controller/LogoutController.php',
@@ -288,10 +295,8 @@ return array(
     'net\authorize\api\controller\UpdateCustomerProfileController' => $libDir . 'net/authorize/api/controller/UpdateCustomerProfileController.php',
     'net\authorize\api\controller\UpdateCustomerShippingAddressController' => $libDir . 'net/authorize/api/controller/UpdateCustomerShippingAddressController.php',
     'net\authorize\api\controller\UpdateHeldTransactionController' => $libDir . 'net/authorize/api/controller/UpdateHeldTransactionController.php',
+    'net\authorize\api\controller\UpdateMerchantDetailsController' => $libDir . 'net/authorize/api/controller/UpdateMerchantDetailsController.php',
     'net\authorize\api\controller\UpdateSplitTenderGroupController' => $libDir . 'net/authorize/api/controller/UpdateSplitTenderGroupController.php',
-    'net\authorize\api\controller\ValidateCustomerPaymentProfileController' => $libDir . 'net/authorize/api/controller/ValidateCustomerPaymentProfileController.php',
-    'net\authorize\api\controller\GetTransactionListForCustomerController' => $libDir . 'net/authorize/api/controller/GetTransactionListForCustomerController.php',
-    'net\authorize\api\controller\GetAUJobDetailsController' => $libDir . 'net/authorize/api/controller/GetAUJobDetailsController.php',
-    'net\authorize\api\controller\GetAUJobSummaryController' => $libDir . 'net/authorize/api/controller/GetAUJobSummaryController.php'
+    'net\authorize\api\controller\ValidateCustomerPaymentProfileController' => $libDir . 'net/authorize/api/controller/ValidateCustomerPaymentProfileController.php'
 
 );
