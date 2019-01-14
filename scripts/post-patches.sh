@@ -24,7 +24,7 @@ perl -0777 -i -pe 's/\bfunction setStartDate[^}]*return/function setStartDate(\\
         \$strDateOnly = \$startDate->format("Y-m-d");
         \$this->startDate = \\DateTime::createFromFormat("!Y-m-d", \$strDateOnly);
         return/gs' lib/net/authorize/api/contract/v1/PaymentScheduleType.php
-git diff -- lib/net/authorize/api/contract/v1/PaymentScheduleType.php
+#git diff -- lib/net/authorize/api/contract/v1/PaymentScheduleType.php
 		
 #WORKING --- Remember to escape $ with \$ and replace ' with " and \ with \\
 #Summary --- Replaces the CustomerProfileInfoExType with CustomerProfileExType
@@ -34,10 +34,10 @@ git diff -- lib/net/authorize/api/contract/v1/PaymentScheduleType.php
 #perl -0777 -pe 's/\bCustomerProfileInfoExType/CustomerProfileExType/gs' lib/net/authorize/api/contract/v1/testfile.txt
 
 perl -0777 -i -pe 's/\bCustomerProfileInfoExType/CustomerProfileExType/gs' lib/net/authorize/api/contract/v1/UpdateCustomerProfileRequest.php
-git diff -- lib/net/authorize/api/contract/v1/UpdateCustomerProfileRequest.php
+#git diff -- lib/net/authorize/api/contract/v1/UpdateCustomerProfileRequest.php
 
 perl -0777 -i -pe 's/\bCustomerProfileInfoExType/CustomerProfileExType/gs' lib/net/authorize/api/yml/v1/UpdateCustomerProfileRequest.yml
-git diff -- lib/net/authorize/api/yml/v1/UpdateCustomerProfileRequest.yml
+#git diff -- lib/net/authorize/api/yml/v1/UpdateCustomerProfileRequest.yml
 
 ##References
 # - http://www.rexegg.com/regex-perl-one-liners.html
