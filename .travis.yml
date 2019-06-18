@@ -2,6 +2,8 @@ language: php
 
 sudo: false
 
+dist: trusty
+
 env:
     - TEST_SUITE=samples
 
