@@ -44,7 +44,7 @@ class CreateTransactionControllerTest extends ApiCoreTestBase
         }
         $this->assertEquals("Ok", $response->getMessages()->getResultCode());
         $this->assertEquals( $this->refId, $response->getRefId());
-        $this->assertTrue(0 < count($response->getMessages()));
+        $this->assertNotNull($response->getMessages());
         foreach ($response->getMessages() as $message)
         {
             $this->assertEquals("I00001", $message->getCode());
@@ -88,7 +88,7 @@ class CreateTransactionControllerTest extends ApiCoreTestBase
         else
         {
             $this->assertEquals("Ok", $response->getMessages()->getResultCode());
-            $this->assertTrue(0 < count($response->getMessages()));
+            $this->assertNotNull($response->getMessages());
             foreach ($response->getMessages() as $message)
             {
                 $this->assertEquals("I00001", $message->getCode());
