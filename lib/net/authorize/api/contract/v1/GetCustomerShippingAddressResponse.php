@@ -121,10 +121,16 @@ class GetCustomerShippingAddressResponse extends ANetApiResponseType
     {
         $this->subscriptionIds = $subscriptionIds;
         return $this;
-    }
+    } 
 
-
-    // Json Set Code
+    /**
+     * Json Set Code
+     * 
+     * @param $data
+     * @throws \Exception
+     *
+     * @return void
+     */
     public function set($data)
     {
         if(is_array($data) || is_object($data)) {
