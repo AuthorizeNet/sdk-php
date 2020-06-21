@@ -1,8 +1,9 @@
 # Authorize.Net PHP SDK
 
-[![Travis CI Status](https://travis-ci.org/AuthorizeNet/sdk-php.svg?branch=master)](https://travis-ci.org/AuthorizeNet/sdk-php)
+[![Travis CI Status](https://travis-ci.org/AuthorizeNet/sdk-php.svg?branch=nodependency-rc)](https://travis-ci.org/AuthorizeNet/sdk-php)
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/AuthorizeNet/sdk-php/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/AuthorizeNet/sdk-php/?branch=master)
-[![Packagist Stable Version](https://poser.pugx.org/authorizenet/authorizenet/v/stable.svg)](https://packagist.org/packages/authorizenet/authorizenet)
+[![Packagist](https://img.shields.io/packagist/v/authorizenet/authorizenet.svg)](https://packagist.org/packages/authorizenet/authorizenet)
+
 
 ## Requirements
 * PHP 5.6+
@@ -12,14 +13,14 @@
 * TLS 1.2 capable versions of libcurl and OpenSSL (or its equivalent)
 
 ### Migrating from older versions
-Since August 2018, the Authorize.Net API has been reorganized to be more merchant focused. Authorize.Net AIM, ARB, CIM, Transaction Reporting, and SIM classes have been deprecated in favor of net\authorize\api. To see the full list of mapping of new features corresponding to the deprecated features, see [MIGRATING.md](MIGRATING.md).
+Since August 2018, the Authorize.Net API has been reorganized to be more merchant focused. AuthorizeNetAIM, AuthorizeNetARB, AuthorizeNetCIM, Reporting and AuthorizeNetSIM classes have all been deprecated in favor of `net\authorize\api` . To see the full list of mapping of new features corresponding to the deprecated features, you can see [MIGRATING.md](MIGRATING.md).
 
 ### Contribution
- - If you need information or clarification about Authorize.Net features, create an issue with your question. You can also search the [Authorize.Net developer community](https://community.developer.authorize.net/)for discussions related to your question.
- - Before creating pull requests, read [the contributors guide](CONTRIBUTING.md)
+ - If you need information or clarification about any Authorize.Net features, please create an issue for it. Also you can search in the [Authorize.Net developer community](https://community.developer.authorize.net/).
+ - Before creating pull requests, please read [CONTRIBUTING.md](CONTRIBUTING.md)
 
 ### TLS 1.2
-The Authorize.Net APIs only support connections using the TLS 1.2 security protocol. Make sure to upgrade all required components to support TLS 1.2. Keep these components up to date to mitigate the risk of new security flaws.
+The Authorize.Net APIs only support connections using the TLS 1.2 security protocol. This SDK communicates with the Authorize.Net API using `libcurl` and `OpenSSL` (or equivalent crypto library). It's important to make sure you have new enough versions of these components to support TLS 1.2. Additionally, it's very important to keep these components up to date going forward to mitigate the risk of any security flaws that may be discovered in these libraries.
 
 To test whether your current installation is capable of communicating to our servers using TLS 1.2, run the following PHP code and examine the output for the TLS version:
 ```php
@@ -79,12 +80,13 @@ You can run composer locally or on another system to build the directory, then c
 
 
 ## Registration & Configuration
-Use of this SDK and the Authorize.Net APIs requires having an account on the Authorize.Net system. You can find these details in the Settings section. If you don't currently have a production Authorize.Net account, [sign up for a sandbox account](https://developer.authorize.net/sandbox/).
+Use of this SDK and the Authorize.Net APIs requires having an account on our system. You can find these details in the Settings section.
+If you don't currently have a production Authorize.Net account and need a sandbox account for testing, you can easily sign up for one [here](https://developer.authorize.net/sandbox/).
 
 ### Authentication
-To authenticate with the Authorize.Net API, use your account's API Login ID and Transaction Key. If you don't have these credentials, obtain them from the Merchant Interface. For production accounts, the Merchant Interface is located at (https://account.authorize.net/), and for sandbox accounts, at (https://sandbox.authorize.net).
+To authenticate with the Authorize.Net API you will need to use your account's API Login ID and Transaction Key. If you don't have these values, you can obtain them from our Merchant Interface site. Access the Merchant Interface for production accounts at (https://account.authorize.net/) or sandbox accounts at (https://sandbox.authorize.net).
 
-After you have your credentials, load them into the appropriate variables in your code. The below sample code shows how to set the credentials as part of the API request.
+Once you have your keys simply load them into the appropriate variables in your code, as per the below sample code dealing with the authentication part of the API request. 
 
 #### To set your API credentials for an API request: 
 ...
@@ -109,7 +111,7 @@ $request->setMerchantAuthentication($merchantAuthentication);
 You should never include your Login ID and Transaction Key directly in a PHP file that's in a publically accessible portion of your website. A better practice would be to define these in a constants file, and then reference those constants in the appropriate place in your code.
 
 ### Switching between the sandbox environment and the production environment
-Authorize.Net maintains a complete sandbox environment for testing and development purposes. The sandbox environment is an exact replica of our production environment, with simulated transaction authorization and settlement. By default, this SDK is configured to use the sandbox environment. To switch to the production environment, replace the environment constant in the execute method. For example:
+Authorize.Net maintains a complete sandbox environment for testing and development purposes. This sandbox environment is an exact duplicate of our production environment with the transaction authorization and settlement process simulated. By default, this SDK is configured to communicate with the sandbox environment. To switch to the production environment, replace the environment constant in the execute method. For example:
 ```php
 // For PRODUCTION use
 $response = $controller->executeWithApiResponse(\net\authorize\api\constants\ANetEnvironment::PRODUCTION);
@@ -168,10 +170,6 @@ A local copy of [AuthorizedNetSensitiveTagsConfig.json](/lib/net/authorize/util/
 
 **<a name="regex-note">Note</a>:**
 **For any regex, no starting or ending '/' or any other delimiter should be defined. The '/' delimiter and unicode flag is added in the code.**
-
-
- ### Transaction Hash Upgrade
-Authorize.Net is phasing out the MD5 based `transHash` element in favor of the SHA-512 based `transHashSHA2`. The setting in the Merchant Interface which controlled the MD5 Hash option is no longer available, and the `transHash` element will stop returning values at a later date to be determined. For information on how to use `transHashSHA2`, see the [Transaction Hash Upgrade Guide] (https://developer.authorize.net/support/hash_upgrade/).
 
 
 ## License
