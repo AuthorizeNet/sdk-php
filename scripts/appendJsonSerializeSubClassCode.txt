@@ -25,7 +25,7 @@
                 }
             }
         }
-        return $values;
+        return array_merge(parent::jsonSerialize(), $values);
     }
-    
+
 }
