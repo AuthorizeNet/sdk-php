@@ -34,7 +34,7 @@ fi
 echo "Identifying Request/Responses to process from $SRCDIR" | tee >> ${GENLOG}
 touch ${SRCLOG}0.log
 touch ${CNTLOG}0.log
-ls ${GENFULL}/*.php  | grep -i -e "request\.php" -e "response\.php" > ${SRCLOG}0.log
+ls ${GENFULL}/*.php  | grep -i -e "[A-Za-z]*request\.php" -e "[A-Za-z]*response\.php" > ${SRCLOG}0.log
 ls ${CNTFULL}/*Controller.php > ${CNTLOG}0.log 2>/dev/null
 
 echo "Cleaning up paths in Sources and Controllers" | tee >> ${GENLOG}

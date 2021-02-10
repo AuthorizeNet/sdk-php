@@ -37,6 +37,16 @@ class CustomerPaymentProfileListItemType implements \JsonSerializable
     private $payment = null;
 
     /**
+     * @property string $originalNetworkTransId
+     */
+    private $originalNetworkTransId = null;
+
+    /**
+     * @property float $originalAuthAmount
+     */
+    private $originalAuthAmount = null;
+
+    /**
      * Gets as defaultPaymentProfile
      *
      * @return boolean
@@ -143,6 +153,50 @@ class CustomerPaymentProfileListItemType implements \JsonSerializable
     public function setPayment(\net\authorize\api\contract\v1\PaymentMaskedType $payment)
     {
         $this->payment = $payment;
+        return $this;
+    }
+
+    /**
+     * Gets as originalNetworkTransId
+     *
+     * @return string
+     */
+    public function getOriginalNetworkTransId()
+    {
+        return $this->originalNetworkTransId;
+    }
+
+    /**
+     * Sets a new originalNetworkTransId
+     *
+     * @param string $originalNetworkTransId
+     * @return self
+     */
+    public function setOriginalNetworkTransId($originalNetworkTransId)
+    {
+        $this->originalNetworkTransId = $originalNetworkTransId;
+        return $this;
+    }
+
+    /**
+     * Gets as originalAuthAmount
+     *
+     * @return float
+     */
+    public function getOriginalAuthAmount()
+    {
+        return $this->originalAuthAmount;
+    }
+
+    /**
+     * Sets a new originalAuthAmount
+     *
+     * @param float $originalAuthAmount
+     * @return self
+     */
+    public function setOriginalAuthAmount($originalAuthAmount)
+    {
+        $this->originalAuthAmount = $originalAuthAmount;
         return $this;
     }
 

@@ -1,32 +1,32 @@
-net\authorize\api\contract\v1\SubsequentAuthInformationType:
+net\authorize\api\contract\v1\ContactDetailType:
     properties:
-        originalNetworkTransId:
+        email:
             expose: true
             access_type: public_method
-            serialized_name: originalNetworkTransId
+            serialized_name: email
             xml_element:
                 namespace: AnetApi/xml/v1/schema/AnetApiSchema.xsd
             accessor:
-                getter: getOriginalNetworkTransId
-                setter: setOriginalNetworkTransId
+                getter: getEmail
+                setter: setEmail
             type: string
-        originalAuthAmount:
+        firstName:
             expose: true
             access_type: public_method
-            serialized_name: originalAuthAmount
+            serialized_name: firstName
             xml_element:
                 namespace: AnetApi/xml/v1/schema/AnetApiSchema.xsd
             accessor:
-                getter: getOriginalAuthAmount
-                setter: setOriginalAuthAmount
-            type: float
-        reason:
+                getter: getFirstName
+                setter: setFirstName
+            type: string
+        lastName:
             expose: true
             access_type: public_method
-            serialized_name: reason
+            serialized_name: lastName
             xml_element:
                 namespace: AnetApi/xml/v1/schema/AnetApiSchema.xsd
             accessor:
-                getter: getReason
-                setter: setReason
+                getter: getLastName
+                setter: setLastName
             type: string

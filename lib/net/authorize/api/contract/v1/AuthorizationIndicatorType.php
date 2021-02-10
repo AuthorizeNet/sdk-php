@@ -3,119 +3,38 @@
 namespace net\authorize\api\contract\v1;
 
 /**
- * Class representing OpaqueDataType
+ * Class representing AuthorizationIndicatorType
  *
  * 
- * XSD Type: opaqueDataType
+ * XSD Type: authorizationIndicatorType
  */
-class OpaqueDataType implements \JsonSerializable
+class AuthorizationIndicatorType implements \JsonSerializable
 {
 
     /**
-     * @property string $dataDescriptor
+     * @property string $authorizationIndicator
      */
-    private $dataDescriptor = null;
+    private $authorizationIndicator = null;
 
     /**
-     * @property string $dataValue
-     */
-    private $dataValue = null;
-
-    /**
-     * @property string $dataKey
-     */
-    private $dataKey = null;
-
-    /**
-     * @property \DateTime $expirationTimeStamp
-     */
-    private $expirationTimeStamp = null;
-
-    /**
-     * Gets as dataDescriptor
+     * Gets as authorizationIndicator
      *
      * @return string
      */
-    public function getDataDescriptor()
+    public function getAuthorizationIndicator()
     {
-        return $this->dataDescriptor;
+        return $this->authorizationIndicator;
     }
 
     /**
-     * Sets a new dataDescriptor
+     * Sets a new authorizationIndicator
      *
-     * @param string $dataDescriptor
+     * @param string $authorizationIndicator
      * @return self
      */
-    public function setDataDescriptor($dataDescriptor)
+    public function setAuthorizationIndicator($authorizationIndicator)
     {
-        $this->dataDescriptor = $dataDescriptor;
-        return $this;
-    }
-
-    /**
-     * Gets as dataValue
-     *
-     * @return string
-     */
-    public function getDataValue()
-    {
-        return $this->dataValue;
-    }
-
-    /**
-     * Sets a new dataValue
-     *
-     * @param string $dataValue
-     * @return self
-     */
-    public function setDataValue($dataValue)
-    {
-        $this->dataValue = $dataValue;
-        return $this;
-    }
-
-    /**
-     * Gets as dataKey
-     *
-     * @return string
-     */
-    public function getDataKey()
-    {
-        return $this->dataKey;
-    }
-
-    /**
-     * Sets a new dataKey
-     *
-     * @param string $dataKey
-     * @return self
-     */
-    public function setDataKey($dataKey)
-    {
-        $this->dataKey = $dataKey;
-        return $this;
-    }
-
-    /**
-     * Gets as expirationTimeStamp
-     *
-     * @return \DateTime
-     */
-    public function getExpirationTimeStamp()
-    {
-        return $this->expirationTimeStamp;
-    }
-
-    /**
-     * Sets a new expirationTimeStamp
-     *
-     * @param \DateTime $expirationTimeStamp
-     * @return self
-     */
-    public function setExpirationTimeStamp(\DateTime $expirationTimeStamp)
-    {
-        $this->expirationTimeStamp = $expirationTimeStamp;
+        $this->authorizationIndicator = $authorizationIndicator;
         return $this;
     }
 

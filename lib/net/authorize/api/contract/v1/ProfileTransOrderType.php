@@ -64,6 +64,12 @@ class ProfileTransOrderType extends ProfileTransAmountType implements \JsonSeria
     private $subsequentAuthInformation = null;
 
     /**
+     * @property \net\authorize\api\contract\v1\AuthorizationIndicatorType
+     * $authorizationIndicatorType
+     */
+    private $authorizationIndicatorType = null;
+
+    /**
      * Gets as customerProfileId
      *
      * @return string
@@ -281,6 +287,29 @@ class ProfileTransOrderType extends ProfileTransAmountType implements \JsonSeria
     public function setSubsequentAuthInformation(\net\authorize\api\contract\v1\SubsequentAuthInformationType $subsequentAuthInformation)
     {
         $this->subsequentAuthInformation = $subsequentAuthInformation;
+        return $this;
+    }
+
+    /**
+     * Gets as authorizationIndicatorType
+     *
+     * @return \net\authorize\api\contract\v1\AuthorizationIndicatorType
+     */
+    public function getAuthorizationIndicatorType()
+    {
+        return $this->authorizationIndicatorType;
+    }
+
+    /**
+     * Sets a new authorizationIndicatorType
+     *
+     * @param \net\authorize\api\contract\v1\AuthorizationIndicatorType
+     * $authorizationIndicatorType
+     * @return self
+     */
+    public function setAuthorizationIndicatorType(\net\authorize\api\contract\v1\AuthorizationIndicatorType $authorizationIndicatorType)
+    {
+        $this->authorizationIndicatorType = $authorizationIndicatorType;
         return $this;
     }
 

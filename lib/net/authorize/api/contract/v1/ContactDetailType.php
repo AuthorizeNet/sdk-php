@@ -3,119 +3,92 @@
 namespace net\authorize\api\contract\v1;
 
 /**
- * Class representing OpaqueDataType
+ * Class representing ContactDetailType
  *
  * 
- * XSD Type: opaqueDataType
+ * XSD Type: ContactDetailType
  */
-class OpaqueDataType implements \JsonSerializable
+class ContactDetailType implements \JsonSerializable
 {
 
     /**
-     * @property string $dataDescriptor
+     * @property string $email
      */
-    private $dataDescriptor = null;
+    private $email = null;
 
     /**
-     * @property string $dataValue
+     * @property string $firstName
      */
-    private $dataValue = null;
+    private $firstName = null;
 
     /**
-     * @property string $dataKey
+     * @property string $lastName
      */
-    private $dataKey = null;
+    private $lastName = null;
 
     /**
-     * @property \DateTime $expirationTimeStamp
-     */
-    private $expirationTimeStamp = null;
-
-    /**
-     * Gets as dataDescriptor
+     * Gets as email
      *
      * @return string
      */
-    public function getDataDescriptor()
+    public function getEmail()
     {
-        return $this->dataDescriptor;
+        return $this->email;
     }
 
     /**
-     * Sets a new dataDescriptor
+     * Sets a new email
      *
-     * @param string $dataDescriptor
+     * @param string $email
      * @return self
      */
-    public function setDataDescriptor($dataDescriptor)
+    public function setEmail($email)
     {
-        $this->dataDescriptor = $dataDescriptor;
+        $this->email = $email;
         return $this;
     }
 
     /**
-     * Gets as dataValue
+     * Gets as firstName
      *
      * @return string
      */
-    public function getDataValue()
+    public function getFirstName()
     {
-        return $this->dataValue;
+        return $this->firstName;
     }
 
     /**
-     * Sets a new dataValue
+     * Sets a new firstName
      *
-     * @param string $dataValue
+     * @param string $firstName
      * @return self
      */
-    public function setDataValue($dataValue)
+    public function setFirstName($firstName)
     {
-        $this->dataValue = $dataValue;
+        $this->firstName = $firstName;
         return $this;
     }
 
     /**
-     * Gets as dataKey
+     * Gets as lastName
      *
      * @return string
      */
-    public function getDataKey()
+    public function getLastName()
     {
-        return $this->dataKey;
+        return $this->lastName;
     }
 
     /**
-     * Sets a new dataKey
+     * Sets a new lastName
      *
-     * @param string $dataKey
+     * @param string $lastName
      * @return self
      */
-    public function setDataKey($dataKey)
+    public function setLastName($lastName)
     {
-        $this->dataKey = $dataKey;
-        return $this;
-    }
-
-    /**
-     * Gets as expirationTimeStamp
-     *
-     * @return \DateTime
-     */
-    public function getExpirationTimeStamp()
-    {
-        return $this->expirationTimeStamp;
-    }
-
-    /**
-     * Sets a new expirationTimeStamp
-     *
-     * @param \DateTime $expirationTimeStamp
-     * @return self
-     */
-    public function setExpirationTimeStamp(\DateTime $expirationTimeStamp)
-    {
-        $this->expirationTimeStamp = $expirationTimeStamp;
+        $this->lastName = $lastName;
         return $this;
     }
 

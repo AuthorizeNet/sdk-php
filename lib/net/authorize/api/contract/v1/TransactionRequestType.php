@@ -194,6 +194,12 @@ class TransactionRequestType implements \JsonSerializable
     private $shipFrom = null;
 
     /**
+     * @property \net\authorize\api\contract\v1\AuthorizationIndicatorType
+     * $authorizationIndicatorType
+     */
+    private $authorizationIndicatorType = null;
+
+    /**
      * Gets as transactionType
      *
      * @return string
@@ -1084,6 +1090,29 @@ class TransactionRequestType implements \JsonSerializable
     public function setShipFrom(\net\authorize\api\contract\v1\NameAndAddressType $shipFrom)
     {
         $this->shipFrom = $shipFrom;
+        return $this;
+    }
+
+    /**
+     * Gets as authorizationIndicatorType
+     *
+     * @return \net\authorize\api\contract\v1\AuthorizationIndicatorType
+     */
+    public function getAuthorizationIndicatorType()
+    {
+        return $this->authorizationIndicatorType;
+    }
+
+    /**
+     * Sets a new authorizationIndicatorType
+     *
+     * @param \net\authorize\api\contract\v1\AuthorizationIndicatorType
+     * $authorizationIndicatorType
+     * @return self
+     */
+    public function setAuthorizationIndicatorType(\net\authorize\api\contract\v1\AuthorizationIndicatorType $authorizationIndicatorType)
+    {
+        $this->authorizationIndicatorType = $authorizationIndicatorType;
         return $this;
     }
 
