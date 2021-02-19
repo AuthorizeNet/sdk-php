@@ -66,7 +66,11 @@ class HeldTransactionRequestType implements \JsonSerializable
     }
 
 
-    // Json Serialize Code
+    /**
+     * Json Serialize Code
+     * 
+     * @return array|mixed
+     */
     public function jsonSerialize(){
         $values = array_filter((array)get_object_vars($this),
         function ($val){
@@ -99,9 +103,16 @@ class HeldTransactionRequestType implements \JsonSerializable
         else{
             return array_merge(parent::jsonSerialize(), $values);
         }
-    }
-    
-    // Json Set Code
+    } 
+
+    /**
+     * Json Set Code
+     * 
+     * @param $data
+     * @throws \Exception
+     *
+     * @return void
+     */
     public function set($data)
     {
         if(is_array($data) || is_object($data)) {

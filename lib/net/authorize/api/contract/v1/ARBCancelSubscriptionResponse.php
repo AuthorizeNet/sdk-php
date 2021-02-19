@@ -8,8 +8,14 @@ namespace net\authorize\api\contract\v1;
 class ARBCancelSubscriptionResponse extends ANetApiResponseType
 {
 
-
-    // Json Set Code
+    /**
+     * Json Set Code
+     *
+     * @param $data
+     * @throws \Exception
+     *
+     * @return void
+     */
     public function set($data)
     {
         if(is_array($data) || is_object($data)) {
