@@ -1451,7 +1451,11 @@ class TransactionDetailsType implements \JsonSerializable
     }
 
 
-    // Json Serialize Code
+    /**
+     * Json Serialize Code
+     *
+     * @return array
+     */
     public function jsonSerialize(){
         $values = array_filter((array)get_object_vars($this),
         function ($val){
@@ -1486,7 +1490,13 @@ class TransactionDetailsType implements \JsonSerializable
         }
     }
     
-    // Json Set Code
+    /**
+     * Json Set Code
+     *
+     * @param array|object $data
+     * @return void
+     * @throws \Exception
+     */
     public function set($data)
     {
         if(is_array($data) || is_object($data)) {

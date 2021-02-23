@@ -90,7 +90,11 @@ class GetUnsettledTransactionListRequest extends ANetApiRequestType
     }
 
 
-    // Json Serialize Code
+    /**
+     * Json Serialize Code
+     *
+     * @return array
+     */
     public function jsonSerialize(){
         $values = array_filter((array)get_object_vars($this),
         function ($val){
