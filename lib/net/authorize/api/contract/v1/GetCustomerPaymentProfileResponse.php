@@ -38,7 +38,13 @@ class GetCustomerPaymentProfileResponse extends ANetApiResponseType
     }
 
 
-    // Json Set Code
+    /**
+     * Json Set Code
+     *
+     * @param array|object $data
+     * @return void
+     * @throws \Exception
+     */
     public function set($data)
     {
         if(is_array($data) || is_object($data)) {
