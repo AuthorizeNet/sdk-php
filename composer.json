@@ -1,5 +1,5 @@
 {
-    "name": "authorizenet/authorizenet",
+    "name": "powersync/authorizenet-sdk-php",
     "type": "library",
     "description": "Official PHP SDK for Authorize.Net",
     "keywords": ["authorizenet", "authorize.net", "payment", "ecommerce"],
@@ -19,5 +19,5 @@
     },
     "autoload-dev": {
         "classmap": ["tests"]
-    }   
+    }
 }
