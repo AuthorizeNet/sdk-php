@@ -117,13 +117,8 @@ class SendCustomerTransactionReceiptRequest extends ANetApiRequestType
                 }
             }
         }
-        if (get_parent_class() == ""){
-            return $values;
-        }
-        else{
-            return array_merge(parent::jsonSerialize(), $values);
-        }
+        return array_merge(parent::jsonSerialize(), $values);
     }
-    
+
 }
 

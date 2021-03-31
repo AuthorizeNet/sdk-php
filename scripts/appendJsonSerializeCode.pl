@@ -13,7 +13,13 @@ while (<>) {
     my $filepath = "lib/net/authorize/api/contract/v1/";
     my $filename = "$filepath"."$_";
     my $text = `cat $filename`;
-    my $sub = `cat scripts/appendJsonSerializeCode.txt`;
+    my $sub = "";
+
+    if ($text =~ /(?^pm:\nclass \w+ extends )/) {
+        $sub = `cat scripts/appendJsonSerializeSubClassCode.txt`;
+    } else {
+        $sub = `cat scripts/appendJsonSerializeCode.txt`;
+    }
 
     $text =~ s|(.+)}|$1$sub|xms;
 

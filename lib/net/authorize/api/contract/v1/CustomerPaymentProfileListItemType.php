@@ -37,6 +37,16 @@ class CustomerPaymentProfileListItemType implements \JsonSerializable
     private $payment = null;
 
     /**
+     * @property string $originalNetworkTransId
+     */
+    private $originalNetworkTransId = null;
+
+    /**
+     * @property float $originalAuthAmount
+     */
+    private $originalAuthAmount = null;
+
+    /**
      * Gets as defaultPaymentProfile
      *
      * @return boolean
@@ -146,6 +156,50 @@ class CustomerPaymentProfileListItemType implements \JsonSerializable
         return $this;
     }
 
+    /**
+     * Gets as originalNetworkTransId
+     *
+     * @return string
+     */
+    public function getOriginalNetworkTransId()
+    {
+        return $this->originalNetworkTransId;
+    }
+
+    /**
+     * Sets a new originalNetworkTransId
+     *
+     * @param string $originalNetworkTransId
+     * @return self
+     */
+    public function setOriginalNetworkTransId($originalNetworkTransId)
+    {
+        $this->originalNetworkTransId = $originalNetworkTransId;
+        return $this;
+    }
+
+    /**
+     * Gets as originalAuthAmount
+     *
+     * @return float
+     */
+    public function getOriginalAuthAmount()
+    {
+        return $this->originalAuthAmount;
+    }
+
+    /**
+     * Sets a new originalAuthAmount
+     *
+     * @param float $originalAuthAmount
+     * @return self
+     */
+    public function setOriginalAuthAmount($originalAuthAmount)
+    {
+        $this->originalAuthAmount = $originalAuthAmount;
+        return $this;
+    }
+
 
     // Json Serialize Code
     public function jsonSerialize(){
@@ -174,18 +228,13 @@ class CustomerPaymentProfileListItemType implements \JsonSerializable
                 }
             }
         }
-        if (get_parent_class() == ""){
-            return $values;
-        }
-        else{
-            return array_merge(parent::jsonSerialize(), $values);
-        }
+        return $values;
     }
     
     // Json Set Code
     public function set($data)
     {
-        if(is_array($data) || is_object($data)) {
+        if(is_array($data) || is_object($data)) {
 			$mapper = \net\authorize\util\Mapper::Instance();
 			foreach($data AS $key => $value) {
 				$classDetails = $mapper->getClass(get_class() , $key);

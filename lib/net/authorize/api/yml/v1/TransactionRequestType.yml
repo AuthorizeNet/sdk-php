@@ -365,3 +365,13 @@ net\authorize\api\contract\v1\TransactionRequestType:
                 getter: getShipFrom
                 setter: setShipFrom
             type: net\authorize\api\contract\v1\NameAndAddressType
+        authorizationIndicatorType:
+            expose: true
+            access_type: public_method
+            serialized_name: authorizationIndicatorType
+            xml_element:
+                namespace: AnetApi/xml/v1/schema/AnetApiSchema.xsd
+            accessor:
+                getter: getAuthorizationIndicatorType
+                setter: setAuthorizationIndicatorType
+            type: net\authorize\api\contract\v1\AuthorizationIndicatorType

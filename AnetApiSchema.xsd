@@ -17,6 +17,12 @@
     </xs:restriction>
   </xs:simpleType>
   <!-- ===================================================== -->
+  <xs:simpleType name="alphaNumericSpaceString">
+    <xs:restriction base="xs:string">
+      <xs:pattern value="[0-9a-zA-Z\s]+"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <!-- ===================================================== -->
   <xs:complexType name="ArrayOfLong">
     <xs:sequence>
       <xs:element name="long" type="xs:long" nillable="false" minOccurs="0" maxOccurs="unbounded"/>
@@ -83,6 +89,23 @@
     </xs:sequence>
   </xs:complexType>
   <!-- ===================================================== -->
+  <xs:complexType name="ArrayOfContactDetail">
+    <xs:sequence>
+      <xs:element name="contactDetail" type="anet:ContactDetailType" nillable="false" minOccurs="0" maxOccurs="unbounded"></xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <!--  
+  ==============================================================================
+  Reason for MasterCard Auth Indicator Transaction Value
+  ==============================================================================
+  -->
+  <xs:simpleType name="authIndicatorEnum">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="pre"/>
+      <xs:enumeration value="final"/>
+    </xs:restriction>
+  </xs:simpleType>
+ <!-- ===================================================== -->
   <xs:simpleType name="bankAccountTypeEnum">
     <xs:restriction base="xs:string">
       <xs:enumeration value="checking"/>
@@ -602,6 +625,7 @@
       <xs:element name="dataDescriptor" type="xs:string" minOccurs="1" maxOccurs="1"/>
       <xs:element name="dataValue" type="xs:string" minOccurs="1" maxOccurs="1"/>
       <xs:element name="dataKey" type="xs:string" minOccurs="0" maxOccurs="1"/>
+      <xs:element name="expirationTimeStamp" type="xs:dateTime" minOccurs="0" maxOccurs="1"/>
     </xs:sequence>
   </xs:complexType>
   <!-- ===================================================== -->
@@ -1383,6 +1407,7 @@
       <xs:element name="subsequentAuthInformation" type="anet:subsequentAuthInformation" minOccurs="0" maxOccurs="1"/>
       <xs:element name="otherTax" minOccurs="0" type="anet:otherTaxType" />
       <xs:element name="shipFrom" minOccurs="0" type="anet:nameAndAddressType" />
+      <xs:element name="authorizationIndicatorType" type="anet:authorizationIndicatorType" minOccurs="0" maxOccurs="1"/>
     </xs:sequence>
   </xs:complexType>
   <!-- ===================================================== -->
@@ -1644,6 +1669,11 @@
           <xs:documentation>string. Used by getHostedProfilePage method to accept button text configuration.</xs:documentation>
         </xs:annotation>
       </xs:enumeration>
+      <xs:enumeration value="hostedPaymentVisaCheckoutOptions">
+        <xs:annotation>
+          <xs:documentation>string. Used by getHostedPaymentPage method to accept VisaCheckout configuration.</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
     </xs:restriction>
   </xs:simpleType>
   <!-- ===================================================== -->
@@ -1685,6 +1715,7 @@
             </xs:simpleType>
           </xs:element>
           <xs:element name="defaultPaymentProfile" type="xs:boolean" minOccurs="0"/>
+          <xs:element name="subsequentAuthInformation" type="anet:subsequentAuthInformation" minOccurs="0" maxOccurs="1"/>
         </xs:sequence>
       </xs:extension>
     </xs:complexContent>
@@ -1717,6 +1748,15 @@
             </xs:simpleType>
           </xs:element>
           <xs:element name="subscriptionIds" type="anet:SubscriptionIdList" minOccurs="0" maxOccurs="1"/>
+          <xs:element name="originalNetworkTransId" type="anet:networkTransId" minOccurs="0" maxOccurs="1"/>
+          <xs:element name="originalAuthAmount" minOccurs="0">
+            <xs:simpleType>
+              <xs:restriction base="xs:decimal">
+                <xs:minInclusive value="0.00"/>
+                <xs:fractionDigits value="4"/>
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:element>
         </xs:sequence>
       </xs:extension>
     </xs:complexContent>
@@ -2021,7 +2061,7 @@
       <xs:element name="productCode" minOccurs="0">
         <xs:simpleType>
           <xs:restriction base="xs:string">
-            <xs:maxLength value="15"/>
+            <xs:maxLength value="30"/>
           </xs:restriction>
         </xs:simpleType>
       </xs:element>
@@ -2082,6 +2122,7 @@
           <xs:element name="splitTenderId" type="anet:numericString" minOccurs="0"/>
           <xs:element name="processingOptions" type="anet:processingOptions" minOccurs="0" maxOccurs="1"/>
           <xs:element name="subsequentAuthInformation" type="anet:subsequentAuthInformation" minOccurs="0" maxOccurs="1"/>
+          <xs:element name="authorizationIndicatorType" type="anet:authorizationIndicatorType" minOccurs="0" maxOccurs="1"/>
         </xs:sequence>
       </xs:extension>
     </xs:complexContent>
@@ -2342,6 +2383,17 @@
       <xs:element name="tip" type="anet:extendedAmountType" minOccurs="0"/>            
       <xs:element name="otherTax" minOccurs="0" type="anet:otherTaxType" />
       <xs:element name="shipFrom"  minOccurs="0" type="anet:nameAndAddressType" />
+      <xs:element name="networkTransId" type="anet:networkTransId" minOccurs="0" />
+      <xs:element name="originalNetworkTransId" type="anet:networkTransId" minOccurs="0" maxOccurs="1"/>
+      <xs:element name="originalAuthAmount"  minOccurs="0">
+        <xs:simpleType>
+          <xs:restriction base="xs:decimal">
+            <xs:minInclusive value="0.00"/>
+            <xs:fractionDigits value="4"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element name="authorizationIndicator" type="xs:string" minOccurs="0"/>
     </xs:sequence>
   </xs:complexType>
   <!-- ===================================================== -->
@@ -2528,9 +2580,36 @@
       </xs:element>
       <xs:element name="transHashSha2" type="xs:string" minOccurs="0"/>
       <xs:element name="profile" type="anet:customerProfileIdType" minOccurs="0"/>
-      <xs:element name="networkTransId" type="anet:networkTransId" minOccurs="0"/>
+      <xs:element name="networkTransId" type="anet:networkTransId" minOccurs="0"/>   
     </xs:sequence>
   </xs:complexType>
+  <!-- ===================================================== -->
+  <xs:complexType name="ContactDetailType">
+    <xs:sequence>
+      <xs:element name="email" minOccurs="0" maxOccurs="1">
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:maxLength value="255"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element name="firstName"  minOccurs="0" maxOccurs="1">
+          <xs:simpleType>
+            <xs:restriction base="xs:string">
+              <xs:maxLength value="50"/>
+            </xs:restriction>
+          </xs:simpleType>
+      </xs:element>
+      <xs:element name="lastName" minOccurs="0" maxOccurs="1">
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:maxLength value="50"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+
   <!-- 
   =================================================================== 
   The ANetApiRequest defines elements common to all API method
@@ -4247,6 +4326,15 @@ Payment Profile Type.
       <xs:element name="customerProfileId" type="xs:int" minOccurs="1" maxOccurs="1"/>
       <xs:element name="billTo" type="anet:customerAddressType" minOccurs="1" maxOccurs="1"/>
       <xs:element name="payment" type="anet:paymentMaskedType" minOccurs="1" maxOccurs="1"/>
+      <xs:element name="originalNetworkTransId" type="anet:networkTransId" minOccurs="0" maxOccurs="1"/>
+      <xs:element name="originalAuthAmount" minOccurs="0">
+        <xs:simpleType>
+          <xs:restriction base="xs:decimal">
+            <xs:minInclusive value="0.00"/>
+            <xs:fractionDigits value="4"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
     </xs:sequence>
   </xs:complexType>
   <xs:complexType name="arrayOfCustomerPaymentProfileListItemType">
@@ -4506,6 +4594,17 @@ The merchant must be signed up for the CIM service to use it.
   </xs:complexType>
   <!--  
   ==============================================================================
+  Processing Options type
+  Processing Options are used to pass additional transaction processing options
+  ==============================================================================
+  -->
+  <xs:complexType name="authorizationIndicatorType">
+    <xs:sequence>      
+      <xs:element name="authorizationIndicator"   type="anet:authIndicatorEnum" minOccurs="0" maxOccurs="1"/>
+    </xs:sequence>
+  </xs:complexType>
+  <!--  
+  ==============================================================================
   Subsequent Auth Information type
   Subsequent Auth Information is used to pass additional information for 
   Merchant-Initiated transactions
@@ -4513,8 +4612,16 @@ The merchant must be signed up for the CIM service to use it.
   -->
   <xs:complexType name="subsequentAuthInformation">
     <xs:sequence>
-      <xs:element name="originalNetworkTransId" type="anet:networkTransId" minOccurs="0" maxOccurs="1"/>
-      <xs:element name="reason"                 type="anet:merchantInitTransReasonEnum" minOccurs="0" maxOccurs="1"/>
+      <xs:element name="originalNetworkTransId" type="anet:networkTransId" minOccurs="0" maxOccurs="1"/>      
+      <xs:element name="originalAuthAmount"  minOccurs="0">
+        <xs:simpleType>
+          <xs:restriction base="xs:decimal">
+            <xs:minInclusive value="0.00"/>
+            <xs:fractionDigits value="4"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element name="reason" type="anet:merchantInitTransReasonEnum" minOccurs="0" maxOccurs="1"/>
     </xs:sequence>
   </xs:complexType>
   <!--  
@@ -4523,10 +4630,11 @@ The merchant must be signed up for the CIM service to use it.
   ==============================================================================
   -->
   <xs:simpleType name="networkTransId">
-    <xs:restriction base="anet:alphaNumericString">
+    <xs:restriction base="anet:alphaNumericSpaceString">
       <xs:maxLength value="255"/>
     </xs:restriction>
   </xs:simpleType>
+   
   <!--  
   ==============================================================================
   Reason for Merchant Initiated Transaction
@@ -4648,6 +4756,7 @@ The merchant must be signed up for the CIM service to use it.
       <xs:enumeration value="VisaCheckout"/>
       <xs:enumeration value="ApplePay"/>
       <xs:enumeration value="AndroidPay"/>
+      <xs:enumeration value="GooglePay"/>
     </xs:restriction>
   </xs:simpleType>
   <!--
@@ -4716,6 +4825,15 @@ The merchant must be signed up for the CIM service to use it.
             <xs:element name="paymentMethods" type="anet:ArrayOfPaymentMethod"/>
             <xs:element name="currencies" type="anet:ArrayOfCurrencyCode"/>
             <xs:element name="publicClientKey" type="xs:string" minOccurs="0" maxOccurs="1"/>
+            <xs:element name="businessInformation" type="anet:customerAddressType" minOccurs="0" maxOccurs="1" />
+            <xs:element name="merchantTimeZone" minOccurs="0"  maxOccurs="1">
+              <xs:simpleType>
+                <xs:restriction base="xs:string">
+                  <xs:maxLength value="100"/>
+                </xs:restriction>
+              </xs:simpleType>
+            </xs:element>
+            <xs:element name="contactDetails" type="anet:ArrayOfContactDetail" minOccurs="0" />
           </xs:sequence>
         </xs:extension>
       </xs:complexContent>
@@ -4748,6 +4866,43 @@ The merchant must be signed up for the CIM service to use it.
     <xs:complexType>
       <xs:complexContent>
         <xs:extension base="anet:ANetApiResponse"/>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  
+  <!-- 
+  ===================================================================
+  getCustomerPaymentProfileNonceRequest
+  This method is used to get Nonce (payment token) for an existing customer payment profile for a customer profile.
+  ===================================================================
+  -->
+  <xs:element name="getCustomerPaymentProfileNonceRequest">
+    <xs:complexType>
+      <xs:complexContent>
+        <xs:extension base="anet:ANetApiRequest">
+          <xs:sequence>
+            <xs:element maxOccurs="1" minOccurs="1" name="connectedAccessToken" type="xs:string"/>
+            <xs:element name="customerProfileId" type="anet:numericString" minOccurs="1" maxOccurs="1"/>
+            <xs:element name="customerPaymentProfileId" type="anet:numericString" minOccurs="1" maxOccurs="1"/>
+          </xs:sequence>
+        </xs:extension>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+
+  <!-- 
+  ===================================================================
+  getCustomerPaymentProfileNonceResponse
+  ===================================================================
+  -->
+  <xs:element name="getCustomerPaymentProfileNonceResponse">
+    <xs:complexType>
+      <xs:complexContent>
+        <xs:extension base="anet:ANetApiResponse">
+          <xs:sequence>
+            <xs:element name="opaqueData" type="anet:opaqueDataType" minOccurs="0" maxOccurs="1"/>
+          </xs:sequence>
+        </xs:extension>
       </xs:complexContent>
     </xs:complexType>
   </xs:element>
