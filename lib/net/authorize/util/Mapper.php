@@ -86,7 +86,7 @@ class Mapper{
 
 			return $obj;
 		}
-		else if(get_parent_class($class)){
+		else if((is_object($class) || (is_string($class) && class_exists($class ))) && get_parent_class($class)){
             //echo "Checking parent class in YAML - ".get_parent_class($class)." -".$class." - ".$property."\n";
 			return $this->getClass(get_parent_class($class), $property);
 		}
