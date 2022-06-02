@@ -7,14 +7,13 @@ namespace net\authorize\api\contract\v1;
  */
 class AuthenticateTestRequest extends ANetApiRequestType
 {
-
-
     /**
      * Json Serialize Code
      *
-     * @return array
+     * @return mixed
      */
-    public function jsonSerialize(){
+    public function jsonSerialize(): mixed
+    {
         $values = array_filter((array)get_object_vars($this),
         function ($val){
             return !is_null($val);
