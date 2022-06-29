@@ -5,7 +5,7 @@ namespace net\authorize\api\contract\v1;
 /**
  * Class representing PayPalType
  *
- * 
+ *
  * XSD Type: payPalType
  */
 class PayPalType implements \JsonSerializable
@@ -179,7 +179,9 @@ class PayPalType implements \JsonSerializable
      *
      * @return mixed
      */
-    public function jsonSerialize(): mixed {
+    #[\ReturnTypeWillChange]
+    public function jsonSerialize()
+    {
         $values = array_filter((array)get_object_vars($this),
         function ($val){
             return !is_null($val);
@@ -207,7 +209,7 @@ class PayPalType implements \JsonSerializable
         }
         return $values;
     }
-    
+
     /**
      * Json Set Code
      *
@@ -221,7 +223,7 @@ class PayPalType implements \JsonSerializable
 			$mapper = \net\authorize\util\Mapper::Instance();
 			foreach($data AS $key => $value) {
 				$classDetails = $mapper->getClass(get_class() , $key);
-	 
+
 				if($classDetails !== NULL ) {
 					if ($classDetails->isArray) {
 						if ($classDetails->isCustomDefined) {
@@ -261,6 +263,6 @@ class PayPalType implements \JsonSerializable
 			}
 		}
     }
-    
+
 }
 

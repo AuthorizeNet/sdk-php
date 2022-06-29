@@ -5,7 +5,7 @@ namespace net\authorize\api\contract\v1;
 /**
  * Class representing ARBSubscriptionMaskedType
  *
- * 
+ *
  * XSD Type: ARBSubscriptionMaskedType
  */
 class ARBSubscriptionMaskedType implements \JsonSerializable
@@ -267,7 +267,8 @@ class ARBSubscriptionMaskedType implements \JsonSerializable
      *
      * @return mixed
      */
-    public function jsonSerialize(): mixed
+    #[\ReturnTypeWillChange]
+    public function jsonSerialize()
     {
         $values = array_filter((array)get_object_vars($this),
         function ($val){
@@ -296,7 +297,7 @@ class ARBSubscriptionMaskedType implements \JsonSerializable
         }
         return $values;
     }
-    
+
     /**
      * Json Set Code
      *
@@ -310,7 +311,7 @@ class ARBSubscriptionMaskedType implements \JsonSerializable
 			$mapper = \net\authorize\util\Mapper::Instance();
 			foreach($data AS $key => $value) {
 				$classDetails = $mapper->getClass(get_class() , $key);
-	 
+
 				if($classDetails !== NULL ) {
 					if ($classDetails->isArray) {
 						if ($classDetails->isCustomDefined) {
@@ -350,6 +351,6 @@ class ARBSubscriptionMaskedType implements \JsonSerializable
 			}
 		}
     }
-    
+
 }
 

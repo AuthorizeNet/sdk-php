@@ -5,7 +5,7 @@ namespace net\authorize\api\contract\v1;
 /**
  * Class representing OrderExType
  *
- * 
+ *
  * XSD Type: orderExType
  */
 class OrderExType extends OrderType implements \JsonSerializable
@@ -44,7 +44,9 @@ class OrderExType extends OrderType implements \JsonSerializable
      *
      * @return mixed
      */
-    public function jsonSerialize(): mixed {
+    #[\ReturnTypeWillChange]
+    public function jsonSerialize()
+    {
         $values = array_filter((array)get_object_vars($this),
         function ($val){
             return !is_null($val);
@@ -77,7 +79,7 @@ class OrderExType extends OrderType implements \JsonSerializable
             return array_merge(parent::jsonSerialize(), $values);
         }
     }
-    
+
     /**
      * Json Set Code
      *
@@ -91,7 +93,7 @@ class OrderExType extends OrderType implements \JsonSerializable
 			$mapper = \net\authorize\util\Mapper::Instance();
 			foreach($data AS $key => $value) {
 				$classDetails = $mapper->getClass(get_class() , $key);
-	 
+
 				if($classDetails !== NULL ) {
 					if ($classDetails->isArray) {
 						if ($classDetails->isCustomDefined) {
@@ -131,6 +133,6 @@ class OrderExType extends OrderType implements \JsonSerializable
 			}
 		}
     }
-    
+
 }
 

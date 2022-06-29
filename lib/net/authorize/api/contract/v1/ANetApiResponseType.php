@@ -5,7 +5,7 @@ namespace net\authorize\api\contract\v1;
 /**
  * Class representing ANetApiResponseType
  *
- * 
+ *
  * XSD Type: ANetApiResponse
  */
 class ANetApiResponseType implements \JsonSerializable
@@ -97,7 +97,8 @@ class ANetApiResponseType implements \JsonSerializable
      *
      * @return mixed
      */
-    public function jsonSerialize(): mixed
+    #[\ReturnTypeWillChange]
+    public function jsonSerialize()
     {
         $values = array_filter((array)get_object_vars($this),
         function ($val){
@@ -126,7 +127,7 @@ class ANetApiResponseType implements \JsonSerializable
         }
         return $values;
     }
-    
+
     /**
      * Json Set Code
      *
@@ -140,7 +141,7 @@ class ANetApiResponseType implements \JsonSerializable
 			$mapper = \net\authorize\util\Mapper::Instance();
 			foreach($data AS $key => $value) {
 				$classDetails = $mapper->getClass(get_class() , $key);
-	 
+
 				if($classDetails !== NULL ) {
 					if ($classDetails->isArray) {
 						if ($classDetails->isCustomDefined) {
@@ -180,6 +181,6 @@ class ANetApiResponseType implements \JsonSerializable
 			}
 		}
     }
-    
+
 }
 

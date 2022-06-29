@@ -44,7 +44,9 @@ class CustomerAddressExType extends CustomerAddressType implements \JsonSerializ
      *
      * @return mixed
      */
-    public function jsonSerialize(): mixed {
+    #[\ReturnTypeWillChange]
+    public function jsonSerialize()
+    {
         $values = array_filter((array)get_object_vars($this),
         function ($val){
             return !is_null($val);

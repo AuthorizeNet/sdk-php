@@ -97,7 +97,9 @@ class UpdateCustomerPaymentProfileRequest extends ANetApiRequestType
      *
      * @return mixed
      */
-    public function jsonSerialize(): mixed {
+    #[\ReturnTypeWillChange]
+    public function jsonSerialize()
+    {
         $values = array_filter((array)get_object_vars($this),
         function ($val){
             return !is_null($val);
@@ -130,6 +132,6 @@ class UpdateCustomerPaymentProfileRequest extends ANetApiRequestType
             return array_merge(parent::jsonSerialize(), $values);
         }
     }
-    
+
 }
 

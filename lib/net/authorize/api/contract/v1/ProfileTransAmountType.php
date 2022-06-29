@@ -5,7 +5,7 @@ namespace net\authorize\api\contract\v1;
 /**
  * Class representing ProfileTransAmountType
  *
- * 
+ *
  * XSD Type: profileTransAmountType
  */
 class ProfileTransAmountType implements \JsonSerializable
@@ -186,7 +186,9 @@ class ProfileTransAmountType implements \JsonSerializable
      *
      * @return mixed
      */
-    public function jsonSerialize(): mixed {
+    #[\ReturnTypeWillChange]
+    public function jsonSerialize()
+    {
         $values = array_filter((array)get_object_vars($this),
         function ($val){
             return !is_null($val);
@@ -214,7 +216,7 @@ class ProfileTransAmountType implements \JsonSerializable
         }
         return $values;
     }
-    
+
     /**
      * Json Set Code
      *
@@ -228,7 +230,7 @@ class ProfileTransAmountType implements \JsonSerializable
 			$mapper = \net\authorize\util\Mapper::Instance();
 			foreach($data AS $key => $value) {
 				$classDetails = $mapper->getClass(get_class() , $key);
-	 
+
 				if($classDetails !== NULL ) {
 					if ($classDetails->isArray) {
 						if ($classDetails->isCustomDefined) {
@@ -268,6 +270,6 @@ class ProfileTransAmountType implements \JsonSerializable
 			}
 		}
     }
-    
+
 }
 

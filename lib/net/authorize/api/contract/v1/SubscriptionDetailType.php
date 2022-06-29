@@ -5,7 +5,7 @@ namespace net\authorize\api\contract\v1;
 /**
  * Class representing SubscriptionDetailType
  *
- * 
+ *
  * XSD Type: SubscriptionDetail
  */
 class SubscriptionDetailType implements \JsonSerializable
@@ -449,7 +449,9 @@ class SubscriptionDetailType implements \JsonSerializable
      *
      * @return mixed
      */
-    public function jsonSerialize(): mixed {
+    #[\ReturnTypeWillChange]
+    public function jsonSerialize()
+    {
         $values = array_filter((array)get_object_vars($this),
         function ($val){
             return !is_null($val);
@@ -477,7 +479,7 @@ class SubscriptionDetailType implements \JsonSerializable
         }
         return $values;
     }
-    
+
     /**
      * Json Set Code
      *
@@ -491,7 +493,7 @@ class SubscriptionDetailType implements \JsonSerializable
 			$mapper = \net\authorize\util\Mapper::Instance();
 			foreach($data AS $key => $value) {
 				$classDetails = $mapper->getClass(get_class() , $key);
-	 
+
 				if($classDetails !== NULL ) {
 					if ($classDetails->isArray) {
 						if ($classDetails->isCustomDefined) {
@@ -531,6 +533,6 @@ class SubscriptionDetailType implements \JsonSerializable
 			}
 		}
     }
-    
+
 }
 
