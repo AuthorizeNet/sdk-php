@@ -5,7 +5,7 @@ namespace net\authorize\api\contract\v1;
 /**
  * Class representing ProcessingOptionsType
  *
- * 
+ *
  * XSD Type: processingOptions
  */
 class ProcessingOptionsType implements \JsonSerializable
@@ -123,9 +123,11 @@ class ProcessingOptionsType implements \JsonSerializable
     /**
      * Json Serialize Code
      *
-     * @return array
+     * @return mixed
      */
-    public function jsonSerialize(){
+    #[\ReturnTypeWillChange]
+    public function jsonSerialize()
+    {
         $values = array_filter((array)get_object_vars($this),
         function ($val){
             return !is_null($val);
@@ -153,7 +155,7 @@ class ProcessingOptionsType implements \JsonSerializable
         }
         return $values;
     }
-    
+
     /**
      * Json Set Code
      *
@@ -167,7 +169,7 @@ class ProcessingOptionsType implements \JsonSerializable
 			$mapper = \net\authorize\util\Mapper::Instance();
 			foreach($data AS $key => $value) {
 				$classDetails = $mapper->getClass(get_class() , $key);
-	 
+
 				if($classDetails !== NULL ) {
 					if ($classDetails->isArray) {
 						if ($classDetails->isCustomDefined) {
@@ -207,6 +209,6 @@ class ProcessingOptionsType implements \JsonSerializable
 			}
 		}
     }
-    
+
 }
 

@@ -5,7 +5,7 @@ namespace net\authorize\api\contract\v1;
 /**
  * Class representing FingerPrintType
  *
- * 
+ *
  * XSD Type: fingerPrintType
  */
 class FingerPrintType implements \JsonSerializable
@@ -150,9 +150,11 @@ class FingerPrintType implements \JsonSerializable
     /**
      * Json Serialize Code
      *
-     * @return array
+     * @return mixed
      */
-    public function jsonSerialize(){
+    #[\ReturnTypeWillChange]
+    public function jsonSerialize()
+    {
         $values = array_filter((array)get_object_vars($this),
         function ($val){
             return !is_null($val);
@@ -180,7 +182,7 @@ class FingerPrintType implements \JsonSerializable
         }
         return $values;
     }
-    
+
     /**
      * Json Set Code
      *
@@ -194,7 +196,7 @@ class FingerPrintType implements \JsonSerializable
 			$mapper = \net\authorize\util\Mapper::Instance();
 			foreach($data AS $key => $value) {
 				$classDetails = $mapper->getClass(get_class() , $key);
-	 
+
 				if($classDetails !== NULL ) {
 					if ($classDetails->isArray) {
 						if ($classDetails->isCustomDefined) {
@@ -234,6 +236,6 @@ class FingerPrintType implements \JsonSerializable
 			}
 		}
     }
-    
+
 }
 
