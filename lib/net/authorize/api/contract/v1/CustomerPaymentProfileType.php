@@ -5,7 +5,7 @@ namespace net\authorize\api\contract\v1;
 /**
  * Class representing CustomerPaymentProfileType
  *
- * 
+ *
  * XSD Type: customerPaymentProfileType
  */
 class CustomerPaymentProfileType extends CustomerPaymentProfileBaseType implements \JsonSerializable
@@ -123,9 +123,11 @@ class CustomerPaymentProfileType extends CustomerPaymentProfileBaseType implemen
     /**
      * Json Serialize Code
      *
-     * @return array
+     * @return mixed
      */
-    public function jsonSerialize(){
+    #[\ReturnTypeWillChange]
+    public function jsonSerialize()
+    {
         $values = array_filter((array)get_object_vars($this),
         function ($val){
             return !is_null($val);
@@ -158,7 +160,7 @@ class CustomerPaymentProfileType extends CustomerPaymentProfileBaseType implemen
             return array_merge(parent::jsonSerialize(), $values);
         }
     }
-    
+
     /**
      * Json Set Code
      *
@@ -172,7 +174,7 @@ class CustomerPaymentProfileType extends CustomerPaymentProfileBaseType implemen
 			$mapper = \net\authorize\util\Mapper::Instance();
 			foreach($data AS $key => $value) {
 				$classDetails = $mapper->getClass(get_class() , $key);
-	 
+
 				if($classDetails !== NULL ) {
 					if ($classDetails->isArray) {
 						if ($classDetails->isCustomDefined) {
@@ -212,6 +214,6 @@ class CustomerPaymentProfileType extends CustomerPaymentProfileBaseType implemen
 			}
 		}
     }
-    
+
 }
 

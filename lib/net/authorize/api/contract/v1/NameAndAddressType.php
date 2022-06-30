@@ -5,7 +5,7 @@ namespace net\authorize\api\contract\v1;
 /**
  * Class representing NameAndAddressType
  *
- * 
+ *
  * XSD Type: nameAndAddressType
  */
 class NameAndAddressType implements \JsonSerializable
@@ -231,9 +231,11 @@ class NameAndAddressType implements \JsonSerializable
     /**
      * Json Serialize Code
      *
-     * @return array
+     * @return mixed
      */
-    public function jsonSerialize(){
+    #[\ReturnTypeWillChange]
+    public function jsonSerialize()
+    {
         $values = array_filter((array)get_object_vars($this),
         function ($val){
             return !is_null($val);
@@ -261,7 +263,7 @@ class NameAndAddressType implements \JsonSerializable
         }
         return $values;
     }
-    
+
     /**
      * Json Set Code
      *
@@ -275,7 +277,7 @@ class NameAndAddressType implements \JsonSerializable
 			$mapper = \net\authorize\util\Mapper::Instance();
 			foreach($data AS $key => $value) {
 				$classDetails = $mapper->getClass(get_class() , $key);
-	 
+
 				if($classDetails !== NULL ) {
 					if ($classDetails->isArray) {
 						if ($classDetails->isCustomDefined) {
@@ -315,6 +317,6 @@ class NameAndAddressType implements \JsonSerializable
 			}
 		}
     }
-    
+
 }
 

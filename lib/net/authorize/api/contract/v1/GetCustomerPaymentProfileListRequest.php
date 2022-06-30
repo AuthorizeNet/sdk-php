@@ -121,9 +121,11 @@ class GetCustomerPaymentProfileListRequest extends ANetApiRequestType
     /**
      * Json Serialize Code
      *
-     * @return array
+     * @return mixed
      */
-    public function jsonSerialize(){
+    #[\ReturnTypeWillChange]
+    public function jsonSerialize()
+    {
         $values = array_filter((array)get_object_vars($this),
         function ($val){
             return !is_null($val);
@@ -156,6 +158,6 @@ class GetCustomerPaymentProfileListRequest extends ANetApiRequestType
             return array_merge(parent::jsonSerialize(), $values);
         }
     }
-    
+
 }
 

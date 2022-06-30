@@ -5,7 +5,7 @@ namespace net\authorize\api\contract\v1;
 /**
  * Class representing CustomerProfileType
  *
- * 
+ *
  * XSD Type: customerProfileType
  */
 class CustomerProfileType extends CustomerProfileBaseType implements \JsonSerializable
@@ -167,9 +167,11 @@ class CustomerProfileType extends CustomerProfileBaseType implements \JsonSerial
     /**
      * Json Serialize Code
      *
-     * @return array
+     * @return mixed
      */
-    public function jsonSerialize(){
+    #[\ReturnTypeWillChange]
+    public function jsonSerialize()
+    {
         $values = array_filter((array)get_object_vars($this),
         function ($val){
             return !is_null($val);
@@ -202,7 +204,7 @@ class CustomerProfileType extends CustomerProfileBaseType implements \JsonSerial
             return array_merge(parent::jsonSerialize(), $values);
         }
     }
-    
+
     /**
      * Json Set Code
      *
@@ -216,7 +218,7 @@ class CustomerProfileType extends CustomerProfileBaseType implements \JsonSerial
 			$mapper = \net\authorize\util\Mapper::Instance();
 			foreach($data AS $key => $value) {
 				$classDetails = $mapper->getClass(get_class() , $key);
-	 
+
 				if($classDetails !== NULL ) {
 					if ($classDetails->isArray) {
 						if ($classDetails->isCustomDefined) {
@@ -256,6 +258,6 @@ class CustomerProfileType extends CustomerProfileBaseType implements \JsonSerial
 			}
 		}
     }
-    
+
 }
 
