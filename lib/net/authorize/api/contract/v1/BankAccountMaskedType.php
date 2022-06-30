@@ -177,8 +177,8 @@ class BankAccountMaskedType implements \JsonSerializable
      * Json Serialize Code
      *
      * @return mixed
-     * #[\ReturnTypeWillChange]
      */
+    #[\ReturnTypeWillChange]
     public function jsonSerialize()
     {
         $values = array_filter((array)get_object_vars($this),
