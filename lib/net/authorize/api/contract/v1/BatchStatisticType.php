@@ -5,7 +5,7 @@ namespace net\authorize\api\contract\v1;
 /**
  * Class representing BatchStatisticType
  *
- * 
+ *
  * XSD Type: batchStatisticType
  */
 class BatchStatisticType implements \JsonSerializable
@@ -580,7 +580,7 @@ class BatchStatisticType implements \JsonSerializable
 
 
     // Json Serialize Code
-    public function jsonSerialize(){
+    public function jsonSerialize(): mixed {
         $values = array_filter((array)get_object_vars($this),
         function ($val){
             return !is_null($val);
@@ -608,7 +608,7 @@ class BatchStatisticType implements \JsonSerializable
         }
         return $values;
     }
-    
+
     // Json Set Code
     public function set($data)
     {
@@ -616,7 +616,7 @@ class BatchStatisticType implements \JsonSerializable
 			$mapper = \net\authorize\util\Mapper::Instance();
 			foreach($data AS $key => $value) {
 				$classDetails = $mapper->getClass(get_class() , $key);
-	 
+
 				if($classDetails !== NULL ) {
 					if ($classDetails->isArray) {
 						if ($classDetails->isCustomDefined) {
@@ -656,6 +656,6 @@ class BatchStatisticType implements \JsonSerializable
 			}
 		}
     }
-    
+
 }
 

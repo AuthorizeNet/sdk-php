@@ -37,7 +37,7 @@ class IsAliveRequest
 
 
     // Json Serialize Code
-    public function jsonSerialize(){
+    public function jsonSerialize() {
         $values = array_filter((array)get_object_vars($this),
         function ($val){
             return !is_null($val);
@@ -65,6 +65,6 @@ class IsAliveRequest
         }
         return $values;
     }
-    
+
 }
 

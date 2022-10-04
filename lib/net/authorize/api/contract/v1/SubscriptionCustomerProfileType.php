@@ -5,7 +5,7 @@ namespace net\authorize\api\contract\v1;
 /**
  * Class representing SubscriptionCustomerProfileType
  *
- * 
+ *
  * XSD Type: subscriptionCustomerProfileType
  */
 class SubscriptionCustomerProfileType extends CustomerProfileExType implements \JsonSerializable
@@ -69,7 +69,7 @@ class SubscriptionCustomerProfileType extends CustomerProfileExType implements \
 
 
     // Json Serialize Code
-    public function jsonSerialize(){
+    public function jsonSerialize(): mixed {
         $values = array_filter((array)get_object_vars($this),
         function ($val){
             return !is_null($val);
@@ -105,7 +105,7 @@ class SubscriptionCustomerProfileType extends CustomerProfileExType implements \
 			$mapper = \net\authorize\util\Mapper::Instance();
 			foreach($data AS $key => $value) {
 				$classDetails = $mapper->getClass(get_class() , $key);
-	 
+
 				if($classDetails !== NULL ) {
 					if ($classDetails->isArray) {
 						if ($classDetails->isCustomDefined) {
@@ -145,6 +145,6 @@ class SubscriptionCustomerProfileType extends CustomerProfileExType implements \
 			}
 		}
     }
-    
+
 }
 

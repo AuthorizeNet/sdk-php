@@ -5,7 +5,7 @@ namespace net\authorize\api\contract\v1;
 /**
  * Class representing TransactionRequestType
  *
- * 
+ *
  * XSD Type: transactionRequestType
  */
 class TransactionRequestType implements \JsonSerializable
@@ -1118,7 +1118,7 @@ class TransactionRequestType implements \JsonSerializable
 
 
     // Json Serialize Code
-    public function jsonSerialize(){
+    public function jsonSerialize(): mixed {
         $values = array_filter((array)get_object_vars($this),
         function ($val){
             return !is_null($val);
@@ -1146,7 +1146,7 @@ class TransactionRequestType implements \JsonSerializable
         }
         return $values;
     }
-    
+
     // Json Set Code
     public function set($data)
     {
@@ -1154,7 +1154,7 @@ class TransactionRequestType implements \JsonSerializable
 			$mapper = \net\authorize\util\Mapper::Instance();
 			foreach($data AS $key => $value) {
 				$classDetails = $mapper->getClass(get_class() , $key);
-	 
+
 				if($classDetails !== NULL ) {
 					if ($classDetails->isArray) {
 						if ($classDetails->isCustomDefined) {
@@ -1194,6 +1194,6 @@ class TransactionRequestType implements \JsonSerializable
 			}
 		}
     }
-    
+
 }
 

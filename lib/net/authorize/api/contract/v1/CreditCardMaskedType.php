@@ -5,7 +5,7 @@ namespace net\authorize\api\contract\v1;
 /**
  * Class representing CreditCardMaskedType
  *
- * 
+ *
  * XSD Type: creditCardMaskedType
  */
 class CreditCardMaskedType implements \JsonSerializable
@@ -175,7 +175,7 @@ class CreditCardMaskedType implements \JsonSerializable
 
 
     // Json Serialize Code
-    public function jsonSerialize(){
+    public function jsonSerialize(): mixed {
         $values = array_filter((array)get_object_vars($this),
         function ($val){
             return !is_null($val);
@@ -203,7 +203,7 @@ class CreditCardMaskedType implements \JsonSerializable
         }
         return $values;
     }
-    
+
     // Json Set Code
     public function set($data)
     {
@@ -211,7 +211,7 @@ class CreditCardMaskedType implements \JsonSerializable
 			$mapper = \net\authorize\util\Mapper::Instance();
 			foreach($data AS $key => $value) {
 				$classDetails = $mapper->getClass(get_class() , $key);
-	 
+
 				if($classDetails !== NULL ) {
 					if ($classDetails->isArray) {
 						if ($classDetails->isCustomDefined) {
@@ -251,6 +251,6 @@ class CreditCardMaskedType implements \JsonSerializable
 			}
 		}
     }
-    
+
 }
 

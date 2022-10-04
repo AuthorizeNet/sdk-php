@@ -64,7 +64,7 @@ class MessageAType implements \JsonSerializable
 
 
     // Json Serialize Code
-    public function jsonSerialize(){
+    public function jsonSerialize(): mixed {
         $values = array_filter((array)get_object_vars($this),
         function ($val){
             return !is_null($val);
@@ -92,7 +92,7 @@ class MessageAType implements \JsonSerializable
         }
         return $values;
     }
-    
+
     // Json Set Code
     public function set($data)
     {
@@ -100,7 +100,7 @@ class MessageAType implements \JsonSerializable
 			$mapper = \net\authorize\util\Mapper::Instance();
 			foreach($data AS $key => $value) {
 				$classDetails = $mapper->getClass(get_class() , $key);
-	 
+
 				if($classDetails !== NULL ) {
 					if ($classDetails->isArray) {
 						if ($classDetails->isCustomDefined) {
@@ -140,6 +140,6 @@ class MessageAType implements \JsonSerializable
 			}
 		}
     }
-    
+
 }
 
