@@ -62,6 +62,7 @@ class MerchantAuthenticationType implements \JsonSerializable
      *
      * @return string
      */
+	#[\ReturnTypeWillChange]
     public function getName()
     {
         return $this->name;
@@ -84,6 +85,7 @@ class MerchantAuthenticationType implements \JsonSerializable
      *
      * @return string
      */
+	#[\ReturnTypeWillChange]
     public function getTransactionKey()
     {
         return $this->transactionKey;
@@ -106,6 +108,7 @@ class MerchantAuthenticationType implements \JsonSerializable
      *
      * @return string
      */
+	#[\ReturnTypeWillChange]
     public function getSessionToken()
     {
         return $this->sessionToken;
@@ -128,6 +131,7 @@ class MerchantAuthenticationType implements \JsonSerializable
      *
      * @return string
      */
+	#[\ReturnTypeWillChange]
     public function getPassword()
     {
         return $this->password;
@@ -150,6 +154,7 @@ class MerchantAuthenticationType implements \JsonSerializable
      *
      * @return \net\authorize\api\contract\v1\ImpersonationAuthenticationType
      */
+	#[\ReturnTypeWillChange]
     public function getImpersonationAuthentication()
     {
         return $this->impersonationAuthentication;
@@ -173,6 +178,7 @@ class MerchantAuthenticationType implements \JsonSerializable
      *
      * @return \net\authorize\api\contract\v1\FingerPrintType
      */
+	#[\ReturnTypeWillChange]
     public function getFingerPrint()
     {
         return $this->fingerPrint;
@@ -258,6 +264,7 @@ class MerchantAuthenticationType implements \JsonSerializable
 
 
     // Json Serialize Code
+#[\ReturnTypeWillChange]
     public function jsonSerialize(){
         $values = array_filter((array)get_object_vars($this),
         function ($val){
