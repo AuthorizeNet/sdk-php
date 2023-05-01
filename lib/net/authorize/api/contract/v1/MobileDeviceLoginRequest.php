@@ -10,7 +10,7 @@ class MobileDeviceLoginRequest extends ANetApiRequestType
 
 
     // Json Serialize Code
-    public function jsonSerialize(){
+    public function jsonSerialize(): mixed {
         $values = array_filter((array)get_object_vars($this),
         function ($val){
             return !is_null($val);
