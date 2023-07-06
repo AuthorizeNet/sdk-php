@@ -499,6 +499,7 @@ class OrderType implements \JsonSerializable
 
 
     // Json Serialize Code
+    #[\ReturnTypeWillChange]
     public function jsonSerialize(){
         $values = array_filter((array)get_object_vars($this),
         function ($val){

@@ -69,6 +69,7 @@ class SubscriptionCustomerProfileType extends CustomerProfileExType implements \
 
 
     // Json Serialize Code
+    #[\ReturnTypeWillChange]
     public function jsonSerialize(){
         $values = array_filter((array)get_object_vars($this),
         function ($val){
