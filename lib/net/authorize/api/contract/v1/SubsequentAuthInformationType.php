@@ -17,6 +17,11 @@ class SubsequentAuthInformationType implements \JsonSerializable
     private $originalNetworkTransId = null;
 
     /**
+     * @property float $originalAuthAmount
+     */
+    private $originalAuthAmount = null;
+
+    /**
      * @property string $reason
      */
     private $reason = null;
@@ -44,6 +49,28 @@ class SubsequentAuthInformationType implements \JsonSerializable
     }
 
     /**
+     * Gets as originalAuthAmount
+     *
+     * @return float
+     */
+    public function getOriginalAuthAmount()
+    {
+        return $this->originalAuthAmount;
+    }
+
+    /**
+     * Sets a new originalAuthAmount
+     *
+     * @param float $originalAuthAmount
+     * @return self
+     */
+    public function setOriginalAuthAmount($originalAuthAmount)
+    {
+        $this->originalAuthAmount = $originalAuthAmount;
+        return $this;
+    }
+
+    /**
      * Gets as reason
      *
      * @return string
@@ -67,6 +94,7 @@ class SubsequentAuthInformationType implements \JsonSerializable
 
 
     // Json Serialize Code
+    #[\ReturnTypeWillChange]
     public function jsonSerialize(){
         $values = array_filter((array)get_object_vars($this),
         function ($val){
@@ -93,18 +121,13 @@ class SubsequentAuthInformationType implements \JsonSerializable
                 }
             }
         }
-        if (get_parent_class() == ""){
-            return $values;
-        }
-        else{
-            return array_merge(parent::jsonSerialize(), $values);
-        }
+        return $values;
     }
     
     // Json Set Code
     public function set($data)
     {
-        if(is_array($data) || is_object($data)) {
+        if(is_array($data) || is_object($data)) {
 			$mapper = \net\authorize\util\Mapper::Instance();
 			foreach($data AS $key => $value) {
 				$classDetails = $mapper->getClass(get_class() , $key);

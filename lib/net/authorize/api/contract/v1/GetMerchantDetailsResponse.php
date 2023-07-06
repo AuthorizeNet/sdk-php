@@ -54,6 +54,22 @@ class GetMerchantDetailsResponse extends ANetApiResponseType
     private $publicClientKey = null;
 
     /**
+     * @property \net\authorize\api\contract\v1\CustomerAddressType
+     * $businessInformation
+     */
+    private $businessInformation = null;
+
+    /**
+     * @property string $merchantTimeZone
+     */
+    private $merchantTimeZone = null;
+
+    /**
+     * @property \net\authorize\api\contract\v1\ContactDetailType[] $contactDetails
+     */
+    private $contactDetails = null;
+
+    /**
      * Gets as isTestMode
      *
      * @return boolean
@@ -421,11 +437,111 @@ class GetMerchantDetailsResponse extends ANetApiResponseType
         return $this;
     }
 
+    /**
+     * Gets as businessInformation
+     *
+     * @return \net\authorize\api\contract\v1\CustomerAddressType
+     */
+    public function getBusinessInformation()
+    {
+        return $this->businessInformation;
+    }
+
+    /**
+     * Sets a new businessInformation
+     *
+     * @param \net\authorize\api\contract\v1\CustomerAddressType $businessInformation
+     * @return self
+     */
+    public function setBusinessInformation(\net\authorize\api\contract\v1\CustomerAddressType $businessInformation)
+    {
+        $this->businessInformation = $businessInformation;
+        return $this;
+    }
+
+    /**
+     * Gets as merchantTimeZone
+     *
+     * @return string
+     */
+    public function getMerchantTimeZone()
+    {
+        return $this->merchantTimeZone;
+    }
+
+    /**
+     * Sets a new merchantTimeZone
+     *
+     * @param string $merchantTimeZone
+     * @return self
+     */
+    public function setMerchantTimeZone($merchantTimeZone)
+    {
+        $this->merchantTimeZone = $merchantTimeZone;
+        return $this;
+    }
+
+    /**
+     * Adds as contactDetail
+     *
+     * @return self
+     * @param \net\authorize\api\contract\v1\ContactDetailType $contactDetail
+     */
+    public function addToContactDetails(\net\authorize\api\contract\v1\ContactDetailType $contactDetail)
+    {
+        $this->contactDetails[] = $contactDetail;
+        return $this;
+    }
+
+    /**
+     * isset contactDetails
+     *
+     * @param scalar $index
+     * @return boolean
+     */
+    public function issetContactDetails($index)
+    {
+        return isset($this->contactDetails[$index]);
+    }
+
+    /**
+     * unset contactDetails
+     *
+     * @param scalar $index
+     * @return void
+     */
+    public function unsetContactDetails($index)
+    {
+        unset($this->contactDetails[$index]);
+    }
+
+    /**
+     * Gets as contactDetails
+     *
+     * @return \net\authorize\api\contract\v1\ContactDetailType[]
+     */
+    public function getContactDetails()
+    {
+        return $this->contactDetails;
+    }
+
+    /**
+     * Sets a new contactDetails
+     *
+     * @param \net\authorize\api\contract\v1\ContactDetailType[] $contactDetails
+     * @return self
+     */
+    public function setContactDetails(array $contactDetails)
+    {
+        $this->contactDetails = $contactDetails;
+        return $this;
+    }
+
 
     // Json Set Code
     public function set($data)
     {
-        if(is_array($data) || is_object($data)) {
+        if(is_array($data) || is_object($data)) {
 			$mapper = \net\authorize\util\Mapper::Instance();
 			foreach($data AS $key => $value) {
 				$classDetails = $mapper->getClass(get_class() , $key);

@@ -500,3 +500,43 @@ net\authorize\api\contract\v1\TransactionDetailsType:
                 getter: getShipFrom
                 setter: setShipFrom
             type: net\authorize\api\contract\v1\NameAndAddressType
+        networkTransId:
+            expose: true
+            access_type: public_method
+            serialized_name: networkTransId
+            xml_element:
+                namespace: AnetApi/xml/v1/schema/AnetApiSchema.xsd
+            accessor:
+                getter: getNetworkTransId
+                setter: setNetworkTransId
+            type: string
+        originalNetworkTransId:
+            expose: true
+            access_type: public_method
+            serialized_name: originalNetworkTransId
+            xml_element:
+                namespace: AnetApi/xml/v1/schema/AnetApiSchema.xsd
+            accessor:
+                getter: getOriginalNetworkTransId
+                setter: setOriginalNetworkTransId
+            type: string
+        originalAuthAmount:
+            expose: true
+            access_type: public_method
+            serialized_name: originalAuthAmount
+            xml_element:
+                namespace: AnetApi/xml/v1/schema/AnetApiSchema.xsd
+            accessor:
+                getter: getOriginalAuthAmount
+                setter: setOriginalAuthAmount
+            type: float
+        authorizationIndicator:
+            expose: true
+            access_type: public_method
+            serialized_name: authorizationIndicator
+            xml_element:
+                namespace: AnetApi/xml/v1/schema/AnetApiSchema.xsd
+            accessor:
+                getter: getAuthorizationIndicator
+                setter: setAuthorizationIndicator
+            type: string

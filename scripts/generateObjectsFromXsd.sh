@@ -5,21 +5,23 @@ echo `date` > $logfile
 # sudo apt-get install php5-curl
 # composer install
 
-echo Getting latest XSD
-XSDURL=https://apitest.authorize.net/xml/v1/schema/AnetApiSchema.xsd
-if [ -f AnetApiSchema.xsd ]; then
-    echo "Renaming existing schema file"
-    mv AnetApiSchema.xsd AnetApiSchema.xsd.old
-fi
-wget $XSDURL 1>> $logfile 2>&1
-ERRORCODE=$?
-if [ $ERRORCODE -ne 0 ];then
-    echo "Unable to download XSD from $XSDURL"
-    exit $ERRORCODE
-fi
+# echo Getting latest XSD
+# XSDURL=https://apitest.authorize.net/xml/v1/schema/AnetApiSchema.xsd
+# if [ -f AnetApiSchema.xsd ]; then
+    # echo "Renaming existing schema file"
+    # mv AnetApiSchema.xsd AnetApiSchema.xsd.old
+# fi
+# wget $XSDURL 1>> $logfile 2>&1
+# ERRORCODE=$?
+# if [ $ERRORCODE -ne 0 ];then
+    # echo "Unable to download XSD from $XSDURL"
+    # exit $ERRORCODE
+# fi
 if [ ! -f AnetApiSchema.xsd ]; then
     echo "SchemaFile not found"
     exit 1
+else
+	echo "SchemaFile Found!!!"
 fi
 
 #create directories that do not exist

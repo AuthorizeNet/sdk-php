@@ -25,6 +25,10 @@ for cmd in $cmdlist ; do
     fi
 done
 
+# Removing non-printable UTF-8 character (Non-breakable space)
+echo Removing non-printable UTF-8 character
+grep --null -lr $'\xC2\xA0' $currdir/lib/net/authorize/api/contract/v1/ | xargs --null sed -i $'s/\xC2\xA0/ /g'
+
 echo Exiting, Update completed successfully.
 echo Compile, run tests and commit to git-hub.
 echo Completed at `date`

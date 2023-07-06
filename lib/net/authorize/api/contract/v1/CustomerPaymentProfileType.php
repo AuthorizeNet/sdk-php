@@ -32,6 +32,12 @@ class CustomerPaymentProfileType extends CustomerPaymentProfileBaseType implemen
     private $defaultPaymentProfile = null;
 
     /**
+     * @property \net\authorize\api\contract\v1\SubsequentAuthInformationType
+     * $subsequentAuthInformation
+     */
+    private $subsequentAuthInformation = null;
+
+    /**
      * Gets as payment
      *
      * @return \net\authorize\api\contract\v1\PaymentType
@@ -119,8 +125,32 @@ class CustomerPaymentProfileType extends CustomerPaymentProfileBaseType implemen
         return $this;
     }
 
+    /**
+     * Gets as subsequentAuthInformation
+     *
+     * @return \net\authorize\api\contract\v1\SubsequentAuthInformationType
+     */
+    public function getSubsequentAuthInformation()
+    {
+        return $this->subsequentAuthInformation;
+    }
+
+    /**
+     * Sets a new subsequentAuthInformation
+     *
+     * @param \net\authorize\api\contract\v1\SubsequentAuthInformationType
+     * $subsequentAuthInformation
+     * @return self
+     */
+    public function setSubsequentAuthInformation(\net\authorize\api\contract\v1\SubsequentAuthInformationType $subsequentAuthInformation)
+    {
+        $this->subsequentAuthInformation = $subsequentAuthInformation;
+        return $this;
+    }
+
 
     // Json Serialize Code
+    #[\ReturnTypeWillChange]
     public function jsonSerialize(){
         $values = array_filter((array)get_object_vars($this),
         function ($val){
@@ -147,18 +177,13 @@ class CustomerPaymentProfileType extends CustomerPaymentProfileBaseType implemen
                 }
             }
         }
-        if (get_parent_class() == ""){
-            return $values;
-        }
-        else{
-            return array_merge(parent::jsonSerialize(), $values);
-        }
+        return array_merge(parent::jsonSerialize(), $values);
     }
-    
+
     // Json Set Code
     public function set($data)
     {
-        if(is_array($data) || is_object($data)) {
+        if(is_array($data) || is_object($data)) {
 			$mapper = \net\authorize\util\Mapper::Instance();
 			foreach($data AS $key => $value) {
 				$classDetails = $mapper->getClass(get_class() , $key);

@@ -2,13 +2,43 @@ language: php
 
 sudo: false
 
-env:
-    - TEST_SUITE=samples
-
-php:
-    - 5.6
-    - 7.0
-    - 7.1
+matrix:
+  include:
+    - php: 5.6
+      env: 
+        - PHPUNIT_VERSION=5.6.*
+        - TEST_SUITE=samples
+      dist: trusty
+    - php: 7.0
+      env: 
+        - PHPUNIT_VERSION=5.6.*
+        - TEST_SUITE=samples
+      dist: trusty
+    - php: 7.1
+      env: 
+        - PHPUNIT_VERSION=5.7.*
+        - TEST_SUITE=samples
+      dist: trusty
+    - php: 7.2
+      env: 
+        - PHPUNIT_VERSION=8.5.*
+        - TEST_SUITE=samples
+      dist: bionic
+    - php: 7.3
+      env: 
+        - PHPUNIT_VERSION=9.5.*
+        - TEST_SUITE=samples
+      dist: bionic
+    - php: 7.4
+      env: 
+        - PHPUNIT_VERSION=9.5.*
+        - TEST_SUITE=samples
+      dist: bionic
+    - php: 8.0
+      env: 
+        - PHPUNIT_VERSION=9.5.*
+        - TEST_SUITE=samples
+      dist: bionic
 
 before_install:
     # execute all of the commands which need to be executed 
@@ -18,7 +48,8 @@ before_install:
 install:
     # install all of the dependencies we need here
     - pecl install xmldiff
-    - composer install --prefer-dist
+    - composer require "phpunit/phpunit:${PHPUNIT_VERSION}" --no-update
+    - composer update --prefer-dist
 
 before_script:
     # execute all of the commands which need to be executed 
@@ -28,7 +59,7 @@ before_script:
 script:
     # execute all of the tests or other commands to determine
     # whether the build will pass or fail
-    - if [[ "$TEST_SUITE" == "samples" ]]; then phpenv config-rm xdebug.ini; cp -R lib sample-code-php/; cp -R vendor sample-code-php/; cd sample-code-php; vendor/phpunit/phpunit/phpunit test-runner.php .;  fi
+    - if [[ "$TEST_SUITE" == "samples" ]]; then phpenv config-rm xdebug.ini; cp -R lib sample-code-php/; cp -R vendor sample-code-php/; cd sample-code-php; vendor/phpunit/phpunit/phpunit TestRunner.php .;  fi
 
 after_script:
 #    - if [[ "$TEST_SUITE" == "coverage" ]]; then wget https://scrutinizer-ci.com/ocular.phar; fi

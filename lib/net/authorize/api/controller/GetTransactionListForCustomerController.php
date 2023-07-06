@@ -8,7 +8,7 @@ class GetTransactionListForCustomerController extends ApiOperationBase
 {
     public function __construct(AnetApiRequestType $request)
     {
-        $responseType = 'net\authorize\api\contract\v1\GetTransactionListResponse';
+        $responseType = 'net\authorize\api\contract\v1\GetTransactionListForCustomerResponse';
         parent::__construct($request, $responseType);
     }
 
