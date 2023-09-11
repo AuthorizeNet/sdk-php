@@ -236,7 +236,7 @@ class ProfileTransRefundType extends ProfileTransAmountType implements \JsonSeri
         });
         $mapper = \net\authorize\util\Mapper::Instance();
         foreach($values as $key => $value){
-            $classDetails = $mapper->getClass(get_class() , $key);
+            $classDetails = $mapper->getClass(get_class($this) , $key);
             if (isset($value)){
                 if ($classDetails->className === 'Date'){
                     $dateTime = $value->format('Y-m-d');
@@ -264,7 +264,7 @@ class ProfileTransRefundType extends ProfileTransAmountType implements \JsonSeri
         if(is_array($data) || is_object($data)) {
 			$mapper = \net\authorize\util\Mapper::Instance();
 			foreach($data AS $key => $value) {
-				$classDetails = $mapper->getClass(get_class() , $key);
+				$classDetails = $mapper->getClass(get_class($this) , $key);
 	 
 				if($classDetails !== NULL ) {
 					if ($classDetails->isArray) {
