@@ -1560,7 +1560,9 @@ class TransactionDetailsType implements \JsonSerializable
 
 
     // Json Serialize Code
-    public function jsonSerialize(){
+    #[\ReturnTypeWillChange]
+    public function jsonSerialize(): mixed
+    {
         $values = array_filter((array)get_object_vars($this),
         function ($val){
             return !is_null($val);
