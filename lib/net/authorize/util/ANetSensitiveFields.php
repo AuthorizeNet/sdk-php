@@ -33,8 +33,8 @@ class ANetSensitiveFields
             }
             
             catch(Exception $e){
-                echo "ERROR deserializing json from : " . $userConfigFilePath  . "; Exception : " . $e->getMessage(); 
                 $useDefaultConfigFile = true;
+                exit ("ERROR deserializing json from : " . $userConfigFilePath  . "; Exception : " . $e->getMessage()); 
             }
         }
         
