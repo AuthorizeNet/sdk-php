@@ -5,7 +5,7 @@
 [![Packagist Stable Version](https://poser.pugx.org/authorizenet/authorizenet/v/stable.svg)](https://packagist.org/packages/authorizenet/authorizenet)
 
 ## Requirements
-* PHP 5.6+
+* PHP 5.6 to 8.x.x
 * cURL PHP Extension
 * JSON PHP Extension
 * An Authorize.Net account (see _Registration & Configuration_ section below)
@@ -56,7 +56,7 @@ override the new secure-http default setting)*.
 {
   "require": {
   "php": ">=5.6",
-  "authorizenet/authorizenet": "2.0.2"
+  "authorizenet/authorizenet": "2.0.3"
   }
 }
 ```
