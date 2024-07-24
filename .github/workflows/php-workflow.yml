@@ -49,14 +49,14 @@ jobs:
                 composer validate
 
                 if [[ ${{steps.php-setup.outputs.php-version}} == "5.6" || ${{steps.php-setup.outputs.php-version}} == "7.0" ]]; then
-                    $env.phpunit_version=5.6.*
+                    export phpunit_version=5.6.*
                 elif [[ ${{steps.php-setup.outputs.php-version}} == "7.1" ]]; then
-                    $env.phpunit_version=5.7.*
+                    export phpunit_version=5.7.*
                 elif [[ ${{steps.php-setup.outputs.php-version}} == "7.2" ]]; then
-                    $env.phpunit_version=8.5.*
+                    export phpunit_version=8.5.*
                 else
-                    $env.phpunit_version=9.5.*
+                    export phpunit_version=9.5.*
                 fi
 
                 echo "${{steps.setup-php.outputs.php-version}}"
-                echo "$env.phpunit_version"
+                echo "$phpunit_version"
