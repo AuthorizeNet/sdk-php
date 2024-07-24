@@ -1,0 +1,61 @@
+name: Authorize.net PHP CI
+on:
+    push:
+    pull_request:
+    workflow_dispatch:
+env:
+    sdk_php: 'sdk-php'
+    sample_code_php: 'sample-code-php'
+jobs:
+    workflow-job:
+        defaults:
+            run:
+                shell: bash
+        strategy:
+            fail-fast: false
+            matrix:
+                operating-system: [ubuntu-latest, macos-latest, windows-latest]
+                php-version: ['5.6', '7.0', '7.1', '7.2', '7.3', '7.4', '8.0', '8.1', '8.2', '8.3', '8.4']
+        runs-on: ${{matrix.operating-system}}
+        steps:
+            - name: Creating separate folders for SDK and Sample Codes
+              run: |
+                rm -rf $sdk_php
+                rm -rf $sample_code_php
+                mkdir $sdk_php $sample_code_php
+
+            - name: Checkout authorizenet/sdk-php
+              uses: actions/checkout@v4
+              with:
+                  path: ${{env.sdk_php}}
+
+            - name: Checkout authorizenet/sample-code-php
+              uses: actions/checkout@v4
+              with:
+                repository: 'authorizenet/sample-code-php'
+                ref: 'future' # Remove this line before pushing to master branch
+                path: ${{env.sample_code_php}}
+
+            - name: Setup PHP
+              id: php-setup
+              uses: shivammathur/setup-php@v2
+              with:
+                php-version: ${{matrix.php-version}}
+                extension: mbstring, curl, openssl, zip
+                
+            - name: Composer Validation
+              run: |
+                composer validate
+
+                if [[ ${{steps.php-setup.outputs.php-version}} == "5.6" || ${{steps.php-setup.outputs.php-version}} == "7.0" ]]; then
+                    $env.phpunit_version=5.6.*
+                elif [[ ${{steps.php-setup.outputs.php-version}} == "7.1" ]]; then
+                    $env.phpunit_version=5.7.*
+                elif [[ ${{steps.php-setup.outputs.php-version}} == "7.2" ]]; then
+                    $env.phpunit_version=8.5.*
+                else
+                    $env.phpunit_version=9.5.*
+                fi
+
+                echo "${{steps.setup-php.outputs.php-version}}"
+                echo "$env.phpunit_version"
