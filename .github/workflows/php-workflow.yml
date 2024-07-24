@@ -45,6 +45,7 @@ jobs:
                 
             - name: Composer Validation
               run: |
+                cd $sdk_php
                 composer validate
 
                 if [[ ${{steps.php-setup.outputs.php-version}} == "5.6" || ${{steps.php-setup.outputs.php-version}} == "7.0" ]]; then
