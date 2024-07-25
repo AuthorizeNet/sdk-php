@@ -65,7 +65,7 @@ jobs:
 
             - name: Composer Update
               run: |
-                composer require "phpunit/phpunit:$phpunit_version" --no-update --dev
+                COMPOSER require "phpunit/phpunit:${{env.PHPUNIT_VERSION}}" --no-update --dev
                 composer update --prefer-dist
 
             - name: Unit Testing
