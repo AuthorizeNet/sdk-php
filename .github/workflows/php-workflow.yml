@@ -65,6 +65,7 @@ jobs:
 
             - name: Composer Update
               run: |
+                cd $sdk_php
                 composer require "phpunit/phpunit:${{env.PHPUNIT_VERSION}}" --no-update --dev
                 composer update --prefer-dist
 
