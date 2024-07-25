@@ -51,16 +51,18 @@ jobs:
                 composer validate
 
                 if [[ ${{env.PHP_VERSION}} == "5.6" || ${{env.PHP_VERSION}} == "7.0" ]]; then
-                    export phpunit_version=5.6.*
+                    echo "PHPUNIT_VERSION=$(echo 5.6.* | cut -c 1-6)" >> "$GITHUB_ENV"
                 elif [[ ${{env.PHP_VERSION}} == "7.1" ]]; then
-                    export phpunit_version=5.7.*
+                    echo "PHPUNIT_VERSION=$(echo 5.7.* | cut -c 1-6)" >> "$GITHUB_ENV"
                 elif [[ ${{env.PHP_VERSION}} == "7.2" ]]; then
-                    export phpunit_version=8.5.*
+                    echo "PHPUNIT_VERSION=$(echo 8.5.* | cut -c 1-6)" >> "$GITHUB_ENV"
                 else
-                    export phpunit_version=9.5.*
+                    echo "PHPUNIT_VERSION=$(echo 9.5.* | cut -c 1-6)" >> "$GITHUB_ENV"
                 fi
+
+                echo "${{env.PHPUNIT_VERSION}}"
 
             - name: Composer Update
               run: |
-                echo "$phpunit_version"
+                echo "${{env.PHPUNIT_VERSION}}"
                 # composer require "phpunit/phpunit:$phpunit_version" --no-update
