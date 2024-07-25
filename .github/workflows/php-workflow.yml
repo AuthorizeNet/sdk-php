@@ -35,7 +35,7 @@ jobs:
               uses: actions/checkout@v4
               with:
                 repository: 'authorizenet/sample-code-php'
-                ref: 'master' # Remove this line before pushing to master branch
+                ref: 'future' # Remove this line before pushing to master branch
                 path: ${{env.sample_code_php}}
 
             - name: Setup PHP
@@ -60,9 +60,18 @@ jobs:
                     echo "PHPUNIT_VERSION=$(echo 9.5.* | cut -c 1-6)" >> "$GITHUB_ENV"
                 fi
 
-                echo "${{env.PHPUNIT_VERSION}}"
+            # Cannot use ${{env.PHPUNIT_VERSION}} in the same step where it is defined
+            # Refer: https://docs.github.com/en/actions/using-workflows/workflow-commands-for-github-actions#example-of-writing-an-environment-variable-to-github_env
 
             - name: Composer Update
               run: |
-                echo "${{env.PHPUNIT_VERSION}}"
-                # composer require "phpunit/phpunit:$phpunit_version" --no-update
+                composer require "phpunit/phpunit:$phpunit_version" --no-update --dev
+                composer update --prefer-dist
+
+            - name: Unit Testing
+              run: |
+                cd $sdk_php
+                cp -R lib ../$sample_code_php/
+                cp -R vendor ../$sample_code_php/
+                cd ../$sample_code_php
+                vendor/phpunit/phpunit/phpunit TestRunner.php .
