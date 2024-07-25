@@ -43,7 +43,7 @@ jobs:
               uses: shivammathur/setup-php@v2
               with:
                 php-version: ${{matrix.php-version}}
-                extensions: mbstring, curl, openssl, zip, xmldiff
+                extensions: mbstring, curl, openssl, zip
                 
             - name: Composer Validation
               run: |
@@ -60,5 +60,7 @@ jobs:
                     export phpunit_version=9.5.*
                 fi
 
-                echo "${{env.PHP_VERSION}}"
+            - name: Composer Update
+              run: |
                 echo "$phpunit_version"
+                # composer require "phpunit/phpunit:$phpunit_version" --no-update
