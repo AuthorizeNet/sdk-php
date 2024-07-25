@@ -43,7 +43,7 @@ jobs:
               uses: shivammathur/setup-php@v2
               with:
                 php-version: ${{matrix.php-version}}
-                extension: mbstring, curl, openssl, zip, xmldiff
+                extensions: mbstring, curl, openssl, zip, xmldiff
                 
             - name: Composer Validation
               run: |
