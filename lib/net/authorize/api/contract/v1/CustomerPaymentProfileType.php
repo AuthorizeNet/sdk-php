@@ -38,6 +38,11 @@ class CustomerPaymentProfileType extends CustomerPaymentProfileBaseType implemen
     private $subsequentAuthInformation = null;
 
     /**
+     * @property boolean $excludeFromAccountUpdater
+     */
+    private $excludeFromAccountUpdater = null;
+
+    /**
      * Gets as payment
      *
      * @return \net\authorize\api\contract\v1\PaymentType
@@ -145,6 +150,28 @@ class CustomerPaymentProfileType extends CustomerPaymentProfileBaseType implemen
     public function setSubsequentAuthInformation(\net\authorize\api\contract\v1\SubsequentAuthInformationType $subsequentAuthInformation)
     {
         $this->subsequentAuthInformation = $subsequentAuthInformation;
+        return $this;
+    }
+
+    /**
+     * Gets as excludeFromAccountUpdater
+     *
+     * @return boolean
+     */
+    public function getExcludeFromAccountUpdater()
+    {
+        return $this->excludeFromAccountUpdater;
+    }
+
+    /**
+     * Sets a new excludeFromAccountUpdater
+     *
+     * @param boolean $excludeFromAccountUpdater
+     * @return self
+     */
+    public function setExcludeFromAccountUpdater($excludeFromAccountUpdater)
+    {
+        $this->excludeFromAccountUpdater = $excludeFromAccountUpdater;
         return $this;
     }
 

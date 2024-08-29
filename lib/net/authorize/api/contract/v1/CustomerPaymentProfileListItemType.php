@@ -47,6 +47,11 @@ class CustomerPaymentProfileListItemType implements \JsonSerializable
     private $originalAuthAmount = null;
 
     /**
+     * @property boolean $excludeFromAccountUpdater
+     */
+    private $excludeFromAccountUpdater = null;
+
+    /**
      * Gets as defaultPaymentProfile
      *
      * @return boolean
@@ -197,6 +202,28 @@ class CustomerPaymentProfileListItemType implements \JsonSerializable
     public function setOriginalAuthAmount($originalAuthAmount)
     {
         $this->originalAuthAmount = $originalAuthAmount;
+        return $this;
+    }
+
+    /**
+     * Gets as excludeFromAccountUpdater
+     *
+     * @return boolean
+     */
+    public function getExcludeFromAccountUpdater()
+    {
+        return $this->excludeFromAccountUpdater;
+    }
+
+    /**
+     * Sets a new excludeFromAccountUpdater
+     *
+     * @param boolean $excludeFromAccountUpdater
+     * @return self
+     */
+    public function setExcludeFromAccountUpdater($excludeFromAccountUpdater)
+    {
+        $this->excludeFromAccountUpdater = $excludeFromAccountUpdater;
         return $this;
     }
 
