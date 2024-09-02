@@ -160,7 +160,7 @@ class Log
 			
 			if(strcmp($prop->getName(),$sensitiveField->tagName)==0)
 			{
-				$prop->setValue($obj,preg_replace($inputPattern,$inputReplacement,$prop->getValue($obj)));
+				$prop->setValue($obj,preg_replace($inputPattern,$inputReplacement,$prop->getValue($obj) ? $prop->getValue($obj) : ""));
 				return $prop->getValue($obj);
 			}
 		}
