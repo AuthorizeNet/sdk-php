@@ -70,3 +70,13 @@ net\authorize\api\contract\v1\CustomerPaymentProfileListItemType:
                 getter: getOriginalAuthAmount
                 setter: setOriginalAuthAmount
             type: float
+        excludeFromAccountUpdater:
+            expose: true
+            access_type: public_method
+            serialized_name: excludeFromAccountUpdater
+            xml_element:
+                namespace: AnetApi/xml/v1/schema/AnetApiSchema.xsd
+            accessor:
+                getter: getExcludeFromAccountUpdater
+                setter: setExcludeFromAccountUpdater
+            type: boolean

@@ -1716,6 +1716,7 @@
           </xs:element>
           <xs:element name="defaultPaymentProfile" type="xs:boolean" minOccurs="0"/>
           <xs:element name="subsequentAuthInformation" type="anet:subsequentAuthInformation" minOccurs="0" maxOccurs="1"/>
+		  <xs:element name="excludeFromAccountUpdater" type="xs:boolean" minOccurs="0" maxOccurs="1"/>
         </xs:sequence>
       </xs:extension>
     </xs:complexContent>
@@ -1757,6 +1758,7 @@
               </xs:restriction>
             </xs:simpleType>
           </xs:element>
+		  <xs:element name="excludeFromAccountUpdater" type="xs:boolean" minOccurs="0"/>
         </xs:sequence>
       </xs:extension>
     </xs:complexContent>
@@ -4335,6 +4337,7 @@ Payment Profile Type.
           </xs:restriction>
         </xs:simpleType>
       </xs:element>
+	  <xs:element name="excludeFromAccountUpdater" type="xs:boolean" minOccurs="0"/>
     </xs:sequence>
   </xs:complexType>
   <xs:complexType name="arrayOfCustomerPaymentProfileListItemType">
