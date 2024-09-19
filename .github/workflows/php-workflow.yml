@@ -35,7 +35,7 @@ jobs:
               uses: actions/checkout@v4
               with:
                 repository: 'authorizenet/sample-code-php'
-                ref: 'future' # Remove this line before pushing to master branch
+                ref: 'master'
                 path: ${{env.sample_code_php}}
 
             - name: Setup PHP
