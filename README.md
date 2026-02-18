@@ -174,4 +174,8 @@ Authorize.Net is phasing out the MD5 based `transHash` element in favor of the S
 
 
 ## License
-This repository is distributed under a proprietary license. See the provided [`LICENSE.txt`](/LICENSE.txt) file.
+This repository is dual-licensed:
+- **Commercial License**: See [`LICENSE-COMMERCIAL.txt`](/LICENSE-COMMERCIAL.txt) for the Authorize.Net SDK License Agreement
+- **GPL v2 License**: See [`LICENSE-GPL.txt`](/LICENSE-GPL.txt) for the GNU General Public License v2
+
+You may choose either license depending on your use case.
